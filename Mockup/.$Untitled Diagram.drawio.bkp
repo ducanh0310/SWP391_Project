@@ -1,0 +1,76 @@
+<mxfile host="Electron" modified="2024-05-18T07:05:25.512Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="BEju-4Ftj9jNPoeBbMIG" version="24.4.0" type="device">
+  <diagram name="Page-1" id="k0tu-8JoDi0TnRKVN1S2">
+    <mxGraphModel dx="1250" dy="735" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="760" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-2" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;fillColor=#f5f5f5;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="760" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-3" value="header" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#f5f5f5;fontColor=#333333;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="760" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-4" value="Employee dashboard" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="30" y="30" width="150" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-5" value="Logo" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-6" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="130" y="80" width="670" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-7" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="130" y="110" width="670" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-8" value="Employee name" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="670" y="85" width="95" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-11" value="Appointment" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="710" y="120" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-12" value="search" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-14" value="Home" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="290" y="120" width="70" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-15" value="About" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="120" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-16" value="Services" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-17" value="Pages" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="120" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-18" value="Contact" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="580" y="120" width="50" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-20" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="765" y="82.5" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-21" value="Logo" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="470" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-22" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="90" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-23" value="Appointment" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="150" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-24" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="190" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-25" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="230" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kaYRoUPyHofxfCsmNQoP-27" value="role" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="600" y="85" width="65" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
