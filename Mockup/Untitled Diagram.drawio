@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-05-19T06:00:59.162Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="x8f0acDpKPmIQhFbL63X" version="24.4.0" type="device">
+<mxfile host="Electron" modified="2024-05-19T09:35:56.289Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="F3dLomiWFXWwgfVtP2_1" version="24.4.0" type="device">
   <diagram name="Page-1" id="k0tu-8JoDi0TnRKVN1S2">
     <mxGraphModel dx="1842" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -313,7 +313,7 @@
         <mxCell id="1xwqfClV_x3DvjiMqpP7-18" value="Appointment" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="50" y="1310" width="70" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="1xwqfClV_x3DvjiMqpP7-19" value="Storage" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" parent="1" vertex="1">
+        <mxCell id="1xwqfClV_x3DvjiMqpP7-19" value="Appoiment book" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;" parent="1" vertex="1">
           <mxGeometry x="50" y="1350" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="1xwqfClV_x3DvjiMqpP7-20" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" parent="1" vertex="1">
@@ -348,6 +348,21 @@
         </mxCell>
         <mxCell id="F-968YT1H_lC1eH4sWaF-2" value="" style="triangle;whiteSpace=wrap;html=1;rotation=90;" vertex="1" parent="1">
           <mxGeometry x="190" y="150" width="15" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F-968YT1H_lC1eH4sWaF-3" value="1, patient id, dentist id, date, start time, end time, type, status, room no" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="142.5" y="180" width="627.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F-968YT1H_lC1eH4sWaF-4" value="2, patient id, dentist id, date, start time, end time, type, status, room no" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="142.5" y="210" width="627.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F-968YT1H_lC1eH4sWaF-5" value="3, patient id, dentist id, date, start time, end time, type, status, room no" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="142.5" y="240" width="627.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F-968YT1H_lC1eH4sWaF-6" value="4, patient id, dentist id, date, start time, end time, type, status, room no" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="142.5" y="270" width="627.5" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F-968YT1H_lC1eH4sWaF-7" value="5, patient id, dentist id, date, start time, end time, type, status, room no" style="rounded=0;whiteSpace=wrap;html=1;align=left;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="142.5" y="300" width="627.5" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
