@@ -6,11 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="58ac1d49-afe9-45c9-bd85-87f14eb017c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Patient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/SQL/scriptfinal.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/SQL/scriptfinal.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/PatientRegisterDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/register.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +84,7 @@
       <workItem from="1716054332182" duration="31000" />
       <workItem from="1716054381582" duration="175000" />
       <workItem from="1716054756407" duration="1710000" />
-      <workItem from="1716141213866" duration="1663000" />
+      <workItem from="1716141213866" duration="6290000" />
     </task>
     <servers />
   </component>
