@@ -6,8 +6,8 @@ package model;
 
 /**
  *
- * @author ADMIN
+ * @author ngphn
  */
-public class test {
+public class Patient {
     
 }
