@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/dal/DBContext.java</file>
-            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/index.html</file>
+            <file>file:/D:/aloo/SWP391_Project/src/java/dal/DBContext.java</file>
+            <file>file:/D:/aloo/SWP391_Project/web/price.html</file>
+            <file>file:/D:/aloo/SWP391_Project/src/java/model/PatientRegisterDTO.java</file>
+            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap.scss</file>
+            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/forms/_form-check.scss</file>
+            <file>file:/D:/aloo/SWP391_Project/web/register.jsp</file>
+            <file>file:/D:/aloo/SWP391_Project/web/css/bootstrap.min.css</file>
+            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/_breadcrumb.scss</file>
         </group>
     </open-files>
 </project-private>
