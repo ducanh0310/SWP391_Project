@@ -96,7 +96,7 @@
             <a href="contact.jsp" class="nav-item nav-link">Contact</a>
         </div>
         <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-        <a href="register.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
+        <a href="Login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
         <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
     </div>
 </nav>
@@ -148,6 +148,10 @@
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                        <div>
+                            <a>Already have an account?</a>
+                            <a href="Login.jsp">Login now!</a>
                         </div>
                     </form>
                 </div>

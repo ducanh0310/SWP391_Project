@@ -36,8 +36,6 @@ i
 9database/SQL/Migrations/20220410160000-viewprocedures.sql,3\f\3ffd472d37cd525746f30bc30b74267fe8271346
 D
 src/conf/MANIFEST.MF,e\d\ed350a900ef5100fe7eccee559c019d839de1fcb
-D
-build/web/index.html,e\5\e5e77cab237db667143df5769f59fdc6acfe27a2
 K
 src/java/dal/DBContext.java,c\3\c32061f2474c65034e4d980af52ad5345019620b
 M
@@ -46,8 +44,6 @@ T
 $nbproject/private/private.properties,e\7\e7c5db9810f3b38d0139d9f54b6b22bdc14e57b5
 J
 lib/nblibraries.properties,b\2\b2ffb1ca6373cef04ab96c2af98b92c73c02fc3b
-H
-src/java/model/test.java,d\6\d6cf6040ca1f4c9c37cad6f64ffe944047c525c7
 T
 $Mockup/.$Untitled Diagram.drawio.bkp,c\5\c521d4625ae756048520f604442cb5abcce8cad9
 N
@@ -66,8 +62,6 @@ H
 nbproject/ant-deploy.xml,5\c\5c2c2380dddaa148378d762f999784d0f67bdaa3
 M
 nbproject/genfiles.properties,8\5\85d559b438fd4915873f371dcfe48a06bd993c18
->
-web/index.html,4\9\49767019a2fee22a613912508aa2789b74108680
 N
 build/web/META-INF/context.xml,6\2\62034c2be65ad9357bc9f301b0b68745fd7246df
 N
