@@ -24,58 +24,42 @@ import org.apache.http.client.fluent.Request;
  */
 public class LoginGoogleServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String code = request.getParameter("code");
-		String accessToken = getToken(code);
-		UserGoogleLoginDTO user = getUserInfor(accessToken);
-		System.out.println(user);
-    }
-
-    public static String getToken(String code) throws ClientProtocolException, IOException {
-        //call api to get token
-        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
-                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
-                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
-                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
-                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
-                .execute().returnContent().asString();
-        
-        JsonObject jobj = new Gson().fromJson(response,JsonObject.class);
-        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
-        return accessToken;
-    }
     
-    public static UserGoogleLoginDTO getUserInfor(final String accessToken) throws ClientProtocolException, IOException{
-        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
-        String response = Request.Get(link).execute().returnContent().asString();
-        UserGoogleLoginDTO googlePojo = new Gson().fromJson(response, UserGoogleLoginDTO.class);
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        String code = request.getParameter("code");
+//		String accessToken = getToken(code);
+//		UserGoogleLoginDTO user = getUserInfor(accessToken);
+//		System.out.println(user);
+//    }
+//
+//    public static String getToken(String code) throws ClientProtocolException, IOException {
+//        //call api to get token
+//        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
+//                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
+//                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
+//                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
+//                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
+//                .execute().returnContent().asString();
+//        
+//        JsonObject jobj = new Gson().fromJson(response,JsonObject.class);
+//        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
+//        return accessToken;
+//    }
+//    
+//    public static UserGoogleLoginDTO getUserInfor(final String accessToken) throws ClientProtocolException, IOException{
+//        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
+//        String response = Request.Get(link).execute().returnContent().asString();
+//        UserGoogleLoginDTO googlePojo = new Gson().fromJson(response, UserGoogleLoginDTO.class);
+//
+//		return googlePojo;
+//    }
 
-		return googlePojo;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -89,7 +73,7 @@ public class LoginGoogleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
