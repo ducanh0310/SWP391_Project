@@ -108,10 +108,10 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4">
                     <h3 class="mb-4">Register</h3>
-                    <form action="register.jsp" method="post">
+                    <form action="register" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="email" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                            <input type="username" class="form-control" id="username" name="username" placeholder="Enter username" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
