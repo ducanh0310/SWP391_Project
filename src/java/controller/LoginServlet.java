@@ -22,7 +22,7 @@ import org.apache.http.client.fluent.Request;
  *
  * @author trung
  */
-public class LoginGoogleServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
