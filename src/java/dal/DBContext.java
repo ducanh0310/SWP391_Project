@@ -15,13 +15,13 @@ import java.util.logging.Logger;
  * @author ngphn
  */
 public class DBContext {
-        Connection connection;
+    protected Connection connection;
 
     public DBContext() throws ClassNotFoundException {
         try {
             String user = "sa";
-            String pass = "namnp";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project";
+            String pass = "30020102";
+            String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
