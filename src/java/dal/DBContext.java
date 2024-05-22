@@ -20,8 +20,8 @@ public class DBContext {
     public DBContext() throws ClassNotFoundException {
         try {
             String user = "sa";
-            String pass = "30020102";
-            String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
+            String pass = "123";
+            String url = "jdbc:sqlserver://HUY\\GIAHUY:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
