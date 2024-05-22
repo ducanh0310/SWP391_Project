@@ -108,7 +108,7 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
                             <h3 class="mb-4">Login</h3>
-                            <form action="login" method="post">
+                            <form action="authen?action=login" method="post">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
