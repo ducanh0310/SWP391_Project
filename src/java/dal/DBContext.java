@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author ngphn
  */
 public class DBContext {
-    protected Connection connection;
+    public Connection connection;
 
     public DBContext() throws ClassNotFoundException {
         try {
