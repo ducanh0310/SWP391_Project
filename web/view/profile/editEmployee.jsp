@@ -107,17 +107,18 @@
             <div class="row gx-0">
                 <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
-                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Sat : 6.00 am - 10.00 pm, Sunday Closed </small>
+                        <small class="py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</small>
+
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>dentcare23@medical.com</p>
+                            <p class="m-0"></i>Role</p>
                         </div>
-                        <div class="me-3 pe-3 border-end py-2">
+<!--                        <div class="me-3 pe-3 border-end py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
-                        </div>
+                        </div>-->
                         <div class="py-2">
                             <p class="m-0" ><a href="" style="color: #ffffff">Username</a></p>                        
                         </div>
@@ -128,34 +129,22 @@
         <!-- Topbar End -->
         
         <!-- Navbar Start -->
-            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="index.html" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                        <a href="team.html" class="dropdown-item">Our Dentist</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="appointment.html" class="dropdown-item">Appointment</a>
-                    </div>
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                
+                <div class="navbar-nav ms-auto py-0">
+                    <div class="nav-item nav-link"></div>                     
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+                
             </div>
-            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-            <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
-        </div>
-         </nav>
+        </nav>
     <!-- Navbar End -->
     
     
@@ -163,9 +152,7 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Personal information</h1>
-                <a href="" class="h4 text-white">Home</a>
-                <i class="far fa-circle text-white px-2"></i>
-                <a href="" class="h4 text-white">Profile</a>
+                
             </div>
         </div>
     </div>
@@ -177,10 +164,11 @@
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Edogaru</span>
-                <span class="text-black-50">edogaru@mail.com.my</span>
+                <span class="font-weight-bold">Username</span>
+                <span class="text-black-50">ID</span>
+                <br>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
+                <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
             </div>
@@ -195,45 +183,68 @@
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" readonly>
+                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" >
                     </div>        
                     <div class="col-md-6">
                         <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="" readonly>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="">
                     </div>
                 </div>
                     
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="" readonly>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="">
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="" readonly>
+                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="">
                     </div>
                 </div>
                 
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels" for="gender">Gender</label>
-                        <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly>
+                        <select class="form-select" id="gender" name="gender">
+                            <option value="">Select your gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Other</option>
+                        </select>
                     </div>                    
 
                     <div class="col-md-6">
                         <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="" readonly>
+                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="">
                     </div>
                 </div>
-                <br>
-                <div>
-                    <label class="labels">Address</label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="" readonly>
+                
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="labels">Role</label>
+                        <input type="text" id="role" name="role" class="form-control" placeholder="" value="" readonly="">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labels">Salary / year</label>
+                        <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="" readonly="">
+                    </div>
                 </div>
                 
-                <div class="mt-5 text-center">
-                    <a href="editPatient.jsp" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="labels">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labels">Working Branch</label>
+                        <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="" readonly="">
+                    </div>
                 </div>
+                
+                
+                
+                <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
+
             </div>
         </div>    
         
@@ -253,7 +264,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>dentcare23@medical.com</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>info@example.com</p>
                     <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
