@@ -4,6 +4,7 @@
     Author     : Vu Minh Quan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -176,8 +177,8 @@
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Edogaru</span>
-                <span class="text-black-50">edogaru@mail.com.my</span>
+                <span class="font-weight-bold">${username}</span>
+                <span class="text-black-50">${paInfo.email}</span>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
@@ -191,51 +192,54 @@
                     <h4 class="text-right">My account</h4>
                 </div>
                 <hr>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" >
-                    </div>        
-                    <div class="col-md-6">
-                        <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="">
+                <form action="edit" method="POST">
+                    <input type="hidden" id="id" name="id" value="${paInfo.patientId}">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Fullname</label>
+                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" >
+                        </div>        
+                        <div class="col-md-6">
+                            <label class="labels">Phone Number</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${paInfo.phoneNumber}">
+                        </div>
                     </div>
-                </div>
-                    
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="">
-                    </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels" for="gender">Gender</label>
-                        <select class="form-select" id="gender" name="gender">
-                            <option value="">Select your gender</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                            <option value="O">Other</option>
-                        </select>
-                    </div>                    
 
-                    <div class="col-md-6">
-                        <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Medicine code</label>
+                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}">
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div>
-                    <label class="labels">Address</label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="">
-                </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels" for="gender">Gender</label>
+                            <select class="form-select" id="gender" name="gender">
+                                <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
+                                <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
+                                <option value="O" <c:if test="${paInfo.gender == 'O'}">selected</c:if>>Other</option>
+                            </select>
+                        </div>                    
+
+                        <div class="col-md-6">
+                            <label class="labels" >Date of birth</label>
+                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}">
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="labels">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}">
+                    </div>
+
+                    <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
+                </form>
                 
-                <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
 
             </div>
         </div>    
