@@ -32,7 +32,7 @@ public class UserDAO extends DBContext {
             if (rs.next()) {
                 User u = new User(rs.getString(1),
                         rs.getString(2),
-                        rs.getBoolean(3),
+                        rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5));
                 return u;
@@ -51,7 +51,7 @@ public class UserDAO extends DBContext {
             while (rs.next()) {
                 User u = new User(rs.getString(1),
                         rs.getString(2),
-                        rs.getBoolean(3),
+                        rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5));
                 list.add(u);

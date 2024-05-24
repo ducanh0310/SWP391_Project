@@ -11,14 +11,14 @@ package model;
 public class User {
     private String name;
     private String password;
-    private boolean type_Id;
+    private int type_Id;
     private String patient_Id;
     private String Employee_Id;
 
     public User() {
     }
 
-    public User(String name, String password, boolean type_Id, String patient_Id, String Employee_Id) {
+    public User(String name, String password, int type_Id, String patient_Id, String Employee_Id) {
         this.name = name;
         this.password = password;
         this.type_Id = type_Id;
@@ -42,11 +42,11 @@ public class User {
         this.password = password;
     }
 
-    public boolean isType_Id() {
+    public int getType_Id() {
         return type_Id;
     }
 
-    public void setType_Id(boolean type_Id) {
+    public void setType_Id(int type_Id) {
         this.type_Id = type_Id;
     }
 
@@ -65,6 +65,8 @@ public class User {
     public void setEmployee_Id(String Employee_Id) {
         this.Employee_Id = Employee_Id;
     }
+
+    
 
     @Override
     public String toString() {
