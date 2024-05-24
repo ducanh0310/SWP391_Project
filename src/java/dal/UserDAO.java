@@ -21,7 +21,7 @@ public class UserDAO extends DBContext {
     }
     
     public User check(String username, String password) {
-        String sql = "select * from [users] "
+        String sql = "select * from [User_account] "
                 + " where username = ? "
                 + " and password = ? ";
         try {
@@ -44,7 +44,7 @@ public class UserDAO extends DBContext {
     
     public ArrayList<User> getAll() {
         ArrayList<User> list = new ArrayList<>();
-        String sql = "select * from users";
+        String sql = "select * from User_account";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

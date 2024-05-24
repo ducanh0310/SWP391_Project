@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.UserGoogleLoginDTO;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
@@ -22,7 +23,7 @@ import org.apache.http.client.fluent.Request;
  *
  * @author trung
  */
-public class LoginServlet extends HttpServlet {
+public class AuthenticateServlet extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -59,31 +60,47 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        String action = request.getParameter("action") == null 
+                ? "" 
+                : request.getParameter("action");
+        String url = "";
+        switch (action) {
+            case "login":
+                url = "login.jsp";
+                break;
+            case "logout":
+                url = "home";
+                logout(request, response);
+                response.sendRedirect(url);
+                return;
+            default:
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                break;
+        }
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
         
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+private void logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        session.removeAttribute(Constants.SESSION_CUSTOMER);
+        //session.removeAttribute("cart");
+    }
+    
+    
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -21,4 +21,6 @@ public class Constants {
 	public static String GOOGLE_LINK_GET_USER_INFO = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
 
 	public static String GOOGLE_GRANT_TYPE = "authorization_code";
+        
+        public static final String SESSION_CUSTOMER = "account";
 }
