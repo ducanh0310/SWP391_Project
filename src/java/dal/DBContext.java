@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author ngphn
  */
 public class DBContext {
-    public Connection connection;
+    protected Connection connection;
 
     public DBContext() throws ClassNotFoundException {
         try {

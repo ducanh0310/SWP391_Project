@@ -108,6 +108,7 @@ public class AuthenticateServlet extends HttpServlet {
 
             default:
                 throw new AssertionError();
+                
         }
     }
 
@@ -121,13 +122,13 @@ public class AuthenticateServlet extends HttpServlet {
         UserDAO user = new UserDAO();
         if (request.getParameter("username") == null || request.getParameter("password") == null
                 || request.getParameter("username").trim().isEmpty() || request.getParameter("password").trim().isEmpty()) {
-            request.setAttribute("mess", "Username or password incorrect !");
+            request.setAttribute("error", "Must be fill all field!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             String userName = request.getParameter("username");
             String passWord = request.getParameter("password");
 
-            User u = user.check(userName, passWord);
+            User u = user.checkUser(userName, passWord);
             HttpSession session = request.getSession();
             if (u == null) {
                 request.setAttribute("error", "Username or password incorrect !");

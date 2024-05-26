@@ -19,11 +19,11 @@ public class UserDAO extends DBContext {
     public UserDAO() throws ClassNotFoundException {
         super();
         if (connection == null) {
-            throw new RuntimeException("Không thể kết nối đến cơ sở dữ liệu");
+            
         }
     }
     
-    public User check(String username, String password) {
+    public User checkUser(String username, String password) {
         String sql = "select * from [User_account] "
                 + " where username = ? "
                 + " and password = ? ";
