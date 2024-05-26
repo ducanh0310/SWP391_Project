@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -23,6 +24,7 @@ import model.UserGoogleLoginDTO;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
+import java.sql.*;
 
 /**
  *
@@ -141,6 +143,13 @@ public class AuthenticateServlet extends HttpServlet {
 
     }
 
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException{
+        UserDAO user = new UserDAO();
+        ArrayList<User> userList = user.getAll();
+        request.setAttribute("Users", userList);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

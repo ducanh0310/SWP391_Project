@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
-
+import java.lang.RuntimeException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +18,9 @@ public class UserDAO extends DBContext {
     
     public UserDAO() throws ClassNotFoundException {
         super();
+        if (connection == null) {
+            throw new RuntimeException("Không thể kết nối đến cơ sở dữ liệu");
+        }
     }
     
     public User check(String username, String password) {
@@ -38,6 +41,7 @@ public class UserDAO extends DBContext {
                 return u;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -57,6 +61,7 @@ public class UserDAO extends DBContext {
                 list.add(u);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return list;

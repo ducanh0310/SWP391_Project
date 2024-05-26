@@ -59,7 +59,7 @@
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>ngphnam</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${u.name}</p>
                         </div>
                         <div class="py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -121,14 +121,14 @@
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
                                 <div class="form-group">
-                                    <div style="color: red"> ${ERROR}</div>
+                                    <div style="color: red"> ${error}</div>
                                 </div>
                                 <div class="mb-3" style="text-align: center">
                                     <label for="password" class="form-label">Or</label>
                                 </div>
                                 <div class="mb-3" >
-                                    <button>
-                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Login with google</a>
+                                    <button style="border-radius: 10px; background-color: lightseagreen ">
+                                    <a style="color: white;" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Login with google</a>
                                     </button>
                                 </div>
 

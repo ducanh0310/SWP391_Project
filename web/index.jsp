@@ -61,7 +61,7 @@
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>ngphnam</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${u.name}</p>
                     </div>
                     <div class="py-2">
                         <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -98,7 +98,7 @@
                 <a href="contact.jsp" class="nav-item nav-link">Contact</a>
             </div>
             <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-            <a href="Login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
+            <a href="login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
             <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
         </div>
     </nav>
