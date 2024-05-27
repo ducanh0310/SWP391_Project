@@ -31,7 +31,7 @@ public class AccountDAO {
 
     public ArrayList<String> getAllEmail() {
         ArrayList<String> list = new ArrayList<>();
-        String query = "SELECT email FROM Patient_info";
+        String query = "SELECT email FROM Patient";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();

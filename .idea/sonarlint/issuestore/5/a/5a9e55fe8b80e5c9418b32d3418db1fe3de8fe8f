@@ -1,19 +1,19 @@
 
-‹
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™žùÿÿÿÿ
-‹
-java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…Ôºþÿÿÿÿ
-f	java:S117."QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â£Ù÷
-k	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õòÇˆÿÿÿÿÿ
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ä”òª
-j
-java:S2095A"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
-j
-java:S20951"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
-j
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
-j
-java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
-I
-java:S1172>".Remove this unused method parameter "type_id".(õòÇˆÿÿÿÿÿ
-E	java:S106R"+Replace this use of System.out by a logger.(Å­ËÝúÿÿÿÿ
+±
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™žùÿÿÿÿJ$f1271dda-5e3d-4edc-a984-282aaac5ecba
+±
+java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…ÔºþÿÿÿÿJ$7dfdc25e-5f71-45e9-a61c-9bacf9274db1
+Œ	java:S117."QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â£Ù÷J$35e06d84-5875-4dca-87e0-5b9f981e94be
+‘	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õòÇˆÿÿÿÿÿJ$a89aa221-bd3e-47b8-834e-039be812cd16
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ä”òªJ$27883dd3-0605-4028-bf1c-c6e9e38ddbef
+
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$3e028292-4e09-426a-99fd-b941efe8f53a
+
+java:S20951"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$4e61878a-24d1-43be-9142-e67c74c5825c
+
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$5bc12817-f459-4a00-980e-1fd2e8561be4
+
+java:S2095A"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$785ff231-a1ae-42f4-a479-d225164a7b82
+o
+java:S1172>".Remove this unused method parameter "type_id".(õòÇˆÿÿÿÿÿJ$353b58d6-2e44-4dac-9d0f-0ec2b20e82a5
+k	java:S106R"+Replace this use of System.out by a logger.(Å­ËÝúÿÿÿÿJ$5eb368ff-e208-4ffb-81ee-27762bf9633a

@@ -7,24 +7,23 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
 
-import DAO.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import validation.Email;
 
 /**
  *
  * @author ngphn
  */
-@WebServlet(name="RegisterController", urlPatterns={"/register"})
-public class RegisterController extends HttpServlet {
+@WebServlet(name="confirmemailregister", urlPatterns={"/verify"})
+public class confirmemailregister extends HttpServlet {
+    private static final long TIMEOUT_SECONDS = 60;
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +40,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");  
+            out.println("<title>Servlet confirmemailregister</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet confirmemailregister at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,25 +60,28 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email");
-        ArrayList<String> list = new AccountDAO().getAllEmail();
-        if (list.contains(email)) {
-            request.setAttribute("accountexits", "This email has been used! Please try another email!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            return;
+        HttpSession session = request.getSession();
+        String enteredCode = request.getParameter("code");
+        String storedCode = (String) session.getAttribute("verificationCode");
+        Instant codeTimestamp = (Instant) session.getAttribute("codeTimestamp");
+        if (storedCode != null && codeTimestamp != null) {
+            Instant now = Instant.now();
+            long elapsedSeconds = Duration.between(codeTimestamp, now).getSeconds();
+            if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
+                session.removeAttribute("verificationCode");
+                session.removeAttribute("codeTimestamp");
+                request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+                return;
+            } else if (elapsedSeconds > TIMEOUT_SECONDS) {
+                request.setAttribute("timeout", "Verification code has expired! Please try again!");
+            } else {
+                request.setAttribute("incorrectCode", "Incorrect verification code! Please try again!");
+            }
+        } else {
+            request.setAttribute("error", "An error occurred! Please try again!");
         }
-        if (email != null) {
-            String verificationCode = Email.generateVerificationCode();
-            Email.sendVerificationCode(email, verificationCode);
-            HttpSession session = request.getSession();
-            session.setAttribute("email", email);
-            session.setAttribute("verificationCode", verificationCode);
-            session.setAttribute("codeTimestamp", Instant.now());
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
-        }
-        request.getRequestDispatcher("register.jsp").forward(request, response);
-    }
+        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -91,7 +93,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
     }
 
     /** 

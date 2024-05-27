@@ -108,13 +108,21 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
                             <h3 class="mb-4">Register</h3>
-                            <form action="register" method="GET">
+                            <form action="registeraccount" method="GET">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Please enter your email" required>
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Please enter your username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Please enter your password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password2nd" class="form-label">Confirm password</label>
+                                    <input type="password" class="form-control" id="password2nd" name="password2nd" placeholder="Please confirm your password" required>
                                 </div>
                                 <div class="d-grid">
-                                    <input type="submit" class="btn btn-primary" value="Next">
+                                    <input type="submit" class="btn btn-primary" value="Register">
                                 </div>
                                 <span class="text-danger">
                                     <%

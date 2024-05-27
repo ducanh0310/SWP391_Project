@@ -1,5 +1,7 @@
 package validation;
 
+import jakarta.servlet.http.HttpSession;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -29,7 +31,7 @@ public class Email {
     public static final String NEWPASSWORD = "Your news password is: ";
     public static final String SUBJECTNEWPASSWORD = "Reset Password";
     public static final String SUBJECTNEWUSERNAME = "New Account";
-    public static final String NEWUSERNAME = "You have been granted an account to log into the FAP system.\n Your username is: ";
+    public static final String NEWACCOUNT = "You have been granted an account to log into the DentCare system.\n Your username is: ";
 
     public static boolean sendTo(String to, String subject, String content) {
 
@@ -74,32 +76,38 @@ public class Email {
     }
 
     public static boolean sendVerificationCode(String to, String code) {
-        return sendTo(to, SUBJECTVERIFICATIONCODE, "Hello " + extractUsername(to) + "\n" +  VERIFICATIONCODE + code + ".\n" + "Use this code to verify your account. Please do not share this code with anyone.");
+        return sendTo(to, SUBJECTVERIFICATIONCODE, "Hello " + extractUsername(to) + "\n" +  VERIFICATIONCODE + code + ".\nUse this code to verify your account. Please do not share this code with anyone.\\nRegards,DentCare Team.\"" );
     }
 
     public static boolean sendNewPassword(String to, String password) {
-        return sendTo(to, SUBJECTNEWPASSWORD, NEWPASSWORD + password + ".\n" + "Use this password to login your account. Please do not share this password with anyone.");
+        return sendTo(to, SUBJECTNEWPASSWORD, NEWPASSWORD + password + ".\n" + "Use this password to login your account. Please do not share this password with anyone.\nRegards,\nDentCare Team.");
     }
 
     public static boolean sendEmail(String to, String subject, String content) {
         return sendTo(to, subject, content);
     }
 
-    public static boolean sendNewUsername(String to, String username, String password) {
-        return sendTo(to, SUBJECTNEWUSERNAME, NEWUSERNAME + username + ".\n "
+    public static boolean sendNewAccount(String to, String username, String password) {
+        return sendTo(to, SUBJECTNEWUSERNAME, NEWACCOUNT + username + ".\n "
                 + "Your password is: " + "Use this username and password to login your account. Please do not share this username with anyone.");
     }
-
-    public static void main(String[] args) {
-      
-        System.out.println(sendVerificationCode("namnphe170040@fpt.edu.vn", "122345"));
-    }
-
     static String extractUsername(String email) {
         String[] parts = email.split("@");
         if (parts.length == 2) {
             return parts[0];
         }
         return null; // Invalid email format
+    }
+    public static String generateVerificationCode() {
+        // Generate a random verification code
+        SecureRandom random = new SecureRandom();
+        StringBuilder code = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            code.append(random.nextInt(10)); // 0-9 digits
+        }
+        return String.valueOf(code);
+    }
+    public static void main(String[] args) {
+        System.out.println(generateVerificationCode());
     }
 }
