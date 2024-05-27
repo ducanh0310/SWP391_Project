@@ -19,25 +19,22 @@ public class UserDAO extends DBContext {
     public UserDAO() throws ClassNotFoundException {
         super();
         if (connection == null) {
-            
+            throw new RuntimeException("Connection to database failed.");
         }
     }
     
     public User checkUser(String username, String password) {
-        String sql = "select * from [User_account] "
-                + " where username = ? "
-                + " and password = ? ";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        String sql = "select * from [User_account] where username = ? and password = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, username);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                User u = new User(rs.getString(1),
-                        rs.getString(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5));
+                User u = new User(rs.getString(1)
+                        , rs.getString(2)
+                        , rs.getInt(3)
+                        , rs.getString(4)
+                        , rs.getString(5));
                 return u;
             }
         } catch (SQLException e) {
