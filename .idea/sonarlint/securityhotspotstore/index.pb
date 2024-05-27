@@ -68,3 +68,7 @@ N
 build/web/META-INF/MANIFEST.MF,7\5\75a2af7c21026ab02c6eff6c78b8d8661b0fec1c
 H
 web/META-INF/context.xml,0\b\0b5ed5dfc48d40f738ad3c8e8ec06325e849a9f7
+\
+,src/java/controller/AuthenticateServlet.java,0\8\0821b09f1ea50cfbec4ffa34af9d2a18207fa1d7
+=
+web/Login.jsp,d\c\dcde6f84048badd6aebaa8b8e5f0bcebc3697491

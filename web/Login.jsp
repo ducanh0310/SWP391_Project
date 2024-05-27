@@ -30,6 +30,7 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+         <meta name="google-signin-client_id" content="225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com">
     </head>
 
     <body>
@@ -126,12 +127,9 @@
                                 <div class="mb-3" style="text-align: center">
                                     <label for="password" class="form-label">Or</label>
                                 </div>
-                                <div class="mb-3" >
-                                    <button style="border-radius: 10px; background-color: lightseagreen ">
-                                    <a style="color: white;" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Login with google</a>
-                                    </button>
+                                <div class="d-grid">
+                                    <div id="oau2-button" ></div>
                                 </div>
-
                                 <div>
                                     <a>Don't have an account?</a>
                                     <table>
@@ -231,6 +229,30 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script>
+            function onSuccess(googleUser) {
+                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            }
+            function onFailure(error) {
+                console.log(error);
+            }
+            function renderButton() {
+                gapi.signin2.render('oau2-button', {
+                    'scope': 'profile email',
+                    'width': 240,
+                    'height': 50,
+                    'longtitle': true,
+                    'theme': 'dark',
+                    'onsuccess': onSuccess,
+                    'onfailure': onFailure,
+                    'redirect_uri': 'https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force',
+                    'client_id': '225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com',
+                });
+            }
+        </script>
+
+        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
     </body>
 
 </html>
