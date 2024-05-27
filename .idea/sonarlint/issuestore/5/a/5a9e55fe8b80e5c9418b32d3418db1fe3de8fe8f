@@ -1,0 +1,19 @@
+
+‹
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™ùÿÿÿÿ
+‹
+java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…Ôºşÿÿÿÿ
+f	java:S117."QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â£Ù÷
+k	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õòÇˆÿÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ä”òª
+j
+java:S2095A"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
+j
+java:S20951"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
+j
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
+j
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ
+I
+java:S1172>".Remove this unused method parameter "type_id".(õòÇˆÿÿÿÿÿ
+E	java:S106R"+Replace this use of System.out by a logger.(Å­Ëİúÿÿÿÿ
