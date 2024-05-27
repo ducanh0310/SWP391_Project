@@ -1,6 +1,7 @@
 USE [master]
 GO
 /****** Object:  Database [SWP391_Project]    Script Date: 24/05/2024 4:30:21 SA ******/
+/************  ************/
 IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'SWP391_Project')
 BEGIN
 	ALTER DATABASE SWP391_Project SET OFFLINE WITH ROLLBACK IMMEDIATE;

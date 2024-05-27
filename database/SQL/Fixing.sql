@@ -13,6 +13,14 @@ create database SWP391_Project
 GO
 USE [SWP391_Project]
 GO
+
+CREATE TABLE [dbo].[Representative](
+	[representativeID] [int] IDENTITY(1,1) PRIMARY KEY,
+	[name] [varchar](255) NULL,
+	[phone] [varchar](20) NULL,
+	[email] [varchar](255) NULL,
+	[relationship] [varchar](255) NULL,
+) 
 /****** Object:  Table [dbo].[Appointment]    Script Date: 15/05/2024 8:36:43 SA ******/
 /****** Object:  Table [dbo].[Patient_info]    Script Date: 15/05/2024 8:36:43 SA ******/
 
@@ -26,7 +34,7 @@ CREATE TABLE [dbo].[Patient](
 	[phone] [varchar](20) NULL,
 	[date_of_birth] [date] NULL,
 	[insurance] [varchar](255) NULL,
-	[rep_id] [int] NULL,
+	[rep_id] [int] NULL FOREIGN KEY REFERENCES [Representative] ([representativeID]),
 )
 GO
 /****** Object:  Table [dbo].[Employee]    Script Date: 15/05/2024 8:36:43 SA ******/
@@ -39,15 +47,6 @@ CREATE TABLE [dbo].[Employee](
 	[annual_salary] [numeric](10, 2) NOT NULL,
 	[branch_id] [int] NOT NULL,
 )
-/****** Object:  Table [dbo].[Insurance_claim]    Script Date: 15/05/2024 8:36:43 SA ******/
-CREATE TABLE [dbo].[Insurance_claim](
-	[claim_id] [int] IDENTITY(1,1) PRIMARY KEY,
-	[Patient_id] [int] NOT NULL FOREIGN KEY REFERENCES [Patient]([patient_id]),
-	[insurance_company] [varchar](255) NOT NULL,
-	[plan_number] [int] NOT NULL,
-	[coverage] [numeric](10, 2) NOT NULL,
-	[invoice_id] [int] NOT NULL,
-) 
 GO
 /****** Object:  Table [dbo].[Procedure_codes]    Script Date: 15/05/2024 8:36:43 SA ******/
 
@@ -65,8 +64,18 @@ CREATE TABLE [dbo].[Invoice](
 	[insurance_charge] [numeric](10, 2) NOT NULL,
 	[discount] [numeric](10, 2) NOT NULL,
 	[penalty] [numeric](10, 2) NOT NULL,
-	[patient_id] [int] NOT NULL,
+	[patient_id] [int] NOT NULL FOREIGN KEY REFERENCES [Patient]([patient_id]),
 )
+GO
+/****** Object:  Table [dbo].[Insurance_claim]    Script Date: 15/05/2024 8:36:43 SA ******/
+CREATE TABLE [dbo].[Insurance_claim](
+	[claim_id] [int] IDENTITY(1,1) PRIMARY KEY,
+	[Patient_id] [int] NOT NULL FOREIGN KEY REFERENCES [Patient]([patient_id]),
+	[insurance_company] [varchar](255) NOT NULL,
+	[plan_number] [int] NOT NULL,
+	[coverage] [numeric](10, 2) NOT NULL,
+	[invoice_id] [int] NOT NULL FOREIGN KEY REFERENCES [Invoice] ([invoice_id]),
+) 
 GO
 CREATE TABLE [dbo].[Appointment](
 	[appointment_id] [int] IDENTITY(1,1) PRIMARY KEY,
@@ -83,12 +92,12 @@ GO
 /****** Object:  Table [dbo].[Appointment_procedure]    Script Date: 15/05/2024 8:36:43 SA ******/
 
 CREATE TABLE [dbo].[Appointment_procedure](
-	[Appointment_procedure] [int] IDENTITY(1,1) PRIMARY KEY,
+	[Appointment_procedure_id] [int] IDENTITY(1,1) PRIMARY KEY,
 	[appointment_id] [int] NOT NULL FOREIGN KEY REFERENCES [dbo].[Appointment] ([appointment_id]),
 	[patient_id] [int] NOT NULL FOREIGN KEY REFERENCES [Patient]([patient_id]),
 	[date_of_procedure] [date] NOT NULL,
 	[invoice_id] [int] NULL  FOREIGN KEY REFERENCES [Invoice]([invoice_id]),
-	[procedure_id] [int] ,
+	[procedure_id] [int]  FOREIGN KEY REFERENCES [Procedure_codes] ([procedure_id]),
 	[appointment_description] [varchar](255) NOT NULL,
 	[tooth] [int] NOT NULL,
 	[amount_of_procedure] [int] NOT NULL,
@@ -113,7 +122,7 @@ GO
 /****** Object:  Table [dbo].[Fee_charge]    Script Date: 15/05/2024 8:36:43 SA ******/
 CREATE TABLE [dbo].[Fee_charge](
 	[fee_id] [int] IDENTITY(1,1) PRIMARY KEY,
-	[procedure_id] [int] NOT NULL,
+	[procedure_id] [int] NOT NULL  FOREIGN KEY REFERENCES [Appointment_procedure]([Appointment_procedure_id]),
 	[fee_code] [int] NOT NULL,
 	[charge] [numeric](10, 2) NOT NULL,
 )
@@ -122,7 +131,7 @@ GO
 
 CREATE TABLE [dbo].[Patient_billing](
 	[bill_id] [int]IDENTITY(1,1) PRIMARY KEY,
-	[patient_id] [int] NOT NULL,
+	[patient_id] [int] NOT NULL FOREIGN KEY REFERENCES [Patient]([patient_id]),
 	[patient_amount] [numeric](10, 2) NOT NULL,
 	[insurance_amount] [numeric](10, 2) NOT NULL,
 	[total_amount] [numeric](10, 2) NOT NULL,
@@ -139,26 +148,18 @@ CREATE TABLE [dbo].[Patient_records](
 	)
 GO
 /****** Object:  Table [dbo].[Representative]    Script Date: 15/05/2024 8:36:43 SA ******/
-
-CREATE TABLE [dbo].[Representative](
-	[representativeID] [int] IDENTITY(1,1) PRIMARY KEY,
-	[name] [varchar](255) NULL,
-	[phone] [varchar](20) NULL,
-	[email] [varchar](255) NULL,
-	[relationship] [varchar](255) NULL,
-) 
 GO
 /****** Object:  Table [dbo].[Review]    Script Date: 15/05/2024 8:36:43 SA ******/
 
 CREATE TABLE [dbo].[Review](
 	[review_id] [int] IDENTITY(1,1) PRIMARY KEY,
-	[dentist_name] [varchar](30) NOT NULL,
+	[dentist_name] [varchar](30) NULL,
 	[review_description] [varchar](255) NULL,
-	[professionalism] [int] NOT NULL,
-	[communication] [int] NOT NULL,
-	[cleanliness] [int] NOT NULL,
-	[date_of_review] [date] NOT NULL,
-	[procedure_id] [int] NOT NULL,
+	[professionalism] [int] NULL,
+	[communication] [int] NULL,
+	[cleanliness] [int] NULL,
+	[date_of_review] [date] NULL,
+	[procedure_id] [int] NOT NULL FOREIGN KEY REFERENCES [dbo].[Appointment] ([appointment_id]),
 )
 GO
 /****** Object:  Table [dbo].[Treatment]    Script Date: 15/05/2024 8:36:43 SA ******/
@@ -189,7 +190,7 @@ PRIMARY KEY CLUSTERED
 GO
 GO
 INSERT [dbo].[Patient] ( [patient_sin], [address], [name], [gender], [email], [phone], [date_of_birth], [insurance], [rep_id]) VALUES (164645466, N'123 Sesame Street', N'Elmo Lee', N'M', N'elmo@elmail.com', N'6664206969', CAST(N'2000-01-01' AS Date), NULL, NULL)
-INSERT [dbo].[Patient] ([patient_sin], [address], [name], [gender], [email], [phone], [date_of_birth], [insurance], [rep_id]) VALUES ( 111111111, N'529 Random Road', N'Stephie McRandom', N'F', N'random@gmail.com', N'1231231234', CAST(N'2012-01-01' AS Date), N'Random Insurance Company Inc.', 1)
+INSERT [dbo].[Patient] ( [patient_sin], [address], [name], [gender], [email], [phone], [date_of_birth], [insurance], [rep_id]) VALUES ( 111111111, N'529 Random Road', N'Stephie McRandom', N'F', N'random@gmail.com', N'1231231234', CAST(N'2012-01-01' AS Date), N'Random Insurance Company Inc.', 1)
 INSERT [dbo].[Patient] ( [patient_sin], [address], [name], [gender], [email], [phone], [date_of_birth], [insurance], [rep_id]) VALUES ( 111111112, N'529 Random Road', N'Paul McRandomee', N'M', N'randomee@gmail.com', N'5551231234', CAST(N'2008-01-01' AS Date), N'Random Insurance Company Inc.', 2)
 INSERT [dbo].[Patient] ( [patient_sin], [address], [name], [gender], [email], [phone], [date_of_birth], [insurance], [rep_id]) VALUES ( 515151547, N'525 Elgin Street', N'Brooke Lay', N'F', N'brooke@gamil.com', N'3436589636', CAST(N'2002-06-08' AS Date), NULL, NULL)
 INSERT [dbo].[Patient] ( [patient_sin], [address], [name], [gender], [email], [phone], [date_of_birth], [insurance], [rep_id]) VALUES ( 388498874, N'1225 Imaginary Street, Toronto, ON, Canada', N'John Li', N'M', N'john@gmail.com', N'3437826548', CAST(N'2000-09-03' AS Date), NULL, NULL)
@@ -392,7 +393,9 @@ REFERENCES [dbo].[Branch] ([branch_id])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
-
+-- RUN 
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD FOREIGN KEY([branch_id])
+REFERENCES [dbo].[Branch] ([branch_id])
 GO
 ALTER TABLE [dbo].[Fee_charge]  WITH CHECK ADD FOREIGN KEY([procedure_id])
 REFERENCES [dbo].[Appointment_procedure] ([procedure_id])
@@ -453,6 +456,8 @@ REFERENCES [dbo].[Patient_info] ([patient_id])
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
+
+--OK
 ALTER TABLE [dbo].[Appointment]  WITH CHECK ADD CHECK  (([appointment_status]='Booked' OR [appointment_status]='Completed' OR [appointment_status]='Cancelled' OR [appointment_status]='No Show'))
 GO
 ALTER TABLE [dbo].[Employee]  WITH CHECK ADD CONSTRAINT [employee_type] CHECK  (([employee_type]='b' OR [employee_type]='h' OR [employee_type]='d' OR [employee_type]='r'))
@@ -465,14 +470,14 @@ ALTER TABLE [dbo].[Patient_billing]  WITH CHECK ADD  CONSTRAINT [Payment_type_ch
 GO
 ALTER TABLE [dbo].[Patient_billing] CHECK CONSTRAINT [Payment_type_check]
 GO
-ALTER TABLE [dbo].[Patient_info]  WITH CHECK ADD  CONSTRAINT [Age_and_representative_check] CHECK  (([date_of_birth]<=dateadd(year,(-15),getdate()) OR [date_of_birth]>dateadd(year,(-15),getdate()) AND [rep_id] IS NOT NULL))
+ALTER TABLE [dbo].[Patient]  WITH CHECK ADD  CONSTRAINT [Age_and_representative_check] CHECK  (([date_of_birth]<=dateadd(year,(-15),getdate()) OR [date_of_birth]>dateadd(year,(-15),getdate()) AND [rep_id] IS NOT NULL))
 --
 GO
-ALTER TABLE [dbo].[Patient_info] CHECK CONSTRAINT [Age_and_representative_check]
+ALTER TABLE [dbo].[Patient] CHECK CONSTRAINT [Age_and_representative_check]
 GO
-ALTER TABLE [dbo].[Patient_info]  WITH CHECK ADD  CONSTRAINT [Gender_check] CHECK  (([gender]='X' OR [gender]='F' OR [gender]='M'))
+ALTER TABLE [dbo].[Patient]  WITH CHECK ADD  CONSTRAINT [Gender_check] CHECK  (([gender]='X' OR [gender]='F' OR [gender]='M'))
 GO
-ALTER TABLE [dbo].[Patient_info] CHECK CONSTRAINT [Gender_check]
+ALTER TABLE [dbo].[Patient] CHECK CONSTRAINT [Gender_check]
 GO
 ALTER TABLE [dbo].[Procedure_codes]  WITH CHECK ADD  CONSTRAINT [procedure_code_check] CHECK  (([procedure_id]>=(1) AND [procedure_id]<=(10)))
 GO
