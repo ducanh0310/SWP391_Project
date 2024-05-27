@@ -30,7 +30,6 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-         <meta name="google-signin-client_id" content="225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com">
     </head>
 
     <body>
@@ -127,9 +126,14 @@
                                 <div class="mb-3" style="text-align: center">
                                     <label for="password" class="form-label">Or</label>
                                 </div>
-                                <div class="d-grid">
-                                    <div id="oau2-button" ></div>
+
+                                <div class="mb-3" >
+                                    <button style="background-color: white; padding-left: 0px; border-radius: 10px">
+                                        <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 31px; height: 30px; border-radius: 25px"></img>
+                                        <a style="color: Black; padding-left: 5px" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Google</a>
+                                    </button>
                                 </div>
+
                                 <div>
                                     <a>Don't have an account?</a>
                                     <table>
@@ -229,6 +233,8 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+
+
         <script>
             function onSuccess(googleUser) {
                 console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -237,22 +243,20 @@
                 console.log(error);
             }
             function renderButton() {
-                gapi.signin2.render('oau2-button', {
+                gapi.signin2.render('my-signin2', {
                     'scope': 'profile email',
                     'width': 240,
                     'height': 50,
                     'longtitle': true,
                     'theme': 'dark',
                     'onsuccess': onSuccess,
-                    'onfailure': onFailure,
-                    'redirect_uri': 'https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force',
-                    'client_id': '225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com',
+                    'onfailure': onFailure
+                    
                 });
             }
         </script>
 
         <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
     </body>
 
 </html>
