@@ -43,6 +43,17 @@ public class UserDAO extends DBContext {
         return null;
     }
     
+    public static void main(String[] args) throws ClassNotFoundException {
+        UserDAO ud = new UserDAO();
+        System.out.println("Hello" );
+        User user = ud.checkUser("akiti7935", "akiti7935");
+         if (user != null) {
+            System.out.println(user.getName() + " " +  user.getPatient_Id() + " " + user.getEmployee_Id());
+        } else {
+            System.out.println("User not found or incorrect username/password.");
+        }
+    }
+    
     public ArrayList<User> getAll() {
         ArrayList<User> list = new ArrayList<>();
         String sql = "select * from User_account";
