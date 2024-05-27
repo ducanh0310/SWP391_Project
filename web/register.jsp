@@ -110,44 +110,11 @@
                     <h3 class="mb-4">Register</h3>
                     <form action="register" method="post">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="username" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
-                        </div>
-                        <hr>
-                        <h3 class="mb-4">Patient Information</h3>
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Full Name *</label>
-                            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter fullname" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email *</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">What's your gender?</label><br>
-                            <input type="radio" name="gender" value="M">Male<br>
-                            <input type="radio" name="gender" value="F">Female<br>
-                            <input type="radio" name="gender" value="X" checked>Other/Prefer not to say<br>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dob" class="form-label">Date of Birth *</label>
-                            <input type="date" class="form-control" id="dob" name="dob" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" required>
-                        </div>
-
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">Next</button>
                         </div>
                     </form>
                 </div>
