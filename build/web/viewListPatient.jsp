@@ -64,27 +64,6 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <!-- User menu (mobile) -->
-                    <div class="navbar-user d-lg-none">
-                        <!-- Dropdown -->
-                        <div class="dropdown">
-                            <!-- Toggle -->
-                            <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="avatar-parent-child">
-                                    <img alt="Image Placeholder" src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar- rounded-circle">
-                                    <span class="avatar-child avatar-badge bg-success"></span>
-                                </div>
-                            </a>
-                            <!-- Menu -->
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
-                                <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Billing</a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">Logout</a>
-                            </div>
-                        </div>
-                    </div>
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
@@ -167,14 +146,15 @@
                                             <th scope="col">Date</th>
                                             <th scope="col">Gender</th> 
                                             <th scope="col">Email</th>
-                                            <th scope="col">Address</th>                                        
-                                            <th scope="col">Insurance</th>
-                                            <th scope="col">RepID</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Address</th>                                                                                   
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td></td>
+                                            <td></td>
                                             <td>
                                                 <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
                                                 <a class="text-heading font-semibold" href="#">
@@ -198,6 +178,7 @@
                                                     <i class="bg-success"></i>Scheduled
                                                 </span>
                                             </td>
+                                               <td></td>
                                             <td class="text-end">
                                                 <a href="#" class="btn btn-sm btn-neutral">View</a>
                                                 <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
@@ -229,6 +210,7 @@
                                                     <i class="bg-warning"></i>Postponed
                                                 </span>
                                             </td>
+                                            <td></td>
                                             <td class="text-end">
                                                 <a href="#" class="btn btn-sm btn-neutral">View</a>
                                                 <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
