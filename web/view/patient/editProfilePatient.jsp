@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>DentCare - Dental Clinic</title>
@@ -99,6 +99,31 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            
+    
+        .profile-pic-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic {
+            display: block;
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 25px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+    </style>
         </style>
     </head>
     <body>  
@@ -172,18 +197,26 @@
     
     <!--profile-->
     
+    
+    
     <div class="row justify-content-center " >
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <div class="profile-pic-wrapper" onclick="triggerFileInput()">
+                    <img class="rounded-circle mt-5 profile-pic" width="180px" height="180px" src="../../img/profile/no_image_profile.png" id="profile-pic" name="profile-pic" alt="personal image">
+                    <i class="fa fa-camera camera-icon"></i>
+                </div>
+                <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" class="d-none">
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
+                <br>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
-                
             </div>
+
+        
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5 container-box">
@@ -222,7 +255,7 @@
                             <select class="form-select" id="gender" name="gender">
                                 <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
                                 <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
-                                <option value="O" <c:if test="${paInfo.gender == 'O'}">selected</c:if>>Other</option>
+                                <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
                             </select>
                         </div>                    
 
@@ -246,7 +279,7 @@
         
     </div>
 
-
+                    
     
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
@@ -296,6 +329,46 @@
 
 
     <!-- JavaScript Libraries -->
+    <script>
+        
+        function triggerFileInput() {
+    document.getElementById('input-file').click();
+}
+
+document.getElementById('input-file').onchange = function() {
+    let fileInput = document.getElementById('input-file');
+    if (fileInput.files.length === 0) {
+        alert('Please select an image.');
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('profileImage', fileInput.files[0]);
+
+    $.ajax({
+        url: '../../uploadImage',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#profile-pic').attr('src',"../../"+ response.newImageUrl);
+            alert('Image uploaded successfully.');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error uploading image: ' + errorThrown);
+        }
+    });
+};
+        
+            
+            
+        
+
+        
+
+           
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../lib/wow/wow.min.js"></script>

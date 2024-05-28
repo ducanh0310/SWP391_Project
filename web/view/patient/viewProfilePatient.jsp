@@ -177,7 +177,7 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <img class="rounded-circle mt-5" width="180px" heigh="180px" src="../../img/profile/${image}">
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
                 <br>
@@ -226,8 +226,8 @@
                                     <c:if test="${paInfo.gender == 'F'}">
                                         value="Female"
                                     </c:if>
-                                    <c:if test="${paInfo.gender == 'O'}">
-                                        value=""
+                                    <c:if test="${paInfo.gender == 'X'}">
+                                        value="Other"
                                     </c:if>
                             >
                         </div>                    

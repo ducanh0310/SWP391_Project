@@ -18,7 +18,7 @@ public class DBPatientProfile extends DBContext{
      public DBPatientProfile() throws ClassNotFoundException {
         super(); // Calls the constructor of DBContext to initialize the connection
     }
-    
+    //Database for view profile
     public PatientInfo getInfoPatient(String username){
         PatientInfo patientInfo= new PatientInfo();
         try {            
@@ -44,7 +44,7 @@ public class DBPatientProfile extends DBContext{
         }
         return patientInfo;
     }
-    
+    //Database fo edit profile
     public void editInfoPatient(PatientInfo paInfo){
          try {
              String sql="""
@@ -73,4 +73,7 @@ public class DBPatientProfile extends DBContext{
          }
         
     }
+    
+    
+    
 }
