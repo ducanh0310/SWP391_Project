@@ -76,7 +76,7 @@ public class Email {
     }
 
     public static boolean sendVerificationCode(String to, String code) {
-        return sendTo(to, SUBJECTVERIFICATIONCODE, "Hello " + extractUsername(to) + "\n" +  VERIFICATIONCODE + code + ".\nUse this code to verify your account. Please do not share this code with anyone.\\nRegards,DentCare Team.\"" );
+        return sendTo(to, SUBJECTVERIFICATIONCODE, "Hello " + extractUsername(to) + "\n" +  VERIFICATIONCODE + code + ".\n" + "Use this code to verify your account. Please do not share this code with anyone.\nRegards,\nDentCare Team.\"" );
     }
 
     public static boolean sendNewPassword(String to, String password) {
@@ -91,7 +91,7 @@ public class Email {
         return sendTo(to, SUBJECTNEWUSERNAME, NEWACCOUNT + username + ".\n "
                 + "Your password is: " + "Use this username and password to login your account. Please do not share this username with anyone.");
     }
-    static String extractUsername(String email) {
+    public static String extractUsername(String email) {
         String[] parts = email.split("@");
         if (parts.length == 2) {
             return parts[0];

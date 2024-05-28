@@ -19,3 +19,5 @@ L
 -src/java/controller/confirmemailregister.java,2\1\21fde53a99e6b4772dc451d323218aedf452c89b
 G
 web/registeraccount.jsp,9\8\98d400ba00f54a1b20038c9fd473d57aa0edde3b
+b
+2src/java/controller/registeraccountcontroller.java,9\4\94ad2fffa1c31fcbf3d2fca7433379c0be46c9eb

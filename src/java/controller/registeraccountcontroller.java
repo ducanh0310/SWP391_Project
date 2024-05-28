@@ -7,11 +7,15 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import DAO.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import validation.Email;
 
 /**
  *
@@ -55,8 +59,8 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+        request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -68,7 +72,25 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String repassword = request.getParameter("repassword");
+        if (!password.equals(repassword)) {
+            request.setAttribute("error", "Password and Re-password are not the same!");
+            request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+            return;
+        }
+        //check if username is existed
+        if (new AccountDAO().checkAccount(username)) {
+            request.setAttribute("error", "Username is existed!");
+            request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+            return;
+        }
+        //insert account
+        new AccountDAO().addPatientAccount(email ,username, password);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
     /** 

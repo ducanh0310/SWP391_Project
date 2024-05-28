@@ -108,28 +108,39 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
                             <h3 class="mb-4">Register</h3>
-                            <form action="registeraccount" method="GET">
+                            <form action="registeraccount" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Please enter your username" required>
+                                    <%
+                                        // Retrieve the email attribute from the session
+                                        String email = (String) session.getAttribute("email");
+                                        // Initialize the usernameSuggestions variable
+                                        String usernameSuggestions = "";
+                                        if (email != null) {
+                                            // Extract the username suggestion from the email
+                                            usernameSuggestions = email.substring(0, email.indexOf("@"));
+                                        }
+                                    %>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Please enter your username" value="<%= usernameSuggestions%>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Please enter your password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password2nd" class="form-label">Confirm password</label>
-                                    <input type="password" class="form-control" id="password2nd" name="password2nd" placeholder="Please confirm your password" required>
+                                    <label for="repassword" class="form-label">Confirm password</label>
+                                    <input type="password" class="form-control" id="repassword" name="repassword" placeholder="Please confirm your password" required>
                                 </div>
                                 <div class="d-grid">
                                     <input type="submit" class="btn btn-primary" value="Register">
                                 </div>
                                 <span class="text-danger">
+
                                     <%
-                                        String accountexits = (String) request.getAttribute("accountexits");
-                                        if (accountexits != null) {
+                                        String error = (String) request.getAttribute("error");
+                                        if (error != null) {
                                     %>
-                                    <%= accountexits %>
+                                    <%= error %>
                                     <%
                                         }
                                     %>
