@@ -21,9 +21,9 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author ngphn
  */
-@WebServlet(name="confirmemailregister", urlPatterns={"/verify"})
-public class confirmemailregister extends HttpServlet {
-    private static final long TIMEOUT_SECONDS = 60;
+@WebServlet(name="ConfirmEmailForgotPwController", urlPatterns={"/ConfirmEmailForgotPw"})
+public class ConfirmEmailForgotPwController extends HttpServlet {
+        private static final long TIMEOUT_SECONDS = 60;
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +40,10 @@ public class confirmemailregister extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet confirmemailregister</title>");  
+            out.println("<title>Servlet ConfirmEmailForgotPwController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet confirmemailregister at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ConfirmEmailForgotPwController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,16 +61,16 @@ public class confirmemailregister extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String enteredCode = request.getParameter("code");
-        String storedCode = (String) session.getAttribute("verificationCode");
-        Instant codeTimestamp = (Instant) session.getAttribute("codeTimestamp");
+        String enteredCode = request.getParameter("codeCf");
+        String storedCode = (String) session.getAttribute("verificationCodeFP");
+        Instant codeTimestamp = (Instant) session.getAttribute("codeTimestampFP");
         if (storedCode != null && codeTimestamp != null) {
             Instant now = Instant.now();
             long elapsedSeconds = Duration.between(codeTimestamp, now).getSeconds();
             if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
                 session.removeAttribute("verificationCode");
                 session.removeAttribute("codeTimestamp");
-                request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+                request.getRequestDispatcher("NewPassword.jsp").forward(request, response);
                 return;
             } else if (elapsedSeconds > TIMEOUT_SECONDS) {
                 request.setAttribute("timeout", "Verification code has expired! Please try again!");
@@ -79,9 +79,9 @@ public class confirmemailregister extends HttpServlet {
             }
         } else {
             request.setAttribute("error", "An error occurred! Please try again!");
-        }
-        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
-    }
+                                                    }
+        request.getRequestDispatcher("ConfirmEmailForgotPw.jsp").forward(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -93,7 +93,7 @@ public class confirmemailregister extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

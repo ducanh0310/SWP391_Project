@@ -129,6 +129,8 @@
                                 <div class="d-flex justify-content-between mt-4">
                                     <a href="login.jsp">Already have an account?</a>
                                 </div>
+                                <div class="d-flex justify-content-between mt-4">
+                                    <a href="ForgotPassword">Forgot password?</a>
                             </form>
                         </div>
                     </div>

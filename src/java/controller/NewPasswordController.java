@@ -7,9 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Duration;
-import java.time.Instant;
 
+import DAO.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,9 +20,8 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author ngphn
  */
-@WebServlet(name="confirmemailregister", urlPatterns={"/verify"})
-public class confirmemailregister extends HttpServlet {
-    private static final long TIMEOUT_SECONDS = 60;
+@WebServlet(name="NewPasswordController", urlPatterns={"/NewPassword"})
+public class NewPasswordController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class confirmemailregister extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet confirmemailregister</title>");  
+            out.println("<title>Servlet NewPasswordController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet confirmemailregister at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet NewPasswordController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,28 +58,8 @@ public class confirmemailregister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String enteredCode = request.getParameter("code");
-        String storedCode = (String) session.getAttribute("verificationCode");
-        Instant codeTimestamp = (Instant) session.getAttribute("codeTimestamp");
-        if (storedCode != null && codeTimestamp != null) {
-            Instant now = Instant.now();
-            long elapsedSeconds = Duration.between(codeTimestamp, now).getSeconds();
-            if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
-                session.removeAttribute("verificationCode");
-                session.removeAttribute("codeTimestamp");
-                request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
-                return;
-            } else if (elapsedSeconds > TIMEOUT_SECONDS) {
-                request.setAttribute("timeout", "Verification code has expired! Please try again!");
-            } else {
-                request.setAttribute("incorrectCode", "Incorrect verification code! Please try again!");
-            }
-        } else {
-            request.setAttribute("error", "An error occurred! Please try again!");
-        }
-        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
-    }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -93,7 +71,18 @@ public class confirmemailregister extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        String emailFP = (String) session.getAttribute("emailFP");
+        String password = request.getParameter("password");
+        String repassword = request.getParameter("repassword");
+        if (!password.equals(repassword)) {
+            request.setAttribute("error", "Password and Re-password are not the same!");
+        } else {
+            AccountDAO dao = new AccountDAO();
+            dao.updatePasswordPatient(emailFP, password);
+            session.removeAttribute("emailFP");
+        }
+        request.getRequestDispatcher("NewPassword.jsp").forward(request, response);
     }
 
     /** 

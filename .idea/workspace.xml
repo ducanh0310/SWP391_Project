@@ -7,19 +7,16 @@
     <list default="true" id="c6045067-40f7-479b-9e5e-1ab77f451790" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21fde53a99e6b4772dc451d323218aedf452c89b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21fde53a99e6b4772dc451d323218aedf452c89b" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9e55fe8b80e5c9418b32d3418db1fe3de8fe8f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9e55fe8b80e5c9418b32d3418db1fe3de8fe8f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6cfe7e9296c71260b381f4c9d8047dda1f6515f6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6cfe7e9296c71260b381f4c9d8047dda1f6515f6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/98d400ba00f54a1b20038c9fd473d57aa0edde3b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/98d400ba00f54a1b20038c9fd473d57aa0edde3b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5be41f60596a46514616b0f424dd8c1e322c931f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5be41f60596a46514616b0f424dd8c1e322c931f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/4/94ad2fffa1c31fcbf3d2fca7433379c0be46c9eb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/4/94ad2fffa1c31fcbf3d2fca7433379c0be46c9eb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/DAO/AccountDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/DAO/AccountDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/registeraccountcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/registeraccountcontroller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Email.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Email.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/registeraccount.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/registeraccount.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/register.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/registeraccountcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/registeraccountcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/validation/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/validation/Email.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/registeraccount.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/registeraccount.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/confirmemailregister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/confirmemailregister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/register.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +140,7 @@
       <workItem from="1716739495942" duration="328000" />
       <workItem from="1716760532141" duration="348000" />
       <workItem from="1716829166888" duration="16917000" />
-      <workItem from="1716916591207" duration="5746000" />
+      <workItem from="1716916591207" duration="12656000" />
     </task>
     <servers />
   </component>
