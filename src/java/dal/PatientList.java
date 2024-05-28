@@ -23,7 +23,6 @@ import model.Patient;
  *
  * @author Gia Huy
  */
-@WebServlet(name = "PatientList", urlPatterns = {"/list"})
 public class PatientList extends DBContext<Patient> {
 
     public ArrayList<Patient> getPatient(int leid) {

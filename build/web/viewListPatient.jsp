@@ -39,12 +39,17 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .text-primary {
+                --x-text-opacity: 1;
+                color: #06a3da !important;
+            }
+        </style>
 
-       
     </head>
 
     <body>
-<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+        <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
             <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
                 <div class="container-fluid">
@@ -53,12 +58,12 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Brand -->
-                    <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <a href="index.jsp" class="navbar-brand p-0">
+                        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <!-- User menu (mobile) -->
                     <div class="navbar-user d-lg-none">
                         <!-- Dropdown -->
@@ -123,7 +128,7 @@
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
                         <!-- Navigation -->
-                       
+
                         <!-- Push content down -->
                         <div class="mt-auto"></div>
                         <!-- User (md) -->
@@ -144,7 +149,7 @@
             </nav>
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-               
+
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">                   
@@ -156,11 +161,15 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">SIN</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Date</th>
-                                            <th scope="col">Company</th>
-                                            <th scope="col">Offer</th>
-                                            <th scope="col">Meeting</th>
+                                            <th scope="col">Gender</th> 
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Address</th>                                        
+                                            <th scope="col">Insurance</th>
+                                            <th scope="col">RepID</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -486,32 +495,32 @@
                 </main>
             </div>
 
-        <!-- JS File -->
-        <script type="text/javascript" src="js/script.js"></script>
+            <!-- JS File -->
+            <script type="text/javascript" src="js/script.js"></script>
 
 
 
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="lib/twentytwenty/jquery.event.move.js"></script>
-        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script src="lib/twentytwenty/jquery.event.move.js"></script>
+            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+            <!-- Template Javascript -->
+            <script src="js/main.js"></script>
     </body>
 
 </html>
