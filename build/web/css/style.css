@@ -1,4 +1,8 @@
 /********** Template CSS **********/
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 :root {
     --primary: #06A3DA;
     --secondary: #F57E57;
@@ -492,30 +496,4 @@ ol, ul, dl {
 ol, ul {
     padding-left: 1rem;
 }
-/*viewList*/
 
-table {
-  width: 60%;
-  border-collapse: collapse;
-}
-
-tbody td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tbody tr:hover {
-  background-color: #eaeaea;
-}
-
-a {
-    color: #ffffff;
-}
