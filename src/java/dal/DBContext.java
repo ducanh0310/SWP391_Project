@@ -7,6 +7,7 @@ package dal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,22 +15,27 @@ import java.util.logging.Logger;
  *
  * @author ngphn
  */
-public class DBContext {
+public abstract class DBContext<T> {
+    
     protected Connection connection;
-
-    public DBContext() throws ClassNotFoundException {
+    
+    public DBContext() {
         try {
             String user = "sa";
-            String pass = "30020102";
-            String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
+            String pass = "123";
+            String url = "jdbc:sqlserver://HUY\\GIAHUY:1433;databaseName=Trial;encrypt=true;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
-        } catch (SQLException e) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args) throws ClassNotFoundException {
-        DBContext db = new DBContext();
-        System.out.println("Hello" + db);
-    }
+    
+    public abstract ArrayList<T> list();
+    public abstract void insert(T entity);
+    public abstract void update(T entity);
+    public abstract void delete(T entity);
+    public abstract T get(int id);
 }
