@@ -22,10 +22,7 @@ import model.PatientInfo;
  * @author Vu Minh Quan
  */
 public class ViewProfilePatientController extends HttpServlet {
-   
-     
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

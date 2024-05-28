@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import model.PatientInfo;
 import java.sql.Date;
 
+
 /**
  *
  * @author Vu Minh Quan
@@ -52,8 +53,7 @@ public class EditProfilePatientController extends HttpServlet {
             paInfo.setDob(Date.valueOf(request.getParameter("dob")));
             paInfo.setAddress(request.getParameter("address"));
             DBPatientProfile db = new DBPatientProfile();
-            db.editInfoPatient(paInfo);
-            
+            db.editInfoPatient(paInfo);            
             response.sendRedirect("view");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex); 

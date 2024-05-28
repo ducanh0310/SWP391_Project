@@ -8,7 +8,14 @@
         <servlet-name>EditProfilePatientController</servlet-name>
         <servlet-class>controller.patient.EditProfilePatientController</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>EditPatientProfileController</servlet-name>
+        <servlet-class>controller.patient.EditPatientProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProfileEmployeeController</servlet-name>
+        <servlet-class>controller.employee.ViewProfileEmployeeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/view</url-pattern>
@@ -17,5 +24,12 @@
         <servlet-name>EditProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/edit</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>EditPatientProfileController</servlet-name>
+        <url-pattern>/EditPatientProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfileEmployeeController</servlet-name>
+        <url-pattern>/employee/profile/view</url-pattern>
+    </servlet-mapping>
 </web-app>

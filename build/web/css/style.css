@@ -36,7 +36,7 @@ h6,
 
 .btn-primary,
 .btn-secondary {
-    color: #FFFFFF;
+    color: #FFFFFF;   
 }
 
 .btn-primary:hover {
@@ -497,3 +497,18 @@ ol, ul {
     padding-left: 1rem;
 }
 
+.text-primary {
+    --x-text-opacity: 1;
+    color: #06a3da !important;
+}
+
+.bg-primary {
+    --x-bg-opacity: 1;
+    background-color: #06a3da !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #06a3da;
+    border-color: #06a3da;
+}

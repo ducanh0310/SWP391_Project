@@ -45,6 +45,7 @@
                 /*background: rgb(99, 39, 120)*/
             }
 
+            
             .form-control:focus {
                 box-shadow: none;
                 border-color: #BA68C8

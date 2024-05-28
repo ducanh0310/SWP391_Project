@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
-            <file>jar:file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/lib/okio-2.8.0.jar!/META-INF/MANIFEST.MF</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/controller/imageProfile/UploadServlet.java</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/upload.html</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/team.html</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/patient/editProfilePatient.jsp</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/dao/DBPatientProfile.java</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/appointment.html</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/editProfileEmployee.jsp</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/controller/patient/EditProfilePatientController.java</file>
         </group>
     </open-files>
 </project-private>
