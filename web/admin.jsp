@@ -84,24 +84,33 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="admin.jsp">
                                     <i class="bi bi-house"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="viewListPatient.jsp">
-                                    <i class="bi bi-bar-chart"></i> Patient
+                                    <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="bi bi-chat"></i> Messages
-                                    <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">6</span>
+                                    <i class="bi bi-clipboard-check"></i> Treatment
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="bi bi-bookmarks"></i> Collections
+                                    <i class="bi bi-clock"></i> Appointment
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-exclamation-square-fill"></i> Report
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-gear-fill"></i> Setting
                                 </a>
                             </li>
                             <li class="nav-item">
