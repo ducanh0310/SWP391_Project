@@ -171,11 +171,11 @@
                     <ul>
                         <li class="nav-item active">
                             <i class="bx bxs-dashboard"></i>
-                            <span>Dashboard</span>
+                            <span>Patient</span>
                         </li>
                         <li class="nav-item">
                             <i class="bx bxs-bar-chart-alt-2"></i>
-                            <span>Inventory</span>
+                            <span>Profile Patient</span>
                         </li>
                         <li class="nav-item">
                             <i class="bx bxs-wallet"></i>
