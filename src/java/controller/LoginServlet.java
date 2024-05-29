@@ -30,7 +30,7 @@ import java.sql.*;
  *
  * @author trung
  */
-public class AuthenticateServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -101,7 +101,7 @@ public class AuthenticateServlet extends HttpServlet {
                 try {
                     login(request, response);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AuthenticateServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
                 break;
