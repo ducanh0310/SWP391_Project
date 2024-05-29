@@ -159,7 +159,7 @@ CREATE TABLE [dbo].[Patient](
 	[Patient_id] [int] IDENTITY(1,1) NOT NULL,
 	[patient_sin] [int] NULL,
 	[address] [varchar](255) NULL,
-	[name] [varchar](255) NOT NULL,
+	[name] [varchar](255) NULL,
 	[gender] [varchar](1) NULL,
 	[email] [varchar](255) NOT NULL,
 	[phone] [varchar](20) NULL,
