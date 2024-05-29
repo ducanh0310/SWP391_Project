@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
+
 import java.lang.RuntimeException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,11 +16,11 @@ import model.User;
  * @author trung
  */
 public class UserDAO extends DBContext {
-    
+
     public UserDAO() throws ClassNotFoundException {
         super();
     }
-    
+
     public User checkUser(String username, String password) {
         String sql = "select * from [User_account] where username = ? and password = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
@@ -27,11 +28,11 @@ public class UserDAO extends DBContext {
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                User u = new User(rs.getString(1)
-                        , rs.getString(2)
-                        , rs.getInt(3)
-                        , rs.getString(4)
-                        , rs.getString(5));
+                User u = new User(rs.getString(1),
+                         rs.getString(2),
+                         rs.getInt(3),
+                         rs.getString(4),
+                         rs.getString(5));
                 return u;
             }
         } catch (SQLException e) {
@@ -39,18 +40,18 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
+
     public static void main(String[] args) throws ClassNotFoundException {
         UserDAO ud = new UserDAO();
-        System.out.println("Hello" );
+        System.out.println("Hello");
         User user = ud.checkUser("akiti7935", "akiti7935");
-         if (user != null) {
-            System.out.println(user.getName() + " " +  user.getPatient_Id() + " " + user.getEmployee_Id());
+        if (user != null) {
+            System.out.println(user.getName() + " " + user.getPatient_Id() + " " + user.getEmployee_Id());
         } else {
             System.out.println("User not found or incorrect username/password.");
         }
     }
-    
+
     public ArrayList<User> getAll() {
         ArrayList<User> list = new ArrayList<>();
         String sql = "select * from User_account";

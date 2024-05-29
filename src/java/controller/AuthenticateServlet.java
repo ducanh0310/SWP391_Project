@@ -82,7 +82,7 @@ public class AuthenticateServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             default:
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("../login.jsp").forward(request, response);
                 break;
         }
         request.getRequestDispatcher(url).forward(request, response);
