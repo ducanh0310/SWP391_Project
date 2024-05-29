@@ -107,18 +107,17 @@
             <div class="row gx-0">
                 <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
-                        <small class="py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</small>
-
+                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Sat : 6.00 am - 10.00 pm, Sunday Closed </small>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"></i>Role</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>ngphnam</p>
                         </div>
-<!--                        <div class="me-3 pe-3 border-end py-2">
+                        <div class="me-3 pe-3 border-end py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
-                        </div>-->
+                        </div>
                         <div class="py-2">
                             <p class="m-0" ><a href="" style="color: #ffffff">Username</a></p>                        
                         </div>
@@ -129,22 +128,34 @@
         <!-- Topbar End -->
         
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                
-                <div class="navbar-nav ms-auto py-0">
-                    <div class="nav-item nav-link"></div>                     
+            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Service</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                        <a href="team.html" class="dropdown-item">Our Dentist</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="appointment.html" class="dropdown-item">Appointment</a>
+                    </div>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-                
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
-        </nav>
+            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+            <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+        </div>
+         </nav>
     <!-- Navbar End -->
     
     
@@ -152,11 +163,21 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Personal information</h1>
-                
+                <a href="" class="h4 text-white">Home</a>
+                <i class="far fa-circle text-white px-2"></i>
+                <a href="" class="h4 text-white">Profile</a>
             </div>
         </div>
     </div>
-    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </div>
+</nav>
+
     <!--profile-->
     
     <div class="row justify-content-center " >
@@ -164,11 +185,10 @@
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Username</span>
-                <span class="text-black-50">ID</span>
-                <br>
+                <span class="font-weight-bold">Edogaru</span>
+                <span class="text-black-50">edogaru@mail.com.my</span>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
-                <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
+                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
             </div>
@@ -183,63 +203,45 @@
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" readonly="">
+                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" readonly>
                     </div>        
                     <div class="col-md-6">
                         <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="" readonly="">
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="" readonly>
                     </div>
                 </div>
                     
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="" readonly="">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="" readonly="">
+                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="" readonly>
                     </div>
                 </div>
                 
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels" for="gender">Gender</label>
-                        <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly="">
+                        <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly>
                     </div>                    
 
                     <div class="col-md-6">
                         <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="" readonly="">
+                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="" readonly>
                     </div>
                 </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Role</label>
-                        <input type="text" id="role" name="role" class="form-control" placeholder="" value="" readonly="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Salary / year</label>
-                        <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="" readonly="">
-                    </div>
+                <br>
+                <div>
+                    <label class="labels">Address</label>
+                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="" readonly>
                 </div>
                 
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Address</label>
-                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="" readonly="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Working Branch</label>
-                        <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="" readonly="">
-                    </div>
+                <div class="mt-5 text-center">
+                    <a href="editPatient.jsp" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                 </div>
-                
-                
-                
-                <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Edit Profile</button></div>
-
             </div>
         </div>    
         
@@ -249,38 +251,58 @@
     
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
-    <div class="container pt-5">
-        <div class="row g-5 pt-4 justify-content-center">
-            <div class="col-lg-3 col-md-6 mx-auto">
-                <a href="index.html" class="navbar-brand p-0 d-block mx-auto text-start">
-                    <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-                </a>
-                <br>
-                <p class="mb-2 text-start"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                <p class="mb-2 text-start"><i class="bi bi-envelope-open text-primary me-2"></i>dentcare23@medical.com</p>
-                <p class="mb-0 text-start"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
-            </div>
-            <div class="col-lg-3 col-md-6 mx-auto">
-                <h3 class="text-white mb-4 text-start">Popular Links</h3>
-                <div class="d-flex flex-column justify-content-start text-start">
-                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                    <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+        <div class="container pt-5">
+            <div class="row g-5 pt-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mx-auto">
-                <h3 class="text-white mb-4 text-start">Follow Us</h3>
-                <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/groups/490263423665224" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
-                <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Popular Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Get In Touch</h3>
+                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>info@example.com</p>
+                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Follow Us</h3>
+                    <div class="d-flex">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Your Site Name</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer End -->
 
 

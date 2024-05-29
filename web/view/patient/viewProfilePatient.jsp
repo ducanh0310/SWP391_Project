@@ -4,6 +4,7 @@
     Author     : Vu Minh Quan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,6 +45,7 @@
                 /*background: rgb(99, 39, 120)*/
             }
 
+            
             .form-control:focus {
                 box-shadow: none;
                 border-color: #BA68C8
@@ -176,10 +178,11 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Edogaru</span>
-                <span class="text-black-50">edogaru@mail.com.my</span>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                <img class="rounded-circle mt-5" width="180px" heigh="180px" src="../../img/profile/${image}">
+                <span class="font-weight-bold">${username}</span>
+                <span class="text-black-50">${paInfo.email}</span>
+                <br>
+                <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
@@ -191,48 +194,58 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">My account</h4>
                 </div>
-                <hr>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" readonly>
-                    </div>        
-                    <div class="col-md-6">
-                        <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="" readonly>
+                <hr>               
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Fullname</label>
+                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" readonly>
+                        </div>        
+                        <div class="col-md-6">
+                            <label class="labels">Phone Number</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="${paInfo.phoneNumber}" value="" readonly>
+                        </div>
                     </div>
-                </div>
-                    
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="" readonly>
-                    </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels" for="gender">Gender</label>
-                        <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly>
-                    </div>                    
 
-                    <div class="col-md-6">
-                        <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="" readonly>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Medicine code</label>
+                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}" readonly>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div>
-                    <label class="labels">Address</label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="" readonly>
-                </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels" for="gender">Gender</label>
+                            <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder=""
+                                   <c:if test="${paInfo.gender == 'M'}">
+                                        value="Male"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'F'}">
+                                        value="Female"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'X'}">
+                                        value="Other"
+                                    </c:if>
+                            >
+                        </div>                    
+
+                        <div class="col-md-6">
+                            <label class="labels">Date of birth</label>
+                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="labels">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}" readonly>
+                    </div>
                 
                 <div class="mt-5 text-center">
-                    <a href="editPatient.jsp" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                 </div>
             </div>
         </div>    
