@@ -4,6 +4,7 @@
     Author     : Vu Minh Quan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-        
         <!-- Libraries Stylesheet -->
         <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="../../lib/animate/animate.min.css" rel="stylesheet">
@@ -45,6 +45,7 @@
                 /*background: rgb(99, 39, 120)*/
             }
 
+            
             .form-control:focus {
                 box-shadow: none;
                 border-color: #BA68C8
@@ -98,9 +99,15 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            
+            .m-0 {
+                margin-left: 30px ! important;
+            }
         </style>
     </head>
-    <body>  
+    <body>
+        
+        
         <!-- Topbar Start -->
         <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
             <div class="row gx-0">
@@ -127,33 +134,33 @@
         <!-- Topbar End -->
         
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                            <a href="team.html" class="dropdown-item">Our Dentist</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="appointment.html" class="dropdown-item">Appointment</a>
-                        </div>
+            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Service</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                        <a href="team.html" class="dropdown-item">Our Dentist</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="appointment.html" class="dropdown-item">Appointment</a>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-                <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
+            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+            <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+        </div>
          </nav>
     <!-- Navbar End -->
     
@@ -175,10 +182,11 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Edogaru</span>
-                <span class="text-black-50">edogaru@mail.com.my</span>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                <img class="rounded-circle mt-5" width="180px" heigh="180px" src="../../img/profile/no_image_profile.png">
+                <span class="font-weight-bold">${username}</span>
+                <span class="text-black-50">${paInfo.email}</span>
+                <br>
+                <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
@@ -190,53 +198,59 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">My account</h4>
                 </div>
-                <hr>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" >
-                    </div>        
-                    <div class="col-md-6">
-                        <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="">
+                <hr>               
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Fullname</label>
+                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" readonly>
+                        </div>        
+                        <div class="col-md-6">
+                            <label class="labels">Phone Number</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="${paInfo.phoneNumber}" value="" readonly>
+                        </div>
                     </div>
-                </div>
-                    
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="">
-                    </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels" for="gender">Gender</label>
-                        <select class="form-select" id="gender" name="gender">
-                            <option value="">Select your gender</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                            <option value="O">Other</option>
-                        </select>
-                    </div>                    
 
-                    <div class="col-md-6">
-                        <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Medicine code</label>
+                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}" readonly>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div>
-                    <label class="labels">Address</label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="">
-                </div>
-                
-                <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
 
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels" for="gender">Gender</label>
+                            <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder=""
+                                   <c:if test="${paInfo.gender == 'M'}">
+                                        value="Male"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'F'}">
+                                        value="Female"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'X'}">
+                                        value="Other"
+                                    </c:if>
+                            >
+                        </div>                    
+
+                        <div class="col-md-6">
+                            <label class="labels">Date of birth</label>
+                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="labels">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}" readonly>
+                    </div>
+                
+                <div class="mt-5 text-center">
+                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                </div>
             </div>
         </div>    
         
@@ -283,7 +297,6 @@
             </div>
         </div>
     </div>
-    
     <!-- Footer End -->
 
 
