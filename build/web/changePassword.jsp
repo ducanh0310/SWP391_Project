@@ -106,7 +106,7 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
                             <h3 class="mb-4">Change password</h3>
-                            <form action="login?action=login" method="post">
+                            <form action="changepass" method="post">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Current password: </label>
                                     <input type="password" class="form-control" id="oldPass" name="oldPass" placeholder="Enter old password" required>

@@ -73,4 +73,48 @@ public class DBPatientProfile extends DBContext{
          }
         
     }
+    
+    public PatientInfo getPatientByEmail(String email) {
+        try {
+            String query = "SELECT * FROM Patient WHERE email = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                PatientInfo patient = new PatientInfo();
+                patient.setPatientId(rs.getInt("patient_id"));
+                patient.setEmail(rs.getString("email"));
+                patient.setName(rs.getString("name"));
+                patient.setAddress(rs.getString("address"));
+                patient.setGender(rs.getString("gender"));
+                patient.setPhoneNumber(rs.getString("phone"));
+                patient.setDob(rs.getDate("date_of_birth"));
+                return patient;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public int addPatient(PatientInfo patient) {
+        try {
+            String query = "INSERT INTO Patient (address, name, gender, email, phone, date_of_birth) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, patient.getAddress());
+            ps.setString(2, patient.getName());
+            ps.setString(3, patient.getGender());
+            ps.setString(4, patient.getEmail());
+            ps.setString(5, patient.getPhoneNumber());
+            ps.setDate(6, patient.getDob());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }

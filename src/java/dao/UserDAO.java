@@ -73,4 +73,25 @@ public class UserDAO extends DBContext {
 
         return list;
     }
+    
+    public User getUserByPatientId(int patientId) {
+        try {
+            String query = "SELECT * FROM User_account WHERE patient_id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User u = new User(rs.getString(1),
+                         rs.getString(2),
+                         rs.getInt(3),
+                         rs.getString(4),
+                         rs.getString(5));
+                return u;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

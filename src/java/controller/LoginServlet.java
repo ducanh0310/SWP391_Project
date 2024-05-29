@@ -4,8 +4,10 @@
  */
 package controller;
 
+import dal.DBContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import dao.DBPatientProfile;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,11 +22,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
-import model.UserGoogleLoginDTO;
+import model.PatientInfo;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import java.sql.*;
+import model.PatientInfo;
 
 /**
  *
@@ -32,13 +35,7 @@ import java.sql.*;
  */
 public class LoginServlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String code = request.getParameter("code");
-        String accessToken = getToken(code);
-        UserGoogleLoginDTO user = getUserInfor(accessToken);
-        System.out.println(user);
-    }
+
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
         //call api to get token
@@ -54,10 +51,10 @@ public class LoginServlet extends HttpServlet {
         return accessToken;
     }
 
-    public static UserGoogleLoginDTO getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
+    public static PatientInfo getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
-        UserGoogleLoginDTO googlePojo = new Gson().fromJson(response, UserGoogleLoginDTO.class);
+        PatientInfo googlePojo = new Gson().fromJson(response, PatientInfo.class);
 
         return googlePojo;
     }
@@ -82,7 +79,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             default:
-                request.getRequestDispatcher("../login.jsp").forward(request, response);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
                 break;
         }
         request.getRequestDispatcher(url).forward(request, response);
@@ -94,63 +91,86 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        String action = request.getParameter("action");
-        switch (action) {
-            case "login":
-            {
+        
+        String code = request.getParameter("code");
+        HttpSession session = request.getSession();
+
+        if (code != null) {
+            // Google OAuth login
+            try {
+                String accessToken = getToken(code);
+                PatientInfo googleUser = getUserInfor(accessToken);
+
+                if (googleUser != null) {
+                    DBPatientProfile patientDAO = new DBPatientProfile();
+                    PatientInfo existingPatient = patientDAO.getPatientByEmail(googleUser.getEmail());
+
+                    if (existingPatient != null) {
+                        // Patient exists, get User_account info
+                        UserDAO userDAO = new UserDAO();
+                        User user = userDAO.getUserByPatientId(existingPatient.getPatientId());
+                        if (user != null) {
+                            session.setAttribute("username", user.getName());
+                            session.setAttribute("password", user.getPassword());
+                            response.sendRedirect("index.jsp");
+                        } else {
+                            // Handle error: user account not found
+                            request.setAttribute("error", "User account not found.");
+                            request.getRequestDispatcher("login.jsp").forward(request, response);
+                        }
+                    } else {
+                        // Redirect to registration page
+                        session.setAttribute("googleUser", googleUser);
+                        response.sendRedirect("register.jsp");
+                    }
+                    return;
+                } else {
+                    request.setAttribute("error", "Failed to retrieve user information from Google.");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
+            } catch (Exception e) {
+                request.setAttribute("error", "Failed to authenticate using Google.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+        } else {
+            // Traditional username and password login
+            String userName = request.getParameter("username");
+            String passWord = request.getParameter("password");
+
+            if (userName == null || passWord == null || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
+                request.setAttribute("error", "Username and password must not be empty.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
                 try {
-                    login(request, response);
+                    UserDAO userDAO = new UserDAO();
+                    User user = userDAO.checkUser(userName, passWord);
+                    if (user != null) {
+                        session.setAttribute("currentUser", user);
+                        response.sendRedirect("index.jsp");
+                    } else {
+                        request.setAttribute("error", "Invalid username or password.");
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                    }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-                break;
-
-            default:
-                throw new AssertionError();
-                
         }
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        session.removeAttribute(Constants.SESSION_CUSTOMER);
-        //session.removeAttribute("cart");
+        session.removeAttribute("currentUser");
+        
     }
 
-    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        UserDAO user = new UserDAO();
-        if (request.getParameter("username") == null || request.getParameter("password") == null
-                || request.getParameter("username").trim().isEmpty() || request.getParameter("password").trim().isEmpty()) {
-            request.setAttribute("error", "Must be fill all field!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            String userName = request.getParameter("username");
-            String passWord = request.getParameter("password");
-
-            User u = user.checkUser(userName, passWord);
-            HttpSession session = request.getSession();
-            if (u == null) {
-                request.setAttribute("error", "Username or password incorrect !");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                 //set vào session account
-            session.setAttribute(Constants.SESSION_CUSTOMER, u);
-            //chuyển về trang home
-            response.sendRedirect("index.jsp");
-
-            }
-        }
-
-    }
-
-    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException{
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
         UserDAO user = new UserDAO();
         ArrayList<User> userList = user.getAll();
         request.setAttribute("Users", userList);
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
-    
+
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -13,7 +13,8 @@ import java.util.logging.Logger;
  * @author ngphn
  */
 public class DBContext {
-    protected Connection connection;
+
+    public Connection connection;
 
     public DBContext() throws ClassNotFoundException {
         try {
@@ -25,6 +26,10 @@ public class DBContext {
         } catch (SQLException e) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
     public static void main(String[] args) throws ClassNotFoundException {
         DBContext db = new DBContext();
