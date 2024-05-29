@@ -43,7 +43,9 @@
                 --x-text-opacity: 1;
                 color: #06a3da !important;
             }
-            
+            .m-0 {
+                margin-left: 30px !important;
+            }
         </style>
     </head>
 

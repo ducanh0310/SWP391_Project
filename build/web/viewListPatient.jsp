@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Patient" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +45,9 @@
             .text-primary {
                 --x-text-opacity: 1;
                 color: #06a3da !important;
+            }
+            .m-0 {
+                margin-left: 30px !important;
             }
         </style>
 
@@ -153,38 +158,30 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Robert Fox
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Feb 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-1.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Dribbble
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $3.500
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-success"></i>Scheduled
-                                                </span>
-                                            </td>
-                                               <td></td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
+                                            <% 
+        ArrayList<Patient> patients = (ArrayList<Patient>) request.getAttribute("patients");
+        if (patients != null && !patients.isEmpty()) {
+            for (Patient patient : patients) {
+                                            %>
+                                        <tr>
+                                            <td><%= patient.getId() %></td>
+                                            <td><%= patient.getSin() %></td>
+                                            <td><%= patient.getName() %></td> 
+                                            <td><%= patient.getDob() %></td> 
+                                            <td><%= patient.getGender() %></td>
+                                            <td><%= patient.getEmail() %></td>                               
+                                            <td><%= patient.getPhone() %></td>
+                                            <td><%= patient.getAddress() %></td>
+
+                                        </tr>
+                                        <% 
+                                            }
+                                        } else {
+                                        %>
+                                        <tr>
+                                            <td colspan="8">No patients found.</td>
+                                        </tr>
+                                        <% } %>
                                         </tr>
                                         <tr>
                                             <td>

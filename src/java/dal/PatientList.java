@@ -16,9 +16,9 @@ import model.Patient;
  *
  * @author Gia Huy
  */
-public class PatientList extends DBContext<Patient> {
+public class PatientList extends DBContext {
 
-    public ArrayList<Patient> getPatient(int leid) {
+    public ArrayList<Patient> getPatient(int pid) {
         ArrayList<Patient> patient = new ArrayList<>();
         try {
             String sql = "SELECT [Patient_id]\n"
@@ -34,7 +34,7 @@ public class PatientList extends DBContext<Patient> {
                     + "  FROM p [Patient]\n";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, leid);
+            stm.setInt(1, pid);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Patient p = new Patient();
@@ -57,29 +57,5 @@ public class PatientList extends DBContext<Patient> {
         return patient;
     }
 
-    @Override
-    public ArrayList<Patient> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void insert(Patient entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(Patient entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void delete(Patient entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Patient get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }
