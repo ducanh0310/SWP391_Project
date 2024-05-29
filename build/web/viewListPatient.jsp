@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.Patient" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +114,7 @@
                         <!-- Navigation -->
 
                         <!-- Push content down -->
-                        <div class="mt-auto"></div>
+                       <hr>
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -158,30 +158,18 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <% 
-        ArrayList<Patient> patients = (ArrayList<Patient>) request.getAttribute("patients");
-        if (patients != null && !patients.isEmpty()) {
-            for (Patient patient : patients) {
-                                            %>
-                                        <tr>
-                                            <td><%= patient.getId() %></td>
-                                            <td><%= patient.getSin() %></td>
-                                            <td><%= patient.getName() %></td> 
-                                            <td><%= patient.getDob() %></td> 
-                                            <td><%= patient.getGender() %></td>
-                                            <td><%= patient.getEmail() %></td>                               
-                                            <td><%= patient.getPhone() %></td>
-                                            <td><%= patient.getAddress() %></td>
+                                            <c:forEach items="${patients}" var="patient">
+                                            <tr>                                           
+                                                <td>${patient.sin}</td>
+                                                <td>${patient.name}</td>
+                                                <td>${patient.dob}</td>
+                                                <td>${patient.gender}</td>
+                                                <td>${patient.email}</td>
+                                                <td>${patient.phone}</td>                                             
+                                                <td>${patient.address}</td>
+                                            </tr>
+                                        </c:forEach>
 
-                                        </tr>
-                                        <% 
-                                            }
-                                        } else {
-                                        %>
-                                        <tr>
-                                            <td colspan="8">No patients found.</td>
-                                        </tr>
-                                        <% } %>
                                         </tr>
                                         <tr>
                                             <td>

@@ -19,17 +19,30 @@ import model.Patient;
  */
 public class PatientController extends HttpServlet {
 
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy thông tin leid từ request parameter
-        int leid = Integer.parseInt(request.getParameter("leid"));
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-        PatientList patientList = new PatientList();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-        ArrayList<Patient> patients = patientList.getPatient(leid);
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
-        request.setAttribute("patients", patients);
-
-        request.getRequestDispatcher("viewListPatient.jsp").forward(request, response);
+        try {
+            int pid = Integer.parseInt(request.getParameter("pid"));
+            PatientList pl = new PatientList();
+            ArrayList<Patient> patients = pl.getPatient(pid);
+            request.setAttribute("patients", patients);
+            request.getRequestDispatcher("/WEB-INF/viewListPatient.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request.");
+        }
     }
 
 }
