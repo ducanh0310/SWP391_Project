@@ -16,7 +16,7 @@
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="../../img/favicon.ico" rel="icon">
+        <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -94,8 +94,6 @@
             
             .container-box {
                 margin-bottom: 120px; /* Khoảng cách giữa các box dưới cùng */
-                
-                
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
@@ -110,7 +108,6 @@
                 <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
                         <small class="py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${emInfo.branch.city}</small>
-
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-lg-end">
@@ -121,9 +118,6 @@
                             <c:if test="${emInfo.employeeType == 'h'}"> <p class="m-0"></i>Nurse</p></c:if>
                             <c:if test="${emInfo.employeeType == 'b'}"> <p class="m-0"></i>Branch Manager</p></c:if>
                         </div>
-<!--                        <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
-                        </div>-->
                         <div class="py-2">
                             <p class="m-0" ><a href="" style="color: #ffffff">${username}</a></p>                        
                         </div>

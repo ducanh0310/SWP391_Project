@@ -5,7 +5,6 @@
 
 package controller.employee;
 
-import dao.DBAccount;
 import dao.DBEmployeeProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -14,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Account;
 import model.Employee;
 
 /**
@@ -28,14 +26,19 @@ public class ViewProfileEmployeeController extends HttpServlet {
     throws ServletException, IOException {
         try {
             DBEmployeeProfile dbEm=new DBEmployeeProfile();
-            Employee emInfo = dbEm.getInfoEmployee("bobmley1");
-            //DBAccount dbAcc = new DBAccount();
-            //Account acc = dbAcc.showAccountInfo("bobmley1");
-
+            Employee emInfo = dbEm.getInfoEmployee("kdo2342");
+            if("d".equals(emInfo.getEmployeeType())){
+                request.setAttribute("emInfo", emInfo);
+                request.setAttribute("username", "kdo2342");
+                request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
+            }
+            if("b".equals(emInfo.getEmployeeType())){
+                request.setAttribute("emInfo", emInfo);
+                request.setAttribute("username", "kdo2342");
+                request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
+            }
             
-            request.setAttribute("emInfo", emInfo);
-            request.setAttribute("username", "bobmley1");
-            request.getRequestDispatcher("../../view/employee/viewProfileEmployee.jsp").forward(request, response);
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }

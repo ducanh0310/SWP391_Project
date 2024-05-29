@@ -30,12 +30,18 @@ public class EditProfileEmployeeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
        try {
-            DBEmployeeProfile db = new DBEmployeeProfile();            
-            Employee emInfo= db.getInfoEmployee("bobmley1");            
-            request.setAttribute("emInfo", emInfo);
-            request.setAttribute("username", "bobmley1");
-
-            request.getRequestDispatcher("../../view/employee/editProfileEmployee.jsp").forward(request, response);
+            DBEmployeeProfile dbEm=new DBEmployeeProfile();
+            Employee emInfo = dbEm.getInfoEmployee("kdo2342");
+            if("d".equals(emInfo.getEmployeeType())){
+                request.setAttribute("emInfo", emInfo);
+                request.setAttribute("username", "kdo2342");
+                request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
+            }
+            if("b".equals(emInfo.getEmployeeType())){
+                request.setAttribute("emInfo", emInfo);
+                request.setAttribute("username", "kdo2342");
+                request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         }

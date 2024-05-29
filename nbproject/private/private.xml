@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/model/Employee.java</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/patient/viewProfilePatient.jsp</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/dao/DBPatientProfile.java</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/doctor/editProfileDoctor.jsp</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java</file>
+            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/doctor/viewProfileDoctor.jsp</file>
             <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/controller/employee/EditProfileEmployeeController.java</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/editProfileEmployee.jsp</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/dao/DBEmployeeProfile.java</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/patient/viewListPatient.jsp</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/viewProfileEmployee.jsp</file>
         </group>
     </open-files>
 </project-private>

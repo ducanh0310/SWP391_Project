@@ -13,12 +13,12 @@
         <servlet-class>controller.patient.EditPatientProfileController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewProfileEmployeeController</servlet-name>
-        <servlet-class>controller.employee.ViewProfileEmployeeController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditProfileEmployeeController</servlet-name>
         <servlet-class>controller.employee.EditProfileEmployeeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProfileEmployeeController</servlet-name>
+        <servlet-class>controller.employee.ViewProfileEmployeeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
@@ -33,11 +33,11 @@
         <url-pattern>/EditPatientProfileController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewProfileEmployeeController</servlet-name>
-        <url-pattern>/employee/profile/view</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditProfileEmployeeController</servlet-name>
         <url-pattern>/employee/profile/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfileEmployeeController</servlet-name>
+        <url-pattern>/employee/profile/view</url-pattern>
     </servlet-mapping>
 </web-app>

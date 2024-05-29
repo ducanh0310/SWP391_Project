@@ -99,6 +99,10 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            
+            .m-0 {
+                margin-left: 30px ! important;
+            }
         </style>
     </head>
     <body>
@@ -178,7 +182,7 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="180px" heigh="180px" src="../../img/profile/${image}">
+                <img class="rounded-circle mt-5" width="180px" heigh="180px" src="../../img/profile/no_image_profile.png">
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
                 <br>
