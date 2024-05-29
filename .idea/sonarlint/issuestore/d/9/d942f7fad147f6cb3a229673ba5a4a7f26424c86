@@ -1,0 +1,11 @@
+
+}
+java:S1118":Add a private constructor to hide the implicit public one.(ŒÚ²8ªÙÙˆü1J$0509cbdb-0d37-4980-be45-e44d6313de01
+[
+java:S5857">Replace this use of a reluctant quantifier with "[^A-Z\\s]*+".(Âã±ò8ñ¤íˆü1
+[
+java:S5857">Replace this use of a reluctant quantifier with "[^a-z\\s]*+".(Âã±ò8ñ¤íˆü1
+[
+java:S5857">Replace this use of a reluctant quantifier with "[^0-9\\s]*+".(Âã±ò8ñ¤íˆü1
+Y
+java:S6353"<Use concise character class syntax '\\d' instead of '[0-9]'.(Âã±ò8ñ¤íˆü1

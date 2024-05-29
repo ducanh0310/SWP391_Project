@@ -1,0 +1,13 @@
+
+Q	java:S125"<This block of commented-out lines of code should be removed.(×Íñ
+H
+java:S4925&"-Remove this "Class.forName()", it is useless.(ìè©‡úÿÿÿÿ
+Q
+java:S6437'"6Revoke and change this password, as it is compromised.(ÊÁ¢êüÿÿÿÿ
+Q
+java:S1854/"6Remove this useless assignment to local variable "db".(ûÑó§üÿÿÿÿ
+”
+java:S1130."yRemove the declaration of thrown exception 'java.lang.ClassNotFoundException', as it cannot be thrown from method's body.(ªù›“øÿÿÿÿ
+B
+java:S1481/"'Remove this unused "db" local variable.(ûÑó§üÿÿÿÿ
+E	java:S1060"+Replace this use of System.out by a logger.(Ù¿éûÿÿÿÿ
