@@ -6,7 +6,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import dal.UserDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
