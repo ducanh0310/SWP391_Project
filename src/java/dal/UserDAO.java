@@ -18,9 +18,6 @@ public class UserDAO extends DBContext {
     
     public UserDAO() throws ClassNotFoundException {
         super();
-        if (connection == null) {
-            throw new RuntimeException("Connection to database failed.");
-        }
     }
     
     public User checkUser(String username, String password) {
