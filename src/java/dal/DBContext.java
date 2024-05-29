@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class DBContext {
 
-    Connection connection;
+    public static Connection connection;
 
 //    public DBContext() throws ClassNotFoundException {
 //        try {
@@ -30,21 +30,21 @@ public class DBContext {
 //        }
 //    }
     public static Connection getConnection() {
-        Connection connection = null;
+        Connection connection2 = null;
         try {
             String user = "sa";
             String pass = "namnp";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, user, pass);
+            connection2 = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return connection;
+        return connection2;
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
         DBContext db = new DBContext();
-        System.out.println("Hello");
+        System.out.println(db);
     }
 }

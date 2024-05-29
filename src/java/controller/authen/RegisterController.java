@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.authen;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
+import java.util.ArrayList;
 
 import DAO.AccountDAO;
 import jakarta.servlet.ServletException;
@@ -21,8 +23,8 @@ import validation.Email;
  *
  * @author ngphn
  */
-@WebServlet(name="registeraccountcontroller", urlPatterns={"/registeraccount"})
-public class registeraccountcontroller extends HttpServlet {
+@WebServlet(name="RegisterController", urlPatterns={"/register"})
+public class RegisterController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +41,10 @@ public class registeraccountcontroller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet registeraccountcontroller</title>");  
+            out.println("<title>Servlet RegisterController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet registeraccountcontroller at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,7 +61,24 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+        String email = request.getParameter("email");
+        ArrayList<String> list = new AccountDAO().getAllEmail();
+        if (list.contains(email)) {
+            request.setAttribute("accountexits", "This email has been used! Please try another email!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        if (email != null) {
+            String verificationCode = Email.generateVerificationCode();
+            Email.sendVerificationCode(email, verificationCode);
+            HttpSession session = request.getSession();
+            session.setAttribute("email", email);
+            session.setAttribute("verificationCode", verificationCode);
+            session.setAttribute("codeTimestamp", Instant.now());
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
+        }
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
     /** 
@@ -72,25 +91,7 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
-        if (!password.equals(repassword)) {
-            request.setAttribute("error", "Password and Re-password are not the same!");
-            request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
-            return;
-        }
-        //check if username is existed
-        if (new AccountDAO().checkAccount(username)) {
-            request.setAttribute("error", "Username is existed!");
-            request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
-            return;
-        }
-        //insert account
-        new AccountDAO().addPatientAccount(email ,username, password);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
     /** 

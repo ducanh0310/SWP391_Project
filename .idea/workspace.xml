@@ -5,18 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6045067-40f7-479b-9e5e-1ab77f451790" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21fde53a99e6b4772dc451d323218aedf452c89b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21fde53a99e6b4772dc451d323218aedf452c89b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9e55fe8b80e5c9418b32d3418db1fe3de8fe8f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9e55fe8b80e5c9418b32d3418db1fe3de8fe8f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5be41f60596a46514616b0f424dd8c1e322c931f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5be41f60596a46514616b0f424dd8c1e322c931f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/4/94ad2fffa1c31fcbf3d2fca7433379c0be46c9eb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/4/94ad2fffa1c31fcbf3d2fca7433379c0be46c9eb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/DAO/AccountDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/DAO/AccountDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/register.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/DAO/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/confirmemailregister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/confirmemailregister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ConfirmEmailForgotPwController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ForgotPasswordController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/NewPasswordController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/PatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/RegisterController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/confirmemailregister.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/registeraccountcontroller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dal/DBContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dal/DBContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBEmployeeProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBEmployeeProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBImageProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBImageProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBPatientProfile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBPatientProfile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/ConfirmEmailForgotPwController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/ConfirmEmailForgotPwController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/ForgotPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/NewPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/NewPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/PatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/confirmemailregister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/confirmemailregister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/registeraccountcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/registeraccountcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/DBContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/DBContext.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
