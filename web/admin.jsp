@@ -124,7 +124,7 @@
                         <!-- Navigation -->
                        
                         <!-- Push content down -->
-                        <div class="mt-auto"></div>
+                        <hr style="border: 1px solid black">
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">

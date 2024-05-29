@@ -120,7 +120,6 @@
                             <c:if test="${emInfo.employeeType == 'd'}"> <p class="m-0"></i>Doctor</p></c:if>
                             <c:if test="${emInfo.employeeType == 'h'}"> <p class="m-0"></i>Nurse</p></c:if>
                             <c:if test="${emInfo.employeeType == 'b'}"> <p class="m-0"></i>Branch Manager</p></c:if>
-                           
                         </div>
 <!--                        <div class="me-3 pe-3 border-end py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -260,8 +259,9 @@
                 
                 
                 
-                <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Edit Profile</button></div>
-
+                <div class="mt-5 text-center">
+                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                </div>
             </div>
         </div>    
         

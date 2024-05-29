@@ -4,6 +4,7 @@
     Author     : Vu Minh Quan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -107,20 +108,23 @@
             <div class="row gx-0">
                 <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
-                        <small class="py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</small>
+                        <small class="py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${emInfo.branch.city}</small>
 
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"></i>Role</p>
+                            <c:if test="${emInfo.employeeType == 'r'}"> <p class="m-0"></i>Receptionist</p></c:if>
+                            <c:if test="${emInfo.employeeType == 'd'}"> <p class="m-0"></i>Doctor</p></c:if>
+                            <c:if test="${emInfo.employeeType == 'h'}"> <p class="m-0"></i>Nurse</p></c:if>
+                            <c:if test="${emInfo.employeeType == 'b'}"> <p class="m-0"></i>Branch Manager</p></c:if>
                         </div>
 <!--                        <div class="me-3 pe-3 border-end py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
                         </div>-->
                         <div class="py-2">
-                            <p class="m-0" ><a href="" style="color: #ffffff">Username</a></p>                        
+                            <p class="m-0" ><a href="" style="color: #ffffff">${username}</a></p>                        
                         </div>
                     </div>
                 </div>
@@ -164,8 +168,8 @@
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Username</span>
-                <span class="text-black-50">ID</span>
+                <span class="font-weight-bold">${username}</span>
+                <span class="text-black-50">${emInfo.email}</span>
                 <br>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
@@ -175,77 +179,86 @@
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5 container-box">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">My account</h4>
-                </div>
-                <hr>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" >
-                    </div>        
-                    <div class="col-md-6">
-                        <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="">
+            <form action="edit" method="POST">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">My account</h4>
                     </div>
-                </div>
-                    
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="">
+                    <hr>
+                    <div class="row mt-3">
+                        <input type="hidden" name="id" id="id" value="${emInfo.id}">
+                        <div class="col-md-6">
+                            <label class="labels">Fullname</label>
+                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${emInfo.name}" >
+                        </div>        
+                        <div class="col-md-6">
+                            <label class="labels">Phone Number</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${emInfo.phoneNumber}">
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="">
-                    </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels" for="gender">Gender</label>
-                        <select class="form-select" id="gender" name="gender">
-                            <option value="">Select your gender</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                            <option value="O">Other</option>
-                        </select>
-                    </div>                    
 
-                    <div class="col-md-6">
-                        <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}" readonly="">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Medicine code</label>
+                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${emInfo.employeeSin}">
+                        </div>
                     </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Role</label>
-                        <input type="text" id="role" name="role" class="form-control" placeholder="" value="" readonly="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Salary / year</label>
-                        <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="" readonly="">
-                    </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Address</label>
-                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Working Branch</label>
-                        <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="" readonly="">
-                    </div>
-                </div>
-                
-                
-                
-                <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
 
-            </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels" for="gender">Gender</label>
+                            <select class="form-select" id="gender" name="gender">
+                                <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
+                                <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
+                                <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
+                            </select>
+                        </div>                    
+
+                        <div class="col-md-6">
+                            <label class="labels">Date of birth</label>
+                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Role</label>
+                            <input type="text"  class="form-control" placeholder=""  readonly=""
+                               <c:if test="${emInfo.employeeType == 'r'}">value="Receptionist"</c:if>
+                               <c:if test="${emInfo.employeeType == 'd'}">value="Doctor"</c:if>
+                               <c:if test="${emInfo.employeeType == 'h'}">value="Nurse"</c:if>
+                               <c:if test="${emInfo.employeeType == 'b'}">value="Branch Manage"</c:if>
+                               >
+                            <input type="hidden" id="role" name="role" value="${emInfo.employeeType}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Salary / year</label>
+                            <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="${emInfo.annualSalary}" readonly="">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Address</label>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="" value="${emInfo.address}" >
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Working Branch</label>
+                            <input type="hidden" id="branchid" name="branchid" class="form-control" placeholder="" value="${emInfo.branchId}">
+                            <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
+                        </div>
+                    </div>
+
+
+
+                    <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
+
+                   </div>
+            </form>
         </div>    
         
     </div>
