@@ -1,4 +1,4 @@
-package dao;
+package AccountDAO;
 
 import dal.DBContext;
 
