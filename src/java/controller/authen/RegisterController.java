@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.time.Instant;
 import java.util.ArrayList;
 
-import DAO.AccountDAO;
+import daoAccount.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -8,7 +8,7 @@ package controller.authen;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import DAO.AccountDAO;
+import daoAccount.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
