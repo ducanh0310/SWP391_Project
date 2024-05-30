@@ -53,13 +53,13 @@
             <div class="row gx-0">
                 <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
-                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed </small>
+                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Sat : 6.00 am - 10.00 pm, Sunday Closed </small>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${u.name}</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>ngphnam</p>
                         </div>
                         <div class="py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -82,22 +82,22 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="index.jsp" class="nav-item nav-link active">Home</a>
-                    <a href="about.jsp" class="nav-item nav-link">About</a>
-                    <a href="service.jsp" class="nav-item nav-link">Service</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Service</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
-                            <a href="price.jsp" class="dropdown-item">Pricing Plan</a>
-                            <a href="team.jsp" class="dropdown-item">Our Dentist</a>
-                            <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
-                            <a href="appointment.jsp" class="dropdown-item">Appointment</a>
+                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                            <a href="team.html" class="dropdown-item">Our Dentist</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="appointment.html" class="dropdown-item">Appointment</a>
                         </div>
                     </div>
-                    <a href="contact.jsp" class="nav-item nav-link">Contact</a>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
                 <a href="register.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
-                <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
             </div>
         </nav>
         <!-- Navbar End -->
@@ -107,51 +107,48 @@
                 <div class="col-lg-6">
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
-                            <h3 class="mb-4">Login</h3>
-                            <form action="login" method="post">
+                            <h3 class="mb-4">Register</h3>
+                            <form action="registeraccount" method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                                    <%
+                                        // Retrieve the email attribute from the session
+                                        String email = (String) session.getAttribute("email");
+                                        // Initialize the usernameSuggestions variable
+                                        String usernameSuggestions = "";
+                                        if (email != null) {
+                                            // Extract the username suggestion from the email
+                                            usernameSuggestions = email.substring(0, email.indexOf("@"));
+                                        }
+                                    %>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Please enter your username" value="<%= usernameSuggestions%>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Please enter your password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="repassword" class="form-label">Confirm password</label>
+                                    <input type="password" class="form-control" id="repassword" name="repassword" placeholder="Please confirm your password" required>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <input type="submit" class="btn btn-primary" value="Register">
                                 </div>
-                                <div class="form-group">
-                                    <div style="color: red"> ${error}</div>
-                                </div>
-                                <div class="mb-3" style="text-align: center">
-                                    <label for="password" class="form-label">Or</label>
-                                </div>
+                                <span class="text-danger">
 
+                                    <%
+                                        String error = (String) request.getAttribute("error");
+                                        if (error != null) {
+                                    %>
+                                    <%= error %>
+                                    <%
+                                        }
+                                    %>
+                                </span>
+                                <div class="d-flex justify-content-between mt-4">
+                                    <a href="login.jsp">Already have an account?</a>
+                                </div>
                             </form>
-                                <div class="mb-3" >
-                                    <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 28px; height: 27px; border-radius: 25px"></img>
-                                    <button style="background-color: white; padding-left: 0px; border-radius: 10px">
-                                        <a style="color: Black; padding-left: 5px" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Google</a>
-                                    </button>
-                                </div>
-
-                                <div>
-                                    <a>Don't have an account?</a>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <a href="register.jsp">Register now!</a> 
-                                            </td>
-                                            <td>
-                                                <a>or</a>
-                                            </td>
-                                            <td>
-                                                <a href="">Forgot password</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </div>
                         </div>
                     </div>
                 </div>
@@ -233,7 +230,6 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-
     </body>
 
 </html>

@@ -8,7 +8,6 @@ import dal.DBContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dao.DBPatientProfile;
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,14 +27,12 @@ import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-
+import dao.UserDAO;
 /**
  *
  * @author trung
  */
 public class LoginServlet extends HttpServlet {
-
-
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
         //call api to get token
@@ -74,77 +71,34 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        
+
         String code = request.getParameter("code");
         HttpSession session = request.getSession();
 
-        if (code != null) {
-            // Google OAuth login
-            try {
-                String accessToken = getToken(code);
-                PatientInfo googleUser = getUserInfor(accessToken);
+        String userName = request.getParameter("username");
+        String passWord = request.getParameter("password");
 
-                if (googleUser != null) {
-                    DBPatientProfile patientDAO = new DBPatientProfile();
-                    PatientInfo existingPatient = patientDAO.getPatientByEmail(googleUser.getEmail());
-
-                    if (existingPatient != null) {
-                        // Patient exists, get User_account info
-                        dao.UserDAO userDAO = new dao.UserDAO();
-                        User user = userDAO.getUserByPatientId(existingPatient.getPatientId());
-                        if (user != null) {
-                            session.setAttribute("username", user.getName());
-                            session.setAttribute("password", user.getPassword());
-                            response.sendRedirect("index.jsp");
-                        } else {
-                            // Handle error: user account not found
-                            request.setAttribute("error", "User account not found.");
-                            request.getRequestDispatcher("login.jsp").forward(request, response);
-                        }
-                    } else {
-                        // Redirect to registration page
-                        session.setAttribute("googleUser", googleUser);
-                        response.sendRedirect("register.jsp");
-                    }
-                    return;
-                } else {
-                    request.setAttribute("error", "Failed to retrieve user information from Google.");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
-                }
-            } catch (Exception e) {
-                request.setAttribute("error", "Failed to authenticate using Google.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
+        if (userName == null || passWord == null || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
+            request.setAttribute("error", "Username and password must not be empty.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            // Traditional username and password login
-            String userName = request.getParameter("username");
-            String passWord = request.getParameter("password");
-
-            if (userName == null || passWord == null || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
-                request.setAttribute("error", "Username and password must not be empty.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+            UserDAO userDAO = new UserDAO();
+            User user = userDAO.checkUser(userName, passWord);
+            if (user != null) {
+                session.setAttribute("currentUser", user);
+                response.sendRedirect("index.jsp");
             } else {
-                try {
-                    dao.UserDAO userDAO = new dao.UserDAO();
-                    User user = userDAO.checkUser(userName, passWord);
-                    if (user != null) {
-                        session.setAttribute("currentUser", user);
-                        response.sendRedirect("index.jsp");
-                    } else {
-                        request.setAttribute("error", "Invalid username or password.");
-                        request.getRequestDispatcher("login.jsp").forward(request, response);
-                    }
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                request.setAttribute("error", "Invalid username or password.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }
+
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.removeAttribute("currentUser");
-        
+
     }
 
     public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {

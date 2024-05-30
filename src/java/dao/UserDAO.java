@@ -6,6 +6,7 @@ package dao;
 
 import dal.DBContext;
 import java.lang.RuntimeException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +19,10 @@ import model.User;
  */
 public class UserDAO extends DBContext {
 
-    public UserDAO() throws ClassNotFoundException {
-        super();
+    private final Connection connection;
+    
+    public UserDAO(){
+        this.connection = DBContext.getConnection();
     }
 
     public User checkUser(String username, String password) {
