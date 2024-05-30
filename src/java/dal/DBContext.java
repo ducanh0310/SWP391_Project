@@ -16,21 +16,20 @@ public class DBContext {
 
     public Connection connection;
 
-    public DBContext() throws ClassNotFoundException {
+      public static Connection getConnection() {
+        Connection connection2 = null;
         try {
             String user = "sa";
             String pass = "123121";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, user, pass);
-        } catch (SQLException e) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            connection2 = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return connection2;
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
     public static void main(String[] args) throws ClassNotFoundException {
         DBContext db = new DBContext();
         System.out.println("Hello" + db);
