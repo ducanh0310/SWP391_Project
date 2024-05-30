@@ -27,7 +27,7 @@ import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-import dao.UserDAO;
+import AccountDAO.UserDAO;
 /**
  *
  * @author trung
@@ -72,13 +72,13 @@ public class LoginServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        String code = request.getParameter("code");
+        
         HttpSession session = request.getSession();
-
         String userName = request.getParameter("username");
         String passWord = request.getParameter("password");
 
-        if (userName == null || passWord == null || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
+        if (userName == null || passWord == null 
+                || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {

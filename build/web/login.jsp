@@ -123,11 +123,10 @@
                                 <div class="form-group">
                                     <div style="color: red"> ${error}</div>
                                 </div>
-                                <div class="mb-3" style="text-align: center">
-                                    <label for="password" class="form-label">Or</label>
-                                </div>
-
                             </form>
+                                <div class="mb-3" style="text-align: center">
+                                    <label class="form-label">Or</label>
+                                </div>
                                 <div class="mb-3" >
                                     <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 28px; height: 27px; border-radius: 25px"></img>
                                     <button style="background-color: white; padding-left: 0px; border-radius: 10px">

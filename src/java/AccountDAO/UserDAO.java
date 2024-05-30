@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package AccountDAO;
 
 import dal.DBContext;
 import java.lang.RuntimeException;
@@ -48,7 +48,7 @@ public class UserDAO extends DBContext {
     public static void main(String[] args) throws ClassNotFoundException {
         UserDAO ud = new UserDAO();
         System.out.println("Hello");
-        User user = ud.checkUser("akiti7935", "akiti7935");
+        User user = ud.checkUser("akiti7935", "123121");
         if (user != null) {
             System.out.println(user.getName() + " " + user.getPatient_Id() + " " + user.getEmployee_Id());
         } else {
