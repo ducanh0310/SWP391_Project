@@ -74,6 +74,7 @@ public class UserDAO extends DBContext {
         return list;
     }
     
+    
     public User getUserByPatientId(int patientId) {
         try {
             String query = "SELECT * FROM User_account WHERE patient_id = ?";

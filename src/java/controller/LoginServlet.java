@@ -65,24 +65,7 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        String action = request.getParameter("action") == null
-                ? ""
-                : request.getParameter("action");
-        String url = "";
-        switch (action) {
-            case "login":
-                url = "login.jsp";
-                break;
-            case "logout":
-                url = "index.jsp";
-                logout(request, response);
-                response.sendRedirect(url);
-                return;
-            default:
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                break;
-        }
-        request.getRequestDispatcher(url).forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -107,7 +90,7 @@ public class LoginServlet extends HttpServlet {
 
                     if (existingPatient != null) {
                         // Patient exists, get User_account info
-                        UserDAO userDAO = new UserDAO();
+                        dao.UserDAO userDAO = new dao.UserDAO();
                         User user = userDAO.getUserByPatientId(existingPatient.getPatientId());
                         if (user != null) {
                             session.setAttribute("username", user.getName());
@@ -142,7 +125,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 try {
-                    UserDAO userDAO = new UserDAO();
+                    dao.UserDAO userDAO = new dao.UserDAO();
                     User user = userDAO.checkUser(userName, passWord);
                     if (user != null) {
                         session.setAttribute("currentUser", user);

@@ -11,11 +11,7 @@ public class AccountDAO {
     private final Connection connection;
 
     public AccountDAO() {
-        try {
-            this.connection = DBContext.getConnection();
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException("Failed to initialize DBContext.", ex);
-        }
+        this.connection = DBContext.getConnection();
     }
 
     public ArrayList<String> getAllAccount() {

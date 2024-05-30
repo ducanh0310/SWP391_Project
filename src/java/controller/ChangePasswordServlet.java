@@ -72,7 +72,7 @@ public class ChangePasswordServlet extends HttpServlet {
        String newPass = request.getParameter("newPass");
        String reEnter = request.getParameter("rePass");
        HttpSession session = request.getSession();
-       session.setAttribute("username", User.getName());
+      // session.setAttribute("username", User.getName());
        
     }
 
