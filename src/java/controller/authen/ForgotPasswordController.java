@@ -62,7 +62,7 @@ public class ForgotPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/ForgotPassword.jsp").forward(request, response);
     }
 
     /**
@@ -93,10 +93,10 @@ public class ForgotPasswordController extends HttpServlet {
                 request.setAttribute("email", email);
                 Email.sendVerificationCode(email, code);
             }
-            request.getRequestDispatcher("ConfirmEmailForgotPw.jsp").forward(request, response);
+            request.getRequestDispatcher("view/authen/ConfirmEmailForgotPw.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Account not found");
-            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("view/authen/ForgotPassword.jsp").forward(request, response);
         }
     }
 

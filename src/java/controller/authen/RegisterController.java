@@ -65,7 +65,7 @@ public class RegisterController extends HttpServlet {
         ArrayList<String> list = new AccountDAO().getAllEmail();
         if (list.contains(email)) {
             request.setAttribute("accountexits", "This email has been used! Please try another email!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("view/authen/register.jsp").forward(request, response);
             return;
         }
         if (email != null) {
@@ -76,9 +76,9 @@ public class RegisterController extends HttpServlet {
             session.setAttribute("verificationCode", verificationCode);
             session.setAttribute("codeTimestamp", Instant.now());
             request.setAttribute("email", email);
-            request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
+            request.getRequestDispatcher("view/authen/confirmemailregister.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/register.jsp").forward(request, response);
     }
 
     /** 
@@ -91,7 +91,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/register.jsp").forward(request, response);
     }
 
     /** 

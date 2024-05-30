@@ -70,7 +70,7 @@ public class confirmemailregister extends HttpServlet {
             if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
                 session.removeAttribute("verificationCode");
                 session.removeAttribute("codeTimestamp");
-                request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
                 return;
             } else if (elapsedSeconds > TIMEOUT_SECONDS) {
                 request.setAttribute("timeout", "Verification code has expired! Please try again!");
@@ -80,7 +80,7 @@ public class confirmemailregister extends HttpServlet {
         } else {
             request.setAttribute("error", "An error occurred! Please try again!");
         }
-        request.getRequestDispatcher("confirmemailregister.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/confirmemailregister.jsp").forward(request, response);
     }
 
     /** 

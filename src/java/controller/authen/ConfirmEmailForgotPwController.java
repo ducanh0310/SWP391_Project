@@ -70,7 +70,7 @@ public class ConfirmEmailForgotPwController extends HttpServlet {
             if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
                 session.removeAttribute("verificationCode");
                 session.removeAttribute("codeTimestamp");
-                request.getRequestDispatcher("NewPassword.jsp").forward(request, response);
+                request.getRequestDispatcher("view/authen/NewPassword.jsp").forward(request, response);
                 return;
             } else if (elapsedSeconds > TIMEOUT_SECONDS) {
                 request.setAttribute("timeout", "Verification code has expired! Please try again!");
@@ -80,7 +80,7 @@ public class ConfirmEmailForgotPwController extends HttpServlet {
         } else {
             request.setAttribute("error", "An error occurred! Please try again!");
                                                     }
-        request.getRequestDispatcher("ConfirmEmailForgotPw.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/ConfirmEmailForgotPw.jsp").forward(request, response);
     } 
 
     /** 

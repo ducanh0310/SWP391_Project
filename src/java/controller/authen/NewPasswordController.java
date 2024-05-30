@@ -82,7 +82,7 @@ public class NewPasswordController extends HttpServlet {
             dao.updatePasswordPatient(emailFP, password);
             session.removeAttribute("emailFP");
         }
-        request.getRequestDispatcher("NewPassword.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/NewPassword.jsp").forward(request, response);
     }
 
     /** 

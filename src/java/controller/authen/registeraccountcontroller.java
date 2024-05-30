@@ -59,7 +59,7 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+        request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
     }
 
     /** 
@@ -79,13 +79,13 @@ public class registeraccountcontroller extends HttpServlet {
         String repassword = request.getParameter("repassword");
         if (!password.equals(repassword)) {
             request.setAttribute("error", "Password and Re-password are not the same!");
-            request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
             return;
         }
         //check if username is existed
         if (new AccountDAO().checkAccount(username)) {
             request.setAttribute("error", "Username is existed!");
-            request.getRequestDispatcher("registeraccount.jsp").forward(request, response);
+            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
             return;
         }
         //insert account
