@@ -5,8 +5,8 @@
 
 package controller.patient;
 
-import dao.DBAccount;
-import dao.DBPatientProfile;
+import dao1.DBAccount;
+import dao1.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

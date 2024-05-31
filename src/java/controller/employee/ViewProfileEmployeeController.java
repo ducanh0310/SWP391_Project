@@ -5,8 +5,8 @@
 
 package controller.employee;
 
-import dao.DBAccount;
-import dao.DBEmployeeProfile;
+import dao1.DBAccount;
+import dao1.DBEmployeeProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

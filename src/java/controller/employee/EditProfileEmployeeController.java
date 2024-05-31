@@ -6,7 +6,7 @@
 package controller.employee;
 
 import controller.patient.ViewProfilePatientController;
-import dao.DBEmployeeProfile;
+import dao1.DBEmployeeProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
