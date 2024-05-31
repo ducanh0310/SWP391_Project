@@ -97,7 +97,9 @@ public class LoginServlet extends HttpServlet {
                     Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                     session.setAttribute("patient", pat);
                     request.setAttribute("user", pat.getName());
-                    request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                    
+                    //request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else if (user.getType_Id() == 1) {
                     EmployeeDAO empDao = new EmployeeDAO();
                     Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
