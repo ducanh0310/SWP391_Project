@@ -1,0 +1,21 @@
+
+a
+java:S1192D"FDefine a constant instead of duplicating this literal "UTF-8" 4 times.(áò‰øÿÿÿÿ
+_
+java:S1192{"IDefine a constant instead of duplicating this literal "password" 3 times.(°©¥Œ
+e
+java:S1192M"JDefine a constant instead of duplicating this literal "login.jsp" 5 times.(Óãë•ùÿÿÿÿ
+b
+java:S1192G"GDefine a constant instead of duplicating this literal "action" 3 times.(©óşÿÿÿÿ
+_
+java:S1192{"IDefine a constant instead of duplicating this literal "username" 3 times.(°©¥Œ
+~
+java:S14885"cImmediately return this expression instead of assigning it to the temporary variable "accessToken".(ßêè‘ÿÿÿÿÿ
+}
+java:S1488<"bImmediately return this expression instead of assigning it to the temporary variable "googlePojo".(«˜™İÿÿÿÿÿ
+@	java:S106("+Replace this use of System.out by a logger.(Ø¼¢ƒ
+f
+java:S1301b"KReplace this "switch" statement by "if" statements to increase readability.(ë´åİşÿÿÿÿ
+J
+java:S1172s"/Remove this unused method parameter "response".(àı¼÷şÿÿÿÿ
+Q	java:S125v"<This block of commented-out lines of code should be removed.(¯ê‡

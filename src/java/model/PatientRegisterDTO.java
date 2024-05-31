@@ -11,13 +11,19 @@ import java.sql.*;
  * @author ngphn
  */
 public class PatientRegisterDTO {
+    String username;
+    String password;
+    int patientId;
     String address;
     String name;
     String gender;
     String email;
     Date DOB;
 
-    public PatientRegisterDTO(String address, String name, String gender, String email, Date DOB) {
+    public PatientRegisterDTO(String username, String password, int patientId, String address, String name, String gender, String email, Date DOB) {
+        this.username = username;
+        this.password = password;
+        this.patientId = patientId;
         this.address = address;
         this.name = name;
         this.gender = gender;
@@ -25,11 +31,38 @@ public class PatientRegisterDTO {
         this.DOB = DOB;
     }
 
-    public PatientRegisterDTO(String address, String name, String gender, Date DOB) {
-        this.address = address;
+    public PatientRegisterDTO(String username, String password, int patientId, String name, String gender, String email, Date DOB) {
+        this.username = username;
+        this.password = password;
+        this.patientId = patientId;
         this.name = name;
         this.gender = gender;
+        this.email = email;
         this.DOB = DOB;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getAddress() {
@@ -71,4 +104,6 @@ public class PatientRegisterDTO {
     public void setDOB(Date DOB) {
         this.DOB = DOB;
     }
+    
+    
 }
