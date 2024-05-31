@@ -103,7 +103,7 @@
                         <a href="login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="logout.jsp" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+                        <a href="logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
                     </c:otherwise>
                 </c:choose>
 

@@ -4,9 +4,9 @@
  */
 package controller;
 
-import AccountDAO.Authorization;
-import AccountDAO.EmployeeDAO;
-import AccountDAO.PatientDAO;
+import dao1.Authorization;
+import dao1.EmployeeDAO;
+import dao1.PatientDAO;
 import dal.DBContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -30,7 +30,7 @@ import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-import AccountDAO.UserDAO;
+import dao1.UserDAO;
 import model.Employee;
 import model.Patient;
 
