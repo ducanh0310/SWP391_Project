@@ -5,6 +5,7 @@
 
 package controller.admin;
 
+import dao1.PatientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -77,6 +78,7 @@ public class AddPatientController extends HttpServlet {
         Date dob = Date.valueOf(request.getParameter("dob")) ;
         String address = request.getParameter("address");
         Patient p = new Patient( code, address, name, gender, email, phone, dob, "", 1);
+        PatientDAO pa = new PatientDAO();
         
         processRequest(request, response);
     }
