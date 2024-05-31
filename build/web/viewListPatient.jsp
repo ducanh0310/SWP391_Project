@@ -1,6 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,7 +78,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viewListPatient.jsp">
+                                <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
@@ -114,7 +113,7 @@
                         <!-- Navigation -->
 
                         <!-- Push content down -->
-                       <hr>
+                        <hr>
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -145,32 +144,37 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">ID</th>
                                             <th scope="col">SIN</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Date</th>
+                                            <th scope="col">Address</th>
                                             <th scope="col">Gender</th> 
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
-                                            <th scope="col">Address</th>                                                                                   
+                                            <th scope="col">Date</th>                                                                                   
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <c:forEach items="${patients}" var="patient">
-                                            <tr>                                           
+                                        <c:forEach items="${patients}" var="patient">
+                                            <tr>
                                                 <td>${patient.sin}</td>
-                                                <td>${patient.name}</td>
-                                                <td>${patient.dob}</td>
+                                                <td><a class="text-heading font-semibold" href="#">${patient.name}   
+                                                    </a></td>
+                                                <td>${patient.address}</td>
                                                 <td>${patient.gender}</td>
                                                 <td>${patient.email}</td>
-                                                <td>${patient.phone}</td>                                             
-                                                <td>${patient.address}</td>
+                                                <td>${patient.phone}</td>
+                                                <td>${patient.dob}</td>                                               
+                                                <td class="text-end">
+                                                    <a href="viewPatientDetail.jsp" class="btn btn-sm btn-neutral">View</a>
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </c:forEach>
 
-                                        </tr>
+
                                         <tr>
                                             <td>
                                                 <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
@@ -197,260 +201,13 @@
                                             </td>
                                             <td></td>
                                             <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                                <a href="viewPatientDetail.jsp" class="btn btn-sm btn-neutral">View</a>
                                                 <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Theresa Webb
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Mar 20, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-3.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Figma
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $4.200
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-success"></i>Scheduled
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1612422656768-d5e4ec31fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Kristin Watson
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Feb 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-4.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Mailchimp
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $3.500
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-dark"></i>Not discussed
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Cody Fisher
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Apr 10, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-5.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Webpixels
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $1.500
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-danger"></i>Canceled
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Robert Fox
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Feb 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-1.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Dribbble
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $3.500
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-success"></i>Scheduled
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Darlene Robertson
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Apr 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-2.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Netguru
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $2.750
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-warning"></i>Postponed
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Theresa Webb
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Mar 20, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-3.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Figma
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $4.200
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-success"></i>Scheduled
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1612422656768-d5e4ec31fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Kristin Watson
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Feb 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-4.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Mailchimp
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $3.500
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-dark"></i>Not discussed
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Cody Fisher
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Apr 10, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-5.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Webpixels
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $1.500
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-danger"></i>Canceled
-                                                </span>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -461,13 +218,6 @@
                     </div>
                 </main>
             </div>
-
-            <!-- JS File -->
-            <script type="text/javascript" src="js/script.js"></script>
-
-
-
-
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>

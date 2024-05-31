@@ -113,7 +113,7 @@
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
                 <a href="register.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
                 <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
-                <a href="admin.jsp" class="btn btn-primary py-2 px-4 ms-3">Admin</a>
+                <a href="PatientController" class="btn btn-primary py-2 px-4 ms-3">Admin</a>
             </div>
         </nav>
         <!-- Navbar End -->

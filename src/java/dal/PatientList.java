@@ -17,8 +17,8 @@ import model.Patient;
  * @author Gia Huy
  */
 public class PatientList extends DBContext {
-
-    public ArrayList<Patient> getPatient(int pid) {
+    
+    public ArrayList<Patient> getPatient() {
         ArrayList<Patient> patient = new ArrayList<>();
         try {
             String sql = "SELECT [Patient_id]\n"
@@ -31,31 +31,35 @@ public class PatientList extends DBContext {
                     + "      ,[date_of_birth]\n"
                     + "      ,[insurance]\n"
                     + "      ,[rep_id]\n"
-                    + "  FROM p [Patient]\n";
-
+                    + "  FROM [Patient]\n";
+            
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, pid);
+
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Patient p = new Patient();
-                p.setId(rs.getInt("id"));
-                p.setSin(rs.getInt("sin"));
+                p.setId(rs.getInt("Patient_id"));
+                p.setSin(rs.getInt("patient_sin"));
+                p.setAddress(rs.getString("address"));
                 p.setName(rs.getString("name"));
-                p.setAddress(rs.getNString("address"));
-                p.setGender(rs.getNString("gender"));
-                p.setEmail(rs.getNString("email"));
-                p.setPhone(rs.getNString("phone"));
-                p.setInsurance(rs.getNString("insurance"));
+                p.setGender(rs.getString("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setPhone(rs.getString("phone"));
+                p.setDob(rs.getDate("date_of_birth"));
+                p.setInsurance(rs.getString("insurance"));
                 p.setRep_id(rs.getInt("rep_id"));
-                p.setDob(rs.getDate("dob"));
+                
                 patient.add(p);
             }
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(PatientList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return patient;
     }
-
-
+    public static void main(String[] args) {
+        PatientList p = new PatientList();
+        System.out.println(p.getPatient());
+    }
+    
 }

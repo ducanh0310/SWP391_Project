@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viewListPatient.jsp">
+                                <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
@@ -273,14 +273,7 @@
                     </div>
                 </main>
             </div>
-
-            <!-- JS File -->
-            <script type="text/javascript" src="js/script.js"></script>
-
-
-
-
-            <!-- Back to Top -->
+       <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
