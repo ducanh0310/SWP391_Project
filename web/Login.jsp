@@ -139,13 +139,13 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <a href="register.jsp">Register now!</a> 
+                                                <a href="register">Register now!</a> 
                                             </td>
                                             <td>
                                                 <a>or</a>
                                             </td>
                                             <td>
-                                                <a href="">Forgot password</a>
+                                                <a href="ForgotPassword">Forgot password</a>
                                             </td>
                                         </tr>
                                     </table>

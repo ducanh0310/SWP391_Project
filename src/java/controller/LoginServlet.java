@@ -4,10 +4,13 @@
  */
 package controller;
 
+import AccountDAO.Authorization;
+import AccountDAO.EmployeeDAO;
+import AccountDAO.PatientDAO;
 import dal.DBContext;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import dao.DBPatientProfile;
+import dao1.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,6 +31,9 @@ import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
 import AccountDAO.UserDAO;
+import model.Employee;
+import model.Patient;
+
 /**
  *
  * @author trung
@@ -72,12 +78,11 @@ public class LoginServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        
         HttpSession session = request.getSession();
         String userName = request.getParameter("username");
         String passWord = request.getParameter("password");
 
-        if (userName == null || passWord == null 
+        if (userName == null || passWord == null
                 || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -86,7 +91,29 @@ public class LoginServlet extends HttpServlet {
             User user = userDAO.checkUser(userName, passWord);
             if (user != null) {
                 session.setAttribute("currentUser", user);
-                response.sendRedirect("index.jsp");
+                Authorization author = new Authorization();
+                if (user.getType_Id() == 0) {
+                    PatientDAO patientDAO = new PatientDAO();
+                    Patient pat = patientDAO.getPatientById(user.getPatient_Id());
+                    session.setAttribute("patient", pat);
+                    request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                } else if (user.getType_Id() == 1) {
+                    EmployeeDAO empDao = new EmployeeDAO();
+                    Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
+                    if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
+                        session.setAttribute("admin", emp);
+                        request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
+                    } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
+                        session.setAttribute("doctor", emp);
+                        request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
+                    } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
+                        session.setAttribute("nurse", emp);
+                        request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
+                    } else {
+                        session.setAttribute("receptionist", emp);
+                        request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
+                    }
+                }
             } else {
                 request.setAttribute("error", "Invalid username or password.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -96,9 +123,13 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        session.removeAttribute("currentUser");
-
+        try {
+            HttpSession session = request.getSession(false);
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
