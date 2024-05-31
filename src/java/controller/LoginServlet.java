@@ -39,28 +39,28 @@ import model.Patient;
  * @author trung
  */
 public class LoginServlet extends HttpServlet {
-
-    public static String getToken(String code) throws ClientProtocolException, IOException {
-        //call api to get token
-        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
-                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
-                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
-                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
-                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
-                .execute().returnContent().asString();
-
-        JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
-        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
-        return accessToken;
-    }
-
-    public static PatientInfo getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
-        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
-        String response = Request.Get(link).execute().returnContent().asString();
-        PatientInfo googlePojo = new Gson().fromJson(response, PatientInfo.class);
-
-        return googlePojo;
-    }
+//Login with google:
+//    public static String getToken(String code) throws ClientProtocolException, IOException {
+//        //call api to get token
+//        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
+//                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
+//                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
+//                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
+//                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
+//                .execute().returnContent().asString();
+//
+//        JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
+//        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
+//        return accessToken;
+//    }
+//
+//    public static PatientInfo getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
+//        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
+//        String response = Request.Get(link).execute().returnContent().asString();
+//        PatientInfo googlePojo = new Gson().fromJson(response, PatientInfo.class);
+//
+//        return googlePojo;
+//    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -96,21 +96,26 @@ public class LoginServlet extends HttpServlet {
                     PatientDAO patientDAO = new PatientDAO();
                     Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                     session.setAttribute("patient", pat);
+                    request.setAttribute("user", pat.getName());
                     request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
                 } else if (user.getType_Id() == 1) {
                     EmployeeDAO empDao = new EmployeeDAO();
                     Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
                     if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
                         session.setAttribute("admin", emp);
+                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
                     } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                         session.setAttribute("doctor", emp);
+                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                     } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                         session.setAttribute("nurse", emp);
+                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                     } else {
                         session.setAttribute("receptionist", emp);
+                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
                     }
                 }
