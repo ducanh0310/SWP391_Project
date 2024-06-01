@@ -79,7 +79,7 @@ public class NewPasswordController extends HttpServlet {
             request.setAttribute("error", "Password and Re-password are not the same!");
         } else {
             AccountDAO dao = new AccountDAO();
-            dao.updatePasswordPatient(emailFP, password);
+            dao.updatePasswordByEmail(emailFP, password);
             session.removeAttribute("emailFP");
         }
         request.getRequestDispatcher("view/authen/NewPassword.jsp").forward(request, response);

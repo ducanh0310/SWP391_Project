@@ -190,17 +190,21 @@ public class AccountDAO {
             }
         }
     }
-    public static boolean updatePasswordPatient(String email, String password) {
-        String query = "UPDATE User_account SET password = ? WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?)";
+    public static boolean updatePasswordByEmail(String email, String password) {
+        String query = "UPDATE User_account " +
+                       "SET password = ? " +
+                       "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) " +
+                       "   OR employee_id = (SELECT employee_id FROM Employee WHERE email = ?)";
         try {
             Connection connection = DBContext.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, password);
             statement.setString(2, email);
+            statement.setString(3, email);
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName());
+            Logger.getLogger(AccountDAO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             return false;
         }
     }
