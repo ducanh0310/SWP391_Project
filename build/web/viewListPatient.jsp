@@ -146,11 +146,10 @@
                                         <tr>
                                             <th scope="col">SIN</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Address</th>
                                             <th scope="col">Gender</th> 
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
-                                            <th scope="col">Date</th>                                                                                   
+                                            <th scope="col">Birthday</th>                                                                                   
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -158,9 +157,8 @@
                                         <c:forEach items="${patients}" var="patient">
                                             <tr>
                                                 <td>${patient.sin}</td>
-                                                <td><a class="text-heading font-semibold" href="#">${patient.name}   
+                                                <td><a class="text-heading font-semibold" href="viewPatientDetail.jsp">${patient.name}   
                                                     </a></td>
-                                                <td>${patient.address}</td>
                                                 <td>${patient.gender}</td>
                                                 <td>${patient.email}</td>
                                                 <td>${patient.phone}</td>
