@@ -5,6 +5,7 @@
 
 package controller.patient;
 
+import dao1.DBAccount;
 import dao1.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 import model.PatientInfo;
 import java.text.ParseException;
 import java.sql.Date;
+import model.Account;
 
 /**
  *
@@ -28,7 +30,10 @@ public class EditProfilePatientController extends HttpServlet {
     throws ServletException, IOException {
         try {
             DBPatientProfile db = new DBPatientProfile();            
-            PatientInfo patientInfo= db.getInfoPatient("elmurder666");            
+            PatientInfo patientInfo= db.getInfoPatient("elmurder666");  
+            DBAccount db1 = new DBAccount();
+            Account acc= db1.showAccountInfo("elmurder666");
+            request.setAttribute("image", acc.getImage());
             request.setAttribute("paInfo", patientInfo);
             request.setAttribute("username", "elmurder666");
 

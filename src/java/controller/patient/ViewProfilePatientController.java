@@ -5,6 +5,7 @@
 
 package controller.patient;
 
+import dao1.DBAccount;
 import dao1.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.PatientInfo;
 import model.User;
 
@@ -31,12 +33,15 @@ public class ViewProfilePatientController extends HttpServlet {
     throws ServletException, IOException {
         //String username = request.getParameter("username");-> thêm câu lệnh này thì sẽ có tham số trên url 
         try {
-            DBPatientProfile db = new DBPatientProfile();            
+            DBPatientProfile dbProfile = new DBPatientProfile();            
            
-            
+            DBAccount db = new DBAccount();
+            Account acc= db.showAccountInfo("elmurder666");
+            PatientInfo patientInfo= dbProfile.getInfoPatient("elmurder666"); 
+            request.setAttribute("image", acc.getImage());
 //            HttpSession session = request.getSession();
 //            User currentUser = (User) session.getAttribute("currentUser");
-             PatientInfo patientInfo= db.getInfoPatient("elmurder666");  
+              
             request.setAttribute("paInfo", patientInfo);
             request.setAttribute("username", "elmurder666");
 

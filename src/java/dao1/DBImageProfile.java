@@ -25,6 +25,7 @@ public class DBImageProfile extends DBContext{
     }
     
     
+    
     public void updateImageProfile(String username, String image){
         try {
             String sql="""
