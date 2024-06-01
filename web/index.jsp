@@ -100,7 +100,7 @@
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
                     <c:choose>
                         <c:when test="${user == null}">
-                        <a href="login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
+                        <a href="login" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
                     </c:when>
                     <c:otherwise>
                         <a href="logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
