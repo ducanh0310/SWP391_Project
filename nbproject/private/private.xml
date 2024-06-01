@@ -3,22 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/aloo/SWP391_Project/web/price.html</file>
-            <file>file:/D:/aloo/SWP391_Project/web/about.html</file>
-            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/bootstrap-grid.scss</file>
-            <file>file:/D:/aloo/SWP391_Project/web/dental-clinic-website-template.jpg</file>
-            <file>file:/D:/aloo/SWP391_Project/web/css/bootstrap.min.css</file>
-            <file>file:/D:/aloo/SWP391_Project/web/index.jsp</file>
             <file>file:/D:/aloo/SWP391_Project/src/java/dal/DBContext.java</file>
-            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/helpers/_ratio.scss</file>
-            <file>file:/D:/aloo/SWP391_Project/src/java/model/PatientRegisterDTO.java</file>
-            <file>file:/D:/aloo/SWP391_Project/web/contact.html</file>
-            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap.scss</file>
-            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/forms/_form-check.scss</file>
-            <file>file:/D:/aloo/SWP391_Project/web/register.jsp</file>
-            <file>file:/D:/aloo/SWP391_Project/web/appointment.html</file>
-            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/_breadcrumb.scss</file>
-            <file>file:/D:/aloo/SWP391_Project/web/scss/bootstrap/scss/helpers/_position.scss</file>
+            <file>file:/D:/aloo/SWP391_Project/web/view/patient/viewListPatient.jsp</file>
+            <file>file:/D:/aloo/SWP391_Project/src/java/controller/admin/AddPatientController.java</file>
+            <file>file:/D:/aloo/SWP391_Project/web/view/patient/editProfilePatient.jsp</file>
+            <file>file:/D:/aloo/SWP391_Project/src/java/validation/Email.java</file>
+            <file>file:/D:/aloo/SWP391_Project/web/view/admin/home.jsp</file>
+            <file>file:/D:/aloo/SWP391_Project/src/java/dao1/PatientDAO.java</file>
+            <file>file:/D:/aloo/SWP391_Project/web/WEB-INF/web.xml</file>
+            <file>file:/D:/aloo/SWP391_Project/src/java/model/Patient.java</file>
+            <file>file:/D:/aloo/SWP391_Project/web/view/admin/addPatient.jsp</file>
         </group>
     </open-files>
 </project-private>

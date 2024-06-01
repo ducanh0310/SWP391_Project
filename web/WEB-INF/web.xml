@@ -46,6 +46,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddPatientController</servlet-name>
-        <url-pattern>/AddPatientController</url-pattern>
+        <url-pattern>/addPatient</url-pattern>
     </servlet-mapping>
 </web-app>
