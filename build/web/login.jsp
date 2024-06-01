@@ -59,7 +59,7 @@
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${user}</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${currentUser.getName()}</p>
                         </div>
                         <div class="py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -111,7 +111,7 @@
                             <form action="login" method="post">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="${currentUser.getName()}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>

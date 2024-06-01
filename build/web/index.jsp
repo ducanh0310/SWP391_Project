@@ -106,8 +106,8 @@
                         <a href="logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
                     </c:otherwise>
                 </c:choose>
-
                 <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>
             </div>
         </nav>
         <!-- Navbar End -->

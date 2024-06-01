@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 
 /**
@@ -20,8 +22,8 @@ import model.User;
 public class UserDAO extends DBContext {
 
     private final Connection connection;
-    
-    public UserDAO(){
+
+    public UserDAO() {
         this.connection = DBContext.getConnection();
     }
 
@@ -33,10 +35,10 @@ public class UserDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 User u = new User(rs.getString(1),
-                         rs.getString(2),
-                         rs.getInt(3),
-                         rs.getString(4),
-                         rs.getString(5));
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5));
                 return u;
             }
         } catch (SQLException e) {
@@ -76,8 +78,7 @@ public class UserDAO extends DBContext {
 
         return list;
     }
-    
-    
+
     public User getUserByPatientId(int patientId) {
         try {
             String query = "SELECT * FROM User_account WHERE patient_id = ?";
@@ -87,10 +88,10 @@ public class UserDAO extends DBContext {
 
             if (rs.next()) {
                 User u = new User(rs.getString(1),
-                         rs.getString(2),
-                         rs.getInt(3),
-                         rs.getString(4),
-                         rs.getString(5));
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5));
                 return u;
             }
         } catch (SQLException e) {
@@ -98,6 +99,33 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-    
-    
+
+    public String checkPasswordByUsername(String username) {
+        try {
+            String sql = "select password from User_account where username = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("password");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void changePassword(String username, String newPass) {
+        try {
+            String sql = "UPDATE [dbo].[User_account] SET password = ? WHERE username = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, newPass);
+            ps.setString(2, username);
+            int rs = ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }
