@@ -11,9 +11,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
+import model.User;
 
 /**
  *
@@ -30,9 +32,13 @@ public class ViewProfilePatientController extends HttpServlet {
         //String username = request.getParameter("username");-> thêm câu lệnh này thì sẽ có tham số trên url 
         try {
             DBPatientProfile db = new DBPatientProfile();            
-            PatientInfo patientInfo= db.getInfoPatient("elmurder666");            
+           
+            
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+             PatientInfo patientInfo= db.getInfoPatient(currentUser.getName());  
             request.setAttribute("paInfo", patientInfo);
-            request.setAttribute("username", "elmurder666");
+            request.setAttribute("username", currentUser.getName());
 
             request.getRequestDispatcher("../../view/patient/viewProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
