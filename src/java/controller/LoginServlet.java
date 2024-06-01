@@ -38,6 +38,7 @@ import model.Patient;
  *
  * @author trung
  */
+@WebServlet(name="LoginServlet", urlPatterns={"/login"})
 public class LoginServlet extends HttpServlet {
 //Login with google:
 //    public static String getToken(String code) throws ClientProtocolException, IOException {

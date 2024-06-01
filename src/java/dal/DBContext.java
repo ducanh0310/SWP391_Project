@@ -4,7 +4,9 @@
  */
 package dal;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,25 +16,35 @@ import java.util.logging.Logger;
  */
 public class DBContext {
 
-    public Connection connection;
+    protected Connection connection;
 
-      public static Connection getConnection() {
-        Connection connection2 = null;
+    public DBContext() throws ClassNotFoundException {
         try {
             String user = "sa";
             String pass = "30020102";
             String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection2 = DriverManager.getConnection(url, user, pass);
-            connection2 = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(url, user, pass);
+        } catch (SQLException e) {
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            String user = "sa";
+            String pass = "30020102";
+            String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return connection2;
+        return connection;
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
         DBContext db = new DBContext();
-        System.out.println("Hello" + db);
+        System.out.println("Hello");
     }
 }

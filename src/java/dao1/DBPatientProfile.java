@@ -117,4 +117,9 @@ public class DBPatientProfile extends DBContext{
         }
         return -1;
     }
+    
+    public static void main(String[] args) throws ClassNotFoundException {
+        DBPatientProfile db = new DBPatientProfile();
+        System.out.println(db.getInfoPatient("elmurder666"));
+    }
 }
