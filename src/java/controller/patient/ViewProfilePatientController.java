@@ -34,11 +34,11 @@ public class ViewProfilePatientController extends HttpServlet {
             DBPatientProfile db = new DBPatientProfile();            
            
             
-            HttpSession session = request.getSession();
-            User currentUser = (User) session.getAttribute("currentUser");
-             PatientInfo patientInfo= db.getInfoPatient(currentUser.getName());  
+//            HttpSession session = request.getSession();
+//            User currentUser = (User) session.getAttribute("currentUser");
+             PatientInfo patientInfo= db.getInfoPatient("elmurder666");  
             request.setAttribute("paInfo", patientInfo);
-            request.setAttribute("username", currentUser.getName());
+            request.setAttribute("username", "elmurder666");
 
             request.getRequestDispatcher("../../view/patient/viewProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {

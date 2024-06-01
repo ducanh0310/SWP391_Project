@@ -252,8 +252,31 @@
                             <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
                         </div>
                     </div>
+                        
+                        <br>
+                        <label class="labels">Certification</label>
+                        <div id="certificateContainer">
+                        <c:forEach items="${requestScope.arrayCerti}" var="cer">
+                            <div class="row mt-3">
+                                <input type="hidden" name="idCer"value="${cer.id}">
+                                <div class="col-md-6">
 
+                                    <label class="labels">Name</label>
+                                    <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="${cer.name}" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">URL</label>
 
+                                    <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="${cer.url}">
+                                </div>
+                            </div>
+                        </c:forEach>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-secondary" onclick="addCertificateForm()">Add Certificate</button>
+                        
+                        <!-- Button to add new certification fields -->
+<!--                        <button id="addCertButton" class="btn btn-secondary mt-3">Add Certification</button>-->
 
                     <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
 
@@ -326,5 +349,23 @@
 
     <!-- Template Javascript -->
     <script src="../../js/main.js"></script>
+    <script>
+        function addCertificateForm() {
+            const certificateContainer = document.getElementById('certificateContainer');
+            const newCertificateForm = `
+                <div class="row mt-3">
+                    <input type="hidden" name="idCer" value="">
+                    <div class="col-md-6">
+                        <label class="labels">Name</label>
+                        <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labels">URL</label>
+                        <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="">
+                    </div>
+                </div>`;
+            certificateContainer.insertAdjacentHTML('beforeend', newCertificateForm);
+        }
+    </script>
     </body>
 </html>

@@ -21,11 +21,10 @@ import model.User;
  */
 public class UserDAO extends DBContext {
 
-    private final Connection connection;
-
-    public UserDAO() {
-        this.connection = DBContext.getConnection();
+    public UserDAO() throws ClassNotFoundException {
+        super(); // Calls the constructor of DBContext to initialize the connection
     }
+    
 
     public User checkUser(String username, String password) {
         String sql = "select * from [User_account] where username = ? and password = ?";

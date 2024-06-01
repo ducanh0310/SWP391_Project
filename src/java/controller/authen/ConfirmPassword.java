@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.User;
 
 /**
@@ -72,16 +74,20 @@ public class ConfirmPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String oldPass = request.getParameter("oldPass");
-        HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        UserDAO userDAO = new UserDAO();
-        String check = userDAO.checkPasswordByUsername(currentUser.getName());
-        if (!check.equals(oldPass)) {
-            request.setAttribute("error", "Password is incorrect!");
-            request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("changepass");
+        try {
+            String oldPass = request.getParameter("oldPass");
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            UserDAO userDAO = new UserDAO();
+            String check = userDAO.checkPasswordByUsername(currentUser.getName());
+            if (!check.equals(oldPass)) {
+                request.setAttribute("error", "Password is incorrect!");
+                request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("changepass");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
