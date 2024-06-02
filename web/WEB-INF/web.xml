@@ -32,8 +32,19 @@
         <servlet-name>ConfirmPassword</servlet-name>
         <url-pattern>/confirmpass</url-pattern>
     </servlet-mapping>
-    
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>your.package.AccessFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/doctor/*</url-pattern>
+        <url-pattern>/nurse/*</url-pattern>
+        <url-pattern>/patient/*</url-pattern>
+    </filter-mapping>
     <session-config>
-   <session-timeout>30</session-timeout>
-</session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </web-app>

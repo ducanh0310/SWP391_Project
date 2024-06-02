@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
@@ -35,8 +36,10 @@ public class EditProfilePatientController extends HttpServlet {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
         try {
-            boolean isPatent = (boolean) session.getAttribute("isPatient");
-            if (!isPatent || isPatent == null) {
+            String isPatent = String.valueOf(session.getAttribute("isPatient"));
+            PrintWriter out = response.getWriter();
+            out.print(isPatent);
+            if (isPatent.isEmpty() || isPatent == null) {
                 session = request.getSession(false);
                 session.invalidate();
                 response.sendRedirect("index.jsp");
@@ -58,8 +61,17 @@ public class EditProfilePatientController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         try {
+            String isPatent = String.valueOf(session.getAttribute("isPatient"));
+            PrintWriter out = response.getWriter();
+            out.print(isPatent);
+            if (isPatent.isEmpty() || isPatent == null) {
+                session = request.getSession(false);
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+            }
             PatientInfo paInfo = new PatientInfo();
             paInfo.setPatientId(Integer.parseInt(request.getParameter("id")));
             paInfo.setPatientSin(Integer.parseInt(request.getParameter("medicineCode")));

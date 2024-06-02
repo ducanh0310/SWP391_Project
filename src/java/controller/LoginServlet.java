@@ -97,7 +97,7 @@ public class LoginServlet extends HttpServlet {
                         PatientDAO patientDAO = new PatientDAO();
                         Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
-                        session.setAttribute("isPatient", true);
+                        session.setAttribute("userRole", "patient");
                         request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
                         //request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (user.getType_Id() == 1) {
@@ -105,19 +105,19 @@ public class LoginServlet extends HttpServlet {
                         Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
                         if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
                             session.setAttribute("admin", emp);
-                            session.setAttribute("isAdmin", true);
+                            session.setAttribute("userRole", "admin");
                             request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
-                            session.setAttribute("isDoctor", true);
+                            session.setAttribute("userRole", "doctor");
                             request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
-                            session.setAttribute("isNurse", true);
+                            session.setAttribute("userRole",  "nurse");
                             request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
-                            session.setAttribute("isrecep", true);
+                            session.setAttribute("userRole", "receptionist");
                             request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
                         }
                     }
