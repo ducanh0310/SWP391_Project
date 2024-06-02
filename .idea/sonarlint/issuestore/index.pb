@@ -72,3 +72,5 @@ H
 ,src/java/controller/AuthenticateServlet.java,0\8\0821b09f1ea50cfbec4ffa34af9d2a18207fa1d7
 =
 web/Login.jsp,d\c\dcde6f84048badd6aebaa8b8e5f0bcebc3697491
+e
+5src/java/controller/authen/NewPasswordController.java,f\9\f9aebdcbd2e061e44feb68c6cd7c33d099221427
