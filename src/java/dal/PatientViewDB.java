@@ -55,14 +55,14 @@ public class PatientViewDB extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PatientList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PatientViewDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return patient;
     }
 
     public static void main(String[] args) {
-        PatientList p = new PatientList();
-        System.out.println(p.getPatient());
+        PatientViewDB p = new PatientViewDB();
+        System.out.println(p.getPatient(1));
     }
 
 }

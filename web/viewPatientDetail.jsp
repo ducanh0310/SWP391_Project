@@ -191,7 +191,16 @@
                                             <h6 class="mb-0">Full Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            k
+                                           
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">SIN</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            00908896
                                         </div>
                                     </div>
                                     <hr>
@@ -304,9 +313,7 @@
 
                 </div>
             </div>
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+           
 
             <!-- JavaScript Libraries -->
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
