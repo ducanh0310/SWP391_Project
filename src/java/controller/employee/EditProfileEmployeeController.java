@@ -39,7 +39,7 @@ public class EditProfileEmployeeController extends HttpServlet {
     throws ServletException, IOException { 
         try {
             DBEmployeeProfile dbEm=new DBEmployeeProfile();
-            Employee emInfo = dbEm.getInfoEmployee("johnli255a");
+            Employee emInfo = dbEm.getInfoEmployee("kdo2342");
             if("d".equals(emInfo.getEmployeeType())){
                 ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification("johnli255a");
                 DBAccount db = new DBAccount();
@@ -56,7 +56,7 @@ public class EditProfileEmployeeController extends HttpServlet {
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", "kdo2342");
-                request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
+                request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,6 +82,13 @@ public class EditProfileEmployeeController extends HttpServlet {
             
             DBEmployeeProfile db = new DBEmployeeProfile();
             db.editInfoEmployee(emInfo);
+            
+            
+            
+            //Certification
+            
+            Employee emInfoCer = db.getInfoEmployee("kdo2342");
+            if("d".equals(emInfoCer.getEmployeeType())){
             int id = Integer.parseInt(request.getParameter("id"));
              String[] imageLinks = request.getParameterValues("imageLink");
             String[] imageNames = request.getParameterValues("imageName");
@@ -113,6 +120,7 @@ public class EditProfileEmployeeController extends HttpServlet {
                 }
             }
             response.getWriter().println("Processing completed.");
+            }
         } else {
             response.getWriter().println("Mismatch in number of image links and names.");
         }

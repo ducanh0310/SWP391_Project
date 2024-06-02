@@ -54,7 +54,7 @@ public class UploadImageController extends HttpServlet {
         System.out.println("Received image URL: " + imageLink);
         
         if (isValidURL(imageLink)) {
-            db.updateImageProfile("johnli255a", imageLink);
+            db.updateImageProfile("kdo2342", imageLink);
             out.write("{\"success\": true, \"imageUrl\": \"" + imageLink + "\"}");
         } else {
             out.write("{\"success\": false, \"message\": \"Invalid image link.\"}");

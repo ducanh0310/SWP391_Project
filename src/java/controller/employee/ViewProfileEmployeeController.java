@@ -36,7 +36,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
         
         try {
             DBEmployeeProfile dbEm=new DBEmployeeProfile();
-            Employee emInfo = dbEm.getInfoEmployee("johnli255a");
+            Employee emInfo = dbEm.getInfoEmployee("kdo2342");
             if("d".equals(emInfo.getEmployeeType())){
                 ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification("johnli255a");
                 DBAccount db = new DBAccount();
