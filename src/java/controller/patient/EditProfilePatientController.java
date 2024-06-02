@@ -36,7 +36,7 @@ public class EditProfilePatientController extends HttpServlet {
         User currentUser = (User) session.getAttribute("currentUser");
         try {
             boolean isPatent = (boolean) session.getAttribute("isPatient");
-            if (!isPatent || isPatent == null) {
+            if (isPatent == false) {
                 session = request.getSession(false);
                 session.invalidate();
                 response.sendRedirect("index.jsp");
