@@ -38,7 +38,15 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-
+        <style>
+            .text-primary {
+                --x-text-opacity: 1;
+                color: #06a3da !important;
+            }
+            .m-0 {
+                margin-left: 30px !important;
+            }
+        </style>
     </head>
 
     <body>
@@ -52,13 +60,12 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Brand -->
-                    <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-                    
+                    <a href="index.jsp" class="navbar-brand p-0">
+                        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
@@ -69,7 +76,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viewListPatient.jsp">
+                                <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
@@ -102,9 +109,9 @@
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
                         <!-- Navigation -->
-                       
+
                         <!-- Push content down -->
-                        <hr style="border: 1px solid black">
+                        <div class="mt-auto"></div>
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -266,32 +273,26 @@
                     </div>
                 </main>
             </div>
-
-        <!-- JS File -->
-        <script type="text/javascript" src="js/script.js"></script>
-
-
+        </div>
+       <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script src="lib/twentytwenty/jquery.event.move.js"></script>
+            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="lib/twentytwenty/jquery.event.move.js"></script>
-        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
-
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+            <!-- Template Javascript -->
+            <script src="js/main.js"></script>
     </body>
 
 </html>

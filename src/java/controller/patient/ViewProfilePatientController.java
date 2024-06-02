@@ -31,20 +31,21 @@ public class ViewProfilePatientController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //elmurder666
         //String username = request.getParameter("username");-> thêm câu lệnh này thì sẽ có tham số trên url 
+            HttpSession session = request.getSession();
+           User currentUser = (User) session.getAttribute("currentUser");
         try {
             DBPatientProfile dbProfile = new DBPatientProfile();            
            
             DBAccount db = new DBAccount();
-            Account acc= db.showAccountInfo("elmurder666");
+            Account acc= db.showAccountInfo(currentUser.getName());
             request.setAttribute("image", acc.getImage());
-            PatientInfo patientInfo= dbProfile.getInfoPatient("elmurder666"); 
-            
-//            HttpSession session = request.getSession();
-//            User currentUser = (User) session.getAttribute("currentUser");
+            PatientInfo patientInfo= dbProfile.getInfoPatient(currentUser.getName()); 
+ 
               
             request.setAttribute("paInfo", patientInfo);
-            request.setAttribute("username", "elmurder666");
+            request.setAttribute("username", currentUser.getName());
 
             request.getRequestDispatcher("../../view/patient/viewProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {

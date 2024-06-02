@@ -12,12 +12,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
 import java.text.ParseException;
 import java.sql.Date;
 import model.Account;
+import model.User;
 
 /**
  *
@@ -28,14 +30,17 @@ public class EditProfilePatientController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //elmurder666
+            HttpSession session = request.getSession();
+           User currentUser = (User) session.getAttribute("currentUser");
         try {
             DBPatientProfile db = new DBPatientProfile();            
-            PatientInfo patientInfo= db.getInfoPatient("elmurder666");  
+            PatientInfo patientInfo= db.getInfoPatient(currentUser.getName());  
             DBAccount db1 = new DBAccount();
-            Account acc= db1.showAccountInfo("elmurder666");
+            Account acc= db1.showAccountInfo(currentUser.getName());
             request.setAttribute("image", acc.getImage());
             request.setAttribute("paInfo", patientInfo);
-            request.setAttribute("username", "elmurder666");
+            request.setAttribute("username", currentUser.getName());
 
             request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
@@ -47,6 +52,7 @@ public class EditProfilePatientController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+
         try {
             PatientInfo paInfo = new PatientInfo();
             paInfo.setPatientId(Integer.parseInt(request.getParameter("id")));

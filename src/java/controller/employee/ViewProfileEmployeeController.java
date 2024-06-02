@@ -13,12 +13,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 import model.DoctorCertification;
 import model.Employee;
+import model.User;
 
 /**
  *
@@ -33,26 +35,29 @@ public class ViewProfileEmployeeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         try {
             DBEmployeeProfile dbEm=new DBEmployeeProfile();
-            Employee emInfo = dbEm.getInfoEmployee("kdo2342");
+            Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
+            //johnli255a
             if("d".equals(emInfo.getEmployeeType())){
-                ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification("johnli255a");
+                ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification(currentUser.getName());
                 DBAccount db = new DBAccount();
-                Account acc= db.showAccountInfo("johnli255a");
+                Account acc= db.showAccountInfo(currentUser.getName());
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("arrayCerti", arrayCerti);
                 request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", "johnli255a");
+                request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
             }
+            //kdo2342
             if("b".equals(emInfo.getEmployeeType())){
                 DBAccount db = new DBAccount();
-                Account acc= db.showAccountInfo("kdo2342");
+                Account acc= db.showAccountInfo(currentUser.getName());
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", "kdo2342");
+                request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException ex) {

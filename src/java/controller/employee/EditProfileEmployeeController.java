@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 import model.Account;
 import model.DoctorCertification;
 import model.Employee;
+import model.User;
 
 /**
  *
@@ -37,25 +39,29 @@ public class EditProfileEmployeeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException { 
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         try {
             DBEmployeeProfile dbEm=new DBEmployeeProfile();
-            Employee emInfo = dbEm.getInfoEmployee("kdo2342");
+            Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
+            //johnli255a
             if("d".equals(emInfo.getEmployeeType())){
-                ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification("johnli255a");
+                ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification(currentUser.getName());
                 DBAccount db = new DBAccount();
-                Account acc= db.showAccountInfo("johnli255a");
+                Account acc= db.showAccountInfo(currentUser.getName());
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("arrayCerti", arrayCerti);
                 request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", "johnli255a");
+                request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
             }
+            //kdo2342
             if("b".equals(emInfo.getEmployeeType())){
                 DBAccount db = new DBAccount();
-                Account acc= db.showAccountInfo("kdo2342");
+                Account acc= db.showAccountInfo(currentUser.getName());
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", "kdo2342");
+                request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException ex) {
@@ -66,6 +72,8 @@ public class EditProfileEmployeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         try {
             Employee emInfo = new Employee();
             emInfo.setId(Integer.parseInt(request.getParameter("id")));
@@ -86,8 +94,9 @@ public class EditProfileEmployeeController extends HttpServlet {
             
             
             //Certification
+            //kdo2342
             
-            Employee emInfoCer = db.getInfoEmployee("kdo2342");
+            Employee emInfoCer = db.getInfoEmployee(currentUser.getName());
             if("d".equals(emInfoCer.getEmployeeType())){
             int id = Integer.parseInt(request.getParameter("id"));
              String[] imageLinks = request.getParameterValues("imageLink");
@@ -111,7 +120,7 @@ public class EditProfileEmployeeController extends HttpServlet {
 
                 if (isValidURL(imageLink)) {
                     if (imageId != 0) {
-                        dbEm.updateCertificate("johnli255a", imageName, imageLink, imageId);
+                        dbEm.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);
                     } else {
                         dbEm.insertCertification(imageName, imageLink, id);
                     }

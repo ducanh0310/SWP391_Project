@@ -14,12 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import static java.lang.System.out;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import model.Account;
+import model.User;
 
 /**
  *
@@ -42,6 +44,8 @@ public class UploadImageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         PrintWriter out = null;
+         HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
     try {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -54,7 +58,7 @@ public class UploadImageController extends HttpServlet {
         System.out.println("Received image URL: " + imageLink);
         
         if (isValidURL(imageLink)) {
-            db.updateImageProfile("kdo2342", imageLink);
+            db.updateImageProfile(currentUser.getName(), imageLink);
             out.write("{\"success\": true, \"imageUrl\": \"" + imageLink + "\"}");
         } else {
             out.write("{\"success\": false, \"message\": \"Invalid image link.\"}");
