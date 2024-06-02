@@ -15,7 +15,7 @@ public class AccountDAO {
     }
     public ArrayList<String> getAllAccount() {
         ArrayList<String> list = new ArrayList<>();
-        String query = "SELECT email FROM Patient union select email from Employee";
+        String query = "SELECT username FROM User_account";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
@@ -31,7 +31,7 @@ public class AccountDAO {
 
     public ArrayList<String> getAllEmail() {
         ArrayList<String> list = new ArrayList<>();
-        String query = "SELECT email FROM Patient";
+        String query = "SELECT email FROM Patient union select email from Employee";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
