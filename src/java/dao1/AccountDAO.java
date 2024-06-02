@@ -211,9 +211,6 @@ public class AccountDAO {
                        "SET password = ? " +
                        "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) " +
                        "   OR employee_id = (SELECT employee_id FROM Employee WHERE email = ?)";
-
-    public static boolean updatePasswordPatient(String email, String password) {
-        String query = "UPDATE User_account SET password = ? WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?)";
         try {
             Connection connection = DBContext.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
@@ -231,7 +228,7 @@ public class AccountDAO {
 
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
-        System.out.println(dao.getEmailByUsername("elmurder666"));
+        System.out.println(dao.getAllEmail());
     }
 
 }

@@ -1,29 +1,37 @@
 
-š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çÊ®®ûÿÿÿÿJ$ba109ef3-a7ca-488e-ad58-0d9f035bc2a9
+“	java:S117/"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â£Ù÷8†øòÌı1J$f96ae1f4-6898-42e9-b617-fa5e5a9655d3
+˜	java:S117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õòÇˆÿÿÿÿÿ8–øòÌı1J$fee0ac3b-8df6-4f92-8456-7e1b545eeffc
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çÊ®®ûÿÿÿÿJ$e77e47ee-8d53-4aaa-8af7-7d6873dcb4b6
 t
-java:S2589…"7Remove this expression which always evaluates to "true"(¤òª£J$2384f43a-2b46-4d71-94fd-277e1cd9e97c
-t
-java:S2589”"7Remove this expression which always evaluates to "true"(šœ§‘J$6866cdac-2193-40e3-af5a-847fd9ba4bbd
+java:S2589´"7Remove this expression which always evaluates to "true"(¤òª£J$0d500f43-6943-4188-9511-d1359b166a0e
+{
+java:S2589É"7Remove this expression which always evaluates to "true"(¤òª£8ñùòÌı1J$357a0538-bcbb-4a30-bd8e-3c40fea0b509
 ±
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™ùÿÿÿÿJ$4538b4f4-7a41-4b61-84f1-a8b5a787b0be
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™ùÿÿÿÿJ$1560e9ac-fb9c-4840-b8f5-50377151fc2e
 ±
-java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…ÔºşÿÿÿÿJ$466c244f-f3db-4e3c-99ae-751bbc0d10bc
-‘
-java:S2095¡"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$1635cfd5-a2cb-44ec-8df3-9aa2a2dc32a4
-‹
-java:S2095f"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(óŒ‘ªJ$68bc6cd5-9f4e-4f82-b954-4a7138a287f3
-‹
-java:S2095t"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(é‰‡±J$d5843b44-fa99-4389-8357-c893eb861cd3
+java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…ÔºşÿÿÿÿJ$e4dd75e7-0de9-4618-9c0e-15bf8276c6af
+Œ
+java:S2095£"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(é‰‡±J$92db1536-ef8c-4ac8-b4e7-44e879c043ba
+—
+java:S20952"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ8…úòÌı1J$6e230392-8f96-49ff-ad5d-5e574a945530
 
-java:S2095>"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$3092ae2c-fd06-41d5-9548-730553b3a88b
+java:S2095R"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$e4f6ff0e-91a5-4396-87c8-efc98a0d4835
 
-java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$05cb148c-c4dd-4c40-9f21-81d463729a1f
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$df199dc1-757a-4da4-9771-7379d96c1123
+—
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿ8„úòÌı1J$084bf5dd-33ac-4212-9211-dc03f58c3b90
 
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$c8e12450-3ee1-475f-acc1-d2c8d3dbf958
+java:S2095{"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$2f89f8cc-23cd-4c86-b903-ef8d3377da21
 
-java:S2095M"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$b4177a7f-30d8-451f-bae1-ebc160928d11
+java:S2095_"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$7e805c7c-d7dc-46c8-8d77-39bf93b7355e
 
-java:S20952"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$712eda77-ab35-4fbd-8601-f54d4b65128b
-„
-java:S3252f"HUse static access with "java.sql.Statement" for "RETURN_GENERATED_KEYS".(óŒ‘ªJ$ef0c8e5e-586e-49ca-88de-c462cc0cea44
-g	java:S106®"+Replace this use of System.out by a logger.(Õ™–ëJ$e6da6fbf-2716-492b-b9e6-e5cc06c6b940
+java:S2095l"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$604d1b35-d8d9-410c-91e2-13fdb8b7747c
+
+java:S2095C"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$7e20c80a-980e-4d57-ba02-5dfe66f2366b
+Œ
+java:S2095•"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(óŒ‘ªJ$cff1e6e1-d906-4c9a-828c-80e6db16e663
+v
+java:S1172@".Remove this unused method parameter "type_id".(õòÇˆÿÿÿÿÿ8½óÌı1J$04bcea4e-1350-426e-9168-9d6dd0541745
+…
+java:S3252•"HUse static access with "java.sql.Statement" for "RETURN_GENERATED_KEYS".(óŒ‘ªJ$649f977f-1d19-4da1-bf7d-14d81bf2423f
+g	java:S106ç"+Replace this use of System.out by a logger.(Õ™–ëJ$3617433b-9f80-4456-9cd2-c75dce0eb8b3
