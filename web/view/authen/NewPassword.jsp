@@ -129,7 +129,7 @@
                                     <input type="password" class="form-control" id="repassword" name="repassword" placeholder="Please confirm your password" required>
                                 </div>
                                 <div class="d-grid">
-                                    <input type="submit" class="btn btn-primary" value="Register">
+                                    <input type="submit" class="btn btn-primary" value="Change Password">
                                 </div>
                                 <span class="text-danger">
 

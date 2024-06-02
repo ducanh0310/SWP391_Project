@@ -91,13 +91,13 @@ public class NewPasswordController extends HttpServlet {
         request.getRequestDispatcher("view/authen/NewPassword.jsp").forward(request, response);
     }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
