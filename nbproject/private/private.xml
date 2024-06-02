@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/admin.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewListPatient.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/PatientController.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ViewPatientDetailController.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/PatientController.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/editPatientDetail.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewPatientDetail.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/Patient.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/index.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/Successful.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientViewDB.java</file>
         </group>
     </open-files>
 </project-private>

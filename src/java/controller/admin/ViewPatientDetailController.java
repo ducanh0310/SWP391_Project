@@ -23,7 +23,7 @@ public class ViewPatientDetailController extends HttpServlet {
         int patientId = Integer.parseInt(request.getParameter("pid"));
         PatientViewDB patientView = new PatientViewDB();
         ArrayList<Patient> patients = patientView.getPatient(patientId);
-        request.setAttribute("patient", patients);
+        request.setAttribute("patients", patients);
         request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
     }
 }
