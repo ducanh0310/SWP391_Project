@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +59,7 @@
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${currentUser.getName()}</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${user}</p>
                         </div>
                         <div class="py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -98,15 +96,6 @@
                     <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                 </div>
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                    <c:choose>
-                        <c:when test="${currentUser == null}">
-                        <a href="login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-                    </c:otherwise>
-                </c:choose>
-                <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
             </div>
         </nav>
         <!-- Navbar End -->
@@ -116,40 +105,29 @@
                 <div class="col-lg-6">
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
-                            <h3 class="mb-4">Login</h3>
-                            <form action="login" method="post">
+                            <h3 class="mb-4">Change password</h3>
+                            <form action="changepass" method="post">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Email/Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter email or username " value="${currentUser.getName()}" required>
+                                    <label for="password" class="form-label">New password: </label>
+                                    <input type="password" class="form-control" id="newPass" name="newPass" placeholder="Enter new password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                                    <label for="password" class="form-label">Re enter new password: </label>
+                                    <input type="password" class="form-control" id="rePass" name="rePass" placeholder="Re enter new password" required>
                                 </div>
-                                <div style="text-align: end; margin-bottom: 10px">
-                                    <a href="ForgotPassword">Forgot password</a>
+
+                                <div class="d-grid">
+                                    <button type="reset" class="btn btn-primary">Reset</button>
+                                
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 3px">Change</button>
                                 </div>
+
                                 <div class="form-group">
                                     <div style="color: red"> ${error}</div>
                                 </div>
                             </form>
-                            <div class="mb-3" style="text-align: center">
-                                <label class="form-label">Or</label>
-                            </div>
-                            <div class="mb-3" >
-                                <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 28px; height: 27px; border-radius: 25px"></img>
-                                <button style="background-color: white; padding-left: 0px; border-radius: 10px">
-                                    <a style="color: Black; padding-left: 5px" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Google</a>
-                                </button>
-                            </div>
-
-                            <div>
-                                <a>Don't have an account?</a>
-                                <a href="register">Register now!</a> 
-                            </div>
                         </div>
                     </div>
                 </div>

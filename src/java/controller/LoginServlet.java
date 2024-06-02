@@ -88,36 +88,30 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             UserDAO userDAO = new UserDAO();
-            User user = userDAO.checkUser(userName, passWord);
-            if (user != null) {
+            User user = userDAO.checkUser(userName);
+            if (user != null && user.getPassword().equals(passWord)) {
                 session.setAttribute("currentUser", user);
                 Authorization author = new Authorization();
                 if (user.getType_Id() == 0) {
                     PatientDAO patientDAO = new PatientDAO();
                     Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                     session.setAttribute("patient", pat);
-                    request.setAttribute("user", pat.getName());
-                    
-                    //request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                    //request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else if (user.getType_Id() == 1) {
                     EmployeeDAO empDao = new EmployeeDAO();
                     Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
                     if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
                         session.setAttribute("admin", emp);
-                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
                     } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                         session.setAttribute("doctor", emp);
-                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                     } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                         session.setAttribute("nurse", emp);
-                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                     } else {
                         session.setAttribute("receptionist", emp);
-                        request.setAttribute("user", emp.getName());
                         request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
                     }
                 }

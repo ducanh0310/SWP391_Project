@@ -59,7 +59,7 @@
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${u.name}</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>${currentUser.getName()}</p>
                         </div>
                         <div class="py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -106,22 +106,19 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4">
                             <h3 class="mb-4">Change password</h3>
-                            <form action="changepass" method="post">
+                            <form action="confirmpass" method="post">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Current password: </label>
                                     <input type="password" class="form-control" id="oldPass" name="oldPass" placeholder="Enter old password" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">New password: </label>
-                                    <input type="password" class="form-control" id="newPass" name="newPass" placeholder="Enter new password" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Re enter new password: </label>
-                                    <input type="password" class="form-control" id="rePass" name="rePass" placeholder="Re enter new password" required>
+                                <div class="d-grid">
+                                    <button type="reset" class="btn btn-primary">Reset</button>
+                                
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Change</button>
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 3px">Change</button>
                                 </div>
+
                                 <div class="form-group">
                                     <div style="color: red"> ${error}</div>
                                 </div>

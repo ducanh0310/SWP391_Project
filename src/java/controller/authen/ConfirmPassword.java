@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.authen;
 
 import dao1.UserDAO;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import model.User;
  *
  * @author trung
  */
-public class ChangePasswordServlet extends HttpServlet {
+public class ConfirmPassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class ChangePasswordServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePasswordServlet</title>");
+            out.println("<title>Servlet ConfirmPassword</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePasswordServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ConfirmPassword at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,11 +60,10 @@ public class ChangePasswordServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
+        if(currentUser == null){
             response.sendRedirect("index.jsp");
         }else{
-            request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-
+            request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
         }
     }
 
@@ -79,19 +78,20 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String newPass = request.getParameter("newPass");
-        String reEnter = request.getParameter("rePass");
-
-        if (newPass.equals(reEnter)) {
-            HttpSession session = request.getSession();
-            User currentUser = (User) session.getAttribute("currentUser");
-            UserDAO userDAO = new UserDAO();
-            userDAO.changePassword(currentUser.getName(), newPass);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            request.setAttribute("error", "Re-enter password do not match your new password!");
-            request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-
+        String oldPass = request.getParameter("oldPass");
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        UserDAO userDAO = new UserDAO();
+        if (currentUser != null) {
+            String check = userDAO.checkPasswordByUsername(currentUser.getName());
+            if (!check.equals(oldPass)) {
+                request.setAttribute("error", "Password is incorrect!");
+                request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("changepass");
+            }
+        }else{
+            response.sendRedirect("index.jsp");
         }
     }
 
