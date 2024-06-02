@@ -134,37 +134,25 @@
         </style>
     </head>
     <body>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9 text-secondary">
-                <input type="button" class="btn btn-primary px-4" value="Save Changes" onclick="showCodeAndRedirect()" />
-            </div>
-        </div>
-
-        <div id="result"></div>
-
-
-
+    <div id="result" class="main-container">
+    <div class="check-container">
+      <div class="check-background">
+        <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="check-shadow"></div>
+    </div>
+  </div>
     </body>
     <script>
-        function showCodeAndRedirect() {
-            var resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = `
-    <div class="main-container">
-      <div class="check-container">
-        <div class="check-background">
-          <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="check-shadow"></div>
-      </div>
-    </div>
-  `;
+    function showCodeAndRedirect() {
+      var resultDiv = document.getElementById("result");
+      resultDiv.style.display = "flex"; // Hiển thị phần tử "result"
 
-            setTimeout(function () {
-                window.location.href = "https://example.com"; // Thay đổi URL chuyển hướng tại đây
-            }, 3000); // Độ trễ trước khi chuyển hướng (3 giây trong ví dụ này)
-        }
-    </script>
+      setTimeout(function() {
+        window.location.href = "https://example.com"; // Thay đổi URL chuyển hướng tại đây
+      }, 3000); // Độ trễ trước khi chuyển hướng (3 giây trong ví dụ này)
+    }
+  </script>
 </html>

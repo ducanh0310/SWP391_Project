@@ -46,6 +46,10 @@
             .m-0 {
                 margin-left: 30px !important;
             }
+            body{
+                background: #f7f7ff;
+                margin-top:0px;
+            }
         </style>
     </head>
 
