@@ -1,0 +1,29 @@
+
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çÊ®®ûÿÿÿÿJ$ba109ef3-a7ca-488e-ad58-0d9f035bc2a9
+t
+java:S2589…"7Remove this expression which always evaluates to "true"(¤òª£J$2384f43a-2b46-4d71-94fd-277e1cd9e97c
+t
+java:S2589”"7Remove this expression which always evaluates to "true"(šœ§‘J$6866cdac-2193-40e3-af5a-847fd9ba4bbd
+±
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™ùÿÿÿÿJ$4538b4f4-7a41-4b61-84f1-a8b5a787b0be
+±
+java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…ÔºşÿÿÿÿJ$466c244f-f3db-4e3c-99ae-751bbc0d10bc
+‘
+java:S2095¡"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$1635cfd5-a2cb-44ec-8df3-9aa2a2dc32a4
+‹
+java:S2095f"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(óŒ‘ªJ$68bc6cd5-9f4e-4f82-b954-4a7138a287f3
+‹
+java:S2095t"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(é‰‡±J$d5843b44-fa99-4389-8357-c893eb861cd3
+
+java:S2095>"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$3092ae2c-fd06-41d5-9548-730553b3a88b
+
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$05cb148c-c4dd-4c40-9f21-81d463729a1f
+
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$c8e12450-3ee1-475f-acc1-d2c8d3dbf958
+
+java:S2095M"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$b4177a7f-30d8-451f-bae1-ebc160928d11
+
+java:S20952"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$712eda77-ab35-4fbd-8601-f54d4b65128b
+„
+java:S3252f"HUse static access with "java.sql.Statement" for "RETURN_GENERATED_KEYS".(óŒ‘ªJ$ef0c8e5e-586e-49ca-88de-c462cc0cea44
+g	java:S106®"+Replace this use of System.out by a logger.(Õ™–ëJ$e6da6fbf-2716-492b-b9e6-e5cc06c6b940
