@@ -86,10 +86,11 @@ public class AccountDAO {
         }
     }
     public boolean checkEmail(String email) {
-        String query = "SELECT email FROM Patient WHERE email = ?";
+        String query = "SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE email = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, email);
+            statement.setString(2, email);
             ResultSet rs = statement.executeQuery();
             return rs.next();
         } catch (SQLException ex) {
@@ -98,11 +99,12 @@ public class AccountDAO {
         }
     }
     public boolean checkUserNameAndEmail(String acc) {
-        String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ?";
+        String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE employee_id =(SELECT employee_id FROM User_account WHERE username = ?);";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, acc);
             statement.setString(2, acc);
+            statement.setString(3, acc);
             ResultSet rs = statement.executeQuery();
             return rs.next();
         } catch (SQLException ex) {
@@ -112,10 +114,11 @@ public class AccountDAO {
     }
 
     public String getEmailByUsername(String username) {
-        String query = "SELECT email FROM Patient WHERE patient_id = (SELECT patient_id FROM User_account WHERE username = ?)";
+        String query = "SELECT email FROM Patient WHERE patient_id = (SELECT patient_id FROM User_account WHERE username = ?) UNION SELECT email FROM Employee WHERE employee_id = (SELECT employee_id FROM User_account WHERE username = ?);";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
+            statement.setString(2, username);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return rs.getString("email");
