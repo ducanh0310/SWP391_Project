@@ -1,29 +1,27 @@
 
-š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çÊ®®ûÿÿÿÿJ$ba109ef3-a7ca-488e-ad58-0d9f035bc2a9
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çÊ®®ûÿÿÿÿJ$a1adb692-42d5-45c3-97e9-57b1cb65545b
 t
-java:S2589…"7Remove this expression which always evaluates to "true"(¤òª£J$2384f43a-2b46-4d71-94fd-277e1cd9e97c
+java:S2589”"7Remove this expression which always evaluates to "true"(šœ§‘J$8ae618dd-158b-4967-a1d4-63d9fb77d571
 t
-java:S2589”"7Remove this expression which always evaluates to "true"(šœ§‘J$6866cdac-2193-40e3-af5a-847fd9ba4bbd
+java:S2589…"7Remove this expression which always evaluates to "true"(¤òª£J$0e182c47-bf05-4cd2-bf49-d81af0298a9d
 ±
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™ùÿÿÿÿJ$4538b4f4-7a41-4b61-84f1-a8b5a787b0be
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Éç™ùÿÿÿÿJ$296aa14d-5752-4740-8091-31aa22da3bcc
 ±
-java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…ÔºşÿÿÿÿJ$466c244f-f3db-4e3c-99ae-751bbc0d10bc
-‘
-java:S2095¡"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$1635cfd5-a2cb-44ec-8df3-9aa2a2dc32a4
+java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(…ÔºşÿÿÿÿJ$34e36e75-5886-44ef-8855-fce731dadec9
+
+java:S20952"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$a7869167-8e99-4fd8-9d45-20085de634e9
+
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$e0208ad9-eaf8-4027-b161-2b0bb40676d3
+
+java:S2095>"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$c07ecdf4-3d16-4834-9b23-5ed38fa2bf12
 ‹
-java:S2095f"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(óŒ‘ªJ$68bc6cd5-9f4e-4f82-b954-4a7138a287f3
+java:S2095t"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(é‰‡±J$bddc2f7d-63fd-4b4d-a28d-af88e6a43052
+
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$d33afa37-a06b-4fe4-9c1d-439e374a5d6a
+
+java:S2095M"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$56c99bef-8334-46ad-b91f-81942913f2aa
 ‹
-java:S2095t"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(é‰‡±J$d5843b44-fa99-4389-8357-c893eb861cd3
-
-java:S2095>"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$3092ae2c-fd06-41d5-9548-730553b3a88b
-
-java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$05cb148c-c4dd-4c40-9f21-81d463729a1f
-
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$c8e12450-3ee1-475f-acc1-d2c8d3dbf958
-
-java:S2095M"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$b4177a7f-30d8-451f-bae1-ebc160928d11
-
-java:S20952"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ç‚æøÿÿÿÿJ$712eda77-ab35-4fbd-8601-f54d4b65128b
+java:S2095f"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(óŒ‘ªJ$2e2dfe9c-ed75-485d-99d5-5af0bf732e40
 „
-java:S3252f"HUse static access with "java.sql.Statement" for "RETURN_GENERATED_KEYS".(óŒ‘ªJ$ef0c8e5e-586e-49ca-88de-c462cc0cea44
-g	java:S106®"+Replace this use of System.out by a logger.(Õ™–ëJ$e6da6fbf-2716-492b-b9e6-e5cc06c6b940
+java:S3252f"HUse static access with "java.sql.Statement" for "RETURN_GENERATED_KEYS".(óŒ‘ªJ$22f4cff9-ea6b-45aa-bca8-44eff1e62719
+l	java:S106®"+Replace this use of System.out by a logger.(ñĞ¹ÊşÿÿÿÿJ$c905ff21-5c17-45bd-8d71-e76a3aef34c7

@@ -74,3 +74,5 @@ H
 web/Login.jsp,d\c\dcde6f84048badd6aebaa8b8e5f0bcebc3697491
 e
 5src/java/controller/authen/NewPasswordController.java,f\9\f9aebdcbd2e061e44feb68c6cd7c33d099221427
+M
+src/java/dao1/AccountDAO.java,7\a\7a4fbc231f1e3250db3a2ef5b29c8fcd16ab5fc9
