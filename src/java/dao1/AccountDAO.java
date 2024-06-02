@@ -13,6 +13,7 @@ public class AccountDAO {
     public AccountDAO() {
         this.connection = DBContext.getConnection();
     }
+
     public ArrayList<String> getAllAccount() {
         ArrayList<String> list = new ArrayList<>();
         String query = "SELECT username FROM User_account";
@@ -27,7 +28,6 @@ public class AccountDAO {
         }
         return list;
     }
-
 
     public ArrayList<String> getAllEmail() {
         ArrayList<String> list = new ArrayList<>();
@@ -44,6 +44,38 @@ public class AccountDAO {
         return list;
     }
 
+    public boolean addPatient(String address, String name, String gender, String email, Date DOB) {
+        String query = "INSERT INTO Patient_info(address, name, gender, email, DOB) VALUES(?,?,?,?,?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, address);
+            statement.setString(2, name);
+            statement.setString(3, gender);
+            statement.setString(4, email);
+            statement.setDate(5, DOB);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName());
+            return false;
+        }
+    }
+
+    public boolean addAccount(String username, String password, int patientId, int type_id) {
+        String query = "INSERT INTO User_account(username, password, patient_id, type_id) VALUES(?,?,?, 1)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setInt(3, patientId);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName());
+            return false;
+        }
+    }
+
     public boolean checkAccount(String username) {
         String query = "SELECT username FROM User_account WHERE username = ?";
         try {
@@ -56,6 +88,20 @@ public class AccountDAO {
             return false;
         }
     }
+
+    public boolean checkEmail(String email) {
+        String query = "SELECT email FROM Patient WHERE email = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName());
+            return false;
+        }
+    }
+
     public boolean checkUserNameAndEmail(String acc) {
         String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE email = ?;";
         try {
@@ -86,6 +132,7 @@ public class AccountDAO {
         }
         return null;
     }
+
     public boolean addPatientAccount(String email, String username, String password) {
         String insertPatientSQL = "INSERT INTO Patient (email) VALUES (?)";
         String insertUserAccountSQL = "INSERT INTO User_account (username, password, type_id, patient_id) VALUES (?, ?, ?, ?)";
@@ -142,10 +189,18 @@ public class AccountDAO {
         } finally {
             // Clean up resources
             try {
-                if (generatedKeys != null) generatedKeys.close();
-                if (insertPatientStmt != null) insertPatientStmt.close();
-                if (insertUserAccountStmt != null) insertUserAccountStmt.close();
-                if (connection != null) connection.setAutoCommit(true); // Reset auto-commit to true
+                if (generatedKeys != null) {
+                    generatedKeys.close();
+                }
+                if (insertPatientStmt != null) {
+                    insertPatientStmt.close();
+                }
+                if (insertUserAccountStmt != null) {
+                    insertUserAccountStmt.close();
+                }
+                if (connection != null) {
+                    connection.setAutoCommit(true); // Reset auto-commit to true
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -156,6 +211,9 @@ public class AccountDAO {
                        "SET password = ? " +
                        "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) " +
                        "   OR employee_id = (SELECT employee_id FROM Employee WHERE email = ?)";
+
+    public static boolean updatePasswordPatient(String email, String password) {
+        String query = "UPDATE User_account SET password = ? WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?)";
         try {
             Connection connection = DBContext.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
@@ -169,6 +227,8 @@ public class AccountDAO {
             return false;
         }
     }
+
+
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
         System.out.println(dao.getEmailByUsername("elmurder666"));
