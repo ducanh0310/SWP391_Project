@@ -99,7 +99,7 @@ public class AccountDAO {
         }
     }
     public boolean checkUserNameAndEmail(String acc) {
-        String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE employee_id =(SELECT employee_id FROM User_account WHERE username = ?);";
+        String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE email = ?;";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, acc);
