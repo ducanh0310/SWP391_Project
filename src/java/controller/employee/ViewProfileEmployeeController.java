@@ -5,6 +5,7 @@
 
 package controller.employee;
 
+import dao1.DBAccount;
 import dao1.DBEmployeeProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.DoctorCertification;
 import model.Employee;
 
@@ -37,12 +39,18 @@ public class ViewProfileEmployeeController extends HttpServlet {
             Employee emInfo = dbEm.getInfoEmployee("johnli255a");
             if("d".equals(emInfo.getEmployeeType())){
                 ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification("johnli255a");
+                DBAccount db = new DBAccount();
+                Account acc= db.showAccountInfo("johnli255a");
+                request.setAttribute("image", acc.getImage());
                 request.setAttribute("arrayCerti", arrayCerti);
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", "johnli255a");
                 request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
             }
             if("b".equals(emInfo.getEmployeeType())){
+                DBAccount db = new DBAccount();
+                Account acc= db.showAccountInfo("kdo2342");
+                request.setAttribute("image", acc.getImage());
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", "kdo2342");
                 request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);

@@ -232,7 +232,7 @@
                                     <c:if test="${paInfo.gender == 'F'}">
                                         value="Female"
                                     </c:if>
-                                    <c:if test="${paInfo.gender == 'O'}">
+                                    <c:if test="${paInfo.gender == 'X'}">
                                         value="Other"
                                     </c:if>
                             >

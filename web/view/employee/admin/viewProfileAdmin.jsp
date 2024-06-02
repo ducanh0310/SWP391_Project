@@ -104,6 +104,12 @@
             .container-box .p-3.py-5 {
                 padding: 1rem; /* Gi?m padding bên trong h?p */
             }
+             .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
+            height: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
+            object-fit: cover; /* ??m b?o hình ?nh ???c c?t g?n v?a v?i hình tròn */
+        }
         </style>
     </head>
 
@@ -218,7 +224,7 @@
                     <div style="margin-top: 50px;"></div>
                     <div class="col-md-3 container-box imageProfile">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                            <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
                             <br>
                             <span class="font-weight-bold">${username}</span>
                             <span class="text-black-50">${emInfo.email}</span>

@@ -5,6 +5,7 @@
 
 package controller.employee;
 
+import dao1.DBAccount;
 import dao1.DBEmployeeProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.DoctorCertification;
 import model.Employee;
 
@@ -26,8 +28,8 @@ import model.Employee;
  *
  * @author Vu Minh Quan
  */
-@WebServlet(name="EditPatientEmployeeController", urlPatterns={"/employee/profile/edit"})
-public class EditPatientEmployeeController extends HttpServlet {
+@WebServlet(name="EditProfileEmployeeController", urlPatterns={"/employee/profile/edit"})
+public class EditProfileEmployeeController extends HttpServlet {
    
   
 
@@ -40,18 +42,24 @@ public class EditPatientEmployeeController extends HttpServlet {
             Employee emInfo = dbEm.getInfoEmployee("johnli255a");
             if("d".equals(emInfo.getEmployeeType())){
                 ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification("johnli255a");
+                DBAccount db = new DBAccount();
+                Account acc= db.showAccountInfo("johnli255a");
+                request.setAttribute("image", acc.getImage());
                 request.setAttribute("arrayCerti", arrayCerti);
                 request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", "tisla2714");
+                request.setAttribute("username", "johnli255a");
                 request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
             }
             if("b".equals(emInfo.getEmployeeType())){
+                DBAccount db = new DBAccount();
+                Account acc= db.showAccountInfo("kdo2342");
+                request.setAttribute("image", acc.getImage());
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", "kdo2342");
                 request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditPatientEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
  
@@ -110,7 +118,7 @@ public class EditPatientEmployeeController extends HttpServlet {
         }
         response.sendRedirect("view");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditPatientEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

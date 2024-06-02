@@ -37,8 +37,9 @@ public class ViewProfilePatientController extends HttpServlet {
            
             DBAccount db = new DBAccount();
             Account acc= db.showAccountInfo("elmurder666");
-            PatientInfo patientInfo= dbProfile.getInfoPatient("elmurder666"); 
             request.setAttribute("image", acc.getImage());
+            PatientInfo patientInfo= dbProfile.getInfoPatient("elmurder666"); 
+            
 //            HttpSession session = request.getSession();
 //            User currentUser = (User) session.getAttribute("currentUser");
               
