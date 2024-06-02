@@ -34,8 +34,8 @@ public class EditProfilePatientController extends HttpServlet {
         //elmurder666
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
-        boolean isPatent = (boolean) session.getAttribute("isPatient");
         try {
+            boolean isPatent = (boolean) session.getAttribute("isPatient");
             if (!isPatent || isPatent == null) {
                 session = request.getSession(false);
                 session.invalidate();
