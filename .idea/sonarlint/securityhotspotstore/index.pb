@@ -19,3 +19,5 @@ e
 5src/java/controller/authen/NewPasswordController.java,f\9\f9aebdcbd2e061e44feb68c6cd7c33d099221427
 O
 web/view/authen/NewPassword.jsp,e\9\e9e2dd8c7105c6520a81e0fdd7af49eaa2bb48c1
+M
+src/java/dao1/AccountDAO.java,7\a\7a4fbc231f1e3250db3a2ef5b29c8fcd16ab5fc9

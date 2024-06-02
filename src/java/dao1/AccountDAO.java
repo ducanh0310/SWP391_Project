@@ -43,54 +43,12 @@ public class AccountDAO {
         }
         return list;
     }
-    public boolean addPatient(String address, String name, String gender, String email, Date DOB ) {
-        String query = "INSERT INTO Patient_info(address, name, gender, email, DOB) VALUES(?,?,?,?,?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, address);
-            statement.setString(2, name);
-            statement.setString(3, gender);
-            statement.setString(4, email);
-            statement.setDate(5, DOB);
-            statement.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName());
-            return false;
-        }
-    }
-    public boolean addAccount(String username, String password, int patientId, int type_id) {
-        String query = "INSERT INTO User_account(username, password, patient_id, type_id) VALUES(?,?,?, 1)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, username);
-            statement.setString(2, password);
-            statement.setInt(3, patientId);
-            statement.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName());
-            return false;
-        }
-    }
+
     public boolean checkAccount(String username) {
         String query = "SELECT username FROM User_account WHERE username = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
-            ResultSet rs = statement.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName());
-            return false;
-        }
-    }
-    public boolean checkEmail(String email) {
-        String query = "SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE email = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, email);
-            statement.setString(2, email);
             ResultSet rs = statement.executeQuery();
             return rs.next();
         } catch (SQLException ex) {

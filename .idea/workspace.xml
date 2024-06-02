@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6045067-40f7-479b-9e5e-1ab77f451790" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/0/206357d5062e8651a8d07e527b91aaaabd86e203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a9e55fe8b80e5c9418b32d3418db1fe3de8fe8f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/98d400ba00f54a1b20038c9fd473d57aa0edde3b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d22824c93b5b142623f95885a13e019fcb22ef1c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/0/206357d5062e8651a8d07e527b91aaaabd86e203" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/a/5a9e55fe8b80e5c9418b32d3418db1fe3de8fe8f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/8/98d400ba00f54a1b20038c9fd473d57aa0edde3b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/2/d22824c93b5b142623f95885a13e019fcb22ef1c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/NewPasswordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/NewPasswordController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/registeraccountcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/registeraccountcontroller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Validation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Validation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/NewPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/NewPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/registeraccountcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/authen/registeraccountcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/dao1/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao1/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/validation/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/validation/Validation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/authen/NewPassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/authen/NewPassword.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +131,7 @@
       <workItem from="1716829166888" duration="16917000" />
       <workItem from="1716916591207" duration="12656000" />
       <workItem from="1717040116695" duration="1403000" />
-      <workItem from="1717294451342" duration="308000" />
+      <workItem from="1717294451342" duration="994000" />
     </task>
     <servers />
   </component>
