@@ -58,8 +58,14 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response); 
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            response.sendRedirect("index.jsp");
+        }else{
+            request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
 
+        }
     }
 
     /**
@@ -82,10 +88,10 @@ public class ChangePasswordServlet extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             userDAO.changePassword(currentUser.getName(), newPass);
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        }else{
+        } else {
             request.setAttribute("error", "Re-enter password do not match your new password!");
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-            
+
         }
     }
 

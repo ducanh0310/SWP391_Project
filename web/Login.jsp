@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,7 +98,14 @@
                     <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                 </div>
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                <a href="register" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
+                    <c:choose>
+                        <c:when test="${currentUser == null}">
+                        <a href="login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+                    </c:otherwise>
+                </c:choose>
                 <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
             </div>
         </nav>
@@ -110,12 +119,15 @@
                             <h3 class="mb-4">Login</h3>
                             <form action="login" method="post">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="${currentUser.getName()}" required>
+                                    <label for="username" class="form-label">Email/Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter email or username " value="${currentUser.getName()}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                                </div>
+                                <div style="text-align: end; margin-bottom: 10px">
+                                    <a href="ForgotPassword">Forgot password</a>
                                 </div>
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary">Login</button>
@@ -124,33 +136,20 @@
                                     <div style="color: red"> ${error}</div>
                                 </div>
                             </form>
-                                <div class="mb-3" style="text-align: center">
-                                    <label class="form-label">Or</label>
-                                </div>
-                                <div class="mb-3" >
-                                    <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 28px; height: 27px; border-radius: 25px"></img>
-                                    <button style="background-color: white; padding-left: 0px; border-radius: 10px">
-                                        <a style="color: Black; padding-left: 5px" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Google</a>
-                                    </button>
-                                </div>
+                            <div class="mb-3" style="text-align: center">
+                                <label class="form-label">Or</label>
+                            </div>
+                            <div class="mb-3" >
+                                <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 28px; height: 27px; border-radius: 25px"></img>
+                                <button style="background-color: white; padding-left: 0px; border-radius: 10px">
+                                    <a style="color: Black; padding-left: 5px" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Google</a>
+                                </button>
+                            </div>
 
-                                <div>
-                                    <a>Don't have an account?</a>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <a href="register">Register now!</a> 
-                                            </td>
-                                            <td>
-                                                <a>or</a>
-                                            </td>
-                                            <td>
-                                                <a href="ForgotPassword">Forgot password</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </div>
+                            <div>
+                                <a>Don't have an account?</a>
+                                <a href="register">Register now!</a> 
+                            </div>
                         </div>
                     </div>
                 </div>

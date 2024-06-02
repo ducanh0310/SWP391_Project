@@ -88,8 +88,8 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             UserDAO userDAO = new UserDAO();
-            User user = userDAO.checkUser(userName, passWord);
-            if (user != null) {
+            User user = userDAO.checkUser(userName);
+            if (user != null && user.getPassword().equals(passWord)) {
                 session.setAttribute("currentUser", user);
                 Authorization author = new Authorization();
                 if (user.getType_Id() == 0) {
