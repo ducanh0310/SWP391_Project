@@ -427,6 +427,12 @@
                                             <input type="button" class="btn btn-primary px-4" value="Save Changes" onclick="showCodeAndRedirect()" /></div>
                                             
                                     </div>
+                                     <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="button" class="btn btn-primary px-4" value="Cancel" onclick="showCodeAndRedirect()" /></div>
+                                            
+                                    </div>
                                     
                                     <div id="result" class="main-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; ">
                                         <div class="check-container">

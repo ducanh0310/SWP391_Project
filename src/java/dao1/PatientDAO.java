@@ -3,22 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao1;
+
 import java.sql.*;
 import dal.DBContext;
 import java.util.logging.Logger;
 import model.Patient;
+
 /**
  *
  * @author ADMIN
  */
-public class PatientDAO  {
+public class PatientDAO {
+
     private final Connection connection;
-private PreparedStatement ps;
+    private PreparedStatement ps;
+
     public PatientDAO() {
         this.connection = DBContext.getConnection();
     }
+
     public boolean addPatient(Patient p) {
-          String query = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, p.getSin());
@@ -27,9 +32,9 @@ private PreparedStatement ps;
             statement.setString(4, p.getGender());
             statement.setString(5, p.getEmail());
             statement.setString(6, p.getPhone());
-            statement.setDate(7,  p.getDob());
+            statement.setDate(7, p.getDob());
             statement.setString(8, p.getInsurance());
-              statement.setInt(9, p.getRep_id());
+            statement.setInt(9, p.getRep_id());
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -37,9 +42,9 @@ private PreparedStatement ps;
             return false;
         }
     }
-    
-   public boolean addPatientAccount(Patient p, String username, String password) {
-         String insertPatientSQL = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    public boolean addPatientAccount(Patient p, String username, String password) {
+        String insertPatientSQL = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String insertUserAccountSQL = "INSERT INTO User_account (username, password, type_id, patient_id) VALUES (?, ?, ?, ?)";
 
         PreparedStatement insertPatientStmt = null;
@@ -58,9 +63,9 @@ private PreparedStatement ps;
             insertPatientStmt.setString(4, p.getGender());
             insertPatientStmt.setString(5, p.getEmail());
             insertPatientStmt.setString(6, p.getPhone());
-            insertPatientStmt.setDate(7,  p.getDob());
+            insertPatientStmt.setDate(7, p.getDob());
             insertPatientStmt.setString(8, p.getInsurance());
-              insertPatientStmt.setInt(9, p.getRep_id());
+            insertPatientStmt.setInt(9, p.getRep_id());
             int affectedRows = insertPatientStmt.executeUpdate();
 
             if (affectedRows == 0) {
@@ -102,17 +107,35 @@ private PreparedStatement ps;
         } finally {
             // Clean up resources
             try {
-                if (generatedKeys != null) generatedKeys.close();
-                if (insertPatientStmt != null) insertPatientStmt.close();
-                if (insertUserAccountStmt != null) insertUserAccountStmt.close();
-                if (connection != null) connection.setAutoCommit(true); // Reset auto-commit to true
+                if (generatedKeys != null) {
+                    generatedKeys.close();
+                }
+                if (insertPatientStmt != null) {
+                    insertPatientStmt.close();
+                }
+                if (insertUserAccountStmt != null) {
+                    insertUserAccountStmt.close();
+                }
+                if (connection != null) {
+                    connection.setAutoCommit(true); // Reset auto-commit to true
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    public Patient getPatientById(int id) {
+        Patient p = new Patient();
+        p.setId(id);
+        return p;
+    }
     
-    
+    public boolean updatePatient(Patient p) {
+        
+         return true;
+    }
+
     public static void main(String[] args) {
         Patient p = new Patient(0, "bac", "danh", "f", "@mail", "123244", Date.valueOf("2002-10-03"), "123124321", 1);
         PatientDAO pa = new PatientDAO();
