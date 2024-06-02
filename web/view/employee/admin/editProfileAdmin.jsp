@@ -38,7 +38,7 @@
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
 
         <style>
             .m-0 {
@@ -104,6 +104,36 @@
             .container-box .p-3.py-5 {
                 padding: 1rem; /* Gi?m padding bên trong h?p */
             }
+            
+            .profile-pic-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic {
+            display: block;
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 25px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+        
+        .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
+            height: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
+            object-fit: cover; /* ??m b?o hình ?nh ???c c?t g?n v?a v?i hình tròn */
+        }
         </style>
     </head>
 
@@ -218,7 +248,32 @@
                     <div style="margin-top: 50px;"></div>
                     <div class="col-md-3 container-box imageProfile">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                            <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            <div class="profile-pic-wrapper" id="uploadImageButton">
+                    
+                            <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
+                            <i class="fa fa-camera camera-icon"></i>
+                        </div>
+                            
+                                            <!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="imageForm" action="../../uploadimage" method="POST">
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label">Image URL</label>
+              <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
                             <br>
                             <span class="font-weight-bold">${username}11</span>
                             <span class="text-black-50">${emInfo.email}11</span>
@@ -230,6 +285,7 @@
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-5 container-box">
+                        <form action="edit" method="POST">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">My account</h4>
@@ -340,6 +396,45 @@
 
         <!-- Template Javascript -->
         <script src="../../js/main.js"></script>
+        
+        <script>
+            // Show modal when clicking the upload image button
+document.getElementById('uploadImageButton').addEventListener('click', function() {
+    $('#uploadModal').modal('show');
+});
+
+// Handle form submission with AJAX
+document.getElementById('imageForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent traditional form submission
+
+    var element = $(this);
+
+    $.ajax({
+        url: '../../uploadimage',
+        type: 'POST',
+        data:element.serializeArray(),// serializes the form data.
+        dataType:'json',
+        success: function(response) {
+            if (response.success) {
+                $('#uploadModal').modal('hide'); // Hide modal
+                alert('Image uploaded successfully');
+                document.getElementById('profile-pic').src = response.imageUrl; // Update image
+            } else {
+                alert('Message: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            var responseText = xhr.responseText;
+            try {
+                var jsonResponse = JSON.parse(responseText);
+                alert('An error occurred: ' + jsonResponse.message);
+            } catch (e) {
+                alert('An error occurred: ' + responseText);
+            }
+        }
+    });
+});
+        </script>
     </body>
 
 </html>

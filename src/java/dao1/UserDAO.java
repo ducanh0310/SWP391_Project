@@ -23,7 +23,7 @@ public class UserDAO extends DBContext {
 
     private final Connection connection;
 
-    public UserDAO() {
+    public UserDAO() throws ClassNotFoundException {
         this.connection = DBContext.getConnection();
     }
 

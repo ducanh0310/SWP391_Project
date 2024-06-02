@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>DentCare - Dental Clinic</title>
@@ -99,6 +99,38 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            
+    
+        .profile-pic-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic {
+            display: block;
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 25px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+        
+        .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+        }
+    </style>
         </style>
     </head>
     <body>  
@@ -172,18 +204,48 @@
     
     <!--profile-->
     
+    
+    
     <div class="row justify-content-center " >
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <div class="profile-pic-wrapper" id="uploadImageButton">
+                    
+                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
+                    <i class="fa fa-camera camera-icon"></i>
+                </div>
+                
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
+                <br>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
-                
             </div>
+
+                <!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="imageForm" action="../../uploadimage" method="POST">
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label">Image URL</label>
+              <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5 container-box">
@@ -222,7 +284,7 @@
                             <select class="form-select" id="gender" name="gender">
                                 <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
                                 <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
-                                <option value="O" <c:if test="${paInfo.gender == 'O'}">selected</c:if>>Other</option>
+                                <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
                             </select>
                         </div>                    
 
@@ -246,7 +308,7 @@
         
     </div>
 
-
+                    
     
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
@@ -296,6 +358,48 @@
 
 
     <!-- JavaScript Libraries -->
+    <script>
+        
+ // Show modal when clicking the upload image button
+document.getElementById('uploadImageButton').addEventListener('click', function() {
+    $('#uploadModal').modal('show');
+});
+
+// Handle form submission with AJAX
+document.getElementById('imageForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent traditional form submission
+
+    var element = $(this);
+
+    $.ajax({
+        url: '../../uploadimage',
+        type: 'POST',
+        data:element.serializeArray(),// serializes the form data.
+        dataType:'json',
+        success: function(response) {
+            if (response.success) {
+                $('#uploadModal').modal('hide'); // Hide modal
+                alert('Image uploaded successfully');
+                document.getElementById('profile-pic').src = response.imageUrl; // Update image
+            } else {
+                alert('Message: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            var responseText = xhr.responseText;
+            try {
+                var jsonResponse = JSON.parse(responseText);
+                alert('An error occurred: ' + jsonResponse.message);
+            } catch (e) {
+                alert('An error occurred: ' + responseText);
+            }
+        }
+    });
+});
+        
+
+           
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../lib/wow/wow.min.js"></script>
