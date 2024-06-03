@@ -183,8 +183,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="logout">
                                 <i class="bi bi-box-arrow-left"></i> Logout
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="confirmpass">
+                                <i class="bi bi-box-arrow-left"></i> Change password
                             </a>
                         </li>
                     </ul>

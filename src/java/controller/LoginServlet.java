@@ -82,8 +82,8 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("username");
         String passWord = request.getParameter("password");
 
-        if (userName == null || passWord == null
-                || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
+        if (userName.trim() == null || passWord.trim() == null
+                || userName.trim().trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
                             session.setAttribute("isNurse", true);
-                            request.getRequestDispatcher("view/employee/Nurse/home.jsp").forward(request, response);
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
                             session.setAttribute("isrecep", true);
