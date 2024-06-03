@@ -161,7 +161,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <i class="bi bi-lock-fill"></i> Change Password
+                                <i class="bi bi-lock-fill"></i>Change Password
                             </a>
                         </li>
                         <li class="nav-item">

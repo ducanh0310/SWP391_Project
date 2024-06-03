@@ -248,10 +248,16 @@
                         <div class="col-md-6">
                             <label class="labels">Fullname</label>
                             <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${emInfo.name}" >
+                            <c:if test="${not empty errorMsg.fullname}">
+                                <span style="color:red">${errorMsg.fullname}</span>
+                            </c:if>
                         </div>        
                         <div class="col-md-6">
                             <label class="labels">Phone Number</label>
                             <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${emInfo.phoneNumber}">
+                            <c:if test="${not empty errorMsg.phoneNumber}">
+                                <span style="color:red">${errorMsg.phoneNumber}</span>
+                            </c:if>
                         </div>
                     </div>
 
@@ -263,6 +269,9 @@
                         <div class="col-md-6">
                             <label class="labels">Medicine code</label>
                             <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${emInfo.employeeSin}">
+                            <c:if test="${not empty errorMsg.medicalCode}">
+                                <span style="color:red">${errorMsg.medicalCode}</span>
+                            </c:if>
                         </div>
                     </div>
 
@@ -279,6 +288,9 @@
                         <div class="col-md-6">
                             <label class="labels">Date of birth</label>
                             <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
+                            <c:if test="${not empty errorMsg.dob}">
+                                <span style="color:red">${errorMsg.dob}</span>
+                            </c:if>
                         </div>
                     </div>
 
@@ -303,6 +315,9 @@
                         <div class="col-md-6">
                             <label class="labels">Address</label>
                             <input type="text" id="address" name="address" class="form-control" placeholder="" value="${emInfo.address}" >
+                            <c:if test="${not empty errorMsg.address}">
+                                <span style="color:red">${errorMsg.address}</span>
+                            </c:if>
                         </div>
                         <div class="col-md-6">
                             <label class="labels">Working Branch</label>
@@ -314,21 +329,24 @@
                         <br>
                         <label class="labels">Certification</label>
                         <div id="certificateContainer">
-                        <c:forEach items="${requestScope.arrayCerti}" var="cer">
-                            <div class="row mt-3">
-                                <input type="hidden" name="idCer"value="${cer.id}">
-                                <div class="col-md-6">
+                            <c:forEach items="${requestScope.arrayCerti}" var="cer">
+                                <div class="row mt-3">
+                                    <input type="hidden" name="idCer"value="${cer.id}">
+                                    <div class="col-md-6">
 
-                                    <label class="labels">Name</label>
-                                    <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="${cer.name}" >
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="labels">URL</label>
+                                        <label class="labels">Name</label>
+                                        <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="${cer.name}" >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="labels">URL</label>
 
-                                    <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="${cer.url}">
+                                        <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="${cer.url}">
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                            <c:if test="${not empty errorMsg.link}">
+                                    <span style="color:red">${errorMsg.link}</span>
+                            </c:if>
                         </div>
                         <br>
                         <button type="button" class="btn btn-secondary" onclick="addCertificateForm()">Add Certificate</button>

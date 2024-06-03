@@ -5,10 +5,10 @@
 
 package controller.employee;
 
+
 import dao1.DBAccount;
 import dao1.DBEmployeeProfile;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,12 +19,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 import model.DoctorCertification;
 import model.Employee;
 import model.User;
+import validation.Validation;
 
 /**
  *
@@ -72,68 +75,161 @@ public class EditProfileEmployeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
         try {
-            Employee emInfo = new Employee();
-            emInfo.setId(Integer.parseInt(request.getParameter("id")));
-            emInfo.setName(request.getParameter("fullname"));
-            emInfo.setPhoneNumber(request.getParameter("phoneNumber"));
-            emInfo.setEmail(request.getParameter("email"));
-            emInfo.setEmployeeSin(Integer.parseInt(request.getParameter("medicineCode")));
-            emInfo.setGender(request.getParameter("gender"));
-            emInfo.setDob(Date.valueOf(request.getParameter("dob")));
-            emInfo.setEmployeeType(request.getParameter("role"));
-            emInfo.setAnnualSalary(Float.parseFloat(request.getParameter("salary")));
-            emInfo.setAddress(request.getParameter("address"));
-            emInfo.setBranchId(Integer.parseInt(request.getParameter("branchid"))); 
-            
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            Map<String, String> errorMsg = new HashMap<>();
             DBEmployeeProfile db = new DBEmployeeProfile();
-            db.editInfoEmployee(emInfo);
-            
-            
-            
-            //Certification
-            //kdo2342
-            
-            Employee emInfoCer = db.getInfoEmployee(currentUser.getName());
-            if("d".equals(emInfoCer.getEmployeeType())){
-            int id = Integer.parseInt(request.getParameter("id"));
-             String[] imageLinks = request.getParameterValues("imageLink");
-            String[] imageNames = request.getParameterValues("imageName");
-            String[] idStrings = request.getParameterValues("idCer");
-            int[] idImage = new int[idStrings.length];
-            // Handle empty strings and null values
-            for (int i = 0; i < idStrings.length; i++) {
-                if (idStrings[i] == null || idStrings[i].isEmpty()) {
-                    idImage[i] = 0; // Default value for empty or null strings
-                } else {
-                    idImage[i] = Integer.parseInt(idStrings[i]);
+            try {
+                int patientId = Integer.parseInt(request.getParameter("id"));
+                String role= request.getParameter("role");
+                float salary=Float.parseFloat(request.getParameter("salary"));
+                int branchId=Integer.parseInt(request.getParameter("branchid"));
+                String patientSin = request.getParameter("medicineCode");
+                String fullname = request.getParameter("fullname");
+                String phoneNumber = request.getParameter("phoneNumber");
+                String email = request.getParameter("email");
+                String gender = request.getParameter("gender");
+                String dobStr = request.getParameter("dob");
+                String address = request.getParameter("address");
+                String branch = request.getParameter("branch");
+                Validation valid= new Validation();
+                
+                // Validate name
+                if (!valid.isName(fullname)) {
+                    errorMsg.put("fullname","Full name must be between 2 and 50 characters.") ;
                 }
-            }
-            DBEmployeeProfile dbEm = new DBEmployeeProfile();
-            if (imageLinks != null && imageNames != null && imageLinks.length == imageNames.length) {
-            for (int i = 0; i < imageLinks.length; i++) {
-                String imageLink = imageLinks[i];
-                String imageName = imageNames[i];
-                int imageId = idImage[i];
+                
+                //Validate phone number
+                if (!valid.isPhoneNumber(phoneNumber)) {
+                    errorMsg.put("phoneNumber","Phone number must exactly 10 digits.") ;
+                }
+                
+                
+                
+                //Validate Medical code
+                int medicalCode =0;
+                if(!valid.isMedicalCode(patientSin)){
+                    errorMsg.put("medicalCode","Medical code must exactly 10 digits.");
+                }else{
+                    medicalCode=Integer.parseInt(patientSin);
+                }
+                
+                // Validate date format
+                Date dob=null;
+                int flag=0;
+                if(valid.isDateOfBirth(dobStr)==false){
+                    errorMsg.put("dob","Use yyyy-mm-dd.");
+                }else{
+                    dob= Date.valueOf(dobStr);
+                    flag=1;
+                }
+                if(flag==1){
+                    if(valid.isDistantDOB(dob) == false ){
+                        errorMsg.put("dob","Your date of birth must before now and you must be 18 years or older.") ;
+                    }
+                }
+                
+                //Validate address
+                if(!valid.isAddress(address)){
+                    errorMsg.put("address","Address must from 2 to 100 character.");
+                }
+                
+                
+                
+                //Validate
+                if (!errorMsg.isEmpty()) {
+                    
+                    DBEmployeeProfile dbEm=new DBEmployeeProfile();
+                    Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
+                    //johnli255a
+                    if("d".equals(emInfo.getEmployeeType())){
+                        ArrayList<DoctorCertification> arrayCerti= dbEm.getCertification(currentUser.getName());
+                        DBAccount dbA = new DBAccount();
+                        Account acc= dbA.showAccountInfo(currentUser.getName());
+                        request.setAttribute("errorMsg", errorMsg);
+                        request.setAttribute("image", acc.getImage());
+                        request.setAttribute("arrayCerti", arrayCerti);
+                        request.setAttribute("emInfo", emInfo);
+                        request.setAttribute("username", currentUser.getName());
+                        request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
 
-                if (isValidURL(imageLink)) {
-                    if (imageId != 0) {
-                        dbEm.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);
-                    } else {
-                        dbEm.insertCertification(imageName, imageLink, id);
+                    }
+                    //kdo2342
+                    if("b".equals(emInfo.getEmployeeType())){
+                        DBAccount dbA = new DBAccount();
+                        Account acc= dbA.showAccountInfo(currentUser.getName());
+                        request.setAttribute("errorMsg", errorMsg);
+                        request.setAttribute("image", acc.getImage());
+                        request.setAttribute("emInfo", emInfo);
+                        request.setAttribute("username", currentUser.getName());
+                        request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
+                    }
+                    
+                }
+                
+                
+                
+                
+                Employee emInfo = new Employee();
+                emInfo.setId(patientId);
+                emInfo.setName(fullname);
+                emInfo.setPhoneNumber(phoneNumber);
+                emInfo.setEmail(email);
+                emInfo.setEmployeeSin(medicalCode);
+                emInfo.setGender(gender);
+                emInfo.setDob(dob);
+                emInfo.setEmployeeType(role);
+                emInfo.setAnnualSalary(salary);
+                emInfo.setAddress(address);
+                emInfo.setBranchId(branchId);
+                db.editInfoEmployee(emInfo);
+                //Certification
+                //kdo2342
+                
+                
+                Employee emInfoCer = db.getInfoEmployee(currentUser.getName());
+                if("d".equals(emInfoCer.getEmployeeType())){
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    String[] imageLinks = request.getParameterValues("imageLink");
+                    String[] imageNames = request.getParameterValues("imageName");
+                    String[] idStrings = request.getParameterValues("idCer");
+                    int[] idImage = new int[idStrings.length];
+                    // Handle empty strings and null values
+                    for (int i = 0; i < idStrings.length; i++) {
+                        if (idStrings[i] == null || idStrings[i].isEmpty()) {
+                            idImage[i] = 0; // Default value for empty or null strings
+                        } else {
+                            idImage[i] = Integer.parseInt(idStrings[i]);
+                        }
+                    }
+                    DBEmployeeProfile dbEm = new DBEmployeeProfile();
+                    if (imageLinks != null && imageNames != null && imageLinks.length == imageNames.length) {
+                        for (int i = 0; i < imageLinks.length; i++) {
+                            String imageLink = imageLinks[i];
+                            String imageName = imageNames[i];
+                            int imageId = idImage[i];
+                            
+                            if (isValidURL(imageLink)) {
+                                if (imageId != 0) {
+                                    dbEm.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);
+                                } else {
+                                    dbEm.insertCertification(imageName, imageLink, id);
+                                }
+                            } else {
+                                errorMsg.put("link", "Invalid link form");
+                                
+                            }
+                        }
+                        response.getWriter().println("Processing completed.");
                     }
                 } else {
-                    response.getWriter().println("Invalid image link: " + imageLink);
+                    response.getWriter().println("Mismatch in number of image links and names.");
                 }
+                response.sendRedirect("view");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            response.getWriter().println("Processing completed.");
-            }
-        } else {
-            response.getWriter().println("Mismatch in number of image links and names.");
-        }
-        response.sendRedirect("view");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
