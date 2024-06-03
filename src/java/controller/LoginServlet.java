@@ -110,11 +110,11 @@ public class LoginServlet extends HttpServlet {
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
                             session.setAttribute("isDoctor", true);
-                            request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
+                            request.getRequestDispatcher("view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
                             session.setAttribute("isNurse", true);
-                            request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
+                            request.getRequestDispatcher("view/employee/Nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
                             session.setAttribute("isrecep", true);

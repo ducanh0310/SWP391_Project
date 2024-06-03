@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/doctor/viewProfileDoctor.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/authen/changePassword.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/LoginServlet.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/authen/ConfirmPassword.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/nbproject/build-impl.xml</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/patient/EditProfilePatientController.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/index.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/Login.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/authen/NewPassword.jsp</file>
         </group>
