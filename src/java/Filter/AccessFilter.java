@@ -23,7 +23,7 @@ import java.io.StringWriter;
  *
  * @author ngphn
  */
-@WebFilter(filterName = "AccessFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "AccessFilter")
 public class AccessFilter implements Filter {
 
     private static final boolean debug = true;
