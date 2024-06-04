@@ -87,6 +87,7 @@ CREATE TABLE [dbo].[Employee](
 	[employee_sin] [int] NULL,
 	[employee_type] [varchar](1) NOT NULL,
 	[name] [varchar](255) NOT NULL,
+	[email] [varchar](255) NOT NULL,
 	[address] [varchar](255) NOT NULL,
 	[annual_salary] [numeric](10, 2) NOT NULL,
 	[branch_id] [int] NOT NULL,
@@ -353,27 +354,27 @@ SET IDENTITY_INSERT [dbo].[Branch] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Employee] ON 
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (1, 123456789, N'r', N'Bob Marley', N'123 Postgres Street, Ottawa, ON, Canada', CAST(60000.25 AS Numeric(10, 2)), 1)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (1, 123456789, N'r', N'Bob Marley', 'bobmley1@gmail.com',  N'123 Postgres Street, Ottawa, ON, Canada', CAST(60000.25 AS Numeric(10, 2)), 1)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (2, 141286236, N'd', N'Tisham Islam', N'123 Postgres Street, Ottawa, ON, Canada', CAST(75000.50 AS Numeric(10, 2)), 1)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (2, 141286236, N'd', N'Tisham Islam', 'tisla2714@gmail.com', N'123 Postgres Street, Ottawa, ON, Canada', CAST(75000.50 AS Numeric(10, 2)), 1)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (3, 158453648, N'd', N'Céline Wan', N'123 Postgres Street, Ottawa, ON, Canada', CAST(75000.50 AS Numeric(10, 2)), 1)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (3, 158453648, N'd', N'Céline Wan', 'cwmk3565@gmail.com', N'123 Postgres Street, Ottawa, ON, Canada', CAST(75000.50 AS Numeric(10, 2)), 1)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (4, 198523644, N'h', N'Amy Kkiti', N'123 Postgres Street, Ottawa, ON, Canada', CAST(65000.50 AS Numeric(10, 2)), 1)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (4, 198523644, N'h', N'Amy Kkiti', 'akiti7935@gmai.com', N'123 Postgres Street, Ottawa, ON, Canada', CAST(65000.50 AS Numeric(10, 2)), 1)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (5, 165984846, N'b', N'Kien Do', N'523 Sesame Street, Ottawa, ON, Canada', CAST(83000.50 AS Numeric(10, 2)), 1)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (5, 165984846, N'b', N'Kien Do', 'kdo2342@gmail.com', N'523 Sesame Street, Ottawa, ON, Canada', CAST(83000.50 AS Numeric(10, 2)), 1)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (6, 388498874, N'd', N'John Li', N'1225 Imaginary Street, Toronto, ON, Canada', CAST(70000.50 AS Numeric(10, 2)), 2)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (6, 388498874, N'd', N'John Li', 'johnli255a@gmail.com', N'1225 Imaginary Street, Toronto, ON, Canada', CAST(70000.50 AS Numeric(10, 2)), 2)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (7, 432364646, N'd', N'Samy Touabi', N'5346 Postgres Avenue, Toronto, ON, Canada', CAST(70000.50 AS Numeric(10, 2)), 2)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (7, 432364646, N'd', N'Samy Touabi', 'stoua0809@gmail.com', N'5346 Postgres Avenue, Toronto, ON, Canada', CAST(70000.50 AS Numeric(10, 2)), 2)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (8, 665946369, N'r', N'Oliva Mars', N'355 MySQL Road, Toronto, ON, Canada', CAST(55000.50 AS Numeric(10, 2)), 2)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (8, 665946369, N'r', N'Oliva Mars', 'olvMar8@gmail.com', N'355 MySQL Road, Toronto, ON, Canada', CAST(55000.50 AS Numeric(10, 2)), 2)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (9, 135941655, N'r', N'Christopher Castillo', N'885 NoSQL Drive, Toronto, ON, Canada', CAST(55000.50 AS Numeric(10, 2)), 2)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (9, 135941655, N'r', N'Christopher Castillo', 'CrsClo9@gmail.com', N'885 NoSQL Drive, Toronto, ON, Canada', CAST(55000.50 AS Numeric(10, 2)), 2)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (10, 256356565, N'h', N'Nakul Lover', N'5243 MariaDB Crossing, Toronto, ON, Canada', CAST(60000.50 AS Numeric(10, 2)), 2)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (10, 256356565, N'h', N'Nakul Lover', 'naklov@gmail.com', N'5243 MariaDB Crossing, Toronto, ON, Canada', CAST(60000.50 AS Numeric(10, 2)), 2)
 GO
-INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id]) VALUES (11, 956233565, N'b', N'Bruno Bale', N'420 Oracle Street, Toronto, ON, Canada', CAST(83000.50 AS Numeric(10, 2)), 2)
+INSERT [dbo].[Employee] ([employee_id], [employee_sin], [employee_type], [name], [email], [address], [annual_salary], [branch_id]) VALUES (11, 956233565, N'b', N'Bruno Bale', 'brunob@gmail.com', N'420 Oracle Street, Toronto, ON, Canada', CAST(83000.50 AS Numeric(10, 2)), 2)
 GO
 SET IDENTITY_INSERT [dbo].[Employee] OFF
 GO

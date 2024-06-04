@@ -98,6 +98,38 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            
+            .profile-pic-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-pic {
+            display: block;
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 25px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+        
+        .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+        }
+        
+
         </style>
     </head>
     <body>
@@ -167,7 +199,33 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <div class="profile-pic-wrapper" id="uploadImageButton">
+                    
+                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
+                    <i class="fa fa-camera camera-icon"></i>
+                </div>
+                    
+                                    <!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="imageForm" action="../../uploadimage" method="POST">
+            <div class="mb-3" style="">
+              <label for="imageUrl" class="form-label">Image URL</label>
+              <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${emInfo.email}</span>
                 <br>
@@ -252,8 +310,31 @@
                             <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
                         </div>
                     </div>
+                        
+                        <br>
+                        <label class="labels">Certification</label>
+                        <div id="certificateContainer">
+                        <c:forEach items="${requestScope.arrayCerti}" var="cer">
+                            <div class="row mt-3">
+                                <input type="hidden" name="idCer"value="${cer.id}">
+                                <div class="col-md-6">
 
+                                    <label class="labels">Name</label>
+                                    <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="${cer.name}" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">URL</label>
 
+                                    <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="${cer.url}">
+                                </div>
+                            </div>
+                        </c:forEach>
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-secondary" onclick="addCertificateForm()">Add Certificate</button>
+                        
+                        <!-- Button to add new certification fields -->
+<!--                        <button id="addCertButton" class="btn btn-secondary mt-3">Add Certification</button>-->
 
                     <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
 
@@ -326,5 +407,66 @@
 
     <!-- Template Javascript -->
     <script src="../../js/main.js"></script>
+    <script>
+        function addCertificateForm() {
+            const certificateContainer = document.getElementById('certificateContainer');
+            const newCertificateForm = `
+                <div class="row mt-3">
+                    <input type="hidden" name="idCer" value="">
+                    <div class="col-md-6">
+                        <label class="labels">Name</label>
+                        <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labels">URL</label>
+                        <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="">
+                    </div>
+                </div>`;
+            certificateContainer.insertAdjacentHTML('beforeend', newCertificateForm);
+        }
+    </script>
+    
+        <script>
+        
+ // Show modal when clicking the upload image button
+document.getElementById('uploadImageButton').addEventListener('click', function() {
+    $('#uploadModal').modal('show');
+});
+
+// Handle form submission with AJAX
+document.getElementById('imageForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent traditional form submission
+
+    var element = $(this);
+
+    $.ajax({
+        url: '../../uploadimage',
+        type: 'POST',
+        data:element.serializeArray(),// serializes the form data.
+        dataType:'json',
+        success: function(response) {
+            if (response.success) {
+                $('#uploadModal').modal('hide'); // Hide modal
+                alert('Image uploaded successfully');
+                document.getElementById('profile-pic').src = response.imageUrl; // Update image
+            } else {
+                alert('Message: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            var responseText = xhr.responseText;
+            try {
+                var jsonResponse = JSON.parse(responseText);
+                alert('An error occurred: ' + jsonResponse.message);
+            } catch (e) {
+                alert('An error occurred: ' + responseText);
+            }
+        }
+    });
+});
+        
+
+           
+    </script>
     </body>
 </html>

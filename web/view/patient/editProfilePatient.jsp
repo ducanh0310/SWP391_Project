@@ -123,6 +123,13 @@
         .hidden-input {
             display: none;
         }
+        
+        .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+        }
     </style>
         </style>
     </head>
@@ -203,11 +210,12 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <div class="profile-pic-wrapper" onclick="triggerFileInput()">
-                    <img class="rounded-circle mt-5 profile-pic" width="180px" height="180px" src="../../img/profile/no_image_profile.png" id="profile-pic" name="profile-pic" alt="personal image">
+                <div class="profile-pic-wrapper" id="uploadImageButton">
+                    
+                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
                     <i class="fa fa-camera camera-icon"></i>
                 </div>
-                <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file" class="d-none">
+                
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
                 <br>
@@ -215,6 +223,27 @@
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
             </div>
+
+                <!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="imageForm" action="../../uploadimage" method="POST">
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label">Image URL</label>
+              <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
         
         </div>
@@ -331,40 +360,42 @@
     <!-- JavaScript Libraries -->
     <script>
         
-        function triggerFileInput() {
-    document.getElementById('input-file').click();
-}
+ // Show modal when clicking the upload image button
+document.getElementById('uploadImageButton').addEventListener('click', function() {
+    $('#uploadModal').modal('show');
+});
 
-document.getElementById('input-file').onchange = function() {
-    let fileInput = document.getElementById('input-file');
-    if (fileInput.files.length === 0) {
-        alert('Please select an image.');
-        return;
-    }
+// Handle form submission with AJAX
+document.getElementById('imageForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent traditional form submission
 
-    var formData = new FormData();
-    formData.append('profileImage', fileInput.files[0]);
+    var element = $(this);
 
     $.ajax({
-        url: '../../uploadImage',
+        url: '../../uploadimage',
         type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
+        data:element.serializeArray(),// serializes the form data.
+        dataType:'json',
         success: function(response) {
-            $('#profile-pic').attr('src',"../../"+ response.newImageUrl);
-            alert('Image uploaded successfully.');
+            if (response.success) {
+                $('#uploadModal').modal('hide'); // Hide modal
+                alert('Image uploaded successfully');
+                document.getElementById('profile-pic').src = response.imageUrl; // Update image
+            } else {
+                alert('Message: ' + response.message);
+            }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('Error uploading image: ' + errorThrown);
+        error: function(xhr, status, error) {
+            var responseText = xhr.responseText;
+            try {
+                var jsonResponse = JSON.parse(responseText);
+                alert('An error occurred: ' + jsonResponse.message);
+            } catch (e) {
+                alert('An error occurred: ' + responseText);
+            }
         }
     });
-};
-        
-            
-            
-        
-
+});
         
 
            

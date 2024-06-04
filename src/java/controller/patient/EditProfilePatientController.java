@@ -2,47 +2,76 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.patient;
 
-import dao.DBPatientProfile;
+import dao1.DBAccount;
+import dao1.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
+import java.text.ParseException;
 import java.sql.Date;
-
+import model.Account;
+import model.User;
 
 /**
  *
  * @author Vu Minh Quan
  */
+@WebServlet(name = "EditProfilePatientController", urlPatterns = {"/patient/profile/edit"})
 public class EditProfilePatientController extends HttpServlet {
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        //elmurder666
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         try {
-            DBPatientProfile db = new DBPatientProfile();            
-            PatientInfo patientInfo= db.getInfoPatient("elmurder666");            
+            String isPatent = String.valueOf(session.getAttribute("isPatient"));
+            PrintWriter out = response.getWriter();
+            out.print(isPatent);
+            if (isPatent.isEmpty() || isPatent == null) {
+                session = request.getSession(false);
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+            }
+            DBPatientProfile db = new DBPatientProfile();
+            PatientInfo patientInfo = db.getInfoPatient(currentUser.getName());
+            DBAccount db1 = new DBAccount();
+            Account acc = db1.showAccountInfo(currentUser.getName());
+            request.setAttribute("image", acc.getImage());
             request.setAttribute("paInfo", patientInfo);
-            request.setAttribute("username", "elmurder666");
+            request.setAttribute("username", currentUser.getName());
 
             request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
-
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         try {
+            String isPatent = String.valueOf(session.getAttribute("isPatient"));
+            PrintWriter out = response.getWriter();
+            out.print(isPatent);
+            if (isPatent.isEmpty() || isPatent == null) {
+                session = request.getSession(false);
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+            }
             PatientInfo paInfo = new PatientInfo();
             paInfo.setPatientId(Integer.parseInt(request.getParameter("id")));
             paInfo.setPatientSin(Integer.parseInt(request.getParameter("medicineCode")));
@@ -53,14 +82,14 @@ public class EditProfilePatientController extends HttpServlet {
             paInfo.setDob(Date.valueOf(request.getParameter("dob")));
             paInfo.setAddress(request.getParameter("address"));
             DBPatientProfile db = new DBPatientProfile();
-            db.editInfoPatient(paInfo);            
+            db.editInfoPatient(paInfo);
+
             response.sendRedirect("view");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    }
 
+    }
 
     @Override
     public String getServletInfo() {

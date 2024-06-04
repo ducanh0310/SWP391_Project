@@ -45,7 +45,6 @@
                 /*background: rgb(99, 39, 120)*/
             }
 
-            
             .form-control:focus {
                 box-shadow: none;
                 border-color: #BA68C8
@@ -99,10 +98,12 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
-            
-            .m-0 {
-                margin-left: 30px ! important;
-            }
+            .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+        }
         </style>
     </head>
     <body>
@@ -182,7 +183,7 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="180px" heigh="180px" src="../../img/profile/no_image_profile.png">
+                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
                 <br>

@@ -3,11 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/doctor/editProfileDoctor.jsp</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/web/view/employee/doctor/viewProfileDoctor.jsp</file>
-            <file>file:/C:/Users/Vu%20Minh%20Quan/Documents/GitHub/SWP391_Project/src/java/controller/employee/EditProfileEmployeeController.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/nbproject/build-impl.xml</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/model/Patient.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/META-INF/context.xml</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/ForgotPasswordController.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/view/authen/NewPassword.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/view/authen/ForgotPassword.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/model/PatientRegisterDTO.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/validation/Email.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/view/authen/confirmemailregister.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/view/patient/editProfilePatient.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/PatientController.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/dao1/AccountDAO.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/validation/Validation.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/NewPasswordController.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/model/Employee.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/confirmemailregister.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/view/authen/ConfirmEmailForgotPw.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/model/Branch.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/dal/DBContext.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/view/authen/register.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/Filter/AccessFilter.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/registeraccountcontroller.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/web/index.jsp</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/model/PatientInfo.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/ConfirmEmailForgotPwController.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/model/Account.java</file>
+            <file>file:/D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project/src/java/controller/authen/RegisterController.java</file>
         </group>
     </open-files>
 </project-private>

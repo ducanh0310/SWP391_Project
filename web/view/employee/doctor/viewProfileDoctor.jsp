@@ -97,6 +97,62 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            
+    
+
+.certification-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                padding: 10px;
+                border: 1px solid #ced4da;
+                border-radius: 5px;
+                background-color: #fff;
+                width: 100%;
+            }
+
+            .certification-item a {
+                flex-grow: 1;
+                margin-right: 10px;
+                color: #495057;
+                text-decoration: none;
+            }
+
+            .certification-item button {
+                background-color: #06A3DA;
+                border: none;
+                padding: 5px 10px;
+                color: #fff;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .certification-item button:hover {
+                background-color: #06A3DA;
+            }
+
+            .link-as-input {
+                display: inline-block;
+                padding: .375rem .75rem;
+                margin-bottom: 0;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            }
+    
+             .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+        }
+
         </style>
     </head>
     <body>
@@ -162,7 +218,8 @@
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
+
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${emInfo.email}</span>
                 <br>
@@ -172,6 +229,7 @@
                 
             </div>
         </div>
+                
         <div class="col-md-1"></div>
         <div class="col-md-5 container-box">
             <div class="p-3 py-5">
@@ -250,9 +308,22 @@
                         <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
                     </div>
                 </div>
-                
-                
-                
+                    
+                    
+                        <form action="view" method="POST">
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="labels">Certification</label>
+                                    <c:forEach items="${requestScope.arrayCerti}" var="cer">
+                                        <div class="certification-item d-flex align-items-center mb-2">
+                                            <a href="${cer.url}" target="_blank" class="link-as-input">${cer.name}</a>
+                                            <button type="button" class="btn btn-gray btn-sm" onclick="confirmDeletion(${cer.id})">Delete</button>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </form>
+                  
                 <div class="mt-5 text-center">
                     <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                 </div>
@@ -319,5 +390,29 @@
 
     <!-- Template Javascript -->
     <script src="../../js/main.js"></script>
+    
+    <script>
+    function confirmDeletion(certId) {
+        if (confirm("Are you sure you want to delete this certification?")) {
+            // Create a form element
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'view';
+
+            // Create a hidden input element to hold the certification ID
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'deleteCert';
+            input.value = certId;
+
+            // Append the hidden input to the form
+            form.appendChild(input);
+
+            // Append the form to the body and submit it
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+</script>
     </body>
 </html>
