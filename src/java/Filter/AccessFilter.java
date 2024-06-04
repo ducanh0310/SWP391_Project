@@ -113,22 +113,22 @@ public class AccessFilter implements Filter {
             if (userRole != null) {
                 if (userRole.equals("admin")) {
                     if (requestURI.contains("/doctor/") ||requestURI.contains("/nurse/") || requestURI.contains("/patient/")) {
-                        httpResponse.sendRedirect("/SWP391_Project/accessDenied.jsp");
+                        httpResponse.sendRedirect("/masteryi/accessDenied.jsp");
                         return;
                     }
                 } else if (userRole.equals("doctor")) {
                     if (requestURI.contains("/nurse/") || requestURI.contains("/patient/") || requestURI.contains("/admin/")) {
-                        httpResponse.sendRedirect("/SWP391_Project/accessDenied.jsp");
+                        httpResponse.sendRedirect("/masteryi/accessDenied.jsp");
                         return;
                     }
                 } else if (userRole.equals("nurse")) {
                     if (requestURI.contains("/doctor/") || requestURI.contains("/patient/") || requestURI.contains("/admin/")) {
-                        httpResponse.sendRedirect("/SWP391_Project/accessDenied.jsp");
+                        httpResponse.sendRedirect("/masteryi/accessDenied.jsp");
                         return;
                     }
                 } else if (userRole.equals("patient")) {
                     if (requestURI.contains("/admin/") || requestURI.contains("/doctor/") || requestURI.contains("/nurse/")) {
-                        httpResponse.sendRedirect("/SWP391_Project/accessDenied.jsp");
+                        httpResponse.sendRedirect("/masteryi/accessDenied.jsp");
                         return;
                     }
                 }
