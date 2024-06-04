@@ -1,3 +1,7 @@
 /dist/
 /build
-/build/web/WEB-INF/classes
+/build/web/WEB-INF/classes/*
+/.idea
+/.idea/
+*.xml
+*.class

@@ -189,7 +189,7 @@
                 <br>
                 <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+                <a href="../../changepass" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
             </div>
         </div>
