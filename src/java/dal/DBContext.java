@@ -33,7 +33,7 @@ public class DBContext {
         Connection connection2 = null;
         try {
             String user = "sa";
-            String pass = "123456";
+            String pass = "namnp";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection2 = DriverManager.getConnection(url, user, pass);
