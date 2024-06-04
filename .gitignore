@@ -5,3 +5,5 @@
 /.idea/
 *.xml
 *.class
+.idea/sonarlint/issuestore/index.pb
+*.pb
