@@ -8,8 +8,8 @@ import dao1.Authorization;
 import dao1.EmployeeDAO;
 import dao1.PatientDAO;
 import dal.DBContext;
-//import com.google.gson.Gson;
-//import com.google.gson.JsonObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dao1.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,9 +25,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 import model.PatientInfo;
-//import org.apache.http.client.ClientProtocolException;
-//import org.apache.http.client.fluent.Form;
-//import org.apache.http.client.fluent.Request;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
 import dao1.UserDAO;
@@ -39,28 +39,27 @@ import model.Patient;
  * @author trung
  */
 public class LoginServlet extends HttpServlet {
-//Login with google:
-//    public static String getToken(String code) throws ClientProtocolException, IOException {
-//        //call api to get token
-//        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
-//                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
-//                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
-//                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
-//                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
-//                .execute().returnContent().asString();
-//
-//        JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
-//        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
-//        return accessToken;
-//    }
-//
-//    public static PatientInfo getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
-//        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
-//        String response = Request.Get(link).execute().returnContent().asString();
-//        PatientInfo googlePojo = new Gson().fromJson(response, PatientInfo.class);
-//
-//        return googlePojo;
-//    }
+    public static String getToken(String code) throws ClientProtocolException, IOException {
+        //call api to get token
+        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
+                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
+                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
+                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
+                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
+                .execute().returnContent().asString();
+
+        JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
+        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
+        return accessToken;
+    }
+
+    public static PatientInfo getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
+        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
+        String response = Request.Get(link).execute().returnContent().asString();
+        PatientInfo googlePojo = new Gson().fromJson(response, PatientInfo.class);
+
+        return googlePojo;
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
