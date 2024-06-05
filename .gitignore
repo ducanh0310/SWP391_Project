@@ -8,3 +8,8 @@
 .idea/sonarlint/issuestore/index.pb
 *.pb
 /.idea
+.idea/sonarlint/securityhotspotstore/index.pb
+nbproject/private/private.xml
+/build/web/WEB-INF/classes
+/build
+/build/*
