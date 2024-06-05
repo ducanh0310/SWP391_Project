@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <title>DentCare - Dental Clinic</title>
@@ -28,7 +28,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-        
         <!-- Libraries Stylesheet -->
         <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="../../lib/animate/animate.min.css" rel="stylesheet">
@@ -99,41 +98,17 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
-            
-    
-        .profile-pic-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .profile-pic {
-            display: block;
-        }
-
-        .camera-icon {
-            position: absolute;
-            bottom: 0;
-            right: 25px;
-            background: #fff;
-            border-radius: 50%;
-            padding: 5px;
-            cursor: pointer;
-        }
-
-        .hidden-input {
-            display: none;
-        }
-        
-        .rounded-circle {
+            .rounded-circle {
             border-radius: 50% !important;
             width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
             height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
             object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
         }
-    </style>
         </style>
     </head>
-    <body>  
+    <body>
+        
+        
         <!-- Topbar Start -->
         <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
             <div class="row gx-0">
@@ -160,33 +135,33 @@
         <!-- Topbar End -->
         
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                            <a href="team.html" class="dropdown-item">Our Dentist</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="appointment.html" class="dropdown-item">Appointment</a>
-                        </div>
+            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Service</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                        <a href="team.html" class="dropdown-item">Our Dentist</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="appointment.html" class="dropdown-item">Appointment</a>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-                <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
+            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+            <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+        </div>
          </nav>
     <!-- Navbar End -->
     
@@ -204,48 +179,19 @@
     
     <!--profile-->
     
-    
-    
     <div class="row justify-content-center " >
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <div class="profile-pic-wrapper" id="uploadImageButton">
-                    
                     <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
-                    <i class="fa fa-camera camera-icon"></i>
-                </div>
-                
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
                 <br>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+                
             </div>
-
-                <!-- Modal -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <form id="imageForm" action="../../uploadimage" method="POST">
-            <div class="mb-3">
-              <label for="imageUrl" class="form-label">Image URL</label>
-              <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-        
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5 container-box">
@@ -253,80 +199,65 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">My account</h4>
                 </div>
-                <hr>
-                <form action="edit" method="POST">
-                    <input type="hidden" id="id" name="id" value="${paInfo.patientId}">
+                <hr>               
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label class="labels">Fullname</label>
-                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" >
-                            <c:if test="${not empty errorMsg.fullname}">
-                                <span style="color:red">${errorMsg.fullname}</span>
-                            </c:if>
+                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" readonly>
                         </div>        
                         <div class="col-md-6">
                             <label class="labels">Phone Number</label>
-                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${paInfo.phoneNumber}">
-                            <c:if test="${not empty errorMsg.phoneNumber}">
-                                <span style="color:red">${errorMsg.phoneNumber}</span>
-                            </c:if>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="${paInfo.phoneNumber}" value="" readonly>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label class="labels">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}">
-                            <c:if test="${not empty errorMsg.email}">
-                                <span style="color:red">${errorMsg.email}</span>
-                            </c:if>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}" readonly>
                         </div>
                         <div class="col-md-6">
                             <label class="labels">Medicine code</label>
-                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}">
-                            <c:if test="${not empty errorMsg.medicalCode}">
-                                <span style="color:red">${errorMsg.medicalCode}</span>
-                            </c:if>
+                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}" readonly>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label class="labels" for="gender">Gender</label>
-                            <select class="form-select" id="gender" name="gender">
-                                <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
-                                <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
-                                <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
-                            </select>
+                            <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder=""
+                                   <c:if test="${paInfo.gender == 'M'}">
+                                        value="Male"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'F'}">
+                                        value="Female"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'X'}">
+                                        value="Other"
+                                    </c:if>
+                            >
                         </div>                    
 
                         <div class="col-md-6">
-                            <label class="labels" >Date of birth</label>
-                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}">
-                            <c:if test="${not empty errorMsg.dob}">
-                                <span style="color:red">${errorMsg.dob}</span>
-                            </c:if>
+                            <label class="labels">Date of birth</label>
+                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}" readonly>
                         </div>
                     </div>
                     <br>
                     <div>
                         <label class="labels">Address</label>
-                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}">
-                        <c:if test="${not empty errorMsg.address}">
-                                <span style="color:red">${errorMsg.address}</span>
-                        </c:if>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}" readonly>
                     </div>
-
-                    <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
-                </form>
                 
-
+                <div class="mt-5 text-center">
+                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                </div>
             </div>
         </div>    
         
     </div>
 
-                    
+
     
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
@@ -367,7 +298,6 @@
             </div>
         </div>
     </div>
-    
     <!-- Footer End -->
 
 
@@ -376,48 +306,6 @@
 
 
     <!-- JavaScript Libraries -->
-    <script>
-        
- // Show modal when clicking the upload image button
-document.getElementById('uploadImageButton').addEventListener('click', function() {
-    $('#uploadModal').modal('show');
-});
-
-// Handle form submission with AJAX
-document.getElementById('imageForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent traditional form submission
-
-    var element = $(this);
-
-    $.ajax({
-        url: '../../uploadimage',
-        type: 'POST',
-        data:element.serializeArray(),// serializes the form data.
-        dataType:'json',
-        success: function(response) {
-            if (response.success) {
-                $('#uploadModal').modal('hide'); // Hide modal
-                alert('Image uploaded successfully');
-                document.getElementById('profile-pic').src = response.imageUrl; // Update image
-            } else {
-                alert('Message: ' + response.message);
-            }
-        },
-        error: function(xhr, status, error) {
-            var responseText = xhr.responseText;
-            try {
-                var jsonResponse = JSON.parse(responseText);
-                alert('An error occurred: ' + jsonResponse.message);
-            } catch (e) {
-                alert('An error occurred: ' + responseText);
-            }
-        }
-    });
-});
-        
-
-           
-    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../lib/wow/wow.min.js"></script>
