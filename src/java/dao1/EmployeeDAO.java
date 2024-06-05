@@ -32,7 +32,7 @@ public class EmployeeDAO {
             ResultSet rs = prepare.executeQuery();
             if(rs.next()){
                 emp.setId(rs.getInt("employee_id"));
-                emp.setEmployeeSin(rs.getInt("employee_sin"));
+                emp.setEmployeeSin(rs.getString("employee_sin"));
                 emp.setEmployeeType(rs.getString("employee_type"));
                 emp.setName(rs.getString("name"));
                 emp.setAddress(rs.getString("address"));

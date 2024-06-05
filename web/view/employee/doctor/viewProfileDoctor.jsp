@@ -278,7 +278,7 @@
 
                     <div class="col-md-6">
                         <label class="labels">Date of birth</label>
-                        <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}" readonly="">
+                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}" readonly="">
                     </div>
                 </div>
                 
