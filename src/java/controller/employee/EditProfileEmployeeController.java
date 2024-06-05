@@ -109,11 +109,11 @@ public class EditProfileEmployeeController extends HttpServlet {
                 
                 //Validate Medical code
                 int medicalCode =0;
-                if(!valid.isMedicalCode(patientSin)){
-                    errorMsg.put("medicalCode","Medical code must exactly 10 digits.");
-                }else{
-                    medicalCode=Integer.parseInt(patientSin);
-                }
+                if (valid.isMedicalCode(patientSin)) {
+                    medicalCode = Integer.parseInt(patientSin);
+                  } else {
+                    errorMsg.put("medicalCode", "Medical code must be exactly 10 digits.");
+                  }
                 
                 // Validate date format
                 Date dob=null;
