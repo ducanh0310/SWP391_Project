@@ -127,23 +127,26 @@ public class EditProfilePatientController extends HttpServlet {
             request.setAttribute("username", currentUser.getName());
             request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
             
+        }else{
+            // If all validations pass, proceed with updating the patient info
+            PatientInfo paInfo = new PatientInfo();
+            paInfo.setPatientId(patientId);
+            paInfo.setPatientSin(medicalCode);
+            paInfo.setName(fullname);
+            paInfo.setPhoneNumber(phoneNumber);
+            paInfo.setEmail(email);
+            paInfo.setGender(gender);
+            paInfo.setDob(dob);
+            paInfo.setAddress(address);
+
+            DBPatientProfile db = new DBPatientProfile();
+            db.editInfoPatient(paInfo);
+            response.sendRedirect("view");
         }
 
-        // If all validations pass, proceed with updating the patient info
-        PatientInfo paInfo = new PatientInfo();
-        paInfo.setPatientId(patientId);
-        paInfo.setPatientSin(medicalCode);
-        paInfo.setName(fullname);
-        paInfo.setPhoneNumber(phoneNumber);
-        paInfo.setEmail(email);
-        paInfo.setGender(gender);
-        paInfo.setDob(dob);
-        paInfo.setAddress(address);
+        
 
-        DBPatientProfile db = new DBPatientProfile();
-        db.editInfoPatient(paInfo);
-
-        response.sendRedirect("view");
+        
     } catch (NumberFormatException e) {
         errorMsg.put("patientId", "Invalid patient ID.");
         errorMsg.put("medicalCode", "Invalid code.");
