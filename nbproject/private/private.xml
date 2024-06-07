@@ -6,9 +6,11 @@
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ViewPatientDetailController.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewListPatient.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/PatientController.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/Successful.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/js/main.js</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/view/employee/viewProfileEmployee.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewPatientDetail.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientList.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/Patient.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientViewDB.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

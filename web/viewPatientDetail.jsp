@@ -152,7 +152,7 @@
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="Admin" class="rounded-circle" width="150">
                                         <div class="mt-3">
-                                            <h4>Elmo Lee</h4>
+                                            ${patients.name}
                                         </div>
                                     </div>
                                 </div>
@@ -185,13 +185,13 @@
                         <div class="col-md-8">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Full Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                          Elmo Lee
+                                            ${patients.name}
                                         </div>
                                     </div>
                                     <hr>
@@ -200,7 +200,7 @@
                                             <h6 class="mb-0">SIN</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                          164645466
+                                            ${patients.sin}
                                         </div>
                                     </div>
                                     <hr>
@@ -209,7 +209,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                           elmo@elmail.com
+                                           ${patients.email}
                                         </div>
                                     </div>
                                     <hr>
@@ -218,16 +218,20 @@
                                             <h6 class="mb-0">Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            6664206969
+                                            ${patients.phone}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Mobile</h6>
+                                            <h6 class="mb-0">Gender</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            (320) 380-4539
+                                            <c:choose>
+                                                <c:when test="${patients.gender == 'M'}">Male</c:when>
+                                                <c:when test="${patients.gender == 'F'}">Female</c:when>
+                                                <c:otherwise>${patients.gender}</c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                     <hr>
@@ -236,7 +240,7 @@
                                             <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            Bay Area, San Francisco, CA
+                                            ${patients.address}
                                         </div>
                                     </div>
                                     <hr>
@@ -245,11 +249,11 @@
                                             <a class="btn btn-info "  href="editPatientDetail.jsp">Edit</a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
-                           
+
 
 
 
@@ -258,7 +262,7 @@
 
                 </div>
             </div>
-           
+
 
             <!-- JavaScript Libraries -->
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

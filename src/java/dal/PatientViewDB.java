@@ -18,7 +18,7 @@ import model.Patient;
  */
 public class PatientViewDB extends DBContext {
 
-    public ArrayList<Patient> getPatient(int pid) {
+    public Patient getPatient(int pid) {
         ArrayList<Patient> patient = new ArrayList<>();
         try {
             String sql = "SELECT [Patient_id]\n"
@@ -50,14 +50,13 @@ public class PatientViewDB extends DBContext {
                 p.setDob(rs.getDate("date_of_birth"));
                 p.setInsurance(rs.getString("insurance"));
                 p.setRep_id(rs.getInt("rep_id"));
-
-                patient.add(p);
+                return p;
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientViewDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return patient;
+        return null;
     }
 
     public static void main(String[] args) {
