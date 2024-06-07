@@ -9,6 +9,7 @@ import dao1.DBAccount;
 import dao1.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +28,8 @@ import validation.Validation;
  *
  * @author Vu Minh Quan
  */
+@WebServlet(name = "EditProfilePatientController", urlPatterns = {"/patient/profile/edit"})
+
 public class EditProfilePatientController extends HttpServlet {
    
     @Override

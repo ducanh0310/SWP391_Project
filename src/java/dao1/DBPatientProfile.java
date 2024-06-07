@@ -74,7 +74,6 @@ public class DBPatientProfile extends DBContext{
         
     }
     
-    //get patient by email
     public PatientInfo getPatientByEmail(String email) {
         try {
             String query = "SELECT * FROM Patient WHERE email = ?";
@@ -98,8 +97,6 @@ public class DBPatientProfile extends DBContext{
         }
         return null;
     }
-    
-    //add patient 
     public int addPatient(PatientInfo patient) {
         try {
             String query = "INSERT INTO Patient (address, name, gender, email, phone, date_of_birth) VALUES (?, ?, ?, ?, ?, ?)";
@@ -119,10 +116,5 @@ public class DBPatientProfile extends DBContext{
             e.printStackTrace();
         }
         return -1;
-    }
-    
-    public static void main(String[] args) throws ClassNotFoundException {
-        DBPatientProfile db = new DBPatientProfile();
-        System.out.println(db.getInfoPatient("elmurder666"));
     }
 }

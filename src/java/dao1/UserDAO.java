@@ -21,16 +21,18 @@ import model.User;
  */
 public class UserDAO extends DBContext {
 
-    public UserDAO() throws ClassNotFoundException {
-        super(); // Calls the constructor of DBContext to initialize the connection
-    }
-    
+    private final Connection connection;
 
-    public User checkUser(String username, String password) {
-        String sql = "select * from [User_account] where username = ? and password = ?";
+    public UserDAO() throws ClassNotFoundException {
+        this.connection = DBContext.getConnection();
+    }
+
+    public User checkUser(String username) {
+        String sql = "select * from User_account where username = ? or patient_id = (select patient_id from Patient where email =  ?) or employee_id = (select employee_id from Employee where email = ?)";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, username);
-            st.setString(2, password);
+            st.setString(2, username);
+            st.setString(3, username);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 User u = new User(rs.getString(1),
@@ -49,7 +51,7 @@ public class UserDAO extends DBContext {
     public static void main(String[] args) throws ClassNotFoundException {
         UserDAO ud = new UserDAO();
         System.out.println("Hello");
-        User user = ud.checkUser("akiti7935", "123121");
+        User user = ud.checkUser("akiti7935");
         if (user != null) {
             System.out.println(user.getName() + " " + user.getPatient_Id() + " " + user.getEmployee_Id());
         } else {

@@ -31,7 +31,7 @@ public class AccountDAO {
 
     public ArrayList<String> getAllEmail() {
         ArrayList<String> list = new ArrayList<>();
-        String query = "SELECT email FROM Patient";
+        String query = "SELECT email FROM Patient union select email from Employee";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
@@ -103,11 +103,12 @@ public class AccountDAO {
     }
 
     public boolean checkUserNameAndEmail(String acc) {
-        String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ?";
+        String query = "SELECT username FROM User_account WHERE username = ? UNION SELECT email FROM Patient WHERE email = ? UNION SELECT email FROM Employee WHERE email = ?;";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, acc);
             statement.setString(2, acc);
+            statement.setString(3, acc);
             ResultSet rs = statement.executeQuery();
             return rs.next();
         } catch (SQLException ex) {
@@ -117,10 +118,11 @@ public class AccountDAO {
     }
 
     public String getEmailByUsername(String username) {
-        String query = "SELECT email FROM Patient WHERE patient_id = (SELECT patient_id FROM User_account WHERE username = ?)";
+        String query = "SELECT email FROM Patient WHERE patient_id = (SELECT patient_id FROM User_account WHERE username = ?) UNION SELECT email FROM Employee WHERE employee_id = (SELECT employee_id FROM User_account WHERE username = ?);";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
+            statement.setString(2, username);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return rs.getString("email");
@@ -204,18 +206,21 @@ public class AccountDAO {
             }
         }
     }
-
-    public static boolean updatePasswordPatient(String email, String password) {
-        String query = "UPDATE User_account SET password = ? WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?)";
+    public static boolean updatePasswordByEmail(String email, String password) {
+        String query = "UPDATE User_account " +
+                       "SET password = ? " +
+                       "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) " +
+                       "   OR employee_id = (SELECT employee_id FROM Employee WHERE email = ?)";
         try {
             Connection connection = DBContext.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, password);
             statement.setString(2, email);
+            statement.setString(3, email);
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName());
+            Logger.getLogger(AccountDAO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -223,7 +228,7 @@ public class AccountDAO {
 
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
-        System.out.println(dao.getEmailByUsername("elmurder666"));
+        System.out.println(dao.getAllEmail());
     }
 
 }

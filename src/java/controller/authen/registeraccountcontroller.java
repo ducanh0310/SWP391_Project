@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.authen;
 
 import java.io.IOException;
@@ -21,36 +20,39 @@ import validation.Email;
  *
  * @author ngphn
  */
-@WebServlet(name="registeraccountcontroller", urlPatterns={"/registeraccount"})
+@WebServlet(name = "registeraccountcontroller", urlPatterns = {"/registeraccount"})
 public class registeraccountcontroller extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet registeraccountcontroller</title>");  
+            out.println("<title>Servlet registeraccountcontroller</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet registeraccountcontroller at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet registeraccountcontroller at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -58,12 +60,13 @@ public class registeraccountcontroller extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -71,13 +74,17 @@ public class registeraccountcontroller extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
-        if (!password.equals(repassword)) {
+        if (!validation.Validation.isValidPassword(password)) {
+            request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase and numbers!");
+            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+            return;
+        } else if (!password.equals(repassword)) {
             request.setAttribute("error", "Password and Re-password are not the same!");
             request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
             return;
@@ -89,12 +96,13 @@ public class registeraccountcontroller extends HttpServlet {
             return;
         }
         //insert account
-        new AccountDAO().addPatientAccount(email ,username, password);
+        new AccountDAO().addPatientAccount(email, username, password);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

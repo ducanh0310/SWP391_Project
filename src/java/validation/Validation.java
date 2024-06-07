@@ -3,18 +3,47 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package validation;
+
+import java.time.Period;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.Period;
 /**
  *
  * @author ngphn
  */
 public class Validation {
-    public static boolean strongPassword(String password) {
-        return password.trim().matches("^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{7,})\\S$");
-    }
 
+    public static boolean isValidPassword(String password) {
+        // Check if the password is at least 8 characters long
+        if (password.length() < 8) {
+            return false;
+        }
+
+        boolean hasLowerCase = false;
+        boolean hasUpperCase = false;
+        boolean hasDigit = false;
+
+        // Iterate through each character of the password
+        for (char ch : password.toCharArray()) {
+            if (Character.isLowerCase(ch)) {
+                hasLowerCase = true;
+            } else if (Character.isUpperCase(ch)) {
+                hasUpperCase = true;
+            } else if (Character.isDigit(ch)) {
+                hasDigit = true;
+            }
+
+            // Check if all requirements are met
+            if (hasLowerCase && hasUpperCase && hasDigit) {
+                return true;
+            }
+        }
+
+        // If any requirement is not met, return false
+        return false;
+    }
+    
+    
     //fulname
     public boolean isName(String name){
         String fulname= name.trim();
@@ -79,6 +108,4 @@ public class Validation {
         return address.length()>=2 && address.length()<=1000;
         
     }
-    
-    
 }

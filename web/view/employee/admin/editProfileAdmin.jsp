@@ -3,6 +3,7 @@
 <html lang="en">
 
     <head>
+        <!-- Admin -->
         <meta charset="utf-8">
         <title>DentCare - Dental Clinic</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -38,7 +39,7 @@
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="../css/style.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
 
         <style>
             .m-0 {
@@ -91,18 +92,18 @@
             }
             
             .container-box {
-                margin-bottom: 120px; /* Kho?ng cách gi?a các box d??i cùng */
+                margin-bottom: 120px; /* Kho?ng c?ch gi?a c?c box d??i c?ng */
                 border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ?i?u ch?nh giá tr? ?? thay ??i ?? ??m nh?t c?a box shadow */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ?i?u ch?nh gi? tr? ?? thay ??i ?? ??m nh?t c?a box shadow */
             }
             
             .imageProfile {
                 
-                margin-bottom: 400px; /* Thêm chút kho?ng cách gi?a các h?p */
+                margin-bottom: 400px; /* Th?m ch?t kho?ng c?ch gi?a c?c h?p */
             }
 
             .container-box .p-3.py-5 {
-                padding: 1rem; /* Gi?m padding bên trong h?p */
+                padding: 1rem; /* Gi?m padding b?n trong h?p */
             }
             
             .profile-pic-wrapper {
@@ -130,9 +131,9 @@
         
         .rounded-circle {
             border-radius: 50% !important;
-            width: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
-            height: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
-            object-fit: cover; /* ??m b?o hình ?nh ???c c?t g?n v?a v?i hình tròn */
+            width: 150px; /* ??m b?o r?ng width v? height c? gi? tr? b?ng nhau */
+            height: 150px; /* ??m b?o r?ng width v? height c? gi? tr? b?ng nhau */
+            object-fit: cover; /* ??m b?o h?nh ?nh ???c c?t g?n v?a v?i h?nh tr?n */
         }
         </style>
     </head>

@@ -108,12 +108,11 @@ public class EditProfileEmployeeController extends HttpServlet {
                 
                 
                 //Validate Medical code
-                int medicalCode =0;
-                if(!valid.isMedicalCode(patientSin)){
-                    errorMsg.put("medicalCode","Medical code must exactly 10 digits.");
-                }else{
-                    medicalCode=Integer.parseInt(patientSin);
-                }
+                
+                if (!valid.isMedicalCode(patientSin)) {
+                    
+                    errorMsg.put("medicalCode", "Medical code must be exactly 10 digits.");
+                  }
                 
                 // Validate date format
                 Date dob=null;
@@ -176,7 +175,7 @@ public class EditProfileEmployeeController extends HttpServlet {
                 emInfo.setName(fullname);
                 emInfo.setPhoneNumber(phoneNumber);
                 emInfo.setEmail(email);
-                emInfo.setEmployeeSin(medicalCode);
+                emInfo.setEmployeeSin(patientSin);
                 emInfo.setGender(gender);
                 emInfo.setDob(dob);
                 emInfo.setEmployeeType(role);
@@ -194,7 +193,7 @@ public class EditProfileEmployeeController extends HttpServlet {
                     String[] imageLinks = request.getParameterValues("imageLink");
                     String[] imageNames = request.getParameterValues("imageName");
                     String[] idStrings = request.getParameterValues("idCer");
-                    int[] idImage = new int[idStrings.length];
+                    int[] idImage = new int[100];
                     // Handle empty strings and null values
                     for (int i = 0; i < idStrings.length; i++) {
                         if (idStrings[i] == null || idStrings[i].isEmpty()) {

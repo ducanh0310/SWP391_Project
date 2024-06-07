@@ -1,10 +1,10 @@
- /* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
 
 import java.sql.*;
-
 
 /**
  *
@@ -12,7 +12,7 @@ import java.sql.*;
  */
 public class Employee {
     private int id;
-    private int employeeSin;
+    private String employeeSin;
     private String employeeType;
     private String name;
     private String address;
@@ -32,11 +32,11 @@ public class Employee {
         this.id = id;
     }
 
-    public int getEmployeeSin() {
+    public String getEmployeeSin() {
         return employeeSin;
     }
 
-    public void setEmployeeSin(int employeeSin) {
+    public void setEmployeeSin(String employeeSin) {
         this.employeeSin = employeeSin;
     }
 

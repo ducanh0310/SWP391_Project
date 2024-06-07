@@ -37,7 +37,6 @@ public class ViewProfileEmployeeController extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
-        
         try {
             DBEmployeeProfile dbEm=new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());

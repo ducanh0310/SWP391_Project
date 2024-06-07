@@ -89,7 +89,7 @@ public class Email {
 
     public static boolean sendNewAccount(String to, String username, String password) {
         return sendTo(to, SUBJECTNEWUSERNAME, NEWACCOUNT + username + ".\n "
-                + "Your password is: " + "Use this username and password to login your account. Please do not share this username with anyone.");
+                + "Your password is: " + password + "Use this username and password to login your account. Please do not share this username with anyone.");
     }
     public static String extractUsername(String email) {
         String[] parts = email.split("@");

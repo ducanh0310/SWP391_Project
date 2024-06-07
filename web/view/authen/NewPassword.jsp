@@ -129,7 +129,7 @@
                                     <input type="password" class="form-control" id="repassword" name="repassword" placeholder="Please confirm your password" required>
                                 </div>
                                 <div class="d-grid">
-                                    <input type="submit" class="btn btn-primary" value="Register">
+                                    <input type="submit" class="btn btn-primary" value="Change Password">
                                 </div>
                                 <span class="text-danger">
 
@@ -142,9 +142,22 @@
                                         }
                                     %>
                                 </span>
-                                <div class="d-flex justify-content-between mt-4">
-                                    <a href="login.jsp">Already have an account?</a>
-                                </div>
+                                <span class="text-success">
+
+                                    <%
+                                        String success = (String) request.getAttribute("succcessAlert");
+                                        if (success != null) {
+                                    %>
+                                    <%= success %>
+                                    <div id="countdown">
+                                        <p> Redirecting in <span id="seconds">5 </span>seconds...</p>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <a href="login.jsp">Already have an account?</a>
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -227,6 +240,25 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script>
+            let timeLeft = 5;
+
+            const countdownElement = document.getElementById("seconds");
+
+            const countdownFunction = setInterval(function () {
+                // Decrease the time left
+                timeLeft--;
+
+                // Display the result in the countdown element
+                countdownElement.innerText = timeLeft;
+
+                // If the countdown is finished, clear the interval and display "EXPIRED"
+                if (timeLeft <= 0) {
+                    clearInterval(countdownFunction);
+                    window.location.href = 'index.jsp';
+                }
+            }, 1000);
+        </script>
     </body>
 
 </html>

@@ -8,6 +8,7 @@ import dao1.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import model.User;
  *
  * @author trung
  */
+@WebServlet(name="ConfirmPassword", urlPatterns={"/confirmpass"})
 public class ConfirmPassword extends HttpServlet {
 
     /**
@@ -60,7 +62,13 @@ public class ConfirmPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if(currentUser == null){
+            response.sendRedirect("index.jsp");
+        }else{
+            request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -79,12 +87,16 @@ public class ConfirmPassword extends HttpServlet {
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("currentUser");
             UserDAO userDAO = new UserDAO();
-            String check = userDAO.checkPasswordByUsername(currentUser.getName());
-            if (!check.equals(oldPass)) {
-                request.setAttribute("error", "Password is incorrect!");
-                request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("changepass");
+            if (currentUser != null) {
+                String check = userDAO.checkPasswordByUsername(currentUser.getName());
+                if (!check.equals(oldPass)) {
+                    request.setAttribute("error", "Password is incorrect!");
+                    request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("changepass");
+                }
+            }else{
+                response.sendRedirect("index.jsp");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);

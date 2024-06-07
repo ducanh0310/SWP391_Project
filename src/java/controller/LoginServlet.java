@@ -8,8 +8,8 @@ import dao1.Authorization;
 import dao1.EmployeeDAO;
 import dao1.PatientDAO;
 import dal.DBContext;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonObject;
 import dao1.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,9 +25,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 import model.PatientInfo;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
+//import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.client.fluent.Form;
+//import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
 import dao1.UserDAO;
@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     @Override
@@ -86,18 +86,19 @@ public class LoginServlet extends HttpServlet {
         if (userName == null || passWord == null
                 || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             try {
                 UserDAO userDAO = new UserDAO();
-                User user = userDAO.checkUser(userName, passWord);
-                if (user != null) {
+                User user = userDAO.checkUser(userName);
+                if (user != null && user.getPassword().equals(passWord)) {
                     session.setAttribute("currentUser", user);
                     Authorization author = new Authorization();
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();
                         Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
+                        session.setAttribute("userRole", "patient");
                         request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
                         //request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (user.getType_Id() == 1) {
@@ -105,21 +106,25 @@ public class LoginServlet extends HttpServlet {
                         Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
                         if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
                             session.setAttribute("admin", emp);
+                            session.setAttribute("userRole", "admin");
                             request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
+                            session.setAttribute("userRole", "doctor");
                             request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
+                            session.setAttribute("userRole",  "nurse");
                             request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
+                            session.setAttribute("userRole", "receptionist");
                             request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
                         }
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("Login.jsp").forward(request, response);
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);

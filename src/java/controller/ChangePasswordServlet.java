@@ -8,6 +8,7 @@ import dao1.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import model.User;
  *
  * @author trung
  */
+@WebServlet(name="ChangePasswordServlet", urlPatterns={"/changepass"})
 public class ChangePasswordServlet extends HttpServlet {
 
     /**
@@ -60,8 +62,14 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response); 
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            response.sendRedirect("index.jsp");
+        }else{
+            request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
 
+        }
     }
 
     /**
@@ -88,10 +96,10 @@ public class ChangePasswordServlet extends HttpServlet {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             request.setAttribute("error", "Re-enter password do not match your new password!");
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-            
+
         }
     }
 
