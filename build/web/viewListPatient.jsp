@@ -142,69 +142,90 @@
                     <div class="container-fluid">                   
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">Applications</h5>
+                                <div class="mb-npx">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                                            <!-- Title -->
+                                            <h1 class="h2 mb-0 ls-tight">List of patient</h1>
+                                        </div>
+                                        <!-- Actions -->
+                                        <div class="col-sm-6 col-12 text-sm-end">
+                                            <div class="mx-n1">
+                                                <a href="addPatient" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                                    <span class=" pe-2">
+                                                        <i class="bi bi-plus"></i>
+                                                    </span>
+                                                    <span>Add new patient</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-nowrap">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">SIN</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Gender</th> 
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Birthday</th>                                                                                   
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${patients}" var="patient">
-                                            <tr>
-                                                <td>${patient.sin}</td>
-                                                <td><a class="text-heading font-semibold" href="viewPatientDetail.jsp">${patient.name}   
-                                                    </a></td>
-                                                <td>${patient.gender}</td>
-                                                <td>${patient.email}</td>
-                                                <td>${patient.phone}</td>
-                                                <td>${patient.dob}</td>                                               
-                                                <td class="text-end">
-                                                    <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
-                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer border-0 py-5">
-                                <span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
-                            </div>
+                            <!-- Nav -->
                         </div>
                     </div>
-                </main>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">SIN</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Gender</th> 
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Birthday</th>                                                                                   
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${patients}" var="patient">
+                                    <tr>
+                                        <td>${patient.sin}</td>
+                                        <td><a class="text-heading font-semibold" href="viewPatientDetail.jsp">${patient.name}   
+                                            </a></td>
+                                        <td>${patient.gender}</td>
+                                        <td>${patient.email}</td>
+                                        <td>${patient.phone}</td>
+                                        <td>${patient.dob}</td>                                               
+                                        <td class="text-end">
+                                            <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
+                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
+                    </div>
             </div>
+        </div>
+    </main>
+</div>
 
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-            <!-- JavaScript Libraries -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/wow/wow.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-            <script src="lib/tempusdominus/js/moment.min.js"></script>
-            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script src="lib/twentytwenty/jquery.event.move.js"></script>
-            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="lib/twentytwenty/jquery.event.move.js"></script>
+<script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-            <!-- Template Javascript -->
-            <script src="js/main.js"></script>
-    </body>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
 
 </html>
