@@ -20,7 +20,7 @@ public class DBContext {
         try {
             String user = "sa";
             String pass = "namnp";
-            String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (SQLException e) {
@@ -33,7 +33,7 @@ public class DBContext {
         try {
             String user = "sa";
             String pass = "namnp";
-            String url = "jdbc:sqlserver://WINDYVU:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true;";
+             String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection2 = DriverManager.getConnection(url, user, pass);
 

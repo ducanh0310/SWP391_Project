@@ -77,7 +77,7 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
+                                <a class="nav-link" href="view/employee/admin/home.jsp">
                                     <i class="bi bi-house"></i> Dashboard
                                 </a>
                             </li>
@@ -121,7 +121,7 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="employee/profile/view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -142,7 +142,7 @@
                     <div class="container-fluid">                   
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">Applications</h5>
+                                <h5 class="mb-0">Welcome, admin</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
