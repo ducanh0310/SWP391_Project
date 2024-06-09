@@ -2,22 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/doctor/viewProfileDoctor.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/editProfileEmployee.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/dal/DBContext.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/Nurse/home.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/nbproject/build-impl.xml</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/Login.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/authen/ConfirmEmailForgotPw.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/authen/ConfirmPassword.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/index.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/authen/NewPassword.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/viewProfileAdmin.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/viewProfileEmployee.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/patient/viewProfilePatient.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
