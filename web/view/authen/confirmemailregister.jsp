@@ -97,7 +97,7 @@
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                <a href="login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
+                <a href="Login.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
                 <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
             </div>
         </nav>

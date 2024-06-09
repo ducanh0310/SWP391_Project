@@ -140,7 +140,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="viewListPatient.jsp">
+                            <a class="nav-link" href="../../viewListPatient.jsp">
                                 <i class="bi bi-list-task"></i> Patient
                             </a>
                         </li>

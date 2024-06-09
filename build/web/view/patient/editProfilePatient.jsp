@@ -260,10 +260,16 @@
                         <div class="col-md-6">
                             <label class="labels">Fullname</label>
                             <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" >
+                            <c:if test="${not empty errorMsg.fullname}">
+                                <span style="color:red">${errorMsg.fullname}</span>
+                            </c:if>
                         </div>        
                         <div class="col-md-6">
                             <label class="labels">Phone Number</label>
                             <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${paInfo.phoneNumber}">
+                            <c:if test="${not empty errorMsg.phoneNumber}">
+                                <span style="color:red">${errorMsg.phoneNumber}</span>
+                            </c:if>
                         </div>
                     </div>
 
@@ -271,10 +277,16 @@
                         <div class="col-md-6">
                             <label class="labels">Email</label>
                             <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}">
+                            <c:if test="${not empty errorMsg.email}">
+                                <span style="color:red">${errorMsg.email}</span>
+                            </c:if>
                         </div>
                         <div class="col-md-6">
                             <label class="labels">Medicine code</label>
                             <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}">
+                            <c:if test="${not empty errorMsg.medicalCode}">
+                                <span style="color:red">${errorMsg.medicalCode}</span>
+                            </c:if>
                         </div>
                     </div>
 
@@ -291,12 +303,18 @@
                         <div class="col-md-6">
                             <label class="labels" >Date of birth</label>
                             <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}">
+                            <c:if test="${not empty errorMsg.dob}">
+                                <span style="color:red">${errorMsg.dob}</span>
+                            </c:if>
                         </div>
                     </div>
                     <br>
                     <div>
                         <label class="labels">Address</label>
                         <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}">
+                        <c:if test="${not empty errorMsg.address}">
+                                <span style="color:red">${errorMsg.address}</span>
+                        </c:if>
                     </div>
 
                     <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>

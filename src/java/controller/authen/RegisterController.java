@@ -62,7 +62,15 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String email = request.getParameter("email");
-        ArrayList<String> list = new AccountDAO().getAllEmail();
+        var out = response.getWriter();
+        ArrayList<String> list = new ArrayList<>();
+        AccountDAO dao = new AccountDAO();
+        list = dao.getAllEmail();
+        if (list.isEmpty()) {
+           
+            out.print(list);
+        }
+        
         if (list.contains(email)) {
             request.setAttribute("accountexits", "This email has been used! Please try another email!");
             request.getRequestDispatcher("view/authen/register.jsp").forward(request, response);

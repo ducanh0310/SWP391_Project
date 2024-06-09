@@ -43,7 +43,7 @@ public class DBEmployeeProfile extends DBContext {
             while (rs.next()) {
                 Branch br = new Branch();
                 employeeInfo.setId(rs.getInt("employee_id"));
-                employeeInfo.setEmployeeSin(rs.getInt("employee_sin"));
+                employeeInfo.setEmployeeSin(rs.getString("employee_sin"));
                 employeeInfo.setEmployeeType(rs.getString("employee_type"));
                 employeeInfo.setName(rs.getString("name"));
                 employeeInfo.setAnnualSalary(rs.getFloat("annual_salary"));
@@ -79,7 +79,7 @@ public class DBEmployeeProfile extends DBContext {
                                ,[email] = ?
                           WHERE [employee_id]=?""";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, emInfo.getEmployeeSin());
+            stm.setString(1, emInfo.getEmployeeSin());
             stm.setString(2, emInfo.getEmployeeType());
             stm.setString(3, emInfo.getName());
             stm.setString(4, emInfo.getAddress());

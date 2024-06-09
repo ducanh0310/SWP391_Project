@@ -108,7 +108,7 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../employee/profile/edit">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
