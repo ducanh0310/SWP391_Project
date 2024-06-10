@@ -25,7 +25,7 @@ public class ViewPatientDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int patientId = Integer.parseInt(request.getParameter("pid"));
         PatientDAO patientView = new PatientDAO();
-        ArrayList<Patient> patients = patientView.getPatient(patientId);
+        Patient patients = patientView.getPatient(patientId);
         request.setAttribute("patients", patients);
         request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
     }

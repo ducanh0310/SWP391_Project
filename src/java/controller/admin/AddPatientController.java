@@ -22,7 +22,7 @@ import validation.Email;
  *
  * @author ADMIN
  */
-@WebServlet(name="EditPatientController", urlPatterns={"/addPatient"})
+@WebServlet(name = "EditPatientController", urlPatterns = {"/addPatient"})
 public class AddPatientController extends HttpServlet {
 
     /**
@@ -63,7 +63,7 @@ public class AddPatientController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          request.getRequestDispatcher("view/employee/admin/addPatient.jsp").forward(request, response);
+        request.getRequestDispatcher("view/employee/admin/addPatient.jsp").forward(request, response);
     }
 
     /**
@@ -131,8 +131,5 @@ public class AddPatientController extends HttpServlet {
             return parts[0];
         }
         return null; // Invalid email format
-    }
-    public static void main(String[] args) {
-       
     }
 }

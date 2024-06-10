@@ -286,13 +286,12 @@
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-5 container-box">
-                        <form action="edit" method="POST">
+                       <form action="edit" method="POST">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">My account</h4>
                             </div>
                             <hr>
-                            <form action="edit" method="POST">
                             <div class="row mt-3">
                                 <input type="hidden" name="id" id="id" value="${emInfo.id}">
                                 <div class="col-md-6">
@@ -315,7 +314,6 @@
                                 <div class="col-md-6">
                                     <label class="labels">Email</label>
                                     <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}" readonly="">
-                                    
                                 </div>
                                 <div class="col-md-6">
                                     <label class="labels">Medicine code</label>
@@ -332,15 +330,13 @@
                                     <select class="form-select" id="gender" name="gender">
                                         <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
                                         <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
-                                        <option value="O" <c:if test="${paInfo.gender == 'O'}">selected</c:if>>Other</option>
-
-
+                                        <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
                                     </select>
                                 </div>                    
 
                                 <div class="col-md-6">
                                     <label class="labels">Date of birth</label>
-                                    <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
+                                    <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
                                     <c:if test="${not empty errorMsg.dob}">
                                         <span style="color:red">${errorMsg.dob}</span>
                                     </c:if>
@@ -369,7 +365,7 @@
                                     <label class="labels">Address</label>
                                     <input type="text" id="address" name="address" class="form-control" placeholder="" value="${emInfo.address}" >
                                     <c:if test="${not empty errorMsg.address}">
-                                            <span style="color:red">${errorMsg.address}</span>
+                                        <span style="color:red">${errorMsg.address}</span>
                                     </c:if>
                                 </div>
                                 <div class="col-md-6">
@@ -380,8 +376,9 @@
                             </div>
 
 
-
                             <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
+
+                           </div>
                         </form>
                     </div>    
 

@@ -36,7 +36,7 @@ public class PatientDAO {
             ResultSet rs = prepare.executeQuery();
             if(rs.next()){
                 patient.setId(rs.getInt("Patient_id"));
-                patient.setSin(rs.getInt("patient_sin"));
+                patient.setSin(rs.getString("patient_sin"));
                 patient.setAddress(rs.getString("address"));
                 patient.setName(rs.getString("name"));
                 patient.setGender(rs.getString("gender"));
@@ -54,7 +54,7 @@ public class PatientDAO {
         String query = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, p.getSin());
+            statement.setString(1, p.getSin());
             statement.setString(2, p.getAddress());
             statement.setString(3, p.getName());
             statement.setString(4, p.getGender());
@@ -85,7 +85,7 @@ public class PatientDAO {
 
             // Insert into Patient table
             insertPatientStmt = connection.prepareStatement(insertPatientSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            insertPatientStmt.setInt(1, p.getSin());
+            insertPatientStmt.setString(1, p.getSin());
             insertPatientStmt.setString(2, p.getAddress());
             insertPatientStmt.setString(3, p.getName());
             insertPatientStmt.setString(4, p.getGender());
@@ -173,7 +173,7 @@ public class PatientDAO {
             while (rs.next()) {
                 Patient p = new Patient();
                 p.setId(rs.getInt("Patient_id"));
-                p.setSin(rs.getInt("patient_sin"));
+                p.setSin(rs.getString("patient_sin"));
                 p.setAddress(rs.getString("address"));
                 p.setName(rs.getString("name"));
                 p.setGender(rs.getString("gender"));
@@ -191,7 +191,7 @@ public class PatientDAO {
         }
         return patient;
     }
-         public ArrayList<Patient> getPatient(int pid) {
+         public Patient getPatient(int pid) {
         ArrayList<Patient> patient = new ArrayList<>();
         try {
             String sql = "SELECT [Patient_id]\n"
@@ -214,7 +214,7 @@ public class PatientDAO {
             while (rs.next()) {
                 Patient p = new Patient();
                 p.setId(rs.getInt("Patient_id"));
-                p.setSin(rs.getInt("patient_sin"));
+                p.setSin(rs.getString("patient_sin"));
                 p.setAddress(rs.getString("address"));
                 p.setName(rs.getString("name"));
                 p.setGender(rs.getString("gender"));
@@ -223,14 +223,13 @@ public class PatientDAO {
                 p.setDob(rs.getDate("date_of_birth"));
                 p.setInsurance(rs.getString("insurance"));
                 p.setRep_id(rs.getInt("rep_id"));
-
-                patient.add(p);
+                return p;
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return patient;
+        return null;
     }
 
     public boolean updatePatient(Patient p) {
@@ -240,6 +239,6 @@ public class PatientDAO {
     
     public static void main(String[] args) {
         PatientDAO ptDAO = new PatientDAO();
-        System.out.println(ptDAO.getPatient());
+        System.out.println(ptDAO.getPatient(1).getName());
     }
 }
