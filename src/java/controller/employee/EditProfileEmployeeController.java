@@ -85,15 +85,15 @@ public class EditProfileEmployeeController extends HttpServlet {
         
         try {
             emInfo.setId(Integer.parseInt(request.getParameter("id")));
-            emInfo.setEmployeeType(request.getParameter("role"));
+            emInfo.setEmployeeType(request.getParameter("role").trim());
             emInfo.setAnnualSalary(Float.parseFloat(request.getParameter("salary")));
             emInfo.setBranchId(Integer.parseInt(request.getParameter("branchid")));
-            emInfo.setEmployeeSin(request.getParameter("medicineCode"));
-            emInfo.setName(request.getParameter("fullname"));
-            emInfo.setPhoneNumber(request.getParameter("phoneNumber"));
-            emInfo.setEmail(request.getParameter("email"));
-            emInfo.setGender(request.getParameter("gender"));
-            emInfo.setAddress(request.getParameter("address"));
+            emInfo.setEmployeeSin(request.getParameter("medicineCode").trim());
+            emInfo.setName(request.getParameter("fullname").trim());
+            emInfo.setPhoneNumber(request.getParameter("phoneNumber").trim());
+            emInfo.setEmail(request.getParameter("email").trim());
+            emInfo.setGender(request.getParameter("gender").trim());
+            emInfo.setAddress(request.getParameter("address").trim());
             
             String dobStr = request.getParameter("dob");
             if (!valid.isDateOfBirth(dobStr)) {

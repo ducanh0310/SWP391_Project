@@ -62,13 +62,13 @@ public class EditProfilePatientController extends HttpServlet {
          Map<String, String> errorMsg = new HashMap<>();
     try {
         int patientId = Integer.parseInt(request.getParameter("id"));
-        String patientSin = request.getParameter("medicineCode");
-        String fullname = request.getParameter("fullname");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        String dobStr = request.getParameter("dob");
-        String address = request.getParameter("address");
+        String patientSin = request.getParameter("medicineCode").trim();
+        String fullname = request.getParameter("fullname").trim();
+        String phoneNumber = request.getParameter("phoneNumber").trim();
+        String email = request.getParameter("email").trim();
+        String gender = request.getParameter("gender").trim();
+        String dobStr = request.getParameter("dob").trim();
+        String address = request.getParameter("address").trim();
 
         Validation valid= new Validation();
         // Validate name
@@ -129,6 +129,7 @@ public class EditProfilePatientController extends HttpServlet {
             
         }else{
             // If all validations pass, proceed with updating the patient info
+            //fullname.trim();
             PatientInfo paInfo = new PatientInfo();
             paInfo.setPatientId(patientId);
             paInfo.setPatientSin(medicalCode);
