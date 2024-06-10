@@ -7,7 +7,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
-        
+
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
@@ -111,7 +111,7 @@
                             <h3 class="mb-4">Verify Code</h3>
                             <form action="verify" method="GET">
                                 <div class="mb-3">
-                                    <labe class="form-label">The authentication code will be sent via gmail to <strong style="font: bold"> ${email}</strong>. If you didn't get the email, check your junk folder or <a href="#" onclick="window.location.reload();">Try again</a></label>
+                                    <labe class="form-label">The authentication code will be sent via gmail to <strong style="font: bold"> ${email}</strong>. If you didn't get the email, check your junk folder or <a href="#" id="try-again-link">Try again</a></label>
                                         <input type="text" class="form-control" id="code" name="code" placeholder="" required>
                                         <span class="text-danger">
                                             <%
@@ -147,6 +147,10 @@
                     </div>
                 </div>
             </div>
+            <!-- Hidden Form for Try Again -->
+            <form id="try-again-form" action="resendCode" method="GET" style="display: none;">
+                <input type="hidden" name="email" value="${email}">
+            </form>
             <!-- Footer Start -->
             <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="container pt-5">
@@ -224,23 +228,27 @@
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
             <script>
-                                        let timeLeft = 60; // 60 seconds countdown
-
-                                        const countdownElement = document.getElementById("seconds");
-
-                                        const countdownFunction = setInterval(function () {
-                                            // Decrease the time left
-                                            timeLeft--;
-
-                                            // Display the result in the countdown element
-                                            countdownElement.innerText = timeLeft;
-
-                                            // If the countdown is finished, clear the interval and display "EXPIRED"
-                                            if (timeLeft <= 0) {
-                                                clearInterval(countdownFunction);
-                                                countdownElement.innerHTML += ' <a href="#" onclick="window.location.reload();">Send again</a>';
-                                            }
-                                        }, 1000);
+                let timeLeft = 60; // 60 seconds countdown
+                const countdownElement = document.getElementById("seconds");
+                const countdownFunction = setInterval(function () {
+                    // Decrease the time left
+                    timeLeft--;
+                    // Display the result in the countdown element
+                    countdownElement.innerText = timeLeft;
+                    // If the countdown is finished, clear the interval and display "Send again" link
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownFunction);
+                        countdownElement.innerHTML += ' <a href="#" id="try-again-link-auto">Send again</a>';
+                        document.getElementById("try-again-link-auto").addEventListener("click", function (event) {
+                            event.preventDefault();
+                            document.getElementById("try-again-form").submit();
+                        });
+                    }
+                }, 1000);
+                document.getElementById("try-again-link").addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.getElementById("try-again-form").submit();
+                });
             </script>
 
     </body>

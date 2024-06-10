@@ -6,22 +6,24 @@ package controller.authen;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import dao1.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.Duration;
+import java.time.Instant;
 import validation.Email;
 
 /**
  *
  * @author ngphn
  */
-@WebServlet(name = "registeraccountcontroller", urlPatterns = {"/registeraccount"})
-public class registeraccountcontroller extends HttpServlet {
+@WebServlet(name = "resendCodeController", urlPatterns = {"/resendCode"})
+public class resendCodeController extends HttpServlet {
+
+    private static final long TIMEOUT_SECONDS = 60;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +42,10 @@ public class registeraccountcontroller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet registeraccountcontroller</title>");
+            out.println("<title>Servlet resendCodeController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet registeraccountcontroller at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet resendCodeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +63,32 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        String enteredCode = request.getParameter("code");
+        session.removeAttribute("verificationCode");
+        session.removeAttribute("codeTimestamp");
+        String verificationCode = Email.generateVerificationCode();
+        session.setAttribute("verificationCode", verificationCode);
+        String email = (String) session.getAttribute("email");
+        Email.sendVerificationCode(email, verificationCode);
+        String storedCode = (String) session.getAttribute("verificationCode");
+        session.setAttribute("codeTimestamp", Instant.now());
+        Instant codeTimestamp = (Instant) session.getAttribute("codeTimestamp");
+        if (storedCode != null && codeTimestamp != null) {
+            Instant now = Instant.now();
+            long elapsedSeconds = Duration.between(codeTimestamp, now).getSeconds();
+            if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
+                session.removeAttribute("verificationCode");
+                session.removeAttribute("codeTimestamp");
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+                return;
+            } else if (elapsedSeconds > TIMEOUT_SECONDS) {
+                request.setAttribute("timeout", "Verification code has expired! Please try again!");
+            } 
+        } else {
+            request.setAttribute("error", "An error occurred! Please try again!");
+        }
+        request.getRequestDispatcher("view/authen/confirmemailregister.jsp").forward(request, response);
     }
 
     /**
@@ -75,34 +102,7 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
-        if (!validation.Validation.isValidUsername(username)) {
-            request.setAttribute("errorUsn", "Username must be 3 to 15 characters and cannot contain spaces.");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
-        }
-        if (!validation.Validation.isValidPassword(password)) {
-            request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase and numbers!");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
-        } else if (!password.equals(repassword)) {
-            request.setAttribute("error", "Password and Re-password are not the same!");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
-        }
-        //check if username is existed
-        if (new AccountDAO().checkAccount(username)) {
-            request.setAttribute("error", "Username is existed!");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
-        }
-        //insert account
-        new AccountDAO().addPatientAccount(email, username, password);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

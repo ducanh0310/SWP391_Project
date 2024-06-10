@@ -138,9 +138,14 @@
 
                                     <%
                                         String error = (String) request.getAttribute("error");
+                                        String errorUsn = (String) request.getAttribute("errorUsn");
                                         if (error != null) {
                                     %>
                                     <%= error %>
+                                    <%
+                                        } if (errorUsn != null) {
+                                    %>
+                                    <%= errorUsn %>
                                     <%
                                         }
                                     %>
