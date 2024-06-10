@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
         if (userName == null || passWord == null
                 || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
                 UserDAO userDAO = new UserDAO();
@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
-                    request.getRequestDispatcher("Login.jsp").forward(request, response);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
