@@ -7,6 +7,7 @@ package controller.admin;
 import dal.PatientViewDB;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import model.Patient;
  *
  * @author Gia Huy
  */
+@WebServlet(urlPatterns={"/patientDtail"})
 public class ViewPatientDetailController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

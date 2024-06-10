@@ -39,7 +39,7 @@ public class PatientList extends DBContext {
             while (rs.next()) {
                 Patient p = new Patient();
                 p.setId(rs.getInt("Patient_id"));
-                p.setSin(rs.getInt("patient_sin"));
+                p.setSin(rs.getString("patient_sin"));
                 p.setAddress(rs.getString("address"));
                 p.setName(rs.getString("name"));
                 p.setGender(rs.getString("gender"));

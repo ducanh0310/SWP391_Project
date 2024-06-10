@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Patient {
     private int id;
-    private int sin;
+    private String sin;
     private String address;
     private String name;
     private String gender;
@@ -26,9 +26,7 @@ public class Patient {
         return id;
     }
 
-    public int getSin() {
-        return sin;
-    }
+   
 
     public String getAddress() {
         return address;
@@ -66,9 +64,15 @@ public class Patient {
         this.id = id;
     }
 
-    public void setSin(int sin) {
+    public String getSin() {
+        return sin;
+    }
+
+    public void setSin(String sin) {
         this.sin = sin;
     }
+
+   
 
     public void setAddress(String address) {
         this.address = address;
