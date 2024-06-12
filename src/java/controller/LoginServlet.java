@@ -4,13 +4,13 @@
  */
 package controller;
 
-import dao1.Authorization;
-import dao1.EmployeeDAO;
-import dao1.PatientDAO;
+import dao.Authorization;
+import dao.EmployeeDAO;
+import dao.PatientDAO;
 import dal.DBContext;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonObject;
-import dao1.DBPatientProfile;
+import dao.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,7 +30,7 @@ import model.PatientInfo;
 //import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-import dao1.UserDAO;
+import dao.UserDAO;
 import model.Employee;
 import model.Patient;
 
@@ -38,6 +38,7 @@ import model.Patient;
  *
  * @author trung
  */
+@WebServlet(name="LoginServlet", urlPatterns={"/login"})
 public class LoginServlet extends HttpServlet {
 //Login with google:
 //    public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -68,7 +69,7 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class LoginServlet extends HttpServlet {
         if (userName == null || passWord == null
                 || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             try {
                 UserDAO userDAO = new UserDAO();
@@ -123,7 +124,7 @@ public class LoginServlet extends HttpServlet {
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
-                    request.getRequestDispatcher("Login.jsp").forward(request, response);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);

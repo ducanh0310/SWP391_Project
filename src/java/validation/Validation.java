@@ -4,6 +4,12 @@
  */
 package validation;
 
+import java.time.Period;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author ngphn
@@ -39,4 +45,89 @@ public class Validation {
         // If any requirement is not met, return false
         return false;
     }
-}
+
+    //fulname
+    public boolean isName(String name) {
+        String fulname = name.trim();
+        return fulname.length() >= 2 && fulname.length() <= 50;
+
+    }
+
+    //phone number   
+    public boolean isPhoneNumber(String numberPhone) {
+        return numberPhone.trim().matches("\\d{10}");
+    }
+
+    //email
+    public boolean isEmail(String email) {
+        return email.trim().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+    }
+
+    //Medical code    
+    public boolean isMedicalCode(String medicalCode) {
+        return medicalCode.trim().matches("\\d{10}");
+    }
+
+    //Date of birth
+    public boolean isDateOfBirth(String dobStr) {
+        String dob = dobStr.trim();
+        try {
+            Date.valueOf(dob);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    public boolean isDistantDOB(Date dob) {
+        LocalDate birthDate = dob.toLocalDate();
+        LocalDate today = LocalDate.now();
+
+        // Check if the birth date is in the future
+        if (birthDate.isAfter(today)) {
+            return false;
+        }
+
+        // Check if the birth date is too far in the past (e.g., more than 150 years ago)
+        if (birthDate.isBefore(today.minusYears(150))) {
+            return false;
+        }
+
+        // Check if the age is at least 18 years
+        if (Period.between(birthDate, today).getYears() < 18) {
+            return false;
+        }
+        return true;
+    }
+
+    //Address
+    public boolean isAddress(String place) {
+        String address = place.trim();
+
+        return address.length() >= 2 && address.length() <= 1000;
+
+    }
+    private static final String USERNAME_PATTERN = "^(?=.*[a-zA-Z])[a-zA-Z0-9!@._-]{3,15}$";
+
+    public static boolean isValidUsername(String username) {
+        // Compile the regular expression
+        Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+
+        // Match the username against the pattern
+        Matcher matcher = pattern.matcher(username);
+
+        // Return whether the username matches the pattern
+        return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        // Test usernames
+        String[] usernames = {"user_1", "user!23", "usa", "valid username", "12345", "''''"};
+
+        for (String username : usernames) {
+            boolean isValid = isValidUsername(username);
+            System.out.println("Username: " + username + " is valid: " + isValid);
+        }
+    }
+
+    }

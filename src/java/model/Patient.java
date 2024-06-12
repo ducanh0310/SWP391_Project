@@ -12,7 +12,7 @@ import java.sql.*;
  */
 public class Patient {
     private int id;
-    private int sin;
+    private String sin;
     private String address;
     private String name;
     private String gender;
@@ -25,25 +25,13 @@ public class Patient {
     public Patient() {
     }
     
-    public Patient(int sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
-        this.sin = sin;
-        this.address = address;
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.dob = dob;
-        this.insurance = insurance;
-        this.rep_id = rep_id;
-    }
+   
     
     public int getId() {
         return id;
     }
 
-    public int getSin() {
-        return sin;
-    }
+    
 
     public String getAddress() {
         return address;
@@ -81,9 +69,28 @@ public class Patient {
         this.id = id;
     }
 
-    public void setSin(int sin) {
+    public Patient(int id, String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+        this.id = id;
+        this.sin = sin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+        this.insurance = insurance;
+        this.rep_id = rep_id;
+    }
+
+    public String getSin() {
+        return sin;
+    }
+
+    public void setSin(String sin) {
         this.sin = sin;
     }
+
+    
 
     public void setAddress(String address) {
         this.address = address;

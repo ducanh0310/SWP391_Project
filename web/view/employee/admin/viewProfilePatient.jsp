@@ -4,6 +4,7 @@
     Author     : Vu Minh Quan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -97,6 +98,12 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
+            .rounded-circle {
+            border-radius: 50% !important;
+            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+        }
         </style>
     </head>
     <body>
@@ -113,7 +120,7 @@
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>ngphnam</p>
+                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>dentcare23@medical.com</p>
                         </div>
                         <div class="me-3 pe-3 border-end py-2">
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
@@ -129,7 +136,7 @@
         
         <!-- Navbar Start -->
             <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="index.jsp" class="navbar-brand p-0">
+        <a href="index.html" class="navbar-brand p-0">
             <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -169,27 +176,20 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-            <span>Toggle Sidebar</span>
-        </button>
-    </div>
-</nav>
-
+    
     <!--profile-->
     
     <div class="row justify-content-center " >
         
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <span class="font-weight-bold">Edogaru</span>
-                <span class="text-black-50">edogaru@mail.com.my</span>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
+                <span class="font-weight-bold">${username}</span>
+                <span class="text-black-50">${paInfo.email}</span>
+                <br>
+                <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+                <a href="../../changepass" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
             </div>
         </div>
@@ -199,48 +199,58 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">My account</h4>
                 </div>
-                <hr>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Fullname</label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" readonly>
-                    </div>        
-                    <div class="col-md-6">
-                        <label class="labels">Phone Number</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="" readonly>
+                <hr>               
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Fullname</label>
+                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" readonly>
+                        </div>        
+                        <div class="col-md-6">
+                            <label class="labels">Phone Number</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="${paInfo.phoneNumber}" value="" readonly>
+                        </div>
                     </div>
-                </div>
-                    
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="labels">Medicine code</label>
-                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="" readonly>
-                    </div>
-                </div>
-                
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label class="labels" for="gender">Gender</label>
-                        <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly>
-                    </div>                    
 
-                    <div class="col-md-6">
-                        <label class="labels">Date of birth</label>
-                        <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="" readonly>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Medicine code</label>
+                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${paInfo.patientSin}" readonly>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div>
-                    <label class="labels">Address</label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="" readonly>
-                </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="labels" for="gender">Gender</label>
+                            <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder=""
+                                   <c:if test="${paInfo.gender == 'M'}">
+                                        value="Male"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'F'}">
+                                        value="Female"
+                                    </c:if>
+                                    <c:if test="${paInfo.gender == 'X'}">
+                                        value="Other"
+                                    </c:if>
+                            >
+                        </div>                    
+
+                        <div class="col-md-6">
+                            <label class="labels">Date of birth</label>
+                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="labels">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}" readonly>
+                    </div>
                 
                 <div class="mt-5 text-center">
-                    <a href="editPatient.jsp" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                 </div>
             </div>
         </div>    
@@ -254,14 +264,15 @@
         <div class="container pt-5">
             <div class="row g-5 pt-4">
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Quick Links</h3>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
-                    </div>
+                    <a href="index.html" class="navbar-brand p-0">
+                        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>dentcare23@medical.com</p>
+                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Popular Links</h3>
@@ -274,31 +285,15 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Get In Touch</h3>
-                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>info@example.com</p>
-                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                    <h3 class="text-white mb-4">Follow Us</h3>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/groups/490263423665224" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Follow Us</h3>
-                    <div class="d-flex">
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid text-light py-4" style="background: #051225;">
-        <div class="container">
-            <div class="row g-0">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Your Site Name</a>. All Rights Reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
+                    <h3 class="text-white mb-4">Payment</h3>
+                    
                 </div>
             </div>
         </div>

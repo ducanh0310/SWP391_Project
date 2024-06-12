@@ -105,9 +105,9 @@
         
                      .rounded-circle {
             border-radius: 50% !important;
-            width: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
-            height: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
-            object-fit: cover; /* ??m b?o hình ?nh ???c c?t g?n v?a v?i hình tròn */
+            width: 150px; /* ??m b?o r?ng width v? height c? gi? tr? b?ng nhau */
+            height: 150px; /* ??m b?o r?ng width v? height c? gi? tr? b?ng nhau */
+            object-fit: cover; /* ??m b?o h?nh ?nh ???c c?t g?n v?a v?i h?nh tr?n */
         }
     </style>
 </head>
@@ -276,7 +276,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="labels">Date of birth</label>
-                                <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}" readonly>
+                                <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}" readonly>
                             </div>
                         </div>
 

@@ -7,7 +7,7 @@ package controller.authen;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import dao1.AccountDAO;
+import dao.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -80,6 +80,11 @@ public class registeraccountcontroller extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
+        if (!validation.Validation.isValidUsername(username)) {
+            request.setAttribute("errorUsn", "Username must be 3 to 15 characters and cannot contain spaces.");
+            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+            return;
+        }
         if (!validation.Validation.isValidPassword(password)) {
             request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase and numbers!");
             request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);

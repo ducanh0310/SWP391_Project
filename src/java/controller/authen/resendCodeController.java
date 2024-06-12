@@ -4,7 +4,6 @@
  */
 package controller.authen;
 
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,16 +12,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.User;
+import java.time.Duration;
+import java.time.Instant;
+import validation.Email;
 
 /**
  *
- * @author trung
+ * @author ngphn
  */
-@WebServlet(name="ConfirmPassword", urlPatterns={"/confirmpass"})
-public class ConfirmPassword extends HttpServlet {
+@WebServlet(name = "resendCodeController", urlPatterns = {"/resendCode"})
+public class resendCodeController extends HttpServlet {
+
+    private static final long TIMEOUT_SECONDS = 60;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +42,10 @@ public class ConfirmPassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConfirmPassword</title>");
+            out.println("<title>Servlet resendCodeController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConfirmPassword at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet resendCodeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,12 +64,31 @@ public class ConfirmPassword extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        if(currentUser == null){
-            response.sendRedirect("index.jsp");
-        }else{
-            request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
+        String enteredCode = request.getParameter("code");
+        session.removeAttribute("verificationCode");
+        session.removeAttribute("codeTimestamp");
+        String verificationCode = Email.generateVerificationCode();
+        session.setAttribute("verificationCode", verificationCode);
+        String email = (String) session.getAttribute("email");
+        Email.sendVerificationCode(email, verificationCode);
+        String storedCode = (String) session.getAttribute("verificationCode");
+        session.setAttribute("codeTimestamp", Instant.now());
+        Instant codeTimestamp = (Instant) session.getAttribute("codeTimestamp");
+        if (storedCode != null && codeTimestamp != null) {
+            Instant now = Instant.now();
+            long elapsedSeconds = Duration.between(codeTimestamp, now).getSeconds();
+            if (storedCode.equals(enteredCode) && elapsedSeconds <= TIMEOUT_SECONDS) {
+                session.removeAttribute("verificationCode");
+                session.removeAttribute("codeTimestamp");
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+                return;
+            } else if (elapsedSeconds > TIMEOUT_SECONDS) {
+                request.setAttribute("timeout", "Verification code has expired! Please try again!");
+            } 
+        } else {
+            request.setAttribute("error", "An error occurred! Please try again!");
         }
+        request.getRequestDispatcher("view/authen/confirmemailregister.jsp").forward(request, response);
     }
 
     /**
@@ -82,25 +102,7 @@ public class ConfirmPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String oldPass = request.getParameter("oldPass");
-            HttpSession session = request.getSession();
-            User currentUser = (User) session.getAttribute("currentUser");
-            UserDAO userDAO = new UserDAO();
-            if (currentUser != null) {
-                String check = userDAO.checkPasswordByUsername(currentUser.getName());
-                if (!check.equals(oldPass)) {
-                    request.setAttribute("error", "Password is incorrect!");
-                    request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("changepass");
-                }
-            }else{
-                response.sendRedirect("index.jsp");
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
