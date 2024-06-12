@@ -5,7 +5,7 @@
 package controller.admin;
 
 
-import dao1.PatientDAO;
+import dao.PatientDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
