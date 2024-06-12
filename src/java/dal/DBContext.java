@@ -28,18 +28,18 @@ public class DBContext {
 //        }
 //    }
     public static Connection getConnection() {
-        Connection connection2 = null;
+        Connection connection = null;
         try {
             String user = "sa";
             String pass = "namnp";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_Project;encrypt=true;trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection2 = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(url, user, pass);
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return connection2;
+        return connection;
     }
 
     public void closeConnection(Connection connection) throws SQLException {
