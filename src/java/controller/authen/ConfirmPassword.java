@@ -4,7 +4,7 @@
  */
 package controller.authen;
 
-import dao1.UserDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

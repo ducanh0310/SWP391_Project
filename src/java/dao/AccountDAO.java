@@ -1,4 +1,4 @@
-package dao1;
+package dao;
 
 import dal.DBContext;
 
@@ -6,48 +6,62 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class AccountDAO {
+public class AccountDAO extends DBContext implements IAccountDAO {
+    //mo truoc dong sau ex statement mo sau cung close dau tien
 
-    private final Connection connection;
-
-    public AccountDAO() {
-        this.connection = DBContext.getConnection();
-    }
-
-    public ArrayList<String> getAllAccount() {
+    public ArrayList<String> getAllAccount() throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
         ArrayList<String> list = new ArrayList<>();
         String query = "SELECT username FROM User_account";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 list.add(rs.getString("username"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName());
+            throw ex; //nesm exception ra ngoai
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return list;
     }
 
-    public ArrayList<String> getAllEmail() {
+    public ArrayList<String> getAllEmail() throws SQLException{
+        Connection connection = null;
+        PreparedStatement statement = null;
         ArrayList<String> list = new ArrayList<>();
         String query = "SELECT email FROM Patient union select email from Employee";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 list.add(rs.getString("email"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName());
+        }finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return list;
     }
 
-    public boolean addPatient(String address, String name, String gender, String email, Date DOB) {
+    @Override
+    public boolean addPatient(String address, String name, String gender, String email, Date DOB) throws SQLException  {
         String query = "INSERT INTO Patient_info(address, name, gender, email, DOB) VALUES(?,?,?,?,?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
             statement.setString(1, address);
             statement.setString(2, name);
             statement.setString(3, gender);
@@ -58,6 +72,9 @@ public class AccountDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName());
             return false;
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
     }
 
@@ -206,11 +223,12 @@ public class AccountDAO {
             }
         }
     }
+
     public static boolean updatePasswordByEmail(String email, String password) {
-        String query = "UPDATE User_account " +
-                       "SET password = ? " +
-                       "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) " +
-                       "   OR employee_id = (SELECT employee_id FROM Employee WHERE email = ?)";
+        String query = "UPDATE User_account "
+                + "SET password = ? "
+                + "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) "
+                + "   OR employee_id = (SELECT employee_id FROM Employee WHERE email = ?)";
         try {
             Connection connection = DBContext.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
@@ -224,7 +242,6 @@ public class AccountDAO {
             return false;
         }
     }
-
 
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();

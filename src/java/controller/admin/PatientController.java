@@ -4,7 +4,7 @@
  */
 package controller.admin;
 
-import dao1.PatientDAO;
+import dao.PatientDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

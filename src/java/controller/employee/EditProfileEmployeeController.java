@@ -1,7 +1,7 @@
 package controller.employee;
 
-import dao1.DBAccount;
-import dao1.DBEmployeeProfile;
+import dao.DBAccount;
+import dao.DBEmployeeProfile;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

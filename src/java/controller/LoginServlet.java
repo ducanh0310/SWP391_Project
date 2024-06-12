@@ -4,13 +4,13 @@
  */
 package controller;
 
-import dao1.Authorization;
-import dao1.EmployeeDAO;
-import dao1.PatientDAO;
+import dao.Authorization;
+import dao.EmployeeDAO;
+import dao.PatientDAO;
 import dal.DBContext;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonObject;
-import dao1.DBPatientProfile;
+import dao.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,7 +30,7 @@ import model.PatientInfo;
 //import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-import dao1.UserDAO;
+import dao.UserDAO;
 import model.Employee;
 import model.Patient;
 
