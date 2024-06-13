@@ -1,3 +1,11 @@
+<%-- 
+    Document   : chooseServices
+    Created on : Jun 12, 2024, 11:42:55 AM
+    Author     : Vu Minh Quan
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,7 @@
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="../img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -20,18 +28,46 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-        <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+        <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-
-        
+        <link href="../css/style.css" rel="stylesheet">
+        <style>
+            .hidden {
+                display: none;
+            }
+            .table-container {
+                max-height: 200px; /* Adjust as needed */
+                overflow-y: auto;
+            }
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #fff;
+            }
+            .table th,
+            .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+            .table th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+            .table tbody + tbody {
+                border-top: 2px solid #dee2e6;
+            }
+            .table .table {
+                background-color: #212529;
+            }
+        </style>
     </head>
 
     <body>
@@ -139,103 +175,90 @@
 
         <!-- Appointment Start -->
         <div class="container-fluid bg-primary bg-appointment mb-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 90px;">
-            <div class="container">
+            <div class="container" >
                 <div class="row gx-5">
-                    <div class="col-lg-6 py-5">
+                    <!-- Initial content -->
+                    <div id="initial-content" class="col-lg-6 py-5">
                         <div class="py-5">
                             <h1 class="display-5 text-white mb-4">We Are A Certified and Award Winning Dental Clinic You Can Trust</h1>
                             <p class="text-white mb-0">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+
+                    <!-- Search slot -->
+                    <div class="col-lg-6 py-5">
                         <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-                            <h1 class="text-white mb-4">Make Appointment</h1>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <select class="form-select bg-light border-0" style="height: 55px;">
-                                            <option selected>Select A Service</option>
-                                            <option value="1">Service 1</option>
-                                            <option value="2">Service 2</option>
-                                            <option value="3">Service 3</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <select class="form-select bg-light border-0" style="height: 55px;">
-                                            <option selected>Select Doctor</option>
-                                            <option value="1">Doctor 1</option>
-                                            <option value="2">Doctor 2</option>
-                                            <option value="3">Doctor 3</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="date" id="date1" data-target-input="nearest">
-                                            <input type="text"
-                                                   class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Appointment Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="time" id="time1" data-target-input="nearest">
-                                            <input type="text"
-                                                   class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Appointment Time" data-target="#time1" data-toggle="datetimepicker" style="height: 55px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-dark w-100 py-3" type="submit">Make Appointment</button>
-                                    </div>
+                            <h1 class="text-white mb-4">Search Slot</h1>
+                            <form id="search-form" action="" method="POST">
+                                <div class="date mb-3" id="dateBook" name="dateBook" data-target-input="nearest">
+                                    <input type="date" class="form-control bg-light border-0 datetimepicker-input"
+                                           placeholder="Appointment Date" style="height: 40px;">
+                                </div>
+                                <select class="form-select bg-light border-0 mb-3" id="service" name="service" style="height: 40px;">
+                                    <option selected>Select A Service</option>
+                                    <c:forEach items="${requestScope.arrService}" var="service">
+                                        <option value="${service.id}">${service.name}</option>
+                                    </c:forEach>
+                                </select>
+
+
+                                <div>
+                                    <button class="btn btn-dark w-100 py-3" type="button" id="search-slot-button">Search Slot</button>
                                 </div>
                             </form>
-                            <!-- Replacement content -->
-                            <div id="replacement-content" class="col-lg-4 wow zoomIn hidden" data-wow-delay="0.1s">
-                                <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
-                                    <h3 class="text-white mb-3">Opening Hours</h3>
-                                    <div class="d-flex justify-content-between text-white mb-3">
-                                        <h6 class="text-white mb-0">Mon - Fri</h6>
-                                        <p class="mb-0">8:00am - 9:00pm</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between text-white mb-3">
-                                        <h6 class="text-white mb-0">Saturday</h6>
-                                        <p class="mb-0">8:00am - 7:00pm</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between text-white mb-3">
-                                        <h6 class="text-white mb-0">Sunday</h6>
-                                        <p class="mb-0">8:00am - 5:00pm</p>
-                                    </div>
-                                    <a class="btn btn-light" href="">Appointment</a>
-                                </div>
+                        </div>
+                    </div>
+                    <!-- Replacement content -->
+                    <div id="replacement-content" class="col-lg-6 py-5 wow zoomIn hidden" data-wow-delay="0.1s">
+                        <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
+                            <h1 class="text-white mb-4">Slot</h1>
+                            <div class="table-container">
+                                <table class="table text-white">
+                                    <thead>
+                                        <tr>
+                                            <th><h4>Room</h4></th>
+                                            <th><h4>Doctor</h4></th>
+                                            <th><h4>Time</h4></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Room 1</td>
+                                            <td>Doctor A</td>
+                                            <td>8:00am - 9:00pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Room 2</td>
+                                            <td>Doctor B</td>
+                                            <td>8:00am - 7:00pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Room 3</td>
+                                            <td>Doctor C</td>
+                                            <td>8:00am - 5:00pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Room 4</td>
+                                            <td>Doctor D</td>
+                                            <td>9:00am - 6:00pm</td>
+                                        </tr>
+                                        <!-- Add more rows as needed -->
+                                    </tbody>
+                                </table>
                             </div>
+                            <a class="btn btn-light" href="">Appointment</a>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
         <!-- Appointment End -->
 
 
-        <!-- Newsletter Start -->
-        <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
-            <div class="container">
-                <div class="bg-primary p-5">
-                    <form class="mx-auto" style="max-width: 600px;">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-white p-3" placeholder="Your Email">
-                            <button class="btn btn-dark px-4">Sign Up</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Newsletter End -->
 
-
+        <div style="margin-top: 160px;"></div>
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
             <div class="container pt-5">
@@ -300,20 +323,26 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="lib/twentytwenty/jquery.event.move.js"></script>
-        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <script src="../lib/wow/wow.min.js"></script>
+        <script src="../lib/easing/easing.min.js"></script>
+        <script src="../lib/waypoints/waypoints.min.js"></script>
+        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../lib/tempusdominus/js/moment.min.js"></script>
+        <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="../js/main.js"></script>
+        <script>
+            document.getElementById('search-slot-button').addEventListener('click', function () {
+                const initialContent = document.getElementById('initial-content');
+                document.getElementById('initial-content').style.display = 'none';
+                document.getElementById('replacement-content').style.display = 'block';
+            });
 
-        
+        </script>
     </body>
 
 </html>
