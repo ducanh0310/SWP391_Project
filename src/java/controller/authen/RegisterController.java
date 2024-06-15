@@ -4,6 +4,7 @@
  */
 package controller.authen;
 
+import Service.IAccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Instant;
@@ -65,7 +66,7 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String email = request.getParameter("email");
-            AccountDAO accountDAO = new AccountDAO();
+            IAccountDAO accountDAO = new AccountDAO();
             ArrayList<String> listEmail = accountDAO.getAllEmail();
             if (listEmail.contains(email)) {
                 request.setAttribute("accountexits", "This email has been used! Please try another email!");

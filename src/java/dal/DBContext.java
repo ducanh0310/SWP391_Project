@@ -27,7 +27,7 @@ public class DBContext {
 //            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
 //        }
 //    }
-    public static Connection getConnection() {
+    public Connection getConnection() {
         Connection connection2 = null;
         try {
             String user = "sa";
@@ -54,8 +54,9 @@ public class DBContext {
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) {
         DBContext db = new DBContext();
         System.out.println("Hello" + db + "\n" + db.getConnection());
+        System.out.println("abc");
     }
 }
