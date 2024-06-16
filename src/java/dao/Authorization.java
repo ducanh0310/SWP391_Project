@@ -15,34 +15,28 @@ import java.util.logging.Logger;
  *
  * @author trung
  */
-public class Authorization {
+public class Authorization extends DBContext{
 
-    private final Connection connection;
-
-    public Authorization() {
-        this.connection = DBContext.getConnection();
-    }
-
-    public String isEmployee(String employeeId) {
-        String sql = "Select employee_type from [Employee] where employee_id = ?";
+    public String isEmployee(String employeeId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "Select employee_type from [Employee] where employee_id = ?";
         try {
-            PreparedStatement statement = connection.prepareStatement(sql);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
             statement.setString(1, employeeId);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getString("employee_type");
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName());
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return null;
     }
-    
-    
-    public static void main(String[] args) {
-        Authorization autho = new Authorization();
-        
-        System.out.println(autho.isEmployee("1"));
-    }
+
 }

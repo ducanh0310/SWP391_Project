@@ -21,19 +21,18 @@ import model.User;
  */
 public class UserDAO extends DBContext {
 
-    private final Connection connection;
+    public User checkUser(String username) throws SQLException {
+        String query = "select * from User_account where username = ? or patient_id = (select patient_id from Patient where email =  ?) or employee_id = (select employee_id from Employee where email = ?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
 
-    public UserDAO() throws ClassNotFoundException {
-        this.connection = DBContext.getConnection();
-    }
-
-    public User checkUser(String username) {
-        String sql = "select * from User_account where username = ? or patient_id = (select patient_id from Patient where email =  ?) or employee_id = (select employee_id from Employee where email = ?)";
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setString(1, username);
-            st.setString(2, username);
-            st.setString(3, username);
-            ResultSet rs = st.executeQuery();
+            statement.setString(1, username);
+            statement.setString(2, username);
+            statement.setString(3, username);
+            ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 User u = new User(rs.getString(1),
                         rs.getString(2),
@@ -44,27 +43,23 @@ public class UserDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return null;
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
-        UserDAO ud = new UserDAO();
-        System.out.println("Hello");
-        User user = ud.checkUser("akiti7935");
-        if (user != null) {
-            System.out.println(user.getName() + " " + user.getPatient_Id() + " " + user.getEmployee_Id());
-        } else {
-            System.out.println("User not found or incorrect username/password.");
-        }
-    }
-
-    public ArrayList<User> getAll() {
+    public ArrayList<User> getAll() throws SQLException {
         ArrayList<User> list = new ArrayList<>();
-        String sql = "select * from User_account";
+
+        String query = "select * from User_account";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 User u = new User(rs.getString(1),
                         rs.getString(2),
@@ -75,18 +70,23 @@ public class UserDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
 
         return list;
     }
 
-    public User getUserByPatientId(int patientId) {
+    public User getUserByPatientId(int patientId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "SELECT * FROM User_account WHERE patient_id = ?";
         try {
-            String query = "SELECT * FROM User_account WHERE patient_id = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, patientId);
-            ResultSet rs = ps.executeQuery();
-
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, patientId);
+            ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 User u = new User(rs.getString(1),
                         rs.getString(2),
@@ -97,36 +97,54 @@ public class UserDAO extends DBContext {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return null;
     }
 
-    public String checkPasswordByUsername(String username) {
+    public String checkPasswordByUsername(String username) throws SQLException {
+        String query = "select password from User_account where username = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            String sql = "select password from User_account where username = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 return rs.getString("password");
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return null;
     }
 
-    public void changePassword(String username, String newPass) {
+    public void changePassword(String username, String newPass) throws SQLException {
+        String query = "UPDATE [dbo].[User_account] SET password = ? WHERE username = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            String sql = "UPDATE [dbo].[User_account] SET password = ? WHERE username = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, newPass);
-            ps.setString(2, username);
-            int rs = ps.executeUpdate();
-            
+
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+
+            statement.setString(1, newPass);
+            statement.setString(2, username);
+            int rs = statement.executeUpdate();
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
-        
+
     }
+
 }

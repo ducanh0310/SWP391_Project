@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
                         Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
                         session.setAttribute("userRole", "patient");
-                        request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                         //request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (user.getType_Id() == 1) {
                         EmployeeDAO empDao = new EmployeeDAO();
@@ -126,8 +126,8 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("error", "Invalid username or password.");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 
@@ -143,7 +143,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException, SQLException {
         UserDAO user = new UserDAO();
         ArrayList<User> userList = user.getAll();
         request.setAttribute("Users", userList);

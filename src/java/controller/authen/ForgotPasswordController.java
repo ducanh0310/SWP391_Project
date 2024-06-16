@@ -14,7 +14,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.time.Instant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import validation.Email;
 
 /**
@@ -82,21 +85,25 @@ public class ForgotPasswordController extends HttpServlet {
         String code = Email.generateVerificationCode();
         session.setAttribute("verificationCodeFP", code);
         session.setAttribute("codeTimestampFP", Instant.now());
-        if (dao.checkUserNameAndEmail(acc)) {
-            if (acc.contains("@")) {
-                session.setAttribute("emailFP", acc);
-                Email.sendVerificationCode(acc, code);
+        try {
+            if (dao.checkUserNameAndEmail(acc)) {
+                if (acc.contains("@")) {
+                    session.setAttribute("emailFP", acc);
+                    Email.sendVerificationCode(acc, code);
+                } else {
+                    
+                    String email = String.valueOf(dao.getEmailByUsername(acc));
+                    session.setAttribute("emailFP", email);
+                    request.setAttribute("email", email);
+                    Email.sendVerificationCode(email, code);
+                }
+                request.getRequestDispatcher("view/authen/ConfirmEmailForgotPw.jsp").forward(request, response);
             } else {
-
-                String email = String.valueOf(dao.getEmailByUsername(acc));
-                session.setAttribute("emailFP", email);
-                request.setAttribute("email", email);
-                Email.sendVerificationCode(email, code);
+                request.setAttribute("error", "Account not found");
+                request.getRequestDispatcher("view/authen/ForgotPassword.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("view/authen/ConfirmEmailForgotPw.jsp").forward(request, response);
-        } else {
-            request.setAttribute("error", "Account not found");
-            request.getRequestDispatcher("view/authen/ForgotPassword.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -26,7 +26,7 @@ public class PatientController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userRole = (String) session.getAttribute("userRole");
-        if (!userRole.equals("admin") || userRole.isEmpty()) {
+        if (userRole.contains("patient") || userRole.isEmpty()) {
             session.invalidate();
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;

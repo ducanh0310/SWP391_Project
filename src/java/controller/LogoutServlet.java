@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author trung
  */
-@WebServlet(name="LogoutServlet", urlPatterns={"/logout"})
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
 public class LogoutServlet extends HttpServlet {
 
     /**
@@ -58,9 +58,13 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        session.invalidate();
-        response.sendRedirect("index.jsp");
+        try {
+            HttpSession session = request.getSession(false);
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+        } catch (NullPointerException e) {
+            response.sendRedirect("index.jsp");
+        }
     }
 
     /**

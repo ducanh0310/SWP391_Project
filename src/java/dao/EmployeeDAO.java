@@ -16,21 +16,20 @@ import model.User;
  *
  * @author trung
  */
-public class EmployeeDAO {
-     private final Connection connection;
-    
-    public EmployeeDAO(){
-        this.connection = DBContext.getConnection();
-    }
-    
-    public Employee getEmployeeByEmployeeId(String employeeId){
-        String sql = "select * from Employee where employee_id = ?";
+public class EmployeeDAO extends DBContext {
+
+    public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "select * from Employee where employee_id = ?";
         Employee emp = new Employee();
-        try{
-            PreparedStatement prepare = connection.prepareStatement(sql);
-            prepare.setString(1, employeeId);
-            ResultSet rs = prepare.executeQuery();
-            if(rs.next()){
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+
+            statement.setString(1, employeeId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
                 emp.setId(rs.getInt("employee_id"));
                 emp.setEmployeeSin(rs.getString("employee_sin"));
                 emp.setEmployeeType(rs.getString("employee_type"));
@@ -39,14 +38,12 @@ public class EmployeeDAO {
                 emp.setAnnualSalary(rs.getFloat("annual_salary"));
                 emp.setBranchId(rs.getInt("branch_id"));
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return emp;
-    }
-    
-    public static void main(String[] args) {
-        EmployeeDAO emp = new EmployeeDAO();
-        System.out.println(emp.getEmployeeByEmployeeId("3").getName());
     }
 }

@@ -247,11 +247,11 @@ public class AccountDAO extends DBContext implements IAccountDAO {
                 if (generatedKeys != null) {
                     generatedKeys.close();
                 }
-                if (insertPatientStmt != null) {
-                    insertPatientStmt.close();
-                }
                 if (insertUserAccountStmt != null) {
                     insertUserAccountStmt.close();
+                }
+                if (insertPatientStmt != null) {
+                    insertPatientStmt.close();
                 }
                 if (connection != null) {
                     connection.setAutoCommit(true); // Reset auto-commit to true
@@ -262,8 +262,9 @@ public class AccountDAO extends DBContext implements IAccountDAO {
             }
         }
     }
+
     @Override
-    public boolean updatePasswordByEmail(String email, String password) throws SQLException{
+    public boolean updatePasswordByEmail(String email, String password) throws SQLException {
         String query = "UPDATE User_account "
                 + "SET password = ? "
                 + "WHERE patient_id = (SELECT patient_id FROM Patient WHERE email = ?) "
