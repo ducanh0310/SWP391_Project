@@ -4,12 +4,12 @@
  */
 package controller;
 
-import dao1.Authorization;
-import dao1.EmployeeDAO;
-import dao1.PatientDAO;
+import dao.Authorization;
+import dao.EmployeeDAO;
+import dao.PatientDAO;
 import dal.DBContext;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonObject;
 import dao1.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +30,7 @@ import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-import dao1.UserDAO;
+import dao.UserDAO;
 import model.Employee;
 import model.Patient;
 
@@ -68,11 +68,7 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        HttpSession session = request.getSession();
-        session.invalidate();
-        
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     @Override
@@ -102,7 +98,7 @@ public class LoginServlet extends HttpServlet {
                         Patient pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
                         session.setAttribute("userRole", "patient");
-                        request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                         //request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (user.getType_Id() == 1) {
                         EmployeeDAO empDao = new EmployeeDAO();
@@ -129,8 +125,8 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("error", "Invalid username or password.");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
             
         }
@@ -139,7 +135,7 @@ public class LoginServlet extends HttpServlet {
 
     
 
-    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException, SQLException {
         UserDAO user = new UserDAO();
         ArrayList<User> userList = user.getAll();
         request.setAttribute("Users", userList);

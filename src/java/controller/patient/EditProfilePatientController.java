@@ -5,8 +5,8 @@
 
 package controller.patient;
 
-import dao1.DBAccount;
-import dao1.DBPatientProfile;
+import dao.DBAccount;
+import dao.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -62,13 +62,13 @@ public class EditProfilePatientController extends HttpServlet {
          Map<String, String> errorMsg = new HashMap<>();
     try {
         int patientId = Integer.parseInt(request.getParameter("id"));
-        String patientSin = request.getParameter("medicineCode");
-        String fullname = request.getParameter("fullname");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        String dobStr = request.getParameter("dob");
-        String address = request.getParameter("address");
+        String patientSin = request.getParameter("medicineCode").trim();
+        String fullname = request.getParameter("fullname").trim();
+        String phoneNumber = request.getParameter("phoneNumber").trim();
+        String email = request.getParameter("email").trim();
+        String gender = request.getParameter("gender").trim();
+        String dobStr = request.getParameter("dob").trim();
+        String address = request.getParameter("address").trim();
 
         Validation valid= new Validation();
         // Validate name
@@ -127,23 +127,27 @@ public class EditProfilePatientController extends HttpServlet {
             request.setAttribute("username", currentUser.getName());
             request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
             
+        }else{
+            // If all validations pass, proceed with updating the patient info
+            //fullname.trim();
+            PatientInfo paInfo = new PatientInfo();
+            paInfo.setPatientId(patientId);
+            paInfo.setPatientSin(medicalCode);
+            paInfo.setName(fullname);
+            paInfo.setPhoneNumber(phoneNumber);
+            paInfo.setEmail(email);
+            paInfo.setGender(gender);
+            paInfo.setDob(dob);
+            paInfo.setAddress(address);
+
+            DBPatientProfile db = new DBPatientProfile();
+            db.editInfoPatient(paInfo);
+            response.sendRedirect("view");
         }
 
-        // If all validations pass, proceed with updating the patient info
-        PatientInfo paInfo = new PatientInfo();
-        paInfo.setPatientId(patientId);
-        paInfo.setPatientSin(medicalCode);
-        paInfo.setName(fullname);
-        paInfo.setPhoneNumber(phoneNumber);
-        paInfo.setEmail(email);
-        paInfo.setGender(gender);
-        paInfo.setDob(dob);
-        paInfo.setAddress(address);
+        
 
-        DBPatientProfile db = new DBPatientProfile();
-        db.editInfoPatient(paInfo);
-
-        response.sendRedirect("view");
+        
     } catch (NumberFormatException e) {
         errorMsg.put("patientId", "Invalid patient ID.");
         errorMsg.put("medicalCode", "Invalid code.");

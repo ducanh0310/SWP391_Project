@@ -5,10 +5,9 @@
 
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>DentCare - Dental Clinic</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
@@ -51,6 +50,23 @@
             body{
                 background: #f7f7ff;
                 margin-top:0px;
+            }
+            table th , table td{
+                text-align: center;
+            }
+            th {
+                background: #333;
+                color: #fff;
+            }
+            .header_wrap {
+                padding:30px 0;
+            }
+            .dataTables_filter input[type="search"] {
+                border: 2px solid #000;
+                font-weight: bold;
+                border-radius: 10px;
+                padding: 5px 5px;
+                height: 35px;
             }
         </style>
 
@@ -121,7 +137,7 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="employee/profile/view">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -139,10 +155,10 @@
 
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
-                    <div class="container-fluid">                   
+                    <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <div class="mb-npx">
+                                                                <div class="mb-npx">
                                     <div class="row align-items-center">
                                         <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                             <!-- Title -->
@@ -162,70 +178,97 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Nav -->
+                            <div class="container">
+                                <div class="header_wrap"> 
+                                    
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="myTable">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">SIN</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Birthday</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${patients}" var="patient" varStatus="loop">
+                                                <tr>
+                                                    <td>${loop.index + 1}</td>
+                                                    <td>${patient.sin}</td>
+                                                    <td><a class="text-heading font-semibold" href="patientDetail?pid=${patient.id}">${patient.name}</a></td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${patient.gender == 'M'}">Male</c:when>
+                                                            <c:when test="${patient.gender == 'F'}">Female</c:when>
+                                                            <c:otherwise>${patient.gender}</c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>${patient.email}</td>
+                                                    <td>${patient.phone}</td>
+                                                    <td>${patient.dob}</td>
+                                                    <td class="text-end">
+                                                        <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
+                                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-nowrap">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">SIN</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gender</th> 
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone</th>
-                                    <th scope="col">Birthday</th>                                                                                   
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${patients}" var="patient">
-                                    <tr>
-                                        <td>${patient.sin}</td>
-                                        <td><a class="text-heading font-semibold" href="viewPatientDetail.jsp">${patient.name}   
-                                            </a></td>
-                                        <td>${patient.gender}</td>
-                                        <td>${patient.email}</td>
-                                        <td>${patient.phone}</td>
-                                        <td>${patient.dob}</td>                                               
-                                        <td class="text-end">
-                                            <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
-                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer border-0 py-5">
-                        <span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
-                    </div>
+                </main>
             </div>
         </div>
-    </main>
-</div>
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/wow/wow.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="lib/tempusdominus/js/moment.min.js"></script>
-<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="lib/twentytwenty/jquery.event.move.js"></script>
-<script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-<!-- Template Javascript -->
-<script src="js/main.js"></script>
-</body>
-
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    "language": {
+                        "lengthMenu": "Show _MENU_",
+                        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                        "infoEmpty": "Showing 0 to 0 of 0 entries",
+                        "infoFiltered": "(filtered from _MAX_ total entries)",
+                        "search": "Search:",
+                        "paginate": {
+                            "first": "First",
+                            "last": "Last",
+                            "next": "Next",
+                            "previous": "Previous"
+                        }
+                    }
+                });
+            });
+            
+        </script>
+    </body>
 </html>

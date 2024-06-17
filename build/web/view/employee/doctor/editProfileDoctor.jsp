@@ -287,7 +287,7 @@
 
                         <div class="col-md-6">
                             <label class="labels">Date of birth</label>
-                            <input type="text" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
+                            <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
                             <c:if test="${not empty errorMsg.dob}">
                                 <span style="color:red">${errorMsg.dob}</span>
                             </c:if>

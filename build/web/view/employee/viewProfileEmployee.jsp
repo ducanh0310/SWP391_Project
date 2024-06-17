@@ -280,6 +280,22 @@
                         <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
                     </div>
                 </div>
+    </div>
+    
+    <!--profile-->
+    
+    <div class="row justify-content-center " >
+        
+        <div class="col-md-3 container-box">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold">Username</span>
+                <span class="text-black-50">ID</span>
+                <br>
+                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
+                <a href="../../changepass" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+                
             </div>
         </div>
 

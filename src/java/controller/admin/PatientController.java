@@ -4,7 +4,7 @@
  */
 package controller.admin;
 
-import dao1.PatientDAO;
+import dao.PatientDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Patient;
 
@@ -23,11 +24,17 @@ import model.Patient;
 public class PatientController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        String userRole = (String) session.getAttribute("userRole");
+        if (userRole.contains("patient") || userRole.isEmpty()) {
+            session.invalidate();
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
         PatientDAO patientList = new PatientDAO();
-        ArrayList<Patient> patients = patientList.getPatient();      
-        request.setAttribute("patients", patients);     
+        ArrayList<Patient> patients = patientList.getPatient();
+        request.setAttribute("patients", patients);
         request.getRequestDispatcher("viewListPatient.jsp").forward(request, response);
     }
-    
+
 }

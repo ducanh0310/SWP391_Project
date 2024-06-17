@@ -5,8 +5,8 @@
 
 package controller.uploadImage;
 
-import dao1.DBAccount;
-import dao1.DBImageProfile;
+import dao.DBAccount;
+import dao.DBImageProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

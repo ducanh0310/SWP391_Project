@@ -4,16 +4,20 @@
  */
 package controller.authen;
 
+import Service.IAccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import dao1.AccountDAO;
+import dao.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import validation.Email;
 
 /**
@@ -75,29 +79,39 @@ public class registeraccountcontroller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
-        if (!validation.Validation.isValidPassword(password)) {
-            request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase and numbers!");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
-        } else if (!password.equals(repassword)) {
-            request.setAttribute("error", "Password and Re-password are not the same!");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
+        try {
+            HttpSession session = request.getSession();
+            String email = (String) session.getAttribute("email");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String repassword = request.getParameter("repassword");
+            if (!validation.Validation.isValidUsername(username)) {
+                request.setAttribute("errorUsn", "Username must be 3 to 15 characters and cannot contain spaces.");
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+                return;
+            }
+            if (!validation.Validation.isValidPassword(password)) {
+                request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase and numbers!");
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+                return;
+            } else if (!password.equals(repassword)) {
+                request.setAttribute("error", "Password and Re-password are not the same!");
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+                return;
+            }
+            //check if username is existed
+            IAccountDAO accountDAO = new AccountDAO();
+            if (accountDAO.checkAccount(username)) {
+                request.setAttribute("error", "Username is existed!");
+                request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
+                return;
+            }
+            //insert account
+            accountDAO.addPatientAccount(email, username, password);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(registeraccountcontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //check if username is existed
-        if (new AccountDAO().checkAccount(username)) {
-            request.setAttribute("error", "Username is existed!");
-            request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
-            return;
-        }
-        //insert account
-        new AccountDAO().addPatientAccount(email, username, password);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
     /**

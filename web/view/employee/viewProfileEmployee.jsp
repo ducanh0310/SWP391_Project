@@ -209,6 +209,68 @@
                             <label class="labels" for="gender">Gender</label>
                             <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly="">
                         </div>                    
+    <!-- Navbar End -->
+    
+    
+    <div class="container-fluid bg-primary py-5 hero-header mb-5">
+        <div class="row py-3">
+            <div class="col-12 text-center">
+                <h1 class="display-3 text-white animated zoomIn">Personal information</h1>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!--profile-->
+    
+    <div class="row justify-content-center " >
+        
+        <div class="col-md-3 container-box">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold">Username</span>
+                <span class="text-black-50">ID</span>
+                <br>
+                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
+                <a href="../../changepass" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+                
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5 container-box">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">My account</h4>
+                </div>
+                <hr>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="labels">Fullname</label>
+                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" readonly="">
+                    </div>        
+                    <div class="col-md-6">
+                        <label class="labels">Phone Number</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="" readonly="">
+                    </div>
+                </div>
+                    
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="labels">Email</label>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="" value="" readonly="">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labels">Medicine code</label>
+                        <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="" readonly="">
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="labels" for="gender">Gender</label>
+                        <input type="text" id="gender" name="gender" class="form-control" placeholder=" " value="" readonly="">
+                    </div>                    
 
                         <div class="col-md-6">
                             <label class="labels">Date of birth</label>

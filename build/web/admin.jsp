@@ -1,12 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>DentCare - Dental Clinic</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
@@ -38,11 +39,40 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .text-primary {
+                --x-text-opacity: 1;
+                color: #06a3da !important;
+            }
+            .m-0 {
+                margin-left: 30px !important;
+            }
+            body{
+                background: #f7f7ff;
+                margin-top:0px;
+            }
+            table th , table td{
+                text-align: center;
+            }
+            th {
+                background: #333;
+                color: #fff;
+            }
+            .header_wrap {
+                padding:30px 0;
+            }
+            .dataTables_filter input[type="search"] {
+                border: 2px solid #000;
+                font-weight: bold;
+                border-radius: 10px;
+                padding: 5px 5px;
+                height: 35px;
+            }
+        </style>
 
     </head>
 
     <body>
-        <!-- Dashboard -->
         <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
             <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
@@ -52,13 +82,12 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Brand -->
-                    <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-                    
+                    <a href="index.jsp" class="navbar-brand p-0">
+                        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
@@ -69,7 +98,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viewListPatient.jsp">
+                                <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
@@ -102,13 +131,13 @@
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
                         <!-- Navigation -->
-                       
+
                         <!-- Push content down -->
-                        <hr style="border: 1px solid black">
+                        <hr>
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="../employee/profile/edit">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -123,156 +152,65 @@
             </nav>
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-                <!-- Header -->
-                <header class="bg-surface-primary border-bottom pt-6">
-                    <div class="container-fluid">
-                        <div class="mb-npx">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6 col-12 mb-4 mb-sm-0">
-                                    <!-- Title -->
-                                    <h1 class="h2 mb-0 ls-tight">Application</h1>
-                                </div>
-                                <!-- Actions -->
-                                <div class="col-sm-6 col-12 text-sm-end">
-                                    <div class="mx-n1">
-                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
-                                            <span class=" pe-2">
-                                                <i class="bi bi-pencil"></i>
-                                            </span>
-                                            <span>Edit</span>
-                                        </a>
-                                        <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
-                                            <span class=" pe-2">
-                                                <i class="bi bi-plus"></i>
-                                            </span>
-                                            <span>Create</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Nav -->
-                            <ul class="nav nav-tabs mt-4 overflow-x border-0">
-                                <li class="nav-item ">
-                                    <a href="#" class="nav-link active">All files</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link font-regular">Shared</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link font-regular">File requests</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </header>
+
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
-                        <!-- Card stats -->
-                        <div class="row g-6 mb-6">
-                            <div class="col-xl-3 col-sm-6 col-12">
-                                <div class="card shadow border-0">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col">
-                                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">Budget</span>
-                                                <span class="h3 font-bold mb-0">$750.90</span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                                    <i class="bi bi-credit-card"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 mb-0 text-sm">
-                                            <span class="badge badge-pill bg-soft-success text-success me-2">
-                                                <i class="bi bi-arrow-up me-1"></i>13%
-                                            </span>
-                                            <span class="text-nowrap text-xs text-muted">Since last month</span>
-                                        </div>
-                                    </div>
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header">
+                                <h5 class="mb-0">Applications</h5>
+                            </div>
+                            <div class="container">
+                                <div class="header_wrap"> 
+
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="myTable">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">SIN</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Birthday</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${patients}" var="patient" varStatus="loop">
+                                                <tr>
+                                                    <td>${loop.index + 1}</td>
+                                                    <td>${patient.sin}</td>
+                                                    <td><a class="text-heading font-semibold" href="patientDetail?pid=${patient.id}">${patient.name}</a></td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${patient.gender == 'M'}">Male</c:when>
+                                                            <c:when test="${patient.gender == 'F'}">Female</c:when>
+                                                            <c:otherwise>${patient.gender}</c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>${patient.email}</td>
+                                                    <td>${patient.phone}</td>
+                                                    <td>${patient.dob}</td>
+                                                    <td class="text-end">
+                                                        <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
+                                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-sm-6 col-12">
-                                <div class="card shadow border-0">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col">
-                                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">New projects</span>
-                                                <span class="h3 font-bold mb-0">215</span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                                    <i class="bi bi-people"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 mb-0 text-sm">
-                                            <span class="badge badge-pill bg-soft-success text-success me-2">
-                                                <i class="bi bi-arrow-up me-1"></i>30%
-                                            </span>
-                                            <span class="text-nowrap text-xs text-muted">Since last month</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6 col-12">
-                                <div class="card shadow border-0">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col">
-                                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total hours</span>
-                                                <span class="h3 font-bold mb-0">1.400</span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
-                                                    <i class="bi bi-clock-history"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 mb-0 text-sm">
-                                            <span class="badge badge-pill bg-soft-danger text-danger me-2">
-                                                <i class="bi bi-arrow-down me-1"></i>-5%
-                                            </span>
-                                            <span class="text-nowrap text-xs text-muted">Since last month</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6 col-12">
-                                <div class="card shadow border-0">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col">
-                                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">Work load</span>
-                                                <span class="h3 font-bold mb-0">95%</span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                                    <i class="bi bi-minecart-loaded"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 mb-0 text-sm">
-                                            <span class="badge badge-pill bg-soft-success text-success me-2">
-                                                <i class="bi bi-arrow-up me-1"></i>10%
-                                            </span>
-                                            <span class="text-nowrap text-xs text-muted">Since last month</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                       
+                        </div>
                     </div>
                 </main>
             </div>
-
-        <!-- JS File -->
-        <script type="text/javascript" src="js/script.js"></script>
-
-
-
-
+        </div>
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
@@ -291,7 +229,28 @@
         <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="js/main.js"></script> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    "language": {
+                        "lengthMenu": "Show _MENU_",
+                        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                        "infoEmpty": "Showing 0 to 0 of 0 entries",
+                        "infoFiltered": "(filtered from _MAX_ total entries)",
+                        "search": "Search:",
+                        "paginate": {
+                            "first": "First",
+                            "last": "Last",
+                            "next": "Next",
+                            "previous": "Previous"
+                        }
+                    }
+                });
+            });
+            
+        </script>
     </body>
-
 </html>
