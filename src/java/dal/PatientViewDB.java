@@ -7,9 +7,9 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.HistoryAdmin;
 import model.Patient;
 
 /**
@@ -17,9 +17,8 @@ import model.Patient;
  * @author Gia Huy
  */
 public class PatientViewDB extends DBContext {
-
+    
     public Patient getPatient(int pid) {
-        ArrayList<Patient> patient = new ArrayList<>();
         try {
             String sql = "SELECT [Patient_id]\n"
                     + "      ,[patient_sin]\n"
@@ -32,9 +31,8 @@ public class PatientViewDB extends DBContext {
                     + "      ,[insurance]\n"
                     + "      ,[rep_id]\n"
                     + "  FROM [Patient]\n"
-                    +"WHERE [Patient_id]=?";
+                    + "WHERE [Patient_id]=?";
             
-
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, pid);
             ResultSet rs = stm.executeQuery();
@@ -52,16 +50,49 @@ public class PatientViewDB extends DBContext {
                 p.setRep_id(rs.getInt("rep_id"));
                 return p;
             }
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(PatientViewDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
+    public HistoryAdmin getHistory(int pid) {
+        try {
+            String sql = "SELECT [date_of_procedure]\n"
+                    + "     ,[appointment_description]\n"
+                    + "      ,[patient_charge]\n"
+                    + "      ,[insurance_charge]\n"
+                    + "      ,[total_charge]\n"
+                    + "  FROM [dbo].[Appointment_procedure] s right join Patient p on s.patient_id=p.Patient_id\n"
+                    + "WHERE p.Patient_id=?";
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                HistoryAdmin h = new HistoryAdmin();
+                h.setDate_of_procedure(rs.getDate("date_of_procedure"));
+                h.setAppointment_description(rs.getString("appointment_description"));
+                h.setPatient_charge(rs.getDouble("patient_charge"));
+                h.setInsurance_charge(rs.getDouble("insurance_charge"));
+                h.setTotal_charge(rs.getDouble("total_charge"));
+                return h;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientViewDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+      
     public static void main(String[] args) {
         PatientViewDB p = new PatientViewDB();
-        System.out.println(p.getPatient(1));
+        System.out.println(p.getHistory(1));
+        
+        
+        
+    
     }
-
+    
 }

@@ -1,0 +1,72 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+
+import java.util.Date;
+
+/**
+ *
+ * @author Gia Huy
+ */
+public class HistoryAdmin {
+
+    Date date_of_procedure;
+    String appointment_description;
+    double patient_charge;
+    double insurance_charge;
+    double total_charge;
+
+    public HistoryAdmin(Date date_of_procedure, String appointment_description, double patient_charge, double insurance_charge, double total_charge) {
+        this.date_of_procedure = date_of_procedure;
+        this.appointment_description = appointment_description;
+        this.patient_charge = patient_charge;
+        this.insurance_charge = insurance_charge;
+        this.total_charge = total_charge;
+    }
+
+    public HistoryAdmin() {
+    }
+
+    public Date getDate_of_procedure() {
+        return date_of_procedure;
+    }
+
+    public String getAppointment_description() {
+        return appointment_description;
+    }
+
+    public double getPatient_charge() {
+        return patient_charge;
+    }
+
+    public double getInsurance_charge() {
+        return insurance_charge;
+    }
+
+    public double getTotal_charge() {
+        return total_charge;
+    }
+
+    public void setDate_of_procedure(Date date_of_procedure) {
+        this.date_of_procedure = date_of_procedure;
+    }
+
+    public void setAppointment_description(String appointment_description) {
+        this.appointment_description = appointment_description;
+    }
+
+    public void setPatient_charge(double patient_charge) {
+        this.patient_charge = patient_charge;
+    }
+
+    public void setInsurance_charge(double insurance_charge) {
+        this.insurance_charge = insurance_charge;
+    }
+
+    public void setTotal_charge(double total_charge) {
+        this.total_charge = total_charge;
+    }
+
+}

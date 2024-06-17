@@ -103,6 +103,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="PatientController">
+                                    <i class="bi bi-person-lines-fill"></i> Service
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clipboard-check"></i> Treatment
                                 </a>
