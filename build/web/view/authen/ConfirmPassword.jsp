@@ -116,7 +116,7 @@
                                 
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary" style="margin-top: 3px">Change</button>
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 3px">Continue</button>
                                 </div>
 
                                 <div class="form-group">

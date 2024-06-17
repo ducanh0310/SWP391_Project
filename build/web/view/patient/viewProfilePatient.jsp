@@ -126,7 +126,7 @@
                             <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
                         </div>
                         <div class="py-2">
-                            <p class="m-0" ><a href="" style="color: #ffffff">Username</a></p>                        
+                            <p class="m-0" ><a href="" style="color: #ffffff">${currentUser.getName()}</a></p>                        
                         </div>
                     </div>
                 </div>

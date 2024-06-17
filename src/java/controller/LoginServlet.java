@@ -68,7 +68,11 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+        HttpSession session = request.getSession();
+        session.invalidate();
+        
         request.getRequestDispatcher("login.jsp").forward(request, response);
+        
     }
 
     @Override
@@ -79,8 +83,8 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String userName = request.getParameter("username");
-        String passWord = request.getParameter("password");
+        String userName = request.getParameter("username").trim();
+        String passWord = request.getParameter("password").trim();
 
         if (userName.trim() == null || passWord.trim() == null
                 || userName.trim().trim().isEmpty() || passWord.trim().isEmpty()) {
@@ -133,15 +137,7 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    private void logout(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            HttpSession session = request.getSession(false);
-            session.invalidate();
-            response.sendRedirect("index.jsp");
-        } catch (IOException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
         UserDAO user = new UserDAO();
