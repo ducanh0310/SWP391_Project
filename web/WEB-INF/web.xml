@@ -20,6 +20,10 @@
         <servlet-name>ViewPatientDetailController</servlet-name>
         <servlet-class>controller.admin.ViewPatientDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditPatientController</servlet-name>
+        <servlet-class>controller.admin.EditPatientController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/view</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>ViewPatientDetailController</servlet-name>
         <url-pattern>/patientDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPatientController</servlet-name>
+        <url-pattern>/editPatient</url-pattern>
     </servlet-mapping>
 </web-app>

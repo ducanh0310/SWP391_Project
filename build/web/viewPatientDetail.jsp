@@ -1,4 +1,4 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +86,7 @@
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
-                           <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
@@ -166,23 +166,23 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Date</h6>
-                                        <span >${history.date_of_procedure}</span>
+                                        <span id="dateSpan"></span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Description</h6>
-                                        <span >${history.appointment_description}</span>
+                                        <span id="dateSpan2"></span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Patient Charge</h6>
-                                        <span >${history.patient_charge}</span>
+                                        <span>${history.patient_charge}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Insurance charge</h6>
-                                        <span >${history.insurance_charge}</span>
+                                        <span>${history.insurance_charge}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Total charge</h6>
-                                        <span >${history.total_charge}</span>
+                                        <span>${history.total_charge}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -214,7 +214,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9 ">
-                                           ${patients.email}
+                                            ${patients.email}
                                         </div>
                                     </div>
                                     <hr>
@@ -224,6 +224,15 @@
                                         </div>
                                         <div class="col-sm-9 ">
                                             ${patients.phone}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Birthday</h6>
+                                        </div>
+                                        <div class="col-sm-9 ">
+                                            ${patients.dob}
                                         </div>
                                     </div>
                                     <hr>
@@ -251,7 +260,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Edit</a>
+                                            <a class="btn btn-info "  href="editPatient?pid=${id}">Edit</a>
                                         </div>
                                     </div>
 
@@ -284,6 +293,29 @@
 
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
+
+            <script>
+                // Lấy giá trị từ biến history.dop
+                var dopValue = "${history.dop}";
+                var dopValue2 = "${history.appointment_description}";
+                // Kiểm tra nếu giá trị là NULL
+                if (dopValue === "NULL" || dopValue === "") {
+                    // Nếu là NULL hoặc rỗng, hiển thị "No data"
+                    document.getElementById("dateSpan").textContent = "No Data";
+                } else {
+                    // Nếu không phải NULL, hiển thị giá trị
+                    document.getElementById("dateSpan").textContent = dopValue;
+                }
+
+                if (dopValue2 === "NULL" || dopValue2 === "") {
+                    // Nếu là NULL hoặc rỗng, hiển thị "No data"
+                    document.getElementById("dateSpan2").textContent = "No Data";
+                } else {
+                    // Nếu không phải NULL, hiển thị giá trị
+                    document.getElementById("dateSpan2").textContent = dopValue2;
+                }
+
+            </script>
     </body>
 
 </html> 

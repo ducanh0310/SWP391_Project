@@ -18,17 +18,15 @@ import model.Patient;
  *
  * @author Gia Huy
  */
-public class ViewPatientDetailController extends HttpServlet {
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@WebServlet(name = "EditPatientController", urlPatterns = {"/editPatient"})
+public class EditPatientController extends HttpServlet {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int patientId = Integer.parseInt(request.getParameter("pid"));
         PatientViewDB patientView = new PatientViewDB();
         Patient patients = patientView.getPatient(patientId);
         HistoryAdmin history = patientView.getHistory(patientId);
-        request.setAttribute("id", patientId);
         request.setAttribute("patients", patients);
         request.setAttribute("history", history);
-        request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("editPatientDetail.jsp").forward(request, response);
     }
-
 }

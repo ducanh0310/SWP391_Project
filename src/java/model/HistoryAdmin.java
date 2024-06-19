@@ -12,14 +12,22 @@ import java.util.Date;
  */
 public class HistoryAdmin {
 
-    Date date_of_procedure;
+    Date dop;
     String appointment_description;
     double patient_charge;
     double insurance_charge;
     double total_charge;
 
-    public HistoryAdmin(Date date_of_procedure, String appointment_description, double patient_charge, double insurance_charge, double total_charge) {
-        this.date_of_procedure = date_of_procedure;
+    public void setDop(Date dop) {
+        this.dop = dop;
+    }
+
+    public Date getDop() {
+        return dop;
+    }
+
+    public HistoryAdmin(Date dop, String appointment_description, double patient_charge, double insurance_charge, double total_charge) {
+        this.dop = dop;
         this.appointment_description = appointment_description;
         this.patient_charge = patient_charge;
         this.insurance_charge = insurance_charge;
@@ -27,10 +35,6 @@ public class HistoryAdmin {
     }
 
     public HistoryAdmin() {
-    }
-
-    public Date getDate_of_procedure() {
-        return date_of_procedure;
     }
 
     public String getAppointment_description() {
@@ -47,10 +51,6 @@ public class HistoryAdmin {
 
     public double getTotal_charge() {
         return total_charge;
-    }
-
-    public void setDate_of_procedure(Date date_of_procedure) {
-        this.date_of_procedure = date_of_procedure;
     }
 
     public void setAppointment_description(String appointment_description) {

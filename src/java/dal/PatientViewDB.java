@@ -72,7 +72,7 @@ public class PatientViewDB extends DBContext {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 HistoryAdmin h = new HistoryAdmin();
-                h.setDate_of_procedure(rs.getDate("date_of_procedure"));
+                h.setDop(rs.getDate("date_of_procedure"));
                 h.setAppointment_description(rs.getString("appointment_description"));
                 h.setPatient_charge(rs.getDouble("patient_charge"));
                 h.setInsurance_charge(rs.getDouble("insurance_charge"));
