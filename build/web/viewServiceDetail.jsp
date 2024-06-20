@@ -77,7 +77,6 @@
                 font-weight:500;
                 font-size:26px;
                 padding-left:20px;
-                padding-top:20px;
             }
             .itemnum{
                 padding: 15px;
@@ -134,89 +133,90 @@
                     margin-top:5px;
                     margin-right:5px;
                 }
-            }*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+            }
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
 
 
-::selection{
-  color: #fff;
-  background: #ff654a;
-}
+            ::selection{
+                color: #fff;
+                background: #ff654a;
+            }
 
-.wrapper{
-  max-width: 450px;
-  margin: 10px auto;
-}
+            .wrapper{
+                max-width: 450px;
+                margin: 20px auto;
+            }
 
-.wrapper .search-input{
-  background: #fff;
-  width: 100%;
-  border-radius: 5px;
-  position: relative;
-  box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
-}
+            .wrapper .search-input{
+                background: #fff;
+                width: 100%;
+                border-radius: 5px;
+                position: relative;
+                box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+            }
 
-.search-input input{
-  height: 55px;
-  width: 100%;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 0 60px 0 20px;
-  font-size: 18px;
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
-}
+            .search-input input{
+                height: 55px;
+                width: 100%;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+                padding: 0 60px 0 20px;
+                font-size: 18px;
+                box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+            }
 
-.search-input.active input{
-  border-radius: 5px 5px 0 0;
-}
+            .search-input.active input{
+                border-radius: 5px 5px 0 0;
+            }
 
-.search-input .autocom-box{
-  padding: 0;
-  opacity: 0;
-  pointer-events: none;
-  max-height: 280px;
-  overflow-y: auto;
-}
+            .search-input .autocom-box{
+                padding: 0;
+                opacity: 0;
+                pointer-events: none;
+                max-height: 280px;
+                overflow-y: auto;
+            }
 
-.search-input.active .autocom-box{
-  padding: 10px 8px;
-  opacity: 1;
-  pointer-events: auto;
-}
+            .search-input.active .autocom-box{
+                padding: 10px 8px;
+                opacity: 1;
+                pointer-events: auto;
+            }
 
-.autocom-box li{
-  list-style: none;
-  padding: 8px 12px;
-  display: none;
-  width: 100%;
-  cursor: default;
-  border-radius: 3px;
-}
+            .autocom-box li{
+                list-style: none;
+                padding: 8px 12px;
+                display: none;
+                width: 100%;
+                cursor: default;
+                border-radius: 3px;
+            }
 
-.search-input.active .autocom-box li{
-  display: block;
-}
-.autocom-box li:hover{
-  background: #efefef;
-}
+            .search-input.active .autocom-box li{
+                display: block;
+            }
+            .autocom-box li:hover{
+                background: #efefef;
+            }
 
-.search-input .icon{
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  height: 55px;
-  width: 55px;
-  text-align: center;
-  line-height: 55px;
-  font-size: 20px;
-  color: black;
-  cursor: pointer;
-}
+            .search-input .icon{
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                height: 55px;
+                width: 55px;
+                text-align: center;
+                line-height: 55px;
+                font-size: 20px;
+                color: black;
+                cursor: pointer;
+            }
         </style>
 
     </head>
@@ -234,9 +234,6 @@
                     <a href="index.jsp" class="navbar-brand p-0">
                         <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
@@ -309,37 +306,37 @@
 
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
-    <div class="container-fluid">
-        <div class="card shadow border-0 mb-7">                       
-            <div class="container">
-                <div class="header_wrap">  
-                    <div class="page-title">Service</div> 
-                    <div class="wrapper">
-                        <div class="search-input">
-                            <a href="" target="_blank" hidden></a>
-                            <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
-                            <div class="autocom-box">
-                                <!-- Các mục sẽ được chèn từ JavaScript -->
+                    <div class="container-fluid">
+                        <div class="card shadow border-0 mb-7">                       
+                            <div class="container">
+                                <div class="header_wrap">  
+                                    <div class="page-title">Service</div> 
+                                    <div class="wrapper">
+                                        <div class="search-input">
+                                            <a href="" target="_blank" hidden></a>
+                                            <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
+                                            <div class="autocom-box">
+                                                <!-- Các mục sẽ được chèn từ JavaScript -->
+                                            </div>
+                                            <div class="icon"><i class="fas fa-search"></i></div>
+                                        </div>
+                                    </div>
+                                    <c:forEach items="${services}" var="service" varStatus="loop">
+                                        <div class="content-bar">
+                                            <div class="itemnum">${loop.index + 1}</div>
+                                            <div class="itemtitle">${service.procedure_name}</div>
+                                            <div class="itemprice">$${service.price}</div>
+                                            <div class="btncontainer">
+                                                <button class="cbbtn"><i class="bi bi-trash" aria-hidden="true"></i></button>
+                                                <button class="cbbtn"><i class="bi bi-pencil-square" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </c:forEach> 
+                                </div>
                             </div>
-                            <div class="icon"><i class="fas fa-search"></i></div>
                         </div>
                     </div>
-                    <c:forEach items="${services}" var="service" varStatus="loop">
-                        <div class="content-bar">
-                            <div class="itemnum">${loop.index + 1}</div>
-                            <div class="itemtitle">${service.procedure_name}</div>
-                            <div class="itemprice">$${service.price}</div>
-                            <div class="btncontainer">
-                                <button class="cbbtn"><i class="bi bi-trash" aria-hidden="true"></i></button>
-                                <button class="cbbtn"><i class="bi bi-pencil-square" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                    </c:forEach> 
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+                </main>
             </div>
         </div>
         <!-- Back to
@@ -363,78 +360,34 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
-            var mnu = document.getElementById("mnu");
-            var mstate = false;
+                                                var mnu = document.getElementById("mnu");
+                                                var mstate = false;
 
-            function slideMenu() {
-                mstate = !mstate;
-                if (mstate) {
-                    mnu.style.left = "0px";
-                    mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
-                } else {
-                    mnu.style.left = "-250px";
-                    mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
-                }
-            }
-const searchWrapper = document.querySelector(".search-input");
-const inputBox = searchWrapper.querySelector("input");
-const suggBox = searchWrapper.querySelector(".autocom-box");
-const icon = searchWrapper.querySelector(".icon");
-let linkTag = searchWrapper.querySelector("a");
-let webLink;
+                                                function slideMenu() {
+                                                    mstate = !mstate;
+                                                    if (mstate) {
+                                                        mnu.style.left = "0px";
+                                                        mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
+                                                    } else {
+                                                        mnu.style.left = "-250px";
+                                                        mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
+                                                    }
+                                                }
+                                                function searchServices(event) {
+                                                    var keyword = event.target.value.toLowerCase();
+                                                    var items = document.getElementsByClassName("itemtitle");
 
-// Tạo một mảng chứa tên các dịch vụ
-let serviceNames = Array.from(document.querySelectorAll(".itemtitle")).map(element => element.textContent);
+                                                    Array.from(items).forEach(function (item) {
+                                                        var itemText = item.textContent.toLowerCase();
+                                                        var contentBar = item.closest(".content-bar");
 
-// Nếu người dùng nhấn bất kỳ phím nào và nhả ra
-inputBox.addEventListener("keyup", (e) => {
-    let userData = e.target.value; // dữ liệu do người dùng nhập vào
-    let emptyArray = [];
-    if (userData) {
-        icon.addEventListener("click", () => {
-            let selectedService = serviceNames.find(service => service.toLowerCase() === userData.toLowerCase());
-            if (selectedService) {
-                webLink = `https://www.google.com/search?q=${selectedService}`;
-                linkTag.setAttribute("href", webLink);
-                linkTag.click();
-            }
-        });
-        emptyArray = serviceNames.filter((data) => {
-            // lọc các dịch vụ bắt đầu bằng các ký tự do người dùng nhập vào
-            return data.toLowerCase().startsWith(userData.toLowerCase());
-        });
-        searchWrapper.classList.add("active"); // hiển thị hộp gợi ý
-        showSuggestions(emptyArray);
-        let allList = suggBox.querySelectorAll("li");
-        allList.forEach((item) => {
-            // thêm sự kiện click vào từng mục
-            item.addEventListener("click", () => {
-                select(item);
-            });
-        });
-    } else {
-        searchWrapper.classList.remove("active"); // ẩn hộp gợi ý
-    }
-});
-
-function select(element) {
-    let selectData = element.textContent;
-    inputBox.value = selectData;
-    webLink = `https://www.google.com/search?q=${selectData}`;
-    linkTag.setAttribute("href", webLink);
-    linkTag.click();
-    searchWrapper.classList.remove("active");
-}
-
-function showSuggestions(list) {
-    let listData;
-    if (!list.length) {
-        listData = `<li>No suggestions found</li>`;
-    } else {
-        listData = list.map(data => `<li>${data}</li>`).join('');
-    }
-    suggBox.innerHTML = listData;
-}
+                                                        if (itemText.includes(keyword)) {
+                                                            contentBar.style.display = "grid";
+                                                        } else {
+                                                            contentBar.style.display = "none";
+                                                        }
+                                                    });
+                                                }
         </script>
     </body>
 </html>

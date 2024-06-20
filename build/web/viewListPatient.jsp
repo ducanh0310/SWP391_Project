@@ -68,6 +68,11 @@
                 padding: 5px 5px;
                 height: 35px;
             }
+            .mb-0{
+                font-weight:500;
+                font-size:26px;
+                padding-left:20px;
+            }
         </style>
 
     </head>
@@ -85,9 +90,6 @@
                     <a href="index.jsp" class="navbar-brand p-0">
                         <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
@@ -163,7 +165,7 @@
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">Applications</h5>
+                                <h5 class="mb-0">List Patient</h5>
                             </div>
                             <div class="container">
                                 <div class="header_wrap"> 
@@ -255,7 +257,7 @@
                     }
                 });
             });
-            
+
         </script>
     </body>
 </html>
