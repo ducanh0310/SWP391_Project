@@ -40,7 +40,15 @@ public class PatientController extends HttpServlet {
         try {
             patients = patientList.getPatient();
             request.setAttribute("patients", patients);
-            request.getRequestDispatcher("viewListPatient.jsp").forward(request, response);
+            // Forward to different JSPs based on the role
+            if (userRole.contains("doctor")) {
+                request.getRequestDispatcher("view/employee/doctor/viewListPatientDoctor.jsp").forward(request, response);
+            } else if (userRole.contains("admin")) {
+                request.getRequestDispatcher("viewListPatientAdmin.jsp").forward(request, response);
+            } else {
+                // Handle unknown roles
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Unauthorized access");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
         }

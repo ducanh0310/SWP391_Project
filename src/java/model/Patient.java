@@ -20,12 +20,12 @@ public class Patient {
     private String phone;
     private Date dob;
     private String insurance;
-    private int rep_id;
+    private Integer rep_id;
 
     public Patient() {
     }
 
-    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, Integer rep_id) {
         this.sin = sin;
         this.address = address;
         this.name = name;
@@ -48,7 +48,7 @@ public class Patient {
         this.insurance = insurance;
     }
 
-    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, int rep_id) {
+    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, Integer rep_id) {
         this.sin = sin;
         this.address = address;
         this.name = name;
@@ -99,7 +99,7 @@ public class Patient {
         return insurance;
     }
 
-    public int getRep_id() {
+    public Integer getRep_id() {
         return rep_id;
     }
 
@@ -139,7 +139,7 @@ public class Patient {
         this.insurance = insurance;
     }
 
-    public void setRep_id(int rep_id) {
+    public void setRep_id(Integer rep_id) {
         this.rep_id = rep_id;
     }
 

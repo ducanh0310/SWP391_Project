@@ -21,13 +21,13 @@ public class PatientGetByIdDTO {
     private String phone;
     private Date dob;
     private String insurance;
-    private int rep_id;
+    private Integer rep_id;
 
     public PatientGetByIdDTO() {
     }
     
     
-    public PatientGetByIdDTO(int id, String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+    public PatientGetByIdDTO(int id, String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, Integer rep_id) {
         this.id = id;
         this.sin = sin;
         this.address = address;
@@ -40,7 +40,7 @@ public class PatientGetByIdDTO {
         this.rep_id = rep_id;
     }
 
-    public PatientGetByIdDTO(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+    public PatientGetByIdDTO(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, Integer rep_id) {
         this.sin = sin;
         this.address = address;
         this.name = name;
@@ -125,11 +125,11 @@ public class PatientGetByIdDTO {
         this.insurance = insurance;
     }
 
-    public int getRep_id() {
+    public Integer getRep_id() {
         return rep_id;
     }
 
-    public void setRep_id(int rep_id) {
+    public void setRep_id(Integer rep_id) {
         this.rep_id = rep_id;
     } 
 }

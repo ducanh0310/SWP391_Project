@@ -40,6 +40,7 @@ public class PatientDAO extends DBContext {
                 patient.setAddress(rs.getString("address"));
                 patient.setName(rs.getString("name"));
                 patient.setGender(rs.getString("gender"));
+                patient.setEmail(rs.getString("email"));
                 patient.setPhone(rs.getString("phone"));
                 patient.setDob(rs.getDate("date_of_birth"));
                 patient.setInsurance(rs.getString("insurance"));
@@ -67,8 +68,21 @@ public class PatientDAO extends DBContext {
             statement.setString(5, p.getEmail());
             statement.setString(6, p.getPhone());
             statement.setDate(7, (Date) p.getDob());
-            statement.setString(8, p.getInsurance());
-            statement.setInt(9, p.getRep_id());
+
+            // Set insurance, handle null
+            if (p.getInsurance() != null) {
+                statement.setString(8, p.getInsurance());
+            } else {
+                statement.setObject(8, null);
+            }
+
+            // Set rep_id, handle null
+            if (p.getRep_id() != null) {
+                statement.setInt(9, p.getRep_id());
+            } else {
+                statement.setObject(9, null);
+            }
+
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -254,7 +268,7 @@ public class PatientDAO extends DBContext {
     }
 
     public boolean updatePatient(PatientGetByIdDTO paInfo) throws SQLException {
-                String query = """
+        String query = """
                         UPDATE [dbo].[Patient]
                            SET [patient_sin] = ?
                               ,[address] = ?
@@ -278,9 +292,20 @@ public class PatientDAO extends DBContext {
             statement.setString(5, paInfo.getEmail());
             statement.setString(6, paInfo.getPhone());
             statement.setDate(7, paInfo.getDob());
-            statement.setString(8, paInfo.getInsurance());
-            statement.setInt(9, paInfo.getRep_id());
-            statement.setInt(8, paInfo.getId());
+            // Set insurance, handle null
+            if (paInfo.getInsurance() != null) {
+                statement.setString(8, paInfo.getInsurance());
+            } else {
+                statement.setObject(8, null);
+            }
+
+            // Set rep_id, handle null
+            if (paInfo.getRep_id() != null) {
+                statement.setInt(9, paInfo.getRep_id());
+            } else {
+                statement.setObject(9, null);
+            }
+            statement.setInt(10, paInfo.getId());
             statement.executeUpdate();
             return true;
 
@@ -292,4 +317,5 @@ public class PatientDAO extends DBContext {
             closeConnection(connection);
         }
     }
+
 }

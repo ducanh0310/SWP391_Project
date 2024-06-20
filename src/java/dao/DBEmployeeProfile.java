@@ -33,14 +33,15 @@ public class DBEmployeeProfile extends DBContext {
         Employee employeeInfo = new Employee();
         String query = """
                        Select e.employee_id, e.employee_sin, e.employee_type, e.name, e.address, e.annual_salary,e.gender, e.dob, e.phone, e.email,e.branch_id, b.city from Employee e
-                       join Branch b on b.branch_id=e.branch_id
-                       join User_account u on u.employee_id=e.employee_id
-                       where u.username =?""";
+                                              join Branch b on b.branch_id=e.branch_id
+                                              join User_account u on u.employee_id=e.employee_id
+                                              where u.username = ?""";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
+            statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Branch br = new Branch();
@@ -210,5 +211,15 @@ public class DBEmployeeProfile extends DBContext {
             closeConnection(connection);
         }
     }
-
+    public static void main(String[] args) {
+        try {
+            DBEmployeeProfile dao = new DBEmployeeProfile();
+            Employee e = dao.getInfoEmployee("johnli255a");
+            System.out.println(e.getEmail() + " " + e.getName() );
+        } catch (SQLException ex) {
+            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
