@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.sql.*;
 /**
  *
  * @author ngphn
@@ -43,6 +43,17 @@ public class DBContext {
         return connection;
     }
 
+    public void closeConnection(Connection connection) throws SQLException {
+        if (connection != null) {
+            connection.close();
+        }
+    }
+
+    public void closePreparedStatement(PreparedStatement preparedStatement) throws SQLException {
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+    }
     public static void main(String[] args) throws ClassNotFoundException {
         DBContext db = new DBContext();
         System.out.println("Hello");

@@ -8,30 +8,11 @@ package model;
  *
  * @author Vu Minh Quan
  */
-public class Service {
+public class StatusBook {
     private int id;
     private String name;
-    private String price;
-    private int idDoctor;
+    private String description;
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public int getIdDoctor() {
-        return idDoctor;
-    }
-
-    public void setIdDoctor(int idDoctor) {
-        this.idDoctor = idDoctor;
-    }
-
-    
-    
     public int getId() {
         return id;
     }
@@ -46,6 +27,14 @@ public class Service {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     

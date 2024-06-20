@@ -177,23 +177,25 @@
         <div class="container-fluid bg-primary bg-appointment mb-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 90px;">
             <div class="container" >
                 <div class="row gx-5">
-                    <!-- Initial content -->
+                    <!-- Initial content start-->
                     <div id="initial-content" class="col-lg-6 py-5">
                         <div class="py-5">
                             <h1 class="display-5 text-white mb-4">We Are A Certified and Award Winning Dental Clinic You Can Trust</h1>
-                            <p class="text-white mb-0">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
+                            <p class="text-w hite mb-0">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
                         </div>
                     </div>
+                    <!-- Initial content end-->
 
-                    <!-- Search slot -->
+                    <!-- Search slot start -->
                     <div class="col-lg-6 py-5">
                         <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                             <h1 class="text-white mb-4">Search Slot</h1>
-                            <form id="search-form" action="" method="POST">
+                            <form id="search-form" action="patient/bookAppointment" method="POST">
+
                                 <div class="date mb-3" id="dateBook" name="dateBook" data-target-input="nearest">
-                                    <input type="date" class="form-control bg-light border-0 datetimepicker-input"
-                                           placeholder="Appointment Date" style="height: 40px;">
+                                    <input type="date" name="date" class="form-control bg-light border-0 datetimepicker-input" placeholder="Appointment Date" style="height: 40px;">
                                 </div>
+
                                 <select class="form-select bg-light border-0 mb-3" id="service" name="service" style="height: 40px;">
                                     <option selected>Select A Service</option>
                                     <c:forEach items="${requestScope.arrService}" var="service">
@@ -201,14 +203,16 @@
                                     </c:forEach>
                                 </select>
 
-
                                 <div>
-                                    <button class="btn btn-dark w-100 py-3" type="button" id="search-slot-button">Search Slot</button>
-                                </div>
+                                    <button class="btn btn-dark w-100 py-3" type="submit" id="search-slot-button">Search Slot</button>
+                                </div
+
                             </form>
                         </div>
                     </div>
-                    <!-- Replacement content -->
+                    <!-- Search slot end -->
+
+                    <!-- Replacement content start-->
                     <div id="replacement-content" class="col-lg-6 py-5 wow zoomIn hidden" data-wow-delay="0.1s">
                         <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
                             <h1 class="text-white mb-4">Slot</h1>
@@ -219,36 +223,19 @@
                                             <th><h4>Room</h4></th>
                                             <th><h4>Doctor</h4></th>
                                             <th><h4>Time</h4></th>
+                                            <th><h4></h4></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Room 1</td>
-                                            <td>Doctor A</td>
-                                            <td>8:00am - 9:00pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Room 2</td>
-                                            <td>Doctor B</td>
-                                            <td>8:00am - 7:00pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Room 3</td>
-                                            <td>Doctor C</td>
-                                            <td>8:00am - 5:00pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Room 4</td>
-                                            <td>Doctor D</td>
-                                            <td>9:00am - 6:00pm</td>
-                                        </tr>
-                                        <!-- Add more rows as needed -->
+                                    <tbody id="slotPlace">
+
                                     </tbody>
                                 </table>
                             </div>
-                            <a class="btn btn-light" href="">Appointment</a>
+                            <!--<a class="btn btn-light" href="">Appointment</a>-->
                         </div>
                     </div>
+                    <!-- Replacement content end-->
+
                 </div>
 
 
@@ -256,7 +243,53 @@
         </div>
         <!-- Appointment End -->
 
+        <!--Confirmation Modal Start-->                
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirm Slot Selection</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!--Fake form-->
+                    <div class="modal-body" style="display: none">
+                        Room: <input type="text" id="confirmRoom1" name="room" readonly=""><br>
+                        Doctor: <input type="text" id="confirmDoctor1" name="doctorName" readonly=""><br>
+                        Time: <input type="text" id="confirmTime1" name="time" readonly="">
+                        <form action="confirmSlot" method="POST">
+                            <input type="hidden" id="confirmSlotId1" name="slotId">
+                            <input type="hidden" id="confirmDoctorId1" name="doctorId">
+                            <input type="hidden" id="confirmRoomId1" name="roomId">
+                            <input type="hidden" id="confirmDate1" name="date">
+                            <input type="hidden" id="confirmServiceId1" name="serviceId">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Confirm">
+                            </div>
+                        </form>
+                    </div>
+                    <!--Real form-->
+                    <div class="modal-body">
+                        Room: <input type="text" id="confirmRoom2" name="room" readonly=""><br>
+                        Doctor: <input type="text" id="confirmDoctor2" name="doctorName" readonly=""><br>
+                        Time: <input type="text" id="confirmTime2" name="time" readonly="">
+                        <form action="confirmSlot" method="POST">
+                            <input type="hidden" id="confirmSlotId2" name="slotId">
+                            <input type="hidden" id="confirmDoctorId2" name="doctorId">
+                            <input type="hidden" id="confirmRoomId2" name="roomId">
+                            <input type="hidden" id="confirmDate2" name="date">
+                            <input type="hidden" id="confirmServiceId2" name="serviceId">
 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Confirm">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Confirmation Modal End -->
 
         <div style="margin-top: 160px;"></div>
         <!-- Footer Start -->
@@ -336,12 +369,132 @@
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>
         <script>
-            document.getElementById('search-slot-button').addEventListener('click', function () {
-                const initialContent = document.getElementById('initial-content');
-                document.getElementById('initial-content').style.display = 'none';
-                document.getElementById('replacement-content').style.display = 'block';
-            });
+            document.getElementById('search-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Ngăn chặn việc gửi form truyền thống
 
+                var element = $(this);
+
+                $.ajax({
+                    url: 'bookAppointment',
+                    type: 'POST',
+                    data: element.serializeArray(), // Serializes the form data.
+                    dataType: 'json',
+                    success: function (response) {
+                        // Log the response for debugging
+                        console.log(response);
+
+                        if (response.success) {
+                            // Hide initial content and show replacement content
+                            document.getElementById('initial-content').style.display = 'none';
+                            var replacementContent = document.getElementById('replacement-content');
+                            replacementContent.style.display = 'block';
+
+                            // Clear previous slot data
+                            $('#slotPlace').empty();
+
+                            // Populate the slot table
+                            response.slots.forEach(function (showSlot) {
+                                // Log showSlot for debugging
+                                console.log('Slot:', showSlot);
+
+                                // Create a new row element
+                                var row = document.createElement('tr');
+
+                                // Create and append the room cell
+                                var roomCell = document.createElement('td');
+                                roomCell.textContent = showSlot.room;
+                                row.appendChild(roomCell);
+
+                                // Create and append the doctor cell
+                                var doctorCell = document.createElement('td');
+                                doctorCell.textContent = showSlot.doctor;
+                                row.appendChild(doctorCell);
+
+                                // Create and append the time cell
+                                var timeCell = document.createElement('td');
+                                timeCell.textContent = showSlot.startedTime + ' - ' + showSlot.endTime;
+                                row.appendChild(timeCell);
+
+                                // Create and append the id of slot cell
+                                var idSlotCell = document.createElement('td');
+                                idSlotCell.textContent = showSlot.idSlot;
+                                idSlotCell.style.display = 'none'; // Make the cell hidden
+                                row.appendChild(idSlotCell);
+
+                                // Create and append the id of doctor cell
+                                var idDoctorCell = document.createElement('td');
+                                idDoctorCell.textContent = showSlot.idDoctor;
+                                idDoctorCell.style.display = 'none'; // Make the cell hidden
+                                row.appendChild(idDoctorCell);
+
+                                // Create and append the id of room cell
+                                var idRoomCell = document.createElement('td');
+                                idRoomCell.textContent = showSlot.idRoom;
+                                idRoomCell.style.display = 'none'; // Make the cell hidden
+                                row.appendChild(idRoomCell);
+
+                                // Create and append the date cell
+                                var dateCell = document.createElement('td');
+                                dateCell.textContent = showSlot.date;
+                                dateCell.style.display = 'none'; // Make the cell hidden
+                                row.appendChild(dateCell);
+
+                                // Create and append the id of service cell
+                                var idServiceCell = document.createElement('td');
+                                idServiceCell.textContent = showSlot.idService;
+                                idServiceCell.style.display = 'none'; // Make the cell hidden
+                                row.appendChild(idServiceCell);
+
+                                // Create and append the select button cell
+                                var selectButtonCell = document.createElement('td');
+                                var selectButton = document.createElement('button');
+                                selectButton.textContent = 'Book';
+                                selectButton.className = 'btn btn-primary';
+                                selectButton.addEventListener('click', function () {
+                                    //Set slot details in modal
+                                    document.getElementById('confirmRoom1').value = showSlot.room;
+                                    document.getElementById('confirmDoctor1').value = showSlot.doctor;
+                                    document.getElementById('confirmTime1').value = showSlot.startedTime + ' - ' + showSlot.endTime;
+                                    document.getElementById('confirmSlotId1').value = showSlot.idSlot;
+                                    document.getElementById('confirmDoctorId1').value = showSlot.idDoctor;
+                                    document.getElementById('confirmRoomId1').value = showSlot.idRoom;
+                                    document.getElementById('confirmDate1').value = showSlot.date;
+                                    document.getElementById('confirmServiceId1').value = showSlot.idService;
+
+
+
+                                    // Also set data in the second form if necessary
+                                    document.getElementById('confirmRoom2').value = showSlot.room;
+                                    document.getElementById('confirmDoctor2').value = showSlot.doctor;
+                                    document.getElementById('confirmTime2').value = showSlot.startedTime + ' - ' + showSlot.endTime;
+                                    document.getElementById('confirmSlotId2').value = showSlot.idSlot;
+                                    document.getElementById('confirmDoctorId2').value = showSlot.idDoctor;
+                                    document.getElementById('confirmRoomId2').value = showSlot.idRoom;
+                                    document.getElementById('confirmDate2').value = showSlot.date;
+                                    document.getElementById('confirmServiceId2').value = showSlot.idService;
+                                    // Show modal
+                                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                                    confirmModal.show();
+                                });
+                                selectButtonCell.appendChild(selectButton);
+                                row.appendChild(selectButtonCell);
+
+                                // Append the row to the table
+                                document.getElementById('slotPlace').appendChild(row);
+
+                            });
+
+
+
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
         </script>
     </body>
 

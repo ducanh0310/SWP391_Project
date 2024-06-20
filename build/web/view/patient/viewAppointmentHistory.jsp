@@ -3,6 +3,7 @@
     Created on : Jun 12, 2024, 11:42:55 AM
     Author     : Vu Minh Quan
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="../../img/favicon.ico" rel="icon">
+        <link href="../img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -27,16 +28,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="../../lib/animate/animate.min.css" rel="stylesheet">
-        <link href="../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-        <link href="../../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+        <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
         <style>
             /* Position notification at top right */
             #deleteSuccessNotification {
@@ -174,6 +175,7 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Service</th>
+                                    <th scope="col">Price of Service</th>
                                     <th scope="col">Doctor</th>
                                     <th scope="col">Day</th>
                                     <th scope="col">Slot</th>
@@ -183,35 +185,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" value="1" style="width: 10px" readonly="">
-                                    </td>
-                                    <td>
-                                        <input type="text" value="tooth" readonly="">
-                                    </td>
-                                    <td>
-                                        <input type="text" value="VMQ" readonly="">
-                                    </td>
-                                    <td>
-                                        <input type="text" value="20/10/2003" readonly="" >
-                                    </td>
-                                    <td>
-                                        <input type="text" value="8am-9am" readonly="">
-                                    </td>
-                                    <td>
-                                        <input type="text" value="Room A" readonly="">
-                                    </td>
-                                    <td>
-                                        <input type="text" value="Verifying.../Cancel/Done/Not Started" readonly="">
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">Edit</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${requestScope.bookingAppointmentHistory}" var="bAH">
+                                    <tr>
+                                        <td>
+                                            <input type="text" value="1" style="width: 10px" readonly="">
+                                        </td>
+                                        <td>
+                                            <input type="text" value="${bAH.service.name}" readonly="">
+                                        </td>
+                                        <td>
+                                            <input type="text" value="${bAH.service.price}$" readonly="">
+                                        </td>
+                                        <td>
+                                            <input type="text" value="${bAH.doctor.name}" readonly="" >
+                                        </td>
+                                        <td>
+                                            <input type="text" value="${bAH.date}" readonly="" >
+                                        </td>
+                                        <td>
+                                            <input type="text" value="${bAH.slot.startedTime}-${bAH.slot.endTime}" readonly="">
+                                        </td>
+                                        <td>
+                                            <input type="text" value="${bAH.room.name}" readonly="">
+                                        </td>
+
+                                        <td>
+                                            <input type="text" value="${bAH.statusBook.name}" readonly="" >
+                                        </td>
+                                        
+                                        <td class="text-end">
+                                            <a href="editAppointment?id=${bAH.ID}" class="btn btn-sm btn-neutral">Edit</a>
+                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
 
 
                             </tbody>
@@ -329,18 +339,18 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../../lib/wow/wow.min.js"></script>
-        <script src="../../lib/easing/easing.min.js"></script>
-        <script src="../../lib/waypoints/waypoints.min.js"></script>
-        <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="../../lib/tempusdominus/js/moment.min.js"></script>
-        <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
-        <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <script src="../lib/wow/wow.min.js"></script>
+        <script src="../lib/easing/easing.min.js"></script>
+        <script src="../lib/waypoints/waypoints.min.js"></script>
+        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../lib/tempusdominus/js/moment.min.js"></script>
+        <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
         <!-- Template Javascript -->
-        <script src="../../js/main.js"></script>
+        <script src="../js/main.js"></script>
 
         <script>
             $(document).ready(function () {

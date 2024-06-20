@@ -32,7 +32,6 @@ public class DBService extends DBContext {
                 service.setId(rs.getInt("procedure_id"));
                 service.setName(rs.getString("procedure_name"));
                 arrService.add(service);
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBService.class.getName()).log(Level.SEVERE, null, ex);

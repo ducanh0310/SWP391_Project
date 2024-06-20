@@ -7,6 +7,7 @@ package validation;
 import java.time.Period;
 import java.sql.*;
 import java.time.LocalDate;
+
 /**
  *
  * @author ngphn
@@ -42,33 +43,31 @@ public class Validation {
         // If any requirement is not met, return false
         return false;
     }
-    
-    
+
     //fulname
-    public boolean isName(String name){
-        String fulname= name.trim();
-        return fulname.length()>=2 && fulname.length()<=50;
+    public boolean isName(String name) {
+        String fulname = name.trim();
+        return fulname.length() >= 2 && fulname.length() <= 50;
 
     }
-   
+
     //phone number   
     public boolean isPhoneNumber(String numberPhone) {
         return numberPhone.trim().matches("\\d{10}");
     }
-    
+
     //email
-    
-     public boolean isEmail(String email) {
+    public boolean isEmail(String email) {
         return email.trim().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
     }
-     
+
     //Medical code    
     public boolean isMedicalCode(String medicalCode) {
         return medicalCode.trim().matches("\\d{10}");
     }
-    
+
     //Date of birth
-    public boolean isDateOfBirth(String dobStr){
+    public boolean isDateOfBirth(String dobStr) {
         String dob = dobStr.trim();
         try {
             Date.valueOf(dob);
@@ -77,8 +76,8 @@ public class Validation {
             return false;
         }
     }
-    
-    public boolean isDistantDOB(Date dob){
+
+    public boolean isDistantDOB(Date dob) {
         LocalDate birthDate = dob.toLocalDate();
         LocalDate today = LocalDate.now();
 
@@ -98,14 +97,28 @@ public class Validation {
         }
         return true;
     }
-    
-    
-    
+
     //Address
-    public boolean isAddress(String place){
+    public boolean isAddress(String place) {
         String address = place.trim();
 
-        return address.length()>=2 && address.length()<=1000;
-        
+        return address.length() >= 2 && address.length() <= 1000;
+
+    }
+
+    //Date in booking appointment
+    public boolean isDateBook(String date) {
+        LocalDate selectedDate = LocalDate.parse(date); // Ngày được chọn
+        LocalDate currentDate = LocalDate.now(); // Thời gian hiện tại
+        return selectedDate.isAfter(currentDate);
+    }
+    
+    //Select service
+    public boolean isService(String service){
+        if(service !=null && !(service.isEmpty())){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
