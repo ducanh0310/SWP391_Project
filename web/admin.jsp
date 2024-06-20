@@ -85,7 +85,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
+                                <a class="nav-link" href="serviceDetail">
                                     <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
                             </li>

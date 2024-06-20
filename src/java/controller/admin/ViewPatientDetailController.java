@@ -7,7 +7,6 @@ package controller.admin;
 import dal.PatientViewDB;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,14 +20,18 @@ import model.Patient;
 public class ViewPatientDetailController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int patientId = Integer.parseInt(request.getParameter("pid"));
-        PatientViewDB patientView = new PatientViewDB();
-        Patient patients = patientView.getPatient(patientId);
-        HistoryAdmin history = patientView.getHistory(patientId);
-        request.setAttribute("id", patientId);
-        request.setAttribute("patients", patients);
-        request.setAttribute("history", history);
-        request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
+        try {
+            int patientId = Integer.parseInt(request.getParameter("pid"));
+            PatientViewDB patientView = new PatientViewDB();
+            Patient patients = patientView.getPatient(patientId);
+            HistoryAdmin history = patientView.getHistory(patientId);
+            request.setAttribute("id", patientId);
+            request.setAttribute("patients", patients);
+            request.setAttribute("history", history);
+            request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+        }
     }
 
 }

@@ -14,6 +14,7 @@ public class HistoryAdmin {
 
     Date dop;
     String appointment_description;
+    PatientRecords patient_details;
     double patient_charge;
     double insurance_charge;
     double total_charge;
@@ -26,12 +27,21 @@ public class HistoryAdmin {
         return dop;
     }
 
-    public HistoryAdmin(Date dop, String appointment_description, double patient_charge, double insurance_charge, double total_charge) {
+    public HistoryAdmin(Date dop, String appointment_description, PatientRecords patient_details, double patient_charge, double insurance_charge, double total_charge) {
         this.dop = dop;
         this.appointment_description = appointment_description;
+        this.patient_details = patient_details;
         this.patient_charge = patient_charge;
         this.insurance_charge = insurance_charge;
         this.total_charge = total_charge;
+    }
+
+    public PatientRecords getPatient_details() {
+        return patient_details;
+    }
+
+    public void setPatient_details(PatientRecords patient_details) {
+        this.patient_details = patient_details;
     }
 
     public HistoryAdmin() {

@@ -5,7 +5,6 @@
 package controller.admin;
 
 import dal.PatientList;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,11 +22,14 @@ import model.Patient;
 public class PatientController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        PatientList patientList = new PatientList();
-        ArrayList<Patient> patients = patientList.getPatient();      
-        request.setAttribute("patients", patients);     
-        request.getRequestDispatcher("viewListPatient.jsp").forward(request, response);
+        try {
+            PatientList patientList = new PatientList();
+            ArrayList<Patient> patients = patientList.getPatient();
+            request.setAttribute("patients", patients);
+            request.getRequestDispatcher("viewListPatient.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+        }
     }
-    
+
 }

@@ -4,32 +4,27 @@
  */
 package controller.admin;
 
-import dal.PatientViewDB;
+import dal.ServiceDB;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.HistoryAdmin;
-import model.Patient;
+import java.util.ArrayList;
+import model.ProcedureCodes;
 
 /**
  *
  * @author Gia Huy
  */
-@WebServlet(name = "EditPatientController", urlPatterns = {"/editPatient"})
-public class EditPatientController extends HttpServlet {
+public class ViewServiceDetailController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int patientId = Integer.parseInt(request.getParameter("pid"));
-            PatientViewDB patientView = new PatientViewDB();
-            Patient patients = patientView.getPatient(patientId);
-            HistoryAdmin history = patientView.getHistory(patientId);
-            request.setAttribute("patients", patients);
-            request.setAttribute("history", history);
-            request.getRequestDispatcher("editPatientDetail.jsp").forward(request, response);
+            ServiceDB service = new ServiceDB();
+            ArrayList<ProcedureCodes> services = service.getService();
+            request.setAttribute("services", services);
+            request.getRequestDispatcher("viewServiceDetail.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("errorPage.jsp").forward(request, response);
         }

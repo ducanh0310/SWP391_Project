@@ -280,6 +280,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="serviceDetail">
+                                    <i class="bi bi-person-lines-fill"></i> Service
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clipboard-check"></i> Treatment
                                 </a>
@@ -361,6 +366,10 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 class="mb-0">Description</h6>
                                             <input type="text" class="form-control" value="${history.appointment_description}">
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Date</h6>
+                                            <input type="text" class="form-control" value="${history.patient_details.patient_details}">
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 class="mb-0">Patient Charge</h6>

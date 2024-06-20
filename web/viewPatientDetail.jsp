@@ -87,7 +87,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
+                                <a class="nav-link" href="serviceDetail">
                                     <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
                             </li>
@@ -171,6 +171,10 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Description</h6>
                                         <span id="dateSpan2"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0">Detail</h6>
+                                        <span> ${history.patient_details.patient_details}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0">Patient Charge</h6>
