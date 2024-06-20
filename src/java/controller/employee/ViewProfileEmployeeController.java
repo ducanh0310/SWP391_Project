@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
         User currentUser = (User) session.getAttribute("currentUser");
         String userRole = (String) session.getAttribute("userRole");
         if (userRole.equals("patient")) {
-             request.getSession(false);
+            request.getSession(false);
             session.invalidate();
             response.sendRedirect("index.jsp");
         }
@@ -64,6 +65,8 @@ public class ViewProfileEmployeeController extends HttpServlet {
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -84,6 +87,8 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 return;
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

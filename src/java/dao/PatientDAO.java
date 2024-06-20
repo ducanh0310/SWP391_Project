@@ -15,18 +15,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Employee;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
  * @author trung
  */
-public class PatientDAO extends DBContext{
+public class PatientDAO extends DBContext {
 
-    public Patient getPatientById(String patientId) throws SQLException {
+    public PatientGetByIdDTO getPatientById(String patientId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
         String query = "select * from Patient where Patient_id = ?";
-        Patient patient = new Patient();
+        PatientGetByIdDTO patient = new PatientGetByIdDTO();
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
@@ -52,10 +53,13 @@ public class PatientDAO extends DBContext{
         return patient;
     }
 
-    public boolean addPatient(Patient p) {
+    public boolean addPatient(Patient p) throws SQLException {
         String query = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
             statement.setString(1, p.getSin());
             statement.setString(2, p.getAddress());
             statement.setString(3, p.getName());
@@ -70,19 +74,23 @@ public class PatientDAO extends DBContext{
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName());
             return false;
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
     }
 
     public boolean addPatientAccount(Patient p, String username, String password) {
         String insertPatientSQL = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String insertUserAccountSQL = "INSERT INTO User_account (username, password, type_id, patient_id) VALUES (?, ?, ?, ?)";
-
+        Connection connection = null;
         PreparedStatement insertPatientStmt = null;
         PreparedStatement insertUserAccountStmt = null;
         ResultSet generatedKeys = null;
 
         try {
             // Start transaction
+            connection = getConnection();
             connection.setAutoCommit(false);
 
             // Insert into Patient table
@@ -155,26 +163,28 @@ public class PatientDAO extends DBContext{
         }
     }
 
-    public ArrayList<Patient> getPatient() {
-        ArrayList<Patient> patient = new ArrayList<>();
+    public ArrayList<PatientGetByIdDTO> getPatient() throws SQLException {
+        ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
+        String query = "SELECT [Patient_id]\n"
+                + "      ,[patient_sin]\n"
+                + "      ,[address]\n"
+                + "      ,[name]\n"
+                + "      ,[gender]\n"
+                + "      ,[email]\n"
+                + "      ,[phone]\n"
+                + "      ,[date_of_birth]\n"
+                + "      ,[insurance]\n"
+                + "      ,[rep_id]\n"
+                + "  FROM [Patient]\n";
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            String sql = "SELECT [Patient_id]\n"
-                    + "      ,[patient_sin]\n"
-                    + "      ,[address]\n"
-                    + "      ,[name]\n"
-                    + "      ,[gender]\n"
-                    + "      ,[email]\n"
-                    + "      ,[phone]\n"
-                    + "      ,[date_of_birth]\n"
-                    + "      ,[insurance]\n"
-                    + "      ,[rep_id]\n"
-                    + "  FROM [Patient]\n";
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
 
-            PreparedStatement stm = connection.prepareStatement(sql);
-
-            ResultSet rs = stm.executeQuery();
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Patient p = new Patient();
+                PatientGetByIdDTO p = new PatientGetByIdDTO();
                 p.setId(rs.getInt("Patient_id"));
                 p.setSin(rs.getString("patient_sin"));
                 p.setAddress(rs.getString("address"));
@@ -191,31 +201,36 @@ public class PatientDAO extends DBContext{
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return patient;
     }
 
-    public Patient getPatient(int pid) {
-        ArrayList<Patient> patient = new ArrayList<>();
+    public PatientGetByIdDTO getPatient(int pid) throws SQLException {
+        ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "SELECT [Patient_id]\n"
+                + "      ,[patient_sin]\n"
+                + "      ,[address]\n"
+                + "      ,[name]\n"
+                + "      ,[gender]\n"
+                + "      ,[email]\n"
+                + "      ,[phone]\n"
+                + "      ,[date_of_birth]\n"
+                + "      ,[insurance]\n"
+                + "      ,[rep_id]\n"
+                + "  FROM [Patient]\n"
+                + "WHERE [Patient_id]=?";
         try {
-            String sql = "SELECT [Patient_id]\n"
-                    + "      ,[patient_sin]\n"
-                    + "      ,[address]\n"
-                    + "      ,[name]\n"
-                    + "      ,[gender]\n"
-                    + "      ,[email]\n"
-                    + "      ,[phone]\n"
-                    + "      ,[date_of_birth]\n"
-                    + "      ,[insurance]\n"
-                    + "      ,[rep_id]\n"
-                    + "  FROM [Patient]\n"
-                    + "WHERE [Patient_id]=?";
-
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, pid);
-            ResultSet rs = stm.executeQuery();
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, pid);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Patient p = new Patient();
+                PatientGetByIdDTO p = new PatientGetByIdDTO();
                 p.setId(rs.getInt("Patient_id"));
                 p.setSin(rs.getString("patient_sin"));
                 p.setAddress(rs.getString("address"));
@@ -231,17 +246,50 @@ public class PatientDAO extends DBContext{
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return null;
     }
 
-    public boolean updatePatient(Patient p) {
+    public boolean updatePatient(PatientGetByIdDTO paInfo) throws SQLException {
+                String query = """
+                        UPDATE [dbo].[Patient]
+                           SET [patient_sin] = ?
+                              ,[address] = ?
+                              ,[name] = ?
+                              ,[gender] = ?
+                              ,[email] = ?
+                              ,[phone] = ?
+                              ,[date_of_birth] = ?
+                              ,insurance = ?
+                              , rep_id = ?
+                         WHERE [Patient_id]=?""";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, paInfo.getSin());
+            statement.setString(2, paInfo.getAddress());
+            statement.setString(3, paInfo.getName());
+            statement.setString(4, paInfo.getGender());
+            statement.setString(5, paInfo.getEmail());
+            statement.setString(6, paInfo.getPhone());
+            statement.setDate(7, paInfo.getDob());
+            statement.setString(8, paInfo.getInsurance());
+            statement.setInt(9, paInfo.getRep_id());
+            statement.setInt(8, paInfo.getId());
+            statement.executeUpdate();
+            return true;
 
-        return true;
-    }
-
-    public static void main(String[] args) {
-        PatientDAO ptDAO = new PatientDAO();
-        System.out.println(ptDAO.getPatient(1).getName());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPatientProfile.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
     }
 }

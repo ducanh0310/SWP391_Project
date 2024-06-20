@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -93,13 +94,13 @@ public class ChangePasswordServlet extends HttpServlet {
                 UserDAO userDAO = new UserDAO();
                 userDAO.changePassword(currentUser.getName(), newPass);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             request.setAttribute("error", "Re-enter password do not match your new password!");
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-
+            return;
         }
     }
 

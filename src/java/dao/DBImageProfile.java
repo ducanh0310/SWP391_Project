@@ -8,41 +8,36 @@ package dao;
  *
  * @author Vu Minh Quan
  */
-
 import dal.DBContext;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Vu Minh Quan
  */
-public class DBImageProfile extends DBContext{
-    public DBImageProfile() throws ClassNotFoundException {
-        super(); // Calls the constructor of DBContext to initialize the connection
-    }
-    
-    
-    
-    public void updateImageProfile(String username, String image){
-        try {
-            String sql="""
+public class DBImageProfile extends DBContext {
+
+    public void updateImageProfile(String username, String image) throws SQLException {
+        String query = """
                                    UPDATE [dbo].[User_account]
                                     SET [image] = ?
                                     WHERE username=?""";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, image);
-            stm.setString(2, username);
-            stm.executeUpdate();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, image);
+            statement.setString(2, username);
+            statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DBImageProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
-        
     }
-    
-    
-      
-      
+
 }

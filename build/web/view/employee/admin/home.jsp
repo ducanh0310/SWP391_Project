@@ -111,7 +111,7 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="view/employee/admin/home.jsp">
+                                <a class="nav-link" href="../../../home">
                                     <i class="bi bi-house"></i> Dashboard
                                 </a>
                             </li>
@@ -160,7 +160,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../../logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>

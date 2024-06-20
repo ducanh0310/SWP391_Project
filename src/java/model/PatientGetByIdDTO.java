@@ -4,14 +4,15 @@
  */
 package model;
 
-import java.sql.*;
+import java.sql.Date;
 
 /**
  *
- * @author Gia Huy
+ * @author ngphn
  */
-public class Patient {
+public class PatientGetByIdDTO {
 
+    private int id;
     private String sin;
     private String address;
     private String name;
@@ -22,10 +23,12 @@ public class Patient {
     private String insurance;
     private int rep_id;
 
-    public Patient() {
+    public PatientGetByIdDTO() {
     }
-
-    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+    
+    
+    public PatientGetByIdDTO(int id, String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+        this.id = id;
         this.sin = sin;
         this.address = address;
         this.name = name;
@@ -37,7 +40,7 @@ public class Patient {
         this.rep_id = rep_id;
     }
 
-    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance) {
+    public PatientGetByIdDTO(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
         this.sin = sin;
         this.address = address;
         this.name = name;
@@ -46,61 +49,16 @@ public class Patient {
         this.phone = phone;
         this.dob = dob;
         this.insurance = insurance;
-    }
-
-    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, int rep_id) {
-        this.sin = sin;
-        this.address = address;
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.dob = dob;
         this.rep_id = rep_id;
     }
     
 
-    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob) {
-        this.sin = sin;
-        this.address = address;
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.dob = dob;
-    }
-    
-
-    public String getAddress() {
-        return address;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public String getInsurance() {
-        return insurance;
-    }
-
-    public int getRep_id() {
-        return rep_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSin() {
@@ -111,36 +69,67 @@ public class Patient {
         this.sin = sin;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Date getDob() {
+        return dob;
     }
 
     public void setDob(Date dob) {
         this.dob = dob;
     }
 
+    public String getInsurance() {
+        return insurance;
+    }
+
     public void setInsurance(String insurance) {
         this.insurance = insurance;
     }
 
-    public void setRep_id(int rep_id) {
-        this.rep_id = rep_id;
+    public int getRep_id() {
+        return rep_id;
     }
 
+    public void setRep_id(int rep_id) {
+        this.rep_id = rep_id;
+    } 
 }

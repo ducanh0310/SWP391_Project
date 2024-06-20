@@ -77,25 +77,34 @@ public class AddPatientController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String sin = request.getParameter("sin");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        int code = Integer.parseInt(request.getParameter("code"));
         String gender = request.getParameter("gender");
         Date dob = Date.valueOf(request.getParameter("dob"));
+        String insurance = request.getParameter("insurance");
         String address = request.getParameter("address");
-        Patient p = new Patient(code, address, name, gender, email, phone, dob, "abc", 1);
+        String reqId = (request.getParameter("reqId"));
+        Patient p = new Patient();
+        if (reqId == null && insurance == null) {
+            p = new Patient(sin, address, name, gender, email, phone, dob);
+        } else if (insurance == null) {
+            p = new Patient(sin, address, name, gender, email, phone, dob, Integer.parseInt(reqId));
+        } else if (reqId == null) {
+            p = new Patient(sin, address, name, gender, email, phone, dob, insurance);
+        } else {
+            p = new Patient(sin, address, name, gender, email, phone, dob, insurance, Integer.parseInt(reqId));
+        }
         PatientDAO pa = new PatientDAO();
         String pasword = generateNewPassword();
         if (pa.addPatientAccount(p, extractUsername(email), pasword)) {
-            Email e = new Email();
-            e.sendNewAccount(email, extractUsername(email), pasword);
+            Email.sendNewAccount(email, extractUsername(email), pasword);
             request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
+            return;
         } else {
             response.sendRedirect("view/employee/admin/addPatient.jsp");
         }
-        processRequest(request, response);
     }
 
     /**

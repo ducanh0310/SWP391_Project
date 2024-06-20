@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.authen;
+package controller.admin;
 
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,18 +11,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.User;
 
 /**
  *
- * @author trung
+ * @author ngphn
  */
-@WebServlet(name="ConfirmPassword", urlPatterns={"/confirmpass"})
-public class ConfirmPassword extends HttpServlet {
+@WebServlet(name = "home", urlPatterns = {"/home"})
+public class home extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +36,10 @@ public class ConfirmPassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConfirmPassword</title>");
+            out.println("<title>Servlet home</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConfirmPassword at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,13 +57,9 @@ public class ConfirmPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        if(currentUser == null){
-            response.sendRedirect("index.jsp");
-        }else{
-            request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
-        }
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
     }
 
     /**
@@ -83,25 +73,7 @@ public class ConfirmPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String oldPass = request.getParameter("oldPass");
-        HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        UserDAO userDAO = new UserDAO();
-        if (currentUser != null) {
-            try {
-                String check = userDAO.checkPasswordByUsername(currentUser.getName());
-                if (!check.equals(oldPass)) {
-                    request.setAttribute("error", "Password is incorrect!");
-                    request.getRequestDispatcher("view/authen/ConfirmPassword.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("changepass");
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            response.sendRedirect("index.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -26,7 +26,6 @@ public class EmployeeDAO extends DBContext {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
-
             statement.setString(1, employeeId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

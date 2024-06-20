@@ -33,12 +33,13 @@ import model.PatientInfo;
 import dao.UserDAO;
 import model.Employee;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 //Login with google:
 //    public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -69,6 +70,11 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser != null) {
+            session.invalidate();
+        }
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
@@ -96,7 +102,7 @@ public class LoginServlet extends HttpServlet {
                     Authorization author = new Authorization();
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();
-                        Patient pat = patientDAO.getPatientById(user.getPatient_Id());
+                        PatientGetByIdDTO pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
                         session.setAttribute("userRole", "patient");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -114,7 +120,7 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
-                            session.setAttribute("userRole",  "nurse");
+                            session.setAttribute("userRole", "nurse");
                             request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
