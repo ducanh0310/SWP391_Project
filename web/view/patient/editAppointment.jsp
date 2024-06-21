@@ -181,7 +181,7 @@
                     <div class="col-lg-6 py-5">
                         <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s" >
                             <h1 class="text-white mb-4">Search Slot</h1>
-                            <form id="search-form" action="../editAppointment?id=${idAppointment}" method="POST">
+                            <form id="search-form" action="" method="POST">
                                 <div class="date mb-3" id="dateBook" name="dateBook" >
                                     <input type="date" name="date" class="form-control bg-light border-0 datetimepicker-input" placeholder="Appointment Date" style="height: 40px;" value="${DateServiceAppointment.date}">
                                 </div>
@@ -193,17 +193,13 @@
                                 </select>
 
                                 <div>
-                                    <button class="btn btn-dark w-100 py-3" type="button" id="search-slot-button">Search Slot</button>
+                                    <button class="btn btn-dark w-100 py-3" type="submit" id="search-slot-button">Search Slot</button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-
-
-
-
-                    <!-- Replacement content -->
+                    <!-- Slot content start-->
                     <div id="replacement-content" class="col-lg-6 py-5 wow zoomIn hidden" data-wow-delay="0.1s">
                         <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
                             <h1 class="text-white mb-4">Slot</h1>
@@ -217,36 +213,32 @@
                                             <th><h4>Select Slot</h4></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="slotPlace">
                                         <c:forEach items="${requestScope.arrRestSlot}" var="slots">
-
                                             <tr>
                                                 <td>${slots.room.name}</td>
                                                 <td>${slots.doctor.name}</td>
                                                 <td>${slots.startedTime}-${slots.endTime}</td>
-
                                                 <td>
                                                     <button type="button" class="btn btn-primary book-button" data-bs-toggle="modal" data-bs-target="#confirmModal" 
-                                                            data-date="${DateServiceAppointment.date}" data-idService="${DateServiceAppointment.service.id}" data-idDoctor="${slots.doctor.id}" data-idSlot="${slots.id}" data-idRoom="${slots.room.id}">Book</button>
-
+                                                            data-date="${DateServiceAppointment.date}" data-idService="${DateServiceAppointment.service.id}" data-idDoctor="${slots.doctor.id}" 
+                                                            data-idSlot="${slots.id}" data-idRoom="${slots.room.id}" data-room="${slots.room.name}" data-doctor="${slots.doctor.name}" 
+                                                            data-time="${slots.startedTime}-${slots.endTime}">Book</button>
                                                 </td>
-
                                             </tr>
-
                                         </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
+                    <!-- Slot content end-->
                 </div>
-
-
             </div>
         </div>
         <!-- Appointment End -->
-        <!--Confirmation Modal Start-->                
+        
+        <!--Confirmation Modal Start(only change slot)-->                
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -255,7 +247,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to book this slot?
+                        Room: <input type="text" id="room" name="room" readonly=""><br>
+                        Doctor: <input type="text" id="doctor" name="doctorName" readonly=""><br>
+                        Time: <input type="text" id="time" name="time" readonly="">
                     </div>
                     <div class="modal-footer">
                         <form id="book-form" action="confirmEditSlot?id=${idAppointment}" method="POST">
@@ -263,7 +257,7 @@
                             <input type="hidden" name="idService" id="idService">
                             <input type="hidden" name="idDoctor" id="idDoctor">
                             <input type="hidden" name="idSlot" id="idSlot">
-                            <input type="hidden" name="idRoom" id="idRoom">
+                            <input type="hidden" name="idRoom" id="idRoom">                
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Confirm</button>
                         </form>
@@ -271,8 +265,55 @@
                 </div>
             </div>
         </div>
-        <!-- Confirmation Modal End -->
+        <!-- Confirmation Modal End(only change slot) -->
 
+        <!--Confirmation Modal Start(change date, service, slot)-->                
+        <div class="modal fade" id="confirmModalDSS" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirm Slot Selection</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!--Fake form-->
+                    <div class="modal-body" style="display: none">
+                        Room: <input type="text" id="confirmRoom1" name="room" readonly=""><br>
+                        Doctor: <input type="text" id="confirmDoctor1" name="doctorName" readonly=""><br>
+                        Time: <input type="text" id="confirmTime1" name="time" readonly="">
+                        <form action="confirmEditSlot" method="POST">
+                            <input type="hidden" id="confirmSlotId1" name="idSlot">
+                            <input type="hidden" id="confirmDoctorId1" name="idDoctor">
+                            <input type="hidden" id="confirmRoomId1" name="idRoom">
+                            <input type="hidden" id="confirmDate1" name="date">
+                            <input type="hidden" id="confirmServiceId1" name="idService">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Confirm">
+                            </div>
+                        </form>
+                    </div>
+                    <!--Real form-->
+                    <div class="modal-body">
+                        Room: <input type="text" id="confirmRoom2" name="room" readonly=""><br>
+                        Doctor: <input type="text" id="confirmDoctor2" name="doctorName" readonly=""><br>
+                        Time: <input type="text" id="confirmTime2" name="time" readonly="">
+                        <form action="confirmEditSlot?id=${idAppointment}" method="POST">
+                            <input type="hidden" id="confirmSlotId2" name="idSlot">
+                            <input type="hidden" id="confirmDoctorId2" name="idDoctor">
+                            <input type="hidden" id="confirmRoomId2" name="idRoom">
+                            <input type="hidden" id="confirmDate2" name="date">
+                            <input type="hidden" id="confirmServiceId2" name="idService">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Confirm">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Confirmation Modal End (change date, service, slot)-->
 
         <div style="margin-top: 160px;"></div>
         <!-- Footer Start -->
@@ -353,6 +394,7 @@
         <script src="../js/main.js"></script>
 
         <script>
+            // Modal for only change slot start
             document.addEventListener("DOMContentLoaded", function () {
                 const confirmModal = document.getElementById('confirmModal');
                 const bookForm = document.getElementById('book-form');
@@ -363,22 +405,32 @@
                     const idDoctor = button.getAttribute('data-idDoctor');
                     const idSlot = button.getAttribute('data-idSlot');
                     const idRoom = button.getAttribute('data-idRoom');
+                    const room = button.getAttribute('data-room');
+                    const doctor = button.getAttribute('data-doctor');
+                    const time = button.getAttribute('data-time');
+                    
                     document.getElementById('date').value = date;
                     document.getElementById('idService').value = idService;
                     document.getElementById('idDoctor').value = idDoctor;
                     document.getElementById('idSlot').value = idSlot;
                     document.getElementById('idRoom').value = idRoom;
+                    document.getElementById('room').value = room;
+                    document.getElementById('doctor').value = doctor;
+                    document.getElementById('time').value = time;
+                    
                 });
             });
-            
-            
+            // Modal for only change slot end 
+
+
+            //Change date, service and slot 
             document.getElementById('search-form').addEventListener('submit', function (event) {
                 event.preventDefault(); // Ngăn chặn việc gửi form truyền thống
 
                 var element = $(this);
 
                 $.ajax({
-                    url: 'bookAppointment',
+                    url: 'editAppointment?id=${idAppointment}',
                     type: 'POST',
                     data: element.serializeArray(), // Serializes the form data.
                     dataType: 'json',
@@ -387,10 +439,7 @@
                         console.log(response);
 
                         if (response.success) {
-                            // Hide initial content and show replacement content
-                            document.getElementById('initial-content').style.display = 'none';
-                            var replacementContent = document.getElementById('replacement-content');
-                            replacementContent.style.display = 'block';
+
 
                             // Clear previous slot data
                             $('#slotPlace').empty();
@@ -476,7 +525,7 @@
                                     document.getElementById('confirmDate2').value = showSlot.date;
                                     document.getElementById('confirmServiceId2').value = showSlot.idService;
                                     // Show modal
-                                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModalDSS'));
                                     confirmModal.show();
                                 });
                                 selectButtonCell.appendChild(selectButton);

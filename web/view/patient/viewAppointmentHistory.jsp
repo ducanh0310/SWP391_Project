@@ -44,14 +44,109 @@
                 display: none;
             }
 
+            #editSuccessNotification {
+                display: none;
+            }
+
             /* Style for the progress bar */
             .progress-bar {
                 transition: width 5s linear;
             }
+
+            /* Position notification at top right */
+            #notificationContainer {
+                display: none; /* Hide by default */
+            }
+
+            /* Style for the progress bar */
+
+            #editSuccessNotification {
+                display: none;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1060;
+            }
+
+
         </style>
     </head>
 
     <body>
+        <!-- Edit Success Notification start-->
+
+        <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${success}
+                <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Edit Success Notification end-->
+
+        <!-- Verify edit booking appointment start -->
+        <div class="modal fade" id="confirmEditModal" tabindex="-1" aria-labelledby="confirmEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmEditModalLabel">Confirm Edit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to edit this appointment?<br>
+                        - Service: <input type="text" id="serviceName" name="serviceName" readonly=""><br>
+                        - Room: <input type="text" id="room" name="room" readonly=""><br>
+                        - Doctor: <input type="text" id="doctor" name="doctorName" readonly=""><br>
+                        - Date <input type="text" id="date" name="date" readonly=""><br>
+                        - Time: <input type="text" id="time" name="time" readonly="">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmEditButton">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Verify edit booking appointment end -->
+
+
+        <!-- Verify cancelled booking appointment start -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to cancel this appointment?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Verify cancelled booking appointment start -->
+
+        <!-- Deleted Success Notification start-->
+        <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                Appointment cancelled successfully!
+                <button type="button" class="btn-close" id="closeNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Deleted Success Notification end-->
+
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary m-1" role="status">
@@ -119,16 +214,8 @@
             </div>
         </nav>
         <!-- Navbar End -->
-        <!-- Deleted Success Notification start-->
-        <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
-            <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                Appointment cancelled successfully!
-                <div class="progress mt-2" style="height: 4px;">
-                    <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Deleted Success Notification end-->
+
+
 
         <!-- Full Screen Search Start -->
         <div class="modal fade" id="searchModal" tabindex="-1">
@@ -212,9 +299,12 @@
                                         <td>
                                             <input type="text" value="${bAH.statusBook.name}" readonly="" >
                                         </td>
-                                        
+
                                         <td class="text-end">
-                                            <a href="editAppointment?id=${bAH.ID}" class="btn btn-sm btn-neutral">Edit</a>
+                                            <button class="btn btn-sm btn-neutral edit-button" data-bs-toggle="modal" data-bs-target="#confirmEditModal" 
+                                                    data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                    data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Edit</button>
+
                                             <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
                                                 <i class="bi bi-trash"></i>
                                             </button>
@@ -236,26 +326,7 @@
         <!--View Medical Appointment History End-->
 
 
-        <!-- Verify cancelled booking appointment start -->
 
-        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to cancel this appointment?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Verify cancelled booking appointment start -->
 
         <!-- Note Start -->
         <main class="py-6 bg-surface-secondary">
@@ -352,27 +423,65 @@
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>
 
+
         <script>
             $(document).ready(function () {
-                $('#confirmDeleteButton').on('click', function () {
-                    // Simulate deletion process
-                    $('#confirmDeleteModal').modal('hide'); // Hide the confirmation modal
+                let editId;
+                let service;
+                let room;
+                let doctor;
+                let date;
+                let time;
+                $('.edit-button').click(function (event) {
+                    event.preventDefault(); // Prevent the default anchor behavior
+                    editId = $(this).data('id');
+                    service = $(this).data('service');
+                    room = $(this).data('room');
+                    doctor = $(this).data('doctor');
+                    date = $(this).data('date');
+                    time = $(this).data('time');
 
-                    // Show success notification
-                    $('#deleteSuccessNotification').fadeIn();
+                    document.getElementById('serviceName').value = service;
+                    document.getElementById('room').value = room;
+                    document.getElementById('doctor').value = doctor;
+                    document.getElementById('date').value = date;
+                    document.getElementById('time').value = time;
+                    console.log("Edit ID: " + editId);  // Log the ID for debugging
 
-                    // Start progress bar animation
-                    var progressBar = $('#deleteSuccessProgressBar');
-                    progressBar.css('width', '100%');
-                    progressBar.addClass('progress-bar-animated');
+                    // Redirect to the edit URL with the captured ID
+                    if (editId) {
+                        $('#confirmEditButton').click(function () {
 
-                    // Hide notification and reset progress bar after 5 seconds
-                    setTimeout(function () {
-                        $('#deleteSuccessNotification').fadeOut();
-                        progressBar.css('width', '0%');
-                        progressBar.removeClass('progress-bar-animated');
-                    }, 5000);
+                            window.location.href = 'editAppointment?id=' + editId;
+                        });
+                    }
                 });
+
+                // Handle notification display for edit success
+                function showEditSuccessNotification() {
+                    $('#editSuccessNotification').show();
+                    let progressBar = $('#editSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#editSuccessNotification').fadeOut('slow');
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
+
+                // Close notification button handler
+                $('#closeEditNotificationButton').click(function () {
+                    $('#editSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let successMessage = '${sessionScope.success}';
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
             });
         </script>
     </body>
