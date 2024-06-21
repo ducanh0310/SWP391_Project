@@ -19,6 +19,7 @@ import model.ProcedureCodes;
  */
 public class ViewServiceDetailController extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             ServiceDB service = new ServiceDB();
@@ -29,5 +30,5 @@ public class ViewServiceDetailController extends HttpServlet {
             request.getRequestDispatcher("errorPage.jsp").forward(request, response);
         }
     }
-    
+
 }

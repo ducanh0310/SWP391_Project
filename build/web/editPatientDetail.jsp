@@ -334,56 +334,57 @@
                 <div class="main-body">
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex flex-column align-items-center text-center">
-                                        <div class="containerimg">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column align-items-center text-center">
+                                            <div class="containerimg">
 
-                                            <div class="avatar-upload">
-                                                <div class="avatar-edit">
-                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                                    <label for="imageUpload"></label>
-                                                </div>
-                                                <div class="avatar-preview">
-                                                    <div id="imagePreview" style="background-image: url('https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png');">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload"></label>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div id="imagePreview" style="background-image: url('https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png');">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="mt-3">
+                                                <h4>${patients.name}</h4>
+                                            </div>
                                         </div>
-                                        <div class="mt-3">
-                                            <h4>${patients.name}</h4>
-                                        </div>
+                                        <hr class="my-4">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <h6 class="mb-0">Date</h6>
+                                                <input type="text" class="form-control" value="${history.dop}">
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <h6 class="mb-0">Description</h6>
+                                                <input type="text" class="form-control" value="${history.appointment_description}">
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <h6 class="mb-0">Date</h6>
+                                                <input type="text" class="form-control" value="${history.patient_details.patient_details}">
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <h6 class="mb-0">Patient Charge</h6>
+                                                <input type="text" class="form-control" value="${history.patient_charge}">
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <h6 class="mb-0">Insurance charge</h6>
+                                                <input type="text" class="form-control" value="${history.insurance_charge}">
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                <h6 class="mb-0">Total charge</h6>
+                                                <input type="text" class="form-control" value="${history.total_charge}">
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <hr class="my-4">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Date</h6>
-                                            <input type="text" class="form-control" value="${history.dop}">
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Description</h6>
-                                            <input type="text" class="form-control" value="${history.appointment_description}">
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Date</h6>
-                                            <input type="text" class="form-control" value="${history.patient_details.patient_details}">
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Patient Charge</h6>
-                                            <input type="text" class="form-control" value="${history.patient_charge}">
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Insurance charge</h6>
-                                            <input type="text" class="form-control" value="${history.insurance_charge}">
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Total charge</h6>
-                                            <input type="text" class="form-control" value="${history.total_charge}">
-                                        </li>
-                                    </ul>
                                 </div>
-                            </div>
                         </div>
+
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
@@ -448,69 +449,70 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="button" class="btn btn-primary px-4" value="Save Changes" onclick="showCodeAndRedirect()" /></div>
-                                    </div>
-                                    <div id="result" class="main-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; ">
-                                        <div class="check-container">
-                                            <div class="check-background">
-                                                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
+                                        <div class="row">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <button type="submit" class="btn btn-primary px-4" onclick="showCodeAndRedirect()" >Save Changes</button>
+                                                <a href="patientDetail?pid=${patients.id}" class="btn btn-primary px-4">Cancel</a>
                                             </div>
-                                            <div class="check-shadow"></div>
+                                        </div>
+                                        <div id="result" class="main-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; ">
+                                            <div class="check-container">
+                                                <div class="check-background">
+                                                    <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                                <div class="check-shadow"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
+                        
                     </div>
                 </div>
-            </div>
 
-            <!-- JavaScript Libraries -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/wow/wow.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-            <script src="lib/tempusdominus/js/moment.min.js"></script>
-            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script src="lib/twentytwenty/jquery.event.move.js"></script>
-            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+                <!-- JavaScript Libraries -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="lib/wow/wow.min.js"></script>
+                <script src="lib/easing/easing.min.js"></script>
+                <script src="lib/waypoints/waypoints.min.js"></script>
+                <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+                <script src="lib/tempusdominus/js/moment.min.js"></script>
+                <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+                <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+                <script src="lib/twentytwenty/jquery.event.move.js"></script>
+                <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-            <!-- Template Javascript -->
-            <script src="js/main.js"></script>
+                <!-- Template Javascript -->
+                <script src="js/main.js"></script>
 
-    </body>
-    <script>
-                                                function readURL(input) {
-                                                    if (input.files && input.files[0]) {
-                                                        var reader = new FileReader();
-                                                        reader.onload = function (e) {
-                                                            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                                                            $('#imagePreview').hide();
-                                                            $('#imagePreview').fadeIn(650);
+                </body>
+                <script>
+                                                    function readURL(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function (e) {
+                                                                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                                                                $('#imagePreview').hide();
+                                                                $('#imagePreview').fadeIn(650);
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
                                                         }
-                                                        reader.readAsDataURL(input.files[0]);
                                                     }
-                                                }
-                                                $("#imageUpload").change(function () {
-                                                    readURL(this);
-                                                });
-                                                function showCodeAndRedirect() {
-                                                    var resultDiv = document.getElementById("result");
-                                                    resultDiv.style.display = "flex";
+                                                    $("#imageUpload").change(function () {
+                                                        readURL(this);
+                                                    });
+                                                    function showCodeAndRedirect() {
+                                                        var resultDiv = document.getElementById("result");
+                                                        resultDiv.style.display = "flex";
 
-                                                    setTimeout(function () {
-                                                        window.location.href = "patientDetail?pid=${patients.id}";
-                                                    }, 2000);
-                                                }
-    </script>
-</html> 
+                                                        setTimeout(function () {
+                                                            window.location.href = "patientDetail?pid=${patients.id}";
+                                                        }, 2000);
+                                                    }
+                </script>
+                </html> 

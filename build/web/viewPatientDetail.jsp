@@ -139,14 +139,6 @@
             <!-- Main content -->
             <div class="container">
                 <div class="main-body">
-                    <!-- Breadcrumb -->
-                    <nav aria-label="breadcrumb" class="main-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="admin.jsp">Home</a></li>
-                        </ol>
-                    </nav>
-                    <!-- /Breadcrumb -->
-
                     <div class="row gutters-sm">
                         <div class="col-md-4 mb-3">
                             <div class="card">

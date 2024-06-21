@@ -21,6 +21,7 @@ import model.Patient;
 @WebServlet("/PatientController")
 public class PatientController extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             PatientList patientList = new PatientList();
