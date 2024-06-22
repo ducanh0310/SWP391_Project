@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -98,7 +99,7 @@ public class ConfirmPassword extends HttpServlet {
             }else{
                 response.sendRedirect("index.jsp");
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -26,18 +26,24 @@ public class DBImageProfile extends DBContext{
     
     
     
-    public void updateImageProfile(String username, String image){
-        try {
+    public void updateImageProfile(String username, String image) throws SQLException{
             String sql="""
                                    UPDATE [dbo].[User_account]
                                     SET [image] = ?
                                     WHERE username=?""";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, image);
-            stm.setString(2, username);
-            stm.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBImageProfile.class.getName()).log(Level.SEVERE, null, ex);
+            Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, image);
+            statement.setString(2, username);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         
     }

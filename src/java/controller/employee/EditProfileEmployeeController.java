@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +51,8 @@ public class EditProfileEmployeeController extends HttpServlet {
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
  
@@ -75,7 +78,9 @@ public class EditProfileEmployeeController extends HttpServlet {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
                  Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (SQLException ex) {
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     //Validation data
@@ -127,7 +132,7 @@ public class EditProfileEmployeeController extends HttpServlet {
     }
     //Announce error into jsp
     private void handleErrors(HttpServletRequest request, HttpServletResponse response, User currentUser, Map<String, String> errorMsg)
-    throws ServletException, IOException, ClassNotFoundException {
+    throws ServletException, IOException, ClassNotFoundException, SQLException {
         DBEmployeeProfile dbEm = new DBEmployeeProfile();
         Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
         DBAccount dbA = new DBAccount();

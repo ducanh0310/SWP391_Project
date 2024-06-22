@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import model.Account;
@@ -50,6 +51,8 @@ public class EditProfilePatientController extends HttpServlet {
             request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
 
@@ -158,7 +161,9 @@ public class EditProfilePatientController extends HttpServlet {
         Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         request.setAttribute("errorMsg", "An error occurred while updating the profile.");
         request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
-    }
+    }   catch (SQLException ex) {
+            Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
     }
 

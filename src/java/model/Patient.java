@@ -22,7 +22,7 @@ public class Patient {
     private String insurance;
     private int rep_id;
 
-    public Patient() {
+    public Patient(int code, String address1, String name1, String gender1, String email1, String phone1, Date dob1, String abc, int par) {
     }
     
    
