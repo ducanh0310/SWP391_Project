@@ -72,12 +72,13 @@ public class DBBookingMedicalAppointment extends DBContext {
     public ArrayList<Slot> getExistSlot(String idService, Date date) {
         ArrayList<Slot> arrSlot = new ArrayList<>();
         try {
-            String sql = """
-                         select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime, s.id, e.employee_id  from Booking_Appointment ba
-                         join Room r on r.id = ba.room_id
-                         join Employee e on e.employee_id = ba.doctor_id
-                         join Slot s on s.id = ba.slot_id
-                         where ba.service_id = ? and ba.booking_date = ?""";
+            String sql ="""
+                        select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime, s.id, e.employee_id, sb.id as statusId  from Booking_Appointment ba
+                                                    join Room r on r.id = ba.room_id
+                                                    join Employee e on e.employee_id = ba.doctor_id
+                                                    join Slot s on s.id = ba.slot_id
+                                                    join Status_Book sb on sb.id = ba.status_id
+                                                    where ba.service_id = ? and ba.booking_date = ?""";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, idService);
             stm.setDate(2, date);
@@ -99,6 +100,10 @@ public class DBBookingMedicalAppointment extends DBContext {
                 slot.setEndTime(rs.getTimestamp("endTime").toLocalDateTime().toLocalTime());
                 //ID of slot
                 slot.setId(rs.getInt("id"));
+                //Status
+                StatusBook statusBook = new StatusBook();
+                statusBook.setId(rs.getInt("statusId"));
+                slot.setStatusBook(statusBook);
                 arrSlot.add(slot);
 
             }
@@ -183,7 +188,7 @@ public class DBBookingMedicalAppointment extends DBContext {
                 Slot slot = new Slot();
                 slot.setStartedTime(rs.getTimestamp("startedTime").toLocalDateTime().toLocalTime());
                 slot.setEndTime(rs.getTimestamp("endTime").toLocalDateTime().toLocalTime());
-                slot.setId(rs.getInt("idStatus"));
+
                 bah.setSlot(slot);
                 //Room
                 Room room = new Room();
@@ -192,6 +197,7 @@ public class DBBookingMedicalAppointment extends DBContext {
                 //Status
                 StatusBook statusBook = new StatusBook();
                 statusBook.setName(rs.getString("status"));
+                statusBook.setId(rs.getInt("idStatus"));
                 bah.setStatusBook(statusBook);
                 //add arrayList
                 arrBookHistory.add(bah);
@@ -214,7 +220,7 @@ public class DBBookingMedicalAppointment extends DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 BookingAppointmentHistory bAH = new BookingAppointmentHistory();
                 bAH.setDate(rs.getDate("booking_date"));
                 //Service
@@ -229,11 +235,11 @@ public class DBBookingMedicalAppointment extends DBContext {
         }
         return null;
     }
-    
+
     //Update appointment
-    public void updateAppointment(BookingAppointment ba){
+    public void updateAppointment(BookingAppointment ba) {
         try {
-            String sql="""
+            String sql = """
                                    UPDATE [dbo].[Booking_Appointment]
                                       SET [patient_id] = ?
                                          ,[doctor_id] = ?
@@ -245,11 +251,11 @@ public class DBBookingMedicalAppointment extends DBContext {
                                     WHERE [Booking_Appointment].id=?""";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, ba.getPatiendId());
-            stm.setInt(2,ba.getDoctorId());
+            stm.setInt(2, ba.getDoctorId());
             stm.setDate(3, ba.getBookingDate());
             stm.setInt(4, ba.getSlotId());
             stm.setInt(5, ba.getStatusId());
-            stm.setInt(6,ba.getRoomId());
+            stm.setInt(6, ba.getRoomId());
             stm.setInt(7, ba.getServiceId());
             stm.setInt(8, ba.getId());
             stm.executeUpdate();
@@ -257,7 +263,37 @@ public class DBBookingMedicalAppointment extends DBContext {
             Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    //Cancel appointment 
+    public void deleteAppointment(int id) {
+        try {
+            String sql = """
+                        DELETE FROM [dbo].[Booking_Appointment]
+                        WHERE [Booking_Appointment].id=?""";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void cancelledAppointment(int id, int statusId) {
+        try {
+            String sql = """
+                        UPDATE [dbo].[Booking_Appointment]
+                        SET[status_id] = ?
+                        WHERE [Booking_Appointment].id=?""";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, statusId);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public static void main(String[] args) {
         try {

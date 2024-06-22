@@ -24,13 +24,14 @@ public class DBService extends DBContext {
     public ArrayList<Service> getService() {
         ArrayList<Service> arrService = new ArrayList<>();
         try {
-            String sql = "SELECT procedure_id, procedure_name from Procedure_codes";
+            String sql = "SELECT procedure_id, procedure_name, price from Procedure_codes";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs =stm.executeQuery();
              while(rs.next()){
                 Service service= new Service();
                 service.setId(rs.getInt("procedure_id"));
                 service.setName(rs.getString("procedure_name"));
+                service.setPrice(rs.getString("price"));
                 arrService.add(service);
             }
         } catch (SQLException ex) {

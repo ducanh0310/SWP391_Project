@@ -67,6 +67,119 @@
             .table .table {
                 background-color: #212529;
             }
+
+            .wrapper{
+                max-width: 450px;
+                margin: 20px auto;
+            }
+
+            .wrapper .search-input{
+                background: #fff;
+                width: 100%;
+                border-radius: 5px;
+                position: relative;
+                box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+            }
+
+            .search-input input{
+                height: 55px;
+                width: 100%;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+                padding: 0 60px 0 20px;
+                font-size: 18px;
+                box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+            }
+
+            .search-input.active input{
+                border-radius: 5px 5px 0 0;
+            }
+
+            .search-input .autocom-box{
+                padding: 0;
+                opacity: 0;
+                pointer-events: none;
+                max-height: 280px;
+                overflow-y: auto;
+            }
+
+            .search-input.active .autocom-box{
+                padding: 10px 8px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .autocom-box li{
+                list-style: none;
+                padding: 8px 12px;
+                display: none;
+                width: 100%;
+                cursor: default;
+                border-radius: 3px;
+            }
+
+            .search-input.active .autocom-box li{
+                display: block;
+            }
+            .autocom-box li:hover{
+                background: #efefef;
+            }
+
+            .search-input .icon{
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                height: 55px;
+                width: 55px;
+                text-align: center;
+                line-height: 55px;
+                font-size: 20px;
+                color: black;
+                cursor: pointer;
+            }
+
+            .search-input {
+                position: relative;
+                display: inline-block;
+            }
+
+            .search-input input {
+                height: 40px;
+                width: 300px; /* Điều chỉnh độ rộng phù hợp với giao diện của bạn */
+                padding: 0 40px 0 15px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                outline: none;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            .search-input .autocom-box {
+                position: absolute;
+                top: 45px; /* Điều chỉnh khoảng cách của hộp tìm kiếm autocomplete */
+                left: 0;
+                width: 100%;
+                background: #fff;
+                border: 1px solid #ccc;
+                border-top: none;
+                max-height: 200px;
+                overflow-y: auto;
+                z-index: 1000;
+                display: none;
+            }
+
+            .search-input .icon {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 40px;
+                width: 40px;
+                text-align: center;
+                line-height: 40px;
+                cursor: pointer;
+                color: #aaa;
+            }
         </style>
     </head>
 
@@ -190,18 +303,21 @@
                     <div class="col-lg-6 py-5">
                         <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                             <h1 class="text-white mb-4">Search Slot</h1>
-                            <form id="search-form" action="patient/bookAppointment" method="POST">
+                            <form id="search-form" action="patient/bookAppointment" method="POST" onsubmit="return validateForm()">
 
                                 <div class="date mb-3" id="dateBook" name="dateBook" data-target-input="nearest">
-                                    <input type="date" name="date" class="form-control bg-light border-0 datetimepicker-input" placeholder="Appointment Date" style="height: 40px;">
+                                    <input type="date" name="date" id="appointmentDate" class="form-control bg-light border-0 datetimepicker-input" placeholder="Appointment Date" style="height: 40px;">
                                 </div>
 
                                 <select class="form-select bg-light border-0 mb-3" id="service" name="service" style="height: 40px;">
-                                    <option selected>Select A Service</option>
+                                    <option value="0">---Select A Service---</option>
                                     <c:forEach items="${requestScope.arrService}" var="service">
-                                        <option value="${service.id}">${service.name}</option>
+                                        <option value="${service.id}">${service.name} (${service.price}$)</option>
                                     </c:forEach>
                                 </select>
+
+                                <!-- Hidden input field for service name -->
+                                <input type="hidden" id="serviceName" name="serviceName" value="">
 
                                 <div>
                                     <button class="btn btn-dark w-100 py-3" type="submit" id="search-slot-button">Search Slot</button>
@@ -214,8 +330,19 @@
 
                     <!-- Replacement content start-->
                     <div id="replacement-content" class="col-lg-6 py-5 wow zoomIn hidden" data-wow-delay="0.1s">
+
                         <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
-                            <h1 class="text-white mb-4">Slot</h1>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h1 class="text-white mb-0">Slot</h1>
+                                <div class="search-input">
+                                    <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
+                                    <div class="autocom-box">
+                                        <!-- Các mục sẽ được chèn từ JavaScript -->
+                                    </div>
+                                    <div class="icon"><i class="fas fa-search"></i></div>
+                                </div>
+                            </div>
+
                             <div class="table-container">
                                 <table class="table text-white">
                                     <thead>
@@ -253,8 +380,10 @@
                     </div>
                     <!--Fake form-->
                     <div class="modal-body" style="display: none">
+                        Service: <input type="text" id="confirmServiceName1" name="serviceName" readonly=""><br>
                         Room: <input type="text" id="confirmRoom1" name="room" readonly=""><br>
                         Doctor: <input type="text" id="confirmDoctor1" name="doctorName" readonly=""><br>
+                        Date: <input type="text" id="confirmDateDisplay1" name="date" readonly=""><br>
                         Time: <input type="text" id="confirmTime1" name="time" readonly="">
                         <form action="confirmSlot" method="POST">
                             <input type="hidden" id="confirmSlotId1" name="slotId">
@@ -270,9 +399,11 @@
                     </div>
                     <!--Real form-->
                     <div class="modal-body">
-                        Room: <input type="text" id="confirmRoom2" name="room" readonly=""><br>
-                        Doctor: <input type="text" id="confirmDoctor2" name="doctorName" readonly=""><br>
-                        Time: <input type="text" id="confirmTime2" name="time" readonly="">
+                        Service: <input type="text" id="confirmServiceName2" name="serviceName" readonly="" style="width: 50%"><br>
+                        Room: <input type="text" id="confirmRoom2" name="room" readonly="" style="width: 50%"><br>
+                        Doctor: <input type="text" id="confirmDoctor2" name="doctorName" readonly="" style="width: 50%"><br>
+                        Date: <input type="text" id="confirmDateDisplay2" name="date" readonly="" style="width: 50%"><br>
+                        Time: <input type="text" id="confirmTime2" name="time" readonly="" style="width: 50%">
                         <form action="confirmSlot" method="POST">
                             <input type="hidden" id="confirmSlotId2" name="slotId">
                             <input type="hidden" id="confirmDoctorId2" name="doctorId">
@@ -290,6 +421,28 @@
             </div>
         </div>
         <!-- Confirmation Modal End -->
+
+        <!-- Announce that now has not slot start -->
+        <div class="modal fade" id="confirmEmptyModal" tabindex="-1" aria-labelledby="confirmEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmEmptyModalLabel">Confirm Edit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        - You need to fill in all the information.<br>
+                        - If you have filled in all the information, you need to book other day. Because
+                        all of slot have been booked or today's working hours have ended!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Announce that now has not slot end -->
 
         <div style="margin-top: 160px;"></div>
         <!-- Footer Start -->
@@ -369,132 +522,202 @@
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>
         <script>
-            document.getElementById('search-form').addEventListener('submit', function (event) {
-                event.preventDefault(); // Ngăn chặn việc gửi form truyền thống
 
-                var element = $(this);
+                                        function showModal() {
+                                            var myModal = new bootstrap.Modal(document.getElementById('confirmEmptyModal'));
+                                            myModal.show();
+                                        }
+                                        function validateForm() {
+                                            var appointmentDate = document.getElementById('appointmentDate').value;
+                                            var service = document.getElementById('service').value;
 
-                $.ajax({
-                    url: 'bookAppointment',
-                    type: 'POST',
-                    data: element.serializeArray(), // Serializes the form data.
-                    dataType: 'json',
-                    success: function (response) {
-                        // Log the response for debugging
-                        console.log(response);
-
-                        if (response.success) {
-                            // Hide initial content and show replacement content
-                            document.getElementById('initial-content').style.display = 'none';
-                            var replacementContent = document.getElementById('replacement-content');
-                            replacementContent.style.display = 'block';
-
-                            // Clear previous slot data
-                            $('#slotPlace').empty();
-
-                            // Populate the slot table
-                            response.slots.forEach(function (showSlot) {
-                                // Log showSlot for debugging
-                                console.log('Slot:', showSlot);
-
-                                // Create a new row element
-                                var row = document.createElement('tr');
-
-                                // Create and append the room cell
-                                var roomCell = document.createElement('td');
-                                roomCell.textContent = showSlot.room;
-                                row.appendChild(roomCell);
-
-                                // Create and append the doctor cell
-                                var doctorCell = document.createElement('td');
-                                doctorCell.textContent = showSlot.doctor;
-                                row.appendChild(doctorCell);
-
-                                // Create and append the time cell
-                                var timeCell = document.createElement('td');
-                                timeCell.textContent = showSlot.startedTime + ' - ' + showSlot.endTime;
-                                row.appendChild(timeCell);
-
-                                // Create and append the id of slot cell
-                                var idSlotCell = document.createElement('td');
-                                idSlotCell.textContent = showSlot.idSlot;
-                                idSlotCell.style.display = 'none'; // Make the cell hidden
-                                row.appendChild(idSlotCell);
-
-                                // Create and append the id of doctor cell
-                                var idDoctorCell = document.createElement('td');
-                                idDoctorCell.textContent = showSlot.idDoctor;
-                                idDoctorCell.style.display = 'none'; // Make the cell hidden
-                                row.appendChild(idDoctorCell);
-
-                                // Create and append the id of room cell
-                                var idRoomCell = document.createElement('td');
-                                idRoomCell.textContent = showSlot.idRoom;
-                                idRoomCell.style.display = 'none'; // Make the cell hidden
-                                row.appendChild(idRoomCell);
-
-                                // Create and append the date cell
-                                var dateCell = document.createElement('td');
-                                dateCell.textContent = showSlot.date;
-                                dateCell.style.display = 'none'; // Make the cell hidden
-                                row.appendChild(dateCell);
-
-                                // Create and append the id of service cell
-                                var idServiceCell = document.createElement('td');
-                                idServiceCell.textContent = showSlot.idService;
-                                idServiceCell.style.display = 'none'; // Make the cell hidden
-                                row.appendChild(idServiceCell);
-
-                                // Create and append the select button cell
-                                var selectButtonCell = document.createElement('td');
-                                var selectButton = document.createElement('button');
-                                selectButton.textContent = 'Book';
-                                selectButton.className = 'btn btn-primary';
-                                selectButton.addEventListener('click', function () {
-                                    //Set slot details in modal
-                                    document.getElementById('confirmRoom1').value = showSlot.room;
-                                    document.getElementById('confirmDoctor1').value = showSlot.doctor;
-                                    document.getElementById('confirmTime1').value = showSlot.startedTime + ' - ' + showSlot.endTime;
-                                    document.getElementById('confirmSlotId1').value = showSlot.idSlot;
-                                    document.getElementById('confirmDoctorId1').value = showSlot.idDoctor;
-                                    document.getElementById('confirmRoomId1').value = showSlot.idRoom;
-                                    document.getElementById('confirmDate1').value = showSlot.date;
-                                    document.getElementById('confirmServiceId1').value = showSlot.idService;
+                                            if (service === "") {
 
 
+                                                // Example: Call this function when needed
+                                                showModal();
+                                                return false;
+                                            }
 
-                                    // Also set data in the second form if necessary
-                                    document.getElementById('confirmRoom2').value = showSlot.room;
-                                    document.getElementById('confirmDoctor2').value = showSlot.doctor;
-                                    document.getElementById('confirmTime2').value = showSlot.startedTime + ' - ' + showSlot.endTime;
-                                    document.getElementById('confirmSlotId2').value = showSlot.idSlot;
-                                    document.getElementById('confirmDoctorId2').value = showSlot.idDoctor;
-                                    document.getElementById('confirmRoomId2').value = showSlot.idRoom;
-                                    document.getElementById('confirmDate2').value = showSlot.date;
-                                    document.getElementById('confirmServiceId2').value = showSlot.idService;
-                                    // Show modal
-                                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-                                    confirmModal.show();
-                                });
-                                selectButtonCell.appendChild(selectButton);
-                                row.appendChild(selectButtonCell);
+                                            if (appointmentDate === "") {
+                                                
 
-                                // Append the row to the table
-                                document.getElementById('slotPlace').appendChild(row);
+                                                // Example: Call this function when needed
+                                                showModal();
+                                                return false;
+                                            }
 
-                            });
+                                            return true;
+                                        }
 
+                                        function searchServices(event) {
+                                            var keyword = event.target.value.toLowerCase();
+                                            var rows = document.querySelectorAll("#slotPlace tr");
 
+                                            rows.forEach(function (row) {
+                                                var text = row.textContent.toLowerCase();
+                                                var displayStyle = text.includes(keyword) ? "table-row" : "none";
+                                                row.style.display = displayStyle;
+                                            });
+                                        }
 
-                        } else {
-                            alert(response.message);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
-            });
+                                        //Validate time
+                                        // Lấy phần tử input
+                                        const appointmentDateInput = document.getElementById('appointmentDate');
+
+                                        // Lấy ngày hiện tại
+                                        const today = new Date();
+
+                                        // Định dạng ngày thành chuỗi yyyy-mm-dd
+                                        const formattedToday = today.toISOString().split('T')[0];
+
+                                        // Đặt thuộc tính min cho input
+                                        appointmentDateInput.setAttribute('min', formattedToday);
+
+                                        function updateServiceName() {
+                                            var serviceDropdown = document.getElementById("service");
+                                            var selectedOption = serviceDropdown.options[serviceDropdown.selectedIndex];
+                                            var serviceName = selectedOption.text;
+                                            document.getElementById("serviceName").value = serviceName;
+                                        }
+
+                                        document.getElementById('search-form').addEventListener('submit', function (event) {
+                                            event.preventDefault(); // Ngăn chặn việc gửi form truyền thống
+                                            updateServiceName();
+                                            var element = $(this);
+
+                                            $.ajax({
+                                                url: 'bookAppointment',
+                                                type: 'POST',
+                                                data: element.serializeArray(), // Serializes the form data.
+                                                dataType: 'json',
+                                                success: function (response) {
+                                                    // Log the response for debugging
+                                                    console.log(response);
+
+                                                    if (response.success) {
+                                                        // Hide initial content and show replacement content
+                                                        document.getElementById('initial-content').style.display = 'none';
+                                                        var replacementContent = document.getElementById('replacement-content');
+                                                        replacementContent.style.display = 'block';
+
+                                                        // Clear previous slot data
+                                                        $('#slotPlace').empty();
+
+                                                        // Populate the slot table
+                                                        response.slots.forEach(function (showSlot) {
+                                                            // Log showSlot for debugging
+                                                            console.log('Slot:', showSlot);
+
+                                                            // Create a new row element
+                                                            var row = document.createElement('tr');
+
+                                                            // Create and append the room cell
+                                                            var roomCell = document.createElement('td');
+                                                            roomCell.textContent = showSlot.room;
+                                                            row.appendChild(roomCell);
+
+                                                            // Create and append the doctor cell
+                                                            var doctorCell = document.createElement('td');
+                                                            doctorCell.textContent = showSlot.doctor;
+                                                            row.appendChild(doctorCell);
+
+                                                            // Create and append the time cell
+                                                            var timeCell = document.createElement('td');
+                                                            timeCell.textContent = showSlot.startedTime + ' - ' + showSlot.endTime;
+                                                            row.appendChild(timeCell);
+
+                                                            // Create and append the id of slot cell
+                                                            var idSlotCell = document.createElement('td');
+                                                            idSlotCell.textContent = showSlot.idSlot;
+                                                            idSlotCell.style.display = 'none'; // Make the cell hidden
+                                                            row.appendChild(idSlotCell);
+
+                                                            // Create and append the id of doctor cell
+                                                            var idDoctorCell = document.createElement('td');
+                                                            idDoctorCell.textContent = showSlot.idDoctor;
+                                                            idDoctorCell.style.display = 'none'; // Make the cell hidden
+                                                            row.appendChild(idDoctorCell);
+
+                                                            // Create and append the id of room cell
+                                                            var idRoomCell = document.createElement('td');
+                                                            idRoomCell.textContent = showSlot.idRoom;
+                                                            idRoomCell.style.display = 'none'; // Make the cell hidden
+                                                            row.appendChild(idRoomCell);
+
+                                                            // Create and append the date cell
+                                                            var dateCell = document.createElement('td');
+                                                            dateCell.textContent = showSlot.date;
+                                                            dateCell.style.display = 'none'; // Make the cell hidden
+                                                            row.appendChild(dateCell);
+
+                                                            // Create and append the id of service cell
+                                                            var idServiceCell = document.createElement('td');
+                                                            idServiceCell.textContent = showSlot.idService;
+                                                            idServiceCell.style.display = 'none'; // Make the cell hidden
+                                                            row.appendChild(idServiceCell);
+
+                                                            // Create and append the id of service cell
+                                                            var nameServiceCell = document.createElement('td');
+                                                            nameServiceCell.textContent = showSlot.serviceName;
+                                                            nameServiceCell.style.display = 'none'; // Make the cell hidden
+                                                            row.appendChild(nameServiceCell);
+
+                                                            // Create and append the select button cell
+                                                            var selectButtonCell = document.createElement('td');
+                                                            var selectButton = document.createElement('button');
+                                                            selectButton.textContent = 'Book';
+                                                            selectButton.className = 'btn btn-primary';
+                                                            selectButton.addEventListener('click', function () {
+                                                                //Set slot details in modal
+                                                                document.getElementById('confirmRoom1').value = showSlot.room;
+                                                                document.getElementById('confirmDoctor1').value = showSlot.doctor;
+                                                                document.getElementById('confirmTime1').value = showSlot.startedTime + ' - ' + showSlot.endTime;
+                                                                document.getElementById('confirmSlotId1').value = showSlot.idSlot;
+                                                                document.getElementById('confirmDoctorId1').value = showSlot.idDoctor;
+                                                                document.getElementById('confirmRoomId1').value = showSlot.idRoom;
+                                                                document.getElementById('confirmDate1').value = showSlot.date;
+                                                                document.getElementById('confirmServiceId1').value = showSlot.idService;
+                                                                document.getElementById('confirmServiceName1').value = showSlot.serviceName;
+                                                                document.getElementById('confirmDateDisplay1').value = showSlot.date;
+
+                                                                // Also set data in the second form if necessary
+                                                                document.getElementById('confirmRoom2').value = showSlot.room;
+                                                                document.getElementById('confirmDoctor2').value = showSlot.doctor;
+                                                                document.getElementById('confirmTime2').value = showSlot.startedTime + ' - ' + showSlot.endTime;
+                                                                document.getElementById('confirmSlotId2').value = showSlot.idSlot;
+                                                                document.getElementById('confirmDoctorId2').value = showSlot.idDoctor;
+                                                                document.getElementById('confirmRoomId2').value = showSlot.idRoom;
+                                                                document.getElementById('confirmDate2').value = showSlot.date;
+                                                                document.getElementById('confirmServiceId2').value = showSlot.idService;
+                                                                document.getElementById('confirmServiceName2').value = showSlot.serviceName;
+                                                                document.getElementById('confirmDateDisplay2').value = showSlot.date;
+                                                                // Show modal
+                                                                var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                                                                confirmModal.show();
+                                                            });
+                                                            selectButtonCell.appendChild(selectButton);
+                                                            row.appendChild(selectButtonCell);
+
+                                                            // Append the row to the table
+                                                            document.getElementById('slotPlace').appendChild(row);
+                                                        });
+                                                    } else {
+                                                        // Function to show the modal
+                                                        function showModal() {
+                                                            var myModal = new bootstrap.Modal(document.getElementById('confirmEmptyModal'));
+                                                            myModal.show();
+                                                        }
+
+                                                        // Example: Call this function when needed
+                                                        showModal();
+                                                    }
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    console.error('Error:', error);
+                                                }
+                                            });
+                                        });
         </script>
     </body>
 

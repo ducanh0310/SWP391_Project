@@ -44,14 +44,227 @@
                 display: none;
             }
 
+            #editSuccessNotification {
+                display: none;
+            }
+            
+            #bookSuccessNotification {
+                display: none;
+            }
+
+
+
             /* Style for the progress bar */
             .progress-bar {
                 transition: width 5s linear;
+            }
+
+            /* Position notification at top right */
+            #notificationContainer {
+                display: none; /* Hide by default */
+            }
+
+            /* Style for the progress bar */
+
+            #editSuccessNotification #deleteSuccessNotification #bookSuccessNotification{
+                display: none;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1060;
+            }
+
+            .status-verify {
+                color: blue;
+            }
+            .status-done {
+                color: green;
+            }
+            .status-cancel {
+                color: red;
+            }
+            .status-not-started {
+                color: black;
+            }
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+
+            ::selection{
+                color: #fff;
+                background: #ff654a;
+            }
+
+            .wrapper{
+                max-width: 450px;
+                margin: 20px auto;
+            }
+
+            .wrapper .search-input{
+                background: #fff;
+                width: 100%;
+                border-radius: 5px;
+                position: relative;
+                box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+            }
+
+            .search-input input{
+                height: 55px;
+                width: 100%;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+                padding: 0 60px 0 20px;
+                font-size: 18px;
+                box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+            }
+
+            .search-input.active input{
+                border-radius: 5px 5px 0 0;
+            }
+
+            .search-input .autocom-box{
+                padding: 0;
+                opacity: 0;
+                pointer-events: none;
+                max-height: 280px;
+                overflow-y: auto;
+            }
+
+            .search-input.active .autocom-box{
+                padding: 10px 8px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .autocom-box li{
+                list-style: none;
+                padding: 8px 12px;
+                display: none;
+                width: 100%;
+                cursor: default;
+                border-radius: 3px;
+            }
+
+            .search-input.active .autocom-box li{
+                display: block;
+            }
+            .autocom-box li:hover{
+                background: #efefef;
+            }
+
+            .search-input .icon{
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                height: 55px;
+                width: 55px;
+                text-align: center;
+                line-height: 55px;
+                font-size: 20px;
+                color: black;
+                cursor: pointer;
             }
         </style>
     </head>
 
     <body>
+        <!-- Book Success Notification start-->
+        <div id="bookSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="bookSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${bookSuccess}
+                <button type="button" class="btn-close" id="closeBookNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="bookSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Book Success Notification end-->
+
+        <!-- Edit Success Notification start-->
+        <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${success}
+                <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Success Notification end-->
+
+        <!-- Verify edit booking appointment start -->
+        <div class="modal fade" id="confirmEditModal" tabindex="-1" aria-labelledby="confirmEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmEditModalLabel">Confirm Edit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to edit this appointment?<br>
+                        - Service: <input type="text" id="serviceName" name="serviceName" readonly=""><br>
+                        - Room: <input type="text" id="room" name="room" readonly=""><br>
+                        - Doctor: <input type="text" id="doctor" name="doctorName" readonly=""><br>
+                        - Date: <input type="text" id="date" name="date" readonly=""><br>
+                        - Time: <input type="text" id="time" name="time" readonly="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmEditButton">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Verify edit booking appointment end -->
+
+
+        <!-- Verify cancelled booking appointment start -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to cancel this appointment?<br>
+                        - Service: <input type="text" id="serviceDelete" name="serviceName" readonly=""><br>
+                        - Room: <input type="text" id="roomDelete" name="room" readonly=""><br>
+                        - Doctor: <input type="text" id="doctorDelete" name="doctorName" readonly=""><br>
+                        - Date: <input type="text" id="dateDelete" name="date" readonly=""><br>
+                        - Time: <input type="text" id="timeDelete" name="time" readonly="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="deleteAppointment" method="POST">
+                            <input type="hidden" id="idDelete" name="idDelete">
+                            <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Confirm</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Verify cancelled booking appointment start -->
+
+        <!-- Deleted Success Notification start-->
+        <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                ${deleteSuccess}
+                <button type="button" class="btn-close" id="closeNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Deleted Success Notification end-->
+
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary m-1" role="status">
@@ -115,20 +328,12 @@
                     <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                 </div>
                 <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="bookAppointment" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
             </div>
         </nav>
         <!-- Navbar End -->
-        <!-- Deleted Success Notification start-->
-        <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
-            <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                Appointment cancelled successfully!
-                <div class="progress mt-2" style="height: 4px;">
-                    <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Deleted Success Notification end-->
+
+
 
         <!-- Full Screen Search Start -->
         <div class="modal fade" id="searchModal" tabindex="-1">
@@ -169,6 +374,16 @@
                     <div class="card-header">
                         <h5 class="mb-0">Medical Appointment History</h5>
                     </div>
+                    <div class="wrapper">
+                        <div class="search-input">
+                            <a href="" target="_blank" hidden></a>
+                            <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
+                            <div class="autocom-box">
+                                <!-- Các mục sẽ được chèn từ JavaScript -->
+                            </div>
+                            <div class="icon"><i class="fas fa-search"></i></div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap">
                             <thead class="thead-light">
@@ -184,40 +399,67 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.bookingAppointmentHistory}" var="bAH">
+                            <tbody id="appointmentHistoryBody">
+                                <c:forEach items="${requestScope.bookingAppointmentHistory}" var="bAH" varStatus="status">
                                     <tr>
                                         <td>
-                                            <input type="text" value="1" style="width: 10px" readonly="">
+                                            <span>${status.index + 1}</span>
                                         </td>
                                         <td>
-                                            <input type="text" value="${bAH.service.name}" readonly="">
+                                            <span>${bAH.service.name}</span>
                                         </td>
                                         <td>
-                                            <input type="text" value="${bAH.service.price}$" readonly="">
+                                            <span>${bAH.service.price}$</span>
                                         </td>
                                         <td>
-                                            <input type="text" value="${bAH.doctor.name}" readonly="" >
+                                            <span>${bAH.doctor.name}</span>
                                         </td>
                                         <td>
-                                            <input type="text" value="${bAH.date}" readonly="" >
+                                            <span>${bAH.date}</span>
                                         </td>
                                         <td>
-                                            <input type="text" value="${bAH.slot.startedTime}-${bAH.slot.endTime}" readonly="">
+                                            <span>${bAH.slot.startedTime}-${bAH.slot.endTime}</span>
                                         </td>
                                         <td>
-                                            <input type="text" value="${bAH.room.name}" readonly="">
+                                            <span>${bAH.room.name}</span>
+                                        </td>
+                                        <td>
+
+                                            <c:choose>
+                                                <c:when test="${bAH.statusBook.id == 1}">
+                                                    <span class="status-verify">${bAH.statusBook.name}</span>
+                                                </c:when>
+                                                <c:when test="${bAH.statusBook.id == 3}">
+                                                    <span class="status-done">${bAH.statusBook.name}</span>
+                                                </c:when>
+                                                <c:when test="${bAH.statusBook.id == 4}">
+                                                    <span class="status-cancel">${bAH.statusBook.name}</span>
+                                                </c:when>
+                                                <c:when test="${bAH.statusBook.id == 2}">
+                                                    <span class="status-not-started">${bAH.statusBook.name}</span>
+                                                </c:when>
+                                            </c:choose>
                                         </td>
 
-                                        <td>
-                                            <input type="text" value="${bAH.statusBook.name}" readonly="" >
-                                        </td>
-                                        
                                         <td class="text-end">
-                                            <a href="editAppointment?id=${bAH.ID}" class="btn btn-sm btn-neutral">Edit</a>
-                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
+                                            <c:if test="${bAH.statusBook.id == 1}">
+                                                <button type="button" class="btn btn-sm btn-neutral edit-button" data-bs-toggle="modal" data-bs-target="#confirmEditModal" 
+                                                        data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                        data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Edit</button>
+
+                                                <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                                                        data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                        data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
+                                                    Cancel
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${bAH.statusBook.id == 2}">
+                                                <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                                                        data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                        data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
+                                                    Cancel
+                                                </button>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -236,26 +478,7 @@
         <!--View Medical Appointment History End-->
 
 
-        <!-- Verify cancelled booking appointment start -->
 
-        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to cancel this appointment?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Verify cancelled booking appointment start -->
 
         <!-- Note Start -->
         <main class="py-6 bg-surface-secondary">
@@ -265,7 +488,7 @@
                     <li>- <b style="color:blue">Verifying:</b> Your booking appointment are verifying.</li>
                     <li>- <b style="color:red">Cancel:</b> Your booking appointment were cancelled.</li>
                     <li>- <b style="color:black">Not Started</b>: You have successfully scheduled an appointment but have not seen the doctor yet.</li>
-                    <li>- <b style="color: #157347">Done</b>: You have completed the medical examination.</li>
+                    <li>- <b style="color: #157347">Completed</b>: You have completed the medical examination.</li>
 
                 </ul>
             </div>
@@ -352,28 +575,150 @@
         <!-- Template Javascript -->
         <script src="../js/main.js"></script>
 
+
         <script>
-            $(document).ready(function () {
-                $('#confirmDeleteButton').on('click', function () {
-                    // Simulate deletion process
-                    $('#confirmDeleteModal').modal('hide'); // Hide the confirmation modal
+                                function searchServices(event) {
+                                    var keyword = event.target.value.toLowerCase();
+                                    var rows = document.querySelectorAll("#appointmentHistoryBody tr");
 
-                    // Show success notification
-                    $('#deleteSuccessNotification').fadeIn();
+                                    rows.forEach(function (row) {
+                                        var text = row.textContent.toLowerCase();
+                                        var displayStyle = text.includes(keyword) ? "table-row" : "none";
+                                        row.style.display = displayStyle;
+                                    });
+                                }
 
-                    // Start progress bar animation
-                    var progressBar = $('#deleteSuccessProgressBar');
-                    progressBar.css('width', '100%');
-                    progressBar.addClass('progress-bar-animated');
 
-                    // Hide notification and reset progress bar after 5 seconds
-                    setTimeout(function () {
-                        $('#deleteSuccessNotification').fadeOut();
-                        progressBar.css('width', '0%');
-                        progressBar.removeClass('progress-bar-animated');
-                    }, 5000);
-                });
-            });
+
+
+
+
+                                $(document).ready(function () {
+                                    let editId;
+                                    let service;
+                                    let room;
+                                    let doctor;
+                                    let date;
+                                    let time;
+                                    $('.edit-button').click(function (event) {
+                                        event.preventDefault(); // Prevent the default anchor behavior
+                                        editId = $(this).data('id');
+                                        service = $(this).data('service');
+                                        room = $(this).data('room');
+                                        doctor = $(this).data('doctor');
+                                        date = $(this).data('date');
+                                        time = $(this).data('time');
+
+                                        document.getElementById('serviceName').value = service;
+                                        document.getElementById('room').value = room;
+                                        document.getElementById('doctor').value = doctor;
+                                        document.getElementById('date').value = date;
+                                        document.getElementById('time').value = time;
+                                        console.log("Edit ID: " + editId);  // Log the ID for debugging
+
+                                        // Redirect to the edit URL with the captured ID
+                                        if (editId) {
+                                            $('#confirmEditButton').click(function () {
+                                                window.location.href = 'editAppointment?id=' + editId;
+                                            });
+                                        }
+                                    });
+
+                                    //Edit appointment
+                                    function showEditSuccessNotification() {
+                                        $('#editSuccessNotification').show();
+                                        let progressBar = $('#editSuccessProgressBar');
+                                        let width = 0;
+                                        let interval = setInterval(function () {
+                                            width++;
+                                            progressBar.css('width', width + '%');
+                                            if (width === 200) {
+                                                clearInterval(interval);
+                                                $('#editSuccessNotification').fadeOut();
+                                            }
+                                        }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                    }
+
+                                    // Close notification button handler
+                                    $('#closeEditNotificationButton').click(function () {
+                                        $('#editSuccessNotification').hide();
+                                    });
+
+                                    // Check for success message from the server
+                                    let successMessage = '${sessionScope.success}';
+                                    if (successMessage) {
+                                        showEditSuccessNotification();
+                                    }
+
+                                    //Delete appointment
+                                    $('.delete-button').click(function (event) {
+                                        event.preventDefault(); // Prevent the default anchor behavior
+                                        deleteId = $(this).data('id');
+                                        service = $(this).data('service');
+                                        room = $(this).data('room');
+                                        doctor = $(this).data('doctor');
+                                        date = $(this).data('date');
+                                        time = $(this).data('time');
+
+                                        document.getElementById('serviceDelete').value = service;
+                                        document.getElementById('roomDelete').value = room;
+                                        document.getElementById('doctorDelete').value = doctor;
+                                        document.getElementById('dateDelete').value = date;
+                                        document.getElementById('timeDelete').value = time;
+                                        document.getElementById('idDelete').value = deleteId;
+                                    });
+
+                                    // Handle notification display for delete success
+                                    function showDeleteSuccessNotification() {
+                                        $('#deleteSuccessNotification').show();
+                                        let progressBar = $('#deleteSuccessProgressBar');
+                                        let width = 0;
+                                        let interval = setInterval(function () {
+                                            width++;
+                                            progressBar.css('width', width + '%');
+                                            if (width === 200) {
+                                                clearInterval(interval);
+                                                $('#deleteSuccessNotification').fadeOut();
+                                            }
+                                        }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                    }
+
+                                    // Close notification button handler
+                                    $('#closeNotificationButton').click(function () {
+                                        $('#deleteSuccessNotification').hide();
+                                    });
+
+                                    // Check for success message from the server
+                                    let deleteSuccess = '${sessionScope.deleteSuccess}';
+                                    if (deleteSuccess) {
+                                        showDeleteSuccessNotification();
+                                    }
+
+                                    function showBookSuccessNotification() {
+                                        $('#bookSuccessNotification').show();
+                                        let progressBar = $('#bookSuccessProgressBar');
+                                        let width = 0;
+                                        let interval = setInterval(function () {
+                                            width++;
+                                            progressBar.css('width', width + '%');
+                                            if (width === 200) {
+                                                clearInterval(interval);
+                                                $('#bookSuccessNotification').fadeOut();
+                                            }
+                                        }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                    }
+
+                                    // Close notification button handler
+                                    $('#closeBookNotificationButton').click(function () {
+                                        $('#bookSuccessNotification').hide();
+                                    });
+
+                                    // Check for success message from the server
+                                    let bookSuccess = '${sessionScope.bookSuccess}';
+                                    if (bookSuccess) {
+                                        showBookSuccessNotification();
+                                    }
+                                });
         </script>
     </body>
 

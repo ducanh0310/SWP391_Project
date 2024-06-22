@@ -17,6 +17,15 @@ public class Slot {
     private int idService;
     private Room room;
     private Employee doctor; 
+    private StatusBook statusBook;
+
+    public StatusBook getStatusBook() {
+        return statusBook;
+    }
+
+    public void setStatusBook(StatusBook statusBook) {
+        this.statusBook = statusBook;
+    }
 
     public Room getRoom() {
         return room;

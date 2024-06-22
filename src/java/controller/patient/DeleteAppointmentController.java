@@ -13,21 +13,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.BookingAppointment;
-import model.BookingAppointmentHistory;
 import model.User;
 
 /**
  *
  * @author Vu Minh Quan
  */
-@WebServlet(name = "ConfirmEditSlotController", urlPatterns = {"/patient/confirmEditSlot"})
-public class ConfirmEditSlotController extends HttpServlet {
+@WebServlet(name = "DeleteAppointmentController", urlPatterns = {"/patient/deleteAppointment"})
+public class DeleteAppointmentController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,28 +35,11 @@ public class ConfirmEditSlotController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
         try {
-            //Get parameter from server
-            String date = request.getParameter("date");
-            String service = request.getParameter("idService");
-            String doctorId = request.getParameter("idDoctor");
-            String slotId = request.getParameter("idSlot");
-            String roomId = request.getParameter("idRoom");
-            String bookAppointmentId = request.getParameter("id");
-
-            //Insert database
-            BookingAppointment ba = new BookingAppointment();
-            ba.setBookingDate(Date.valueOf(date));
-            ba.setServiceId(Integer.parseInt(service));
-            ba.setRoomId(Integer.parseInt(roomId));
-            ba.setDoctorId(Integer.parseInt(doctorId));
-            ba.setPatiendId(Integer.parseInt(currentUser.getPatient_Id()));
-            ba.setSlotId(Integer.parseInt(slotId));
-            ba.setStatusId(1);
-            ba.setId(Integer.parseInt(bookAppointmentId));
-            DBBookingMedicalAppointment dbBookingMedicalAppointment = new DBBookingMedicalAppointment();
-            dbBookingMedicalAppointment.updateAppointment(ba);
+            String id = request.getParameter("idDelete");
+           
+            DBBookingMedicalAppointment db = new DBBookingMedicalAppointment();
+            db.cancelledAppointment(Integer.parseInt(id), 4);
 
             // Xóa tất cả các thuộc tính trong session
             Enumeration<String> attributeNames = session.getAttributeNames();
@@ -72,19 +51,14 @@ public class ConfirmEditSlotController extends HttpServlet {
                 }
                 
             }
-            //Move view appointment history
-            session.setAttribute("success", "Edit appointment successfully");
+
+            session.setAttribute("deleteSuccess", "Appointment cancelled successfully");
             response.sendRedirect("viewAppointmentHistory");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

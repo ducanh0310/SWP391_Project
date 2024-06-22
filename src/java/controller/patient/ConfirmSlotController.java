@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BookingAppointment;
@@ -59,6 +60,19 @@ public class ConfirmSlotController extends HttpServlet {
             ba.setStatusId(1);           
             DBBookingMedicalAppointment dbBookingMedicalAppointment = new DBBookingMedicalAppointment();
             dbBookingMedicalAppointment.insertSlot(ba);
+            
+            // Xóa tất cả các thuộc tính trong session
+            Enumeration<String> attributeNames = session.getAttributeNames();
+            while (attributeNames.hasMoreElements()) {
+                
+                String attributeName = attributeNames.nextElement();
+                if(!attributeName.equals("currentUser")){
+                    session.removeAttribute(attributeName);
+                }
+                
+            }
+            
+            session.setAttribute("bookSuccess", "Appointment booked successfully");
             response.sendRedirect("viewAppointmentHistory");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);

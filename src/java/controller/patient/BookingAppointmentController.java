@@ -20,6 +20,10 @@ import java.util.logging.Logger;
 import model.Service;
 import model.Slot;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -52,21 +56,33 @@ public class BookingAppointmentController extends HttpServlet {
             // Take parameters from the request
             Date dateBook = Date.valueOf(request.getParameter("date"));
             String service = request.getParameter("service");
+            String serviceName = request.getParameter("serviceName");
 
             DBBookingMedicalAppointment db = new DBBookingMedicalAppointment();
             ArrayList<Slot> arrAllSlot = db.getAllSlot(service);
             ArrayList<Slot> arrExitSlot = db.getExistSlot(service, dateBook);
             ArrayList<Slot> arrRestSlot = new ArrayList<>();
 
+            // Get the current time
+            LocalTime now = LocalTime.now();
+            LocalDate today = LocalDate.now();
+            
             for (Slot slotAll : arrAllSlot) {
                 boolean isExist = false;
                 for (Slot slotExist : arrExitSlot) {
-                    if (slotAll.getId()==slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()) {
+                    //Slots are not booked by patient 
+                    if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
+                            && slotExist.getStatusBook().getId() != 4) {
                         isExist = true;
                         break;
                     }
                 }
-                if (!isExist) {
+                
+                // Check if the slot's start time is after the current time
+                LocalDate slotDate = dateBook.toLocalDate(); 
+                LocalTime slotStartTime = slotAll.getStartedTime();
+                
+                if (!isExist && (slotDate.isAfter(today) || (slotDate.isEqual(today) && slotStartTime.isAfter(now)))) {
                     arrRestSlot.add(slotAll);
                 }
             }
@@ -86,13 +102,14 @@ public class BookingAppointmentController extends HttpServlet {
                             .append("\"idDoctor\": \"").append(slot.getDoctor().getId()).append("\",")
                             .append("\"date\": \"").append(dateBook).append("\",")
                             .append("\"idService\": \"").append(service).append("\",")
+                            .append("\"serviceName\": \"").append(serviceName).append("\",")
                             .append("\"idRoom\": \"").append(slot.getRoom().getId()).append("\"")
                             .append("},");
                 }
                 // Remove the last comma and close the JSON array and object
                 jsonResponse.setLength(jsonResponse.length() - 1);
                 jsonResponse.append("]}");
-                out.print(jsonResponse.toString());                
+                out.print(jsonResponse.toString());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
