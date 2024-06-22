@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
@@ -29,7 +30,7 @@ public class ViewPatientDetailController extends HttpServlet {
         try {
             int patientId = Integer.parseInt(request.getParameter("pid"));
             PatientDAO patientView = new PatientDAO();
-            Patient patients = patientView.getPatient(patientId);
+            PatientGetByIdDTO patients = patientView.getPatient(patientId);
             request.setAttribute("patients", patients);
             request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
         } catch (SQLException ex) {

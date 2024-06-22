@@ -11,7 +11,7 @@ import java.sql.*;
  * @author Gia Huy
  */
 public class Patient {
-    private int id;
+
     private String sin;
     private String address;
     private String name;
@@ -20,17 +20,55 @@ public class Patient {
     private String phone;
     private Date dob;
     private String insurance;
-    private int rep_id;
+    private Integer rep_id;
 
-    public Patient(int code, String address1, String name1, String gender1, String email1, String phone1, Date dob1, String abc, int par) {
-    }
-    
-   
-    
-    public int getId() {
-        return id;
+    public Patient() {
     }
 
+    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, Integer rep_id) {
+        this.sin = sin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+        this.insurance = insurance;
+        this.rep_id = rep_id;
+    }
+
+    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance) {
+        this.sin = sin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+        this.insurance = insurance;
+    }
+
+    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob, Integer rep_id) {
+        this.sin = sin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+        this.rep_id = rep_id;
+    }
+    
+
+    public Patient(String sin, String address, String name, String gender, String email, String phone, Date dob) {
+        this.sin = sin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+    }
     
 
     public String getAddress() {
@@ -61,25 +99,8 @@ public class Patient {
         return insurance;
     }
 
-    public int getRep_id() {
+    public Integer getRep_id() {
         return rep_id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Patient(int id, String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
-        this.id = id;
-        this.sin = sin;
-        this.address = address;
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.dob = dob;
-        this.insurance = insurance;
-        this.rep_id = rep_id;
     }
 
     public String getSin() {
@@ -89,8 +110,6 @@ public class Patient {
     public void setSin(String sin) {
         this.sin = sin;
     }
-
-    
 
     public void setAddress(String address) {
         this.address = address;
@@ -120,9 +139,8 @@ public class Patient {
         this.insurance = insurance;
     }
 
-    public void setRep_id(int rep_id) {
+    public void setRep_id(Integer rep_id) {
         this.rep_id = rep_id;
     }
-    
-    
+
 }

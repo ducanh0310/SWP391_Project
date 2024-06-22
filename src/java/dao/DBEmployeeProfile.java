@@ -31,16 +31,16 @@ public class DBEmployeeProfile extends DBContext {
     //Database for view profile
     public Employee getInfoEmployee(String username) throws SQLException {
         Employee employeeInfo = new Employee();
-        String sql = """
+        String query = """
                        Select e.employee_id, e.employee_sin, e.employee_type, e.name, e.address, e.annual_salary,e.gender, e.dob, e.phone, e.email,e.branch_id, b.city from Employee e
-                       join Branch b on b.branch_id=e.branch_id
-                       join User_account u on u.employee_id=e.employee_id
-                       where u.username =?""";
+                                              join Branch b on b.branch_id=e.branch_id
+                                              join User_account u on u.employee_id=e.employee_id
+                                              where u.username = ?""";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(query);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -59,8 +59,8 @@ public class DBEmployeeProfile extends DBContext {
                 br.setCity(rs.getString("city"));
                 employeeInfo.setBranch(br);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPatientProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -70,7 +70,7 @@ public class DBEmployeeProfile extends DBContext {
 
     //Database fo edit profile
     public void editInfoEmployee(Employee emInfo) throws SQLException {
-        String sql = """
+        String query = """
                         UPDATE [dbo].[Employee]
                             SET [employee_sin] = ?
                                ,[employee_type] = ?
@@ -87,7 +87,7 @@ public class DBEmployeeProfile extends DBContext {
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(query);
             statement.setString(1, emInfo.getEmployeeSin());
             statement.setString(2, emInfo.getEmployeeType());
             statement.setString(3, emInfo.getName());
@@ -101,8 +101,8 @@ public class DBEmployeeProfile extends DBContext {
             statement.setInt(11, emInfo.getId());
             statement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPatientProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -113,17 +113,16 @@ public class DBEmployeeProfile extends DBContext {
 
     public ArrayList<DoctorCertification> getCertification(String username) throws SQLException {
         ArrayList<DoctorCertification> arrayCerti = new ArrayList<>();
-            String sql = """
+        String query = """
                                    Select dc.id, dc.name_cetification, dc.id_doctor, dc.url from Doctor_Certification dc
                                    join Employee e on e.employee_id = dc.id_doctor
                                    join User_account u on u.employee_id = e.employee_id
                                    where u.username=?""";
-            Connection connection = null;
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
+            statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 DoctorCertification dc = new DoctorCertification();
@@ -133,8 +132,8 @@ public class DBEmployeeProfile extends DBContext {
                 dc.setUrl(rs.getString("url"));
                 arrayCerti.add(dc);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -144,7 +143,7 @@ public class DBEmployeeProfile extends DBContext {
 
     //insert certification 
     public void insertCertification(String nameCert, String url, int id) throws SQLException {
-            String sql = """
+        String query = """
                     INSERT INTO [dbo].[Doctor_Certification]
                                ([url]
                                ,[id_doctor]
@@ -153,17 +152,18 @@ public class DBEmployeeProfile extends DBContext {
                                (?
                                ,?
                                ,?)""";
-            Connection connection = null;
+
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(query);
             statement.setString(1, url);
             statement.setInt(2, id);
             statement.setString(3, nameCert); // Corrected the index and value
             statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -172,22 +172,22 @@ public class DBEmployeeProfile extends DBContext {
 
     //Update certificate 
     public void updateCertificate(String username, String imageName, String imageURL, int imageId) throws SQLException {
-            String sql = """
+        String query = """
                                    UPDATE [dbo].[Doctor_Certification]
                                       SET [url] = ?
                                          ,[name_cetification] = ?
                                     WHERE [id]=?""";
-            Connection connection = null;
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, imageURL);
-            stm.setString(2, imageName);
-            stm.setInt(3, imageId);
-            stm.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, imageURL);
+            statement.setString(2, imageName);
+            statement.setInt(3, imageId);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -195,27 +195,30 @@ public class DBEmployeeProfile extends DBContext {
     }
 
     //Delete certification
-    public void deleteCertification(int certId) {
-            String sql = "DELETE FROM [dbo].[Doctor_Certification] WHERE id = ?";
-            Connection connection = null;
+    public void deleteCertification(int certId) throws SQLException {
+        String query = "DELETE FROM [dbo].[Doctor_Certification] WHERE id = ?";
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(query);
             statement.setInt(1, certId);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
     }
-
     public static void main(String[] args) {
         try {
-            DBEmployeeProfile db = new DBEmployeeProfile();
-            System.out.println(db.getInfoEmployee("kdo2342"));
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
+            DBEmployeeProfile dao = new DBEmployeeProfile();
+            Employee e = dao.getInfoEmployee("johnli255a");
+            System.out.println(e.getEmail() + " " + e.getName() );
         } catch (SQLException ex) {
+            Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

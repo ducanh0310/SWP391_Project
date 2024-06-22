@@ -10,7 +10,7 @@ import dao.PatientDAO;
 import dal.DBContext;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonObject;
-//import dao1.DBPatientProfile;
+import dao.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,21 +25,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 import model.PatientInfo;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
+//import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.client.fluent.Form;
+//import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
 import dao.UserDAO;
 import model.Employee;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+//Login with google:
 //    public static String getToken(String code) throws ClientProtocolException, IOException {
 //        //call api to get token
 //        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
@@ -68,7 +70,12 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser != null) {
+            session.invalidate();
+        }
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -79,11 +86,11 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String userName = request.getParameter("username").trim();
-        String passWord = request.getParameter("password").trim();
+        String userName = request.getParameter("username");
+        String passWord = request.getParameter("password");
 
-        if (userName.trim() == null || passWord.trim() == null
-                || userName.trim().trim().isEmpty() || passWord.trim().isEmpty()) {
+        if (userName == null || passWord == null
+                || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
@@ -95,7 +102,7 @@ public class LoginServlet extends HttpServlet {
                     Authorization author = new Authorization();
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();
-                        Patient pat = patientDAO.getPatientById(user.getPatient_Id());
+                        PatientGetByIdDTO pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
                         session.setAttribute("userRole", "patient");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -113,7 +120,7 @@ public class LoginServlet extends HttpServlet {
                             request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
-                            session.setAttribute("userRole",  "nurse");
+                            session.setAttribute("userRole", "nurse");
                             request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
@@ -128,12 +135,19 @@ public class LoginServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
         }
 
     }
 
-    
+    private void logout(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            HttpSession session = request.getSession(false);
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException, SQLException {
         UserDAO user = new UserDAO();

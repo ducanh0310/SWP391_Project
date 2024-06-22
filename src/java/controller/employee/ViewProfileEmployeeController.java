@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -36,7 +37,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
         User currentUser = (User) session.getAttribute("currentUser");
         String userRole = (String) session.getAttribute("userRole");
         if (userRole.equals("patient")) {
-             request.getSession(false);
+            request.getSession(false);
             session.invalidate();
             response.sendRedirect("index.jsp");
         }
@@ -44,7 +45,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
             //johnli255a
-            if ("d".equals(emInfo.getEmployeeType())) {
+            if (userRole.contains("doctor")) {
                 ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
                 DBAccount db = new DBAccount();
                 Account acc = db.showAccountInfo(currentUser.getName());
@@ -52,7 +53,11 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 request.setAttribute("arrayCerti", arrayCerti);
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", currentUser.getName());
+                PrintWriter out = response.getWriter();
+                out.print(userRole);
+                out.print(acc.getUsername() + emInfo);
                 request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
+                return;
             }
             //kdo2342
             if ("b".equals(emInfo.getEmployeeType())) {
@@ -66,7 +71,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -87,6 +92,8 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 return;
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

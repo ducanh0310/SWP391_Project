@@ -83,12 +83,12 @@ public class ConfirmPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String oldPass = request.getParameter("oldPass");
-            HttpSession session = request.getSession();
-            User currentUser = (User) session.getAttribute("currentUser");
-            UserDAO userDAO = new UserDAO();
-            if (currentUser != null) {
+        String oldPass = request.getParameter("oldPass");
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        UserDAO userDAO = new UserDAO();
+        if (currentUser != null) {
+            try {
                 String check = userDAO.checkPasswordByUsername(currentUser.getName());
                 if (!check.equals(oldPass)) {
                     request.setAttribute("error", "Password is incorrect!");
@@ -96,11 +96,11 @@ public class ConfirmPassword extends HttpServlet {
                 } else {
                     response.sendRedirect("changepass");
                 }
-            }else{
-                response.sendRedirect("index.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConfirmPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }else{
+            response.sendRedirect("index.jsp");
         }
     }
 

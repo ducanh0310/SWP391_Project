@@ -100,7 +100,7 @@ public class ChangePasswordServlet extends HttpServlet {
         } else {
             request.setAttribute("error", "Re-enter password do not match your new password!");
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-
+            return;
         }
     }
 

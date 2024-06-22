@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Employee;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
@@ -22,10 +23,11 @@ import model.Patient;
  */
 public class PatientDAO extends DBContext {
 
-    public Patient getPatientById(String patientId) throws SQLException {
-        String query = "select * from Patient where Patient_id = ?";
+    public PatientGetByIdDTO getPatientById(String patientId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
+        String query = "select * from Patient where Patient_id = ?";
+        PatientGetByIdDTO patient = new PatientGetByIdDTO();
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
@@ -33,16 +35,15 @@ public class PatientDAO extends DBContext {
             statement.setString(1, patientId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                Patient patient = new Patient(rs.getInt("Patient_id"),
-                        rs.getString("patient_sin"),
-                        rs.getString("address"),
-                        rs.getString("name"),
-                        rs.getString("gender"),
-                        rs.getString("phone"),
-                        rs.getDate("date_of_birth"),
-                        rs.getString("insurance"),
-                        rs.getInt("rep_id"));
-                return patient;
+                patient.setId(rs.getInt("Patient_id"));
+                patient.setSin(rs.getString("patient_sin"));
+                patient.setAddress(rs.getString("address"));
+                patient.setName(rs.getString("name"));
+                patient.setGender(rs.getString("gender"));
+                patient.setEmail(rs.getString("email"));
+                patient.setPhone(rs.getString("phone"));
+                patient.setDob(rs.getDate("date_of_birth"));
+                patient.setInsurance(rs.getString("insurance"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,10 +51,10 @@ public class PatientDAO extends DBContext {
             closePreparedStatement(statement);
             closeConnection(connection);
         }
-        return null;
+        return patient;
     }
 
-    public boolean addPatient(Patient p) {
+    public boolean addPatient(Patient p) throws SQLException {
         String query = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -67,26 +68,43 @@ public class PatientDAO extends DBContext {
             statement.setString(5, p.getEmail());
             statement.setString(6, p.getPhone());
             statement.setDate(7, (Date) p.getDob());
-            statement.setString(8, p.getInsurance());
-            statement.setInt(9, p.getRep_id());
+
+            // Set insurance, handle null
+            if (p.getInsurance() != null) {
+                statement.setString(8, p.getInsurance());
+            } else {
+                statement.setObject(8, null);
+            }
+
+            // Set rep_id, handle null
+            if (p.getRep_id() != null) {
+                statement.setInt(9, p.getRep_id());
+            } else {
+                statement.setObject(9, null);
+            }
+
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName());
             return false;
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
     }
 
     public boolean addPatientAccount(Patient p, String username, String password) {
         String insertPatientSQL = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String insertUserAccountSQL = "INSERT INTO User_account (username, password, type_id, patient_id) VALUES (?, ?, ?, ?)";
-
+        Connection connection = null;
         PreparedStatement insertPatientStmt = null;
         PreparedStatement insertUserAccountStmt = null;
         ResultSet generatedKeys = null;
 
         try {
             // Start transaction
+            connection = getConnection();
             connection.setAutoCommit(false);
 
             // Insert into Patient table
@@ -157,12 +175,11 @@ public class PatientDAO extends DBContext {
                 e.printStackTrace();
             }
         }
-
     }
 
-    public ArrayList<Patient> getPatient() {
-        ArrayList<Patient> patient = new ArrayList<>();
-        String sql = "SELECT [Patient_id]\n"
+    public ArrayList<PatientGetByIdDTO> getPatient() throws SQLException {
+        ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
+        String query = "SELECT [Patient_id]\n"
                 + "      ,[patient_sin]\n"
                 + "      ,[address]\n"
                 + "      ,[name]\n"
@@ -176,33 +193,40 @@ public class PatientDAO extends DBContext {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            PreparedStatement stm = connection.prepareStatement(sql);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
 
-            ResultSet rs = stm.executeQuery();
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Patient p = new Patient(rs.getInt("Patient_id"),
-                        rs.getString("patient_sin"),
-                        rs.getString("address"),
-                        rs.getString("name"),
-                        rs.getString("gender"),
-                        rs.getString("email"),
-                        rs.getString("phone"),
-                        rs.getDate("date_of_birth"),
-                        rs.getString("insurance"),
-                        rs.getInt("rep_id"));
+                PatientGetByIdDTO p = new PatientGetByIdDTO();
+                p.setId(rs.getInt("Patient_id"));
+                p.setSin(rs.getString("patient_sin"));
+                p.setAddress(rs.getString("address"));
+                p.setName(rs.getString("name"));
+                p.setGender(rs.getString("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setPhone(rs.getString("phone"));
+                p.setDob(rs.getDate("date_of_birth"));
+                p.setInsurance(rs.getString("insurance"));
+                p.setRep_id(rs.getInt("rep_id"));
 
                 patient.add(p);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
         }
         return patient;
     }
 
-    public Patient getPatient(int pid) throws SQLException {
-        ArrayList<Patient> patient = new ArrayList<>();
-        String sql = "SELECT [Patient_id]\n"
+    public PatientGetByIdDTO getPatient(int pid) throws SQLException {
+        ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "SELECT [Patient_id]\n"
                 + "      ,[patient_sin]\n"
                 + "      ,[address]\n"
                 + "      ,[name]\n"
@@ -214,30 +238,28 @@ public class PatientDAO extends DBContext {
                 + "      ,[rep_id]\n"
                 + "  FROM [Patient]\n"
                 + "WHERE [Patient_id]=?";
-        Connection connection = null;
-        PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(query);
             statement.setInt(1, pid);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Patient p = new Patient(
-                        rs.getInt("Patient_id"),
-                        rs.getString("patient_sin"),
-                        rs.getString("address"),
-                        rs.getString("name"),
-                        rs.getString("gender"),
-                        rs.getString("email"),
-                        rs.getString("phone"),
-                        rs.getDate("date_of_birth"),
-                        rs.getString("insurance"),
-                        rs.getInt("rep_id"));
+                PatientGetByIdDTO p = new PatientGetByIdDTO();
+                p.setId(rs.getInt("Patient_id"));
+                p.setSin(rs.getString("patient_sin"));
+                p.setAddress(rs.getString("address"));
+                p.setName(rs.getString("name"));
+                p.setGender(rs.getString("gender"));
+                p.setEmail(rs.getString("email"));
+                p.setPhone(rs.getString("phone"));
+                p.setDob(rs.getDate("date_of_birth"));
+                p.setInsurance(rs.getString("insurance"));
+                p.setRep_id(rs.getInt("rep_id"));
                 return p;
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -245,13 +267,55 @@ public class PatientDAO extends DBContext {
         return null;
     }
 
-    public boolean updatePatient(Patient p) {
+    public boolean updatePatient(PatientGetByIdDTO paInfo) throws SQLException {
+        String query = """
+                        UPDATE [dbo].[Patient]
+                           SET [patient_sin] = ?
+                              ,[address] = ?
+                              ,[name] = ?
+                              ,[gender] = ?
+                              ,[email] = ?
+                              ,[phone] = ?
+                              ,[date_of_birth] = ?
+                              ,insurance = ?
+                              , rep_id = ?
+                         WHERE [Patient_id]=?""";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, paInfo.getSin());
+            statement.setString(2, paInfo.getAddress());
+            statement.setString(3, paInfo.getName());
+            statement.setString(4, paInfo.getGender());
+            statement.setString(5, paInfo.getEmail());
+            statement.setString(6, paInfo.getPhone());
+            statement.setDate(7, paInfo.getDob());
+            // Set insurance, handle null
+            if (paInfo.getInsurance() != null) {
+                statement.setString(8, paInfo.getInsurance());
+            } else {
+                statement.setObject(8, null);
+            }
 
-        return true;
+            // Set rep_id, handle null
+            if (paInfo.getRep_id() != null) {
+                statement.setInt(9, paInfo.getRep_id());
+            } else {
+                statement.setObject(9, null);
+            }
+            statement.setInt(10, paInfo.getId());
+            statement.executeUpdate();
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPatientProfile.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
     }
 
-//    public static void main(String[] args) {
-//        PatientDAO ptDAO = new PatientDAO();
-//        System.out.println(ptDAO.getPatient(1).getName());
-//    }
 }

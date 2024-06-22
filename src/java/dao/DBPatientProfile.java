@@ -9,6 +9,8 @@ import model.PatientInfo;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
@@ -22,7 +24,7 @@ public class DBPatientProfile extends DBContext {
 
     public PatientInfo getInfoPatient(String username) throws SQLException {
         PatientInfo patientInfo = new PatientInfo();
-        String sql = """
+        String query = """
                        select p.Patient_id, p.name,p.phone, p.email, p.patient_sin, p.gender, p.date_of_birth, p.address from User_account acc
                        join Patient p on p.Patient_id=acc.patient_id
                        where acc.username=?""";
@@ -30,7 +32,7 @@ public class DBPatientProfile extends DBContext {
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(query);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -38,13 +40,13 @@ public class DBPatientProfile extends DBContext {
                 patientInfo.setName(rs.getString("name"));
                 patientInfo.setPhoneNumber(rs.getString("phone"));
                 patientInfo.setEmail(rs.getString("email"));
-                patientInfo.setPatientSin(rs.getInt("patient_sin"));
+                patientInfo.setPatientSin(rs.getString("patient_sin"));
                 patientInfo.setGender(rs.getString("gender"));
                 patientInfo.setDob(rs.getDate("date_of_birth"));
                 patientInfo.setAddress(rs.getString("address"));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPatientProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -53,7 +55,7 @@ public class DBPatientProfile extends DBContext {
     }
 
     public void editInfoPatient(PatientInfo paInfo) throws SQLException {
-        String sql = """
+        String query = """
                         UPDATE [dbo].[Patient]
                            SET [patient_sin] = ?
                               ,[address] = ?
@@ -67,8 +69,8 @@ public class DBPatientProfile extends DBContext {
         PreparedStatement statement = null;
         try {
             connection = getConnection();
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, paInfo.getPatientSin());
+            statement = connection.prepareStatement(query);
+            statement.setString(1, paInfo.getPatientSin());
             statement.setString(2, paInfo.getAddress());
             statement.setString(3, paInfo.getName());
             statement.setString(4, paInfo.getGender());
@@ -78,8 +80,8 @@ public class DBPatientProfile extends DBContext {
             statement.setInt(8, paInfo.getPatientId());
             statement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBPatientProfile.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -88,8 +90,8 @@ public class DBPatientProfile extends DBContext {
     }
 
     public PatientInfo getPatientByEmail(String email) throws SQLException {
-            String query = "SELECT * FROM Patient WHERE email = ?";
-            Connection connection = null;
+        String query = "SELECT * FROM Patient WHERE email = ?";
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
@@ -118,11 +120,11 @@ public class DBPatientProfile extends DBContext {
     }
 
     public int addPatient(PatientInfo patient) throws SQLException {
-            String query = "INSERT INTO Patient (address, name, gender, email, phone, date_of_birth) VALUES (?, ?, ?, ?, ?, ?)";
-            Connection connection = null;
+        String query = "INSERT INTO Patient (address, name, gender, email, phone, date_of_birth) VALUES (?, ?, ?, ?, ?, ?)";
+        Connection connection = null;
         PreparedStatement statement = null;
-            try {
-                connection = getConnection();
+        try {
+            connection = getConnection();
             statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, patient.getAddress());
             statement.setString(2, patient.getName());
