@@ -99,6 +99,8 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
+    
+    //get all employee when have username
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
         String sql = "SELECT * FROM Employee WHERE LOWER(name) LIKE ?";
@@ -134,14 +136,31 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
-    public void deleteEmployee(String key) {
-
+    
+    
+    public void deleteEmployee(String key) throws SQLException {
+        String sql = "DELETE DC FROM Doctor_Certification DC INNER JOIN Employee E ON DC.id = E.employee_id WHERE E.employee_id = ?;\n"
+                + "DELETE FROM Employee WHERE employee_id = ?;";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try{
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+             statement.setString(1, key);
+             statement.setString(2, key);
+             ResultSet rs = statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
     }
 
     public static void main(String[] args) {
         try {
             EmployeeDAO emp = new EmployeeDAO();
-            System.out.println(emp.getEmployeeByName("b"));
+            emp.deleteEmployee("2");
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

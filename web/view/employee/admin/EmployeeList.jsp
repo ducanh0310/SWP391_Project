@@ -228,7 +228,7 @@
                                                         <c:otherwise>Other</c:otherwise>
                                                     </c:choose></td>
                                                 <td class="text-end">
-                                                    <form action="DeleteEmployee" method="post">
+                                                    <form action="DeleteEmployee?employeeId=${emp.id}" method="post">
                                                         <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}" class="btn btn-sm btn-neutral">View</a>
                                                         <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                                             <i class="bi bi-trash"></i>
@@ -265,7 +265,7 @@
             <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
             <script src="lib/twentytwenty/jquery.event.move.js"></script>
             <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
-
+            
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
 

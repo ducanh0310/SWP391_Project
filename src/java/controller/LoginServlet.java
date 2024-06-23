@@ -89,9 +89,9 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("username").trim();
         String passWord = request.getParameter("password").trim();
 
-        if (userName == null || passWord == null
-                || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
-            request.setAttribute("error", "Username and password must not be empty.");
+        if (userName.length() < 5 || userName.length() > 30
+                || passWord.length() == 0) {
+            request.setAttribute("error", "Username must be 5-30 characters and password not be null.");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             try {
@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("admin", emp);
                             session.setAttribute("userRole", "admin");
                             request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
-                           //response.sendRedirect("view/employee/admin/home.jsp");
+                            //response.sendRedirect("view/employee/admin/home.jsp");
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
                             session.setAttribute("userRole", "doctor");
@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("nurse", emp);
                             session.setAttribute("userRole", "nurse");
                             //response.sendRedirect("view/employee/nurse/home.jsp");
-                            request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
+                            request.getRequestDispatcher("view/employee/Nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
                             session.setAttribute("userRole", "receptionist");
