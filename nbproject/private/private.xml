@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP391_Project/nbproject/build-impl.xml</file>
-            <file>file:/D:/SWP391_Project/web/WEB-INF/web.xml</file>
+            <file>file:/D:/SWP391_Project/src/java/controller/admin/AddServiceController.java</file>
+            <file>file:/D:/SWP391_Project/web/view/employee/admin/addService.jsp</file>
+            <file>file:/D:/SWP391_Project/src/java/controller/admin/AddPatientController.java</file>
         </group>
     </open-files>
 </project-private>
