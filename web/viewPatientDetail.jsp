@@ -246,7 +246,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Edit</a>
+                                            <a class="btn btn-info "  href="view/employee/admin/editPatient.jsp">Edit</a>
                                         </div>
                                     </div>
 

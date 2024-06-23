@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
         if (currentUser != null) {
             session.invalidate();
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     @Override
@@ -86,13 +86,13 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String userName = request.getParameter("username");
-        String passWord = request.getParameter("password");
+        String userName = request.getParameter("username").trim();
+        String passWord = request.getParameter("password").trim();
 
         if (userName == null || passWord == null
                 || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             try {
                 UserDAO userDAO = new UserDAO();
@@ -114,23 +114,27 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("admin", emp);
                             session.setAttribute("userRole", "admin");
                             request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
+                           //response.sendRedirect("view/employee/admin/home.jsp");
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
                             session.setAttribute("userRole", "doctor");
+                            //response.sendRedirect("view/employee/doctor/home.jsp");
                             request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
                             session.setAttribute("userRole", "nurse");
+                            //response.sendRedirect("view/employee/nurse/home.jsp");
                             request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
                             session.setAttribute("userRole", "receptionist");
+                            //response.sendRedirect("view/employee/receptionist/home.jsp");
                             request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
                         }
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("Login.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -153,7 +157,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO user = new UserDAO();
         ArrayList<User> userList = user.getAll();
         request.setAttribute("Users", userList);
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     @Override

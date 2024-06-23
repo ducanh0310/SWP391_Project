@@ -4,33 +4,29 @@
  */
 package model;
 
-import java.sql.*;
+import java.sql.Date;
 
 /**
  *
- * @author Vu Minh Quan
+ * @author trung
  */
-public class Employee {
-
-    private int id;
+public class Employees {
+     private int id;
     private String employeeSin;
     private String employeeType;
     private String name;
     private String address;
     private float annualSalary;
     private int branchId;
-    private String phoneNumber;
-    private String email;
-    private Date dob;
     private String gender;
-    private Branch branch;
-    private String url;
-    private String certificationName;
+    private String phoneNumber;
+    private Date dob;
+    private String email;
 
-    public Employee() {
+    public Employees() {
     }
 
-    public Employee(int id, String employeeSin, String employeeType, String name, String address, float annualSalary, int branchId, String phoneNumber, String email, Date dob, String gender, Branch branch, String url, String certificationName) {
+    public Employees(int id, String employeeSin, String employeeType, String name, String address, float annualSalary, int branchId, String gender, String phoneNumber, Date dob, String email) {
         this.id = id;
         this.employeeSin = employeeSin;
         this.employeeType = employeeType;
@@ -38,16 +34,11 @@ public class Employee {
         this.address = address;
         this.annualSalary = annualSalary;
         this.branchId = branchId;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.dob = dob;
         this.gender = gender;
-        this.branch = branch;
-        this.url = url;
-        this.certificationName = certificationName;
+        this.phoneNumber = phoneNumber;
+        this.dob = dob;
+        this.email = email;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -105,20 +96,20 @@ public class Employee {
         this.branchId = branchId;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Date getDob() {
@@ -129,38 +120,13 @@ public class Employee {
         this.dob = dob;
     }
 
-    public String getGender() {
-        return gender;
+    public String getEmail() {
+        return email;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public void setBranch(Branch branch) {
-        this.branch = branch;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getCertificationName() {
-        return certificationName;
-    }
-
-    public void setCertificationName(String certificationName) {
-        this.certificationName = certificationName;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     
-
 }

@@ -61,7 +61,7 @@
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
-                            <a class="m-0" href="login">
+                            <a class="m-0" >
                                 <i class="fa fa-envelope-open me-2"></i>${currentUser.getName()}
                             </a>
                         </div>
@@ -109,7 +109,8 @@
                     </c:otherwise>
                 </c:choose>
                 <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
-                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>
+<!--                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>-->
+                <a href="ViewEmployeeList" class="btn btn-primary py-2 px-4 ms-3">Employee List</a>
             </div>
         </nav>
         <!-- Navbar End -->

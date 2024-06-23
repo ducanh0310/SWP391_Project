@@ -182,72 +182,61 @@
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
                                 <h5 class="mb-0">Welcome, admin</h5>
+
                             </div>
+                            <form method="get" action="SearchEmployeeServlet" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
+                                           aria-describedby="basic-addon2" name="searchKey">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>   
+
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">SIN</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Gender</th> 
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Birthday</th>                                                                                   
-                                            <th></th>
+                                            <th scope="col">Employee ID</th>
+                                            <th scope="col">Employee Name</th> 
+                                            <th scope="col">Employee Sin</th>
+                                            <th scope="col">Employee Type</th>
+                                            <th scope="col">Phone Number</th>                                                                                   
+                                            <th scope="col">Gender</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${patients}" var="patient">
+                                        <c:forEach items="${EmployeeList}" var="emp">
                                             <tr>
-                                                <td>${patient.sin}</td>
-                                                <td><a class="text-heading font-semibold" href="viewPatientDetail.jsp">${patient.name}   
-                                                    </a></td>
-                                                <td>${patient.gender}</td>
-                                                <td>${patient.email}</td>
-                                                <td>${patient.phone}</td>
-                                                <td>${patient.dob}</td>                                               
+                                                <td>${emp.id}</td>
+                                                <td>${emp.name}</td>
+                                                <td>${emp.employeeSin}</td>
+                                                <td><c:choose>
+                                                        <c:when test= "${emp.employeeType == 'r'}">Receptionist</c:when>
+                                                        <c:when test="${emp.employeeType == 'd'}">Doctor</c:when>
+                                                        <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
+                                                        <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
+                                                    </c:choose></td>
+                                                <td>${emp.phoneNumber}</td>
+                                                <td><c:choose>
+                                                        <c:when test="${emp.gender == 'M'}">Male</c:when>
+                                                        <c:when test="${emp.gender == 'F'}">Female</c:when>
+                                                        <c:otherwise>Other</c:otherwise>
+                                                    </c:choose></td>
                                                 <td class="text-end">
-                                                    <a href="viewPatientDetail.jsp" class="btn btn-sm btn-neutral">View</a>
-                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
+                                                    <form action="DeleteEmployee" method="post">
+                                                        <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}" class="btn btn-sm btn-neutral">View</a>
+                                                        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         </c:forEach>
-
-
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Darlene Robertson
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Apr 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-2.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Netguru
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $2.750
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-warning"></i>Postponed
-                                                </span>
-                                            </td>
-                                            <td></td>
-                                            <td class="text-end">
-                                                <a href="viewPatientDetail.jsp" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>
