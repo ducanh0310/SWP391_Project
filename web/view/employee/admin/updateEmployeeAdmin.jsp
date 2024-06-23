@@ -9,12 +9,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>DentCare - Dental Clinic</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description">
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
 
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+        <!-- BoxIcons v2.1.2 -->
+        <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+
+        <!-- Roboto Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+        <!-- CSS File -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- comment -->
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
@@ -285,18 +310,16 @@
                                         <span class="font-weight-bold">${username}</span>
                                         <span class="text-black-50">${emInfo.email}</span>
                                         <br>
-                                        <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                                        <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Employee account</a>
                                         <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
-                                        <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
-
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5 container-box">
-                                    <form action="edit" method="POST">
+                                    <form action="UpdateEmployee" method="POST">
                                         <div class="p-3 py-5">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="text-right">My account</h4>
+                                                <h4 class="text-right">Employee account</h4>
                                             </div>
                                             <hr>
                                             <div class="row mt-3">
@@ -320,7 +343,7 @@
                                             <div class="row mt-3">
                                                 <div class="col-md-6">
                                                     <label class="labels">Email</label>
-                                                    <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}" readonly="">
+                                                    <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="labels">Medicine code</label>
@@ -353,7 +376,7 @@
                                             <div class="row mt-3">
                                                 <div class="col-md-6">
                                                     <label class="labels">Role</label>
-                                                    <input type="text"  class="form-control" placeholder=""  readonly=""
+                                                    <input type="text"  class="form-control" placeholder=""
                                                            <c:if test="${emInfo.employeeType == 'r'}">value="Receptionist"</c:if>
                                                            <c:if test="${emInfo.employeeType == 'd'}">value="Doctor"</c:if>
                                                            <c:if test="${emInfo.employeeType == 'h'}">value="Nurse"</c:if>
@@ -363,7 +386,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="labels">Salary / year</label>
-                                                    <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="${emInfo.annualSalary}" readonly="">
+                                                    <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="${emInfo.annualSalary}" >
                                                 </div>
                                             </div>
 
@@ -378,7 +401,7 @@
                                                 <div class="col-md-6">
                                                     <label class="labels">Working Branch</label>
                                                     <input type="hidden" id="branchid" name="branchid" class="form-control" placeholder="" value="${emInfo.branchId}">
-                                                    <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
+                                                    <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}">
                                                 </div>
                                             </div>
 
@@ -409,7 +432,7 @@
 
                                             <!-- Button to add new certification fields -->
                                             <!--                        <button id="addCertButton" class="btn btn-secondary mt-3">Add Certification</button>-->
-
+                                            <input type="hidden" name="eId" id="eId" value="<%=request.getParameter("eId")%>">
                                             <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
 
                                         </div>
@@ -433,6 +456,20 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+
+        <!-- Template Javascript -->
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -454,18 +491,28 @@
                                                 function addCertificateForm() {
                                                     const certificateContainer = document.getElementById('certificateContainer');
                                                     const newCertificateForm = `
-                <div class="row mt-3">
+                <div class="row mt-3 certificate-row">
                     <input type="hidden" name="idCer" value="">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label class="labels">Name</label>
                         <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label class="labels">URL</label>
                         <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="">
                     </div>
+        <div class="col-md-2">
+                    <label class="labels">&nbsp;</label>
+                    <button type="button" class="btn btn-danger form-control" onclick="deleteCertificateRow(this)">Delete</button>
+                </div>
                 </div>`;
                                                     certificateContainer.insertAdjacentHTML('beforeend', newCertificateForm);
+                                                }
+                                                function deleteCertificateRow(button) {
+                                                    const row = button.closest('.certificate-row');
+                                                    if (row) {
+                                                        row.remove();
+                                                    }
                                                 }
         </script>
 

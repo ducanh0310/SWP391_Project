@@ -250,7 +250,7 @@
                     </div>
                 
                 <div class="mt-5 text-center">
-                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                    <a href="editpatient" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                 </div>
             </div>
         </div>    

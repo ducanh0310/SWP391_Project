@@ -112,26 +112,6 @@
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
-                                    <i class="bi bi-list-task"></i> Medical History
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Invoice
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">

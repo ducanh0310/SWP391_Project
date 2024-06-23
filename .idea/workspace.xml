@@ -5,10 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6045067-40f7-479b-9e5e-1ab77f451790" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/patient/EditProfilePatientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/patient/EditProfilePatientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF_1/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/patient/EditProfilePatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/patient/EditProfilePatientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF_1/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/a/7a4fbc231f1e3250db3a2ef5b29c8fcd16ab5fc9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/a/7a4fbc231f1e3250db3a2ef5b29c8fcd16ab5fc9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EditPatientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EditPatientController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/home.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/addPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/addPatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/editPatient.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/editProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/editProfileAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/viewListPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/viewListPatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfileAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfilePatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/doctor/editProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/doctor/editProfileDoctor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/doctor/viewProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/doctor/viewProfileDoctor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/viewProfileEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/viewProfileEmployee.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/patient/editProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/patient/editProfilePatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/patient/home.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/patient/viewListPatient.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/patient/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/patient/viewProfilePatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/viewListPatientAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/viewListPatientAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/viewPatientDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/viewPatientDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EditPatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EditPatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/patient/home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/addPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/addPatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/editPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/editPatientDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/editProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/editProfileAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/viewListPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/viewListPatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/viewProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/viewProfileAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/viewProfilePatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/doctor/editProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/doctor/editProfileDoctor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/doctor/viewProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/doctor/viewProfileDoctor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/viewProfileEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/viewProfileEmployee.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/patient/editProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/patient/editProfilePatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/patient/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/patient/appointment.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/patient/viewListPatient.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/patient/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/patient/viewProfilePatient.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/viewListPatientAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/viewListPatientAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/viewPatientDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/viewPatientDetail.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +184,9 @@
       <workItem from="1717294451342" duration="994000" />
       <workItem from="1717342862331" duration="589000" />
       <workItem from="1717353414851" duration="26000" />
+      <workItem from="1718933736401" duration="1082000" />
+      <workItem from="1718943993214" duration="592000" />
+      <workItem from="1719164244686" duration="8477000" />
     </task>
     <servers />
   </component>

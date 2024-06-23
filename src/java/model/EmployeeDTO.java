@@ -4,14 +4,14 @@
  */
 package model;
 
-import java.sql.*;
-import java.util.logging.Logger;
+import java.sql.Date;
 
 /**
  *
- * @author Vu Minh Quan
+ * @author ngphn
  */
-public class Employee {
+public class EmployeeDTO {
+
     private int id;
     private String employeeSin;
     private String employeeType;
@@ -20,52 +20,51 @@ public class Employee {
     private float annualSalary;
     private int branchId;
     private String phoneNumber;
-    public String email;
+    private String email;
     private Date dob;
     private String gender;
-    private Branch branch;
+    private int branchID;
 
-    public Employee() {
+    public EmployeeDTO() {
     }
-    
+
+    public EmployeeDTO(int id, String employeeSin, String employeeType, String name, String address, float annualSalary, int branchId, String phoneNumber, String email, Date dob, String gender, int branchID) {
+        this.id = id;
+        this.employeeSin = employeeSin;
+        this.employeeType = employeeType;
+        this.name = name;
+        this.address = address;
+        this.annualSalary = annualSalary;
+        this.branchId = branchId;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.dob = dob;
+        this.gender = gender;
+        this.branchID = branchID;
+    }
+
+    public EmployeeDTO(String employeeSin, String employeeType, String name, String address, float annualSalary, int branchId, String phoneNumber, String email, Date dob, String gender, int branchID) {
+        this.employeeSin = employeeSin;
+        this.employeeType = employeeType;
+        this.name = name;
+        this.address = address;
+        this.annualSalary = annualSalary;
+        this.branchId = branchId;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.dob = dob;
+        this.gender = gender;
+        this.branchID = branchID;
+    }
 
     public int getId() {
         return id;
     }
 
-    public Employee(int id, String employeeSin, String employeeType, String name, String address, float annualSalary, int branchId, String phoneNumber, String email, Date dob, String gender, Branch branch) {
-        this.id = id;
-        this.employeeSin = employeeSin;
-        this.employeeType = employeeType;
-        this.name = name;
-        this.address = address;
-        this.annualSalary = annualSalary;
-        this.branchId = branchId;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.dob = dob;
-        this.gender = gender;
-        this.branch = branch;
-    }
-
-    public Employee(String employeeSin, String employeeType, String name, String address, float annualSalary, int branchId, String phoneNumber, String email, Date dob, String gender) {
-        this.employeeSin = employeeSin;
-        this.employeeType = employeeType;
-        this.name = name;
-        this.address = address;
-        this.annualSalary = annualSalary;
-        this.branchId = branchId;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.dob = dob;
-        this.gender = gender;
-    }
-    
-
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getEmployeeSin() {
         return employeeSin;
     }
@@ -146,15 +145,12 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Branch getBranch() {
-        return branch;
+    public int getBranchID() {
+        return branchID;
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = branch;
+    public void setBranchID(int branchID) {
+        this.branchID = branchID;
     }
-
-    
-    
     
 }

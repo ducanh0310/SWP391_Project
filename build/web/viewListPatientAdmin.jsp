@@ -93,38 +93,8 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
                                 </a>
                             </li>
                         </ul>
@@ -137,7 +107,7 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="employee/profile/view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -158,7 +128,7 @@
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                                                <div class="mb-npx">
+                                <div class="mb-npx">
                                     <div class="row align-items-center">
                                         <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                             <!-- Title -->
@@ -180,7 +150,7 @@
                             </div>
                             <div class="container">
                                 <div class="header_wrap"> 
-                                    
+
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped" id="myTable">
@@ -268,7 +238,7 @@
                     }
                 });
             });
-            
+
         </script>
     </body>
 </html>

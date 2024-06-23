@@ -103,6 +103,31 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+    public User getUserByEmployeeId(int patientId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "SELECT * FROM User_account WHERE [employee_id] = ?";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, patientId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                User u = new User(rs.getString(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5));
+                return u;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return null;
+    }
 
     public String checkPasswordByUsername(String username) throws SQLException {
         String query = "select password from User_account where username = ?";
@@ -145,6 +170,14 @@ public class UserDAO extends DBContext {
             closeConnection(connection);
         }
 
+    }
+    public static void main(String[] args) {
+        try {
+            User u = new UserDAO().getUserByEmployeeId(3);
+            System.out.println(u.getName());
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

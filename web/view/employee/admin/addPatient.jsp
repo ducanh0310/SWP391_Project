@@ -270,38 +270,8 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
                                 </a>
                             </li>
                         </ul>
@@ -319,7 +289,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -430,15 +400,35 @@
                                             </div>                    
 
                                             <div class="col-md-6">
-                                                <label class="labels" >Date of birth</label>
-                                                <input type="date"id="dob" name="dob" class="form-control" placeholder="" >
+                                                <label class="labels">Date of birth</label>
+                                                <input type="date" id="dob" name="dob" class="form-control" placeholder="" onchange="checkAge()">
                                             </div>
+                                            
                                         </div>
                                         <br>
                                         <div>
                                             <label class="labels">Address</label>
                                             <input type="text" id="address" name="address" class="form-control" placeholder="" >
                                         </div>
+                                        <br>
+                                        <div id="representativeForm" style="display: none;">
+                                            <div class="row mt-3">
+                                                <h3>
+                                                    For customers under 14 years old, we require a guardian.
+                                                </h3>
+                                                <label class="labels">Representative Name</label>
+                                                <input type="text" id="repName" name="repName" class="form-control" placeholder="Representative Name" required>
+
+                                                <label class="labels">Representative Phone</label>
+                                                <input type="text" id="repPhone" name="repPhone" class="form-control" placeholder="Representative Phone">
+
+                                                <label class="labels">Representative Email</label>
+                                                <input type="email" id="repEmail" name="repEmail" class="form-control" placeholder="Representative Email">
+
+                                                <label class="labels">Relationship</label>
+                                                <input type="text" id="relationship" name="relationship" class="form-control" placeholder="Relationship" required>
+                                            
+                                            </div>
 
                                         <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
                                         <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Cancel</button></div>
@@ -515,27 +505,49 @@
             <script src="js/main.js"></script>
     </body>
     <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                    $('#imagePreview').hide();
-                    $('#imagePreview').fadeIn(650);
-                }
-                reader.readAsDataURL(input.files[0]);
+                                                    function readURL(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function (e) {
+                                                                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                                                                $('#imagePreview').hide();
+                                                                $('#imagePreview').fadeIn(650);
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
+                                                        }
+                                                    }
+                                                    $("#imageUpload").change(function () {
+                                                        readURL(this);
+                                                    });
+                                                    function showCodeAndRedirect() {
+                                                        var resultDiv = document.getElementById("result");
+                                                        resultDiv.style.display = "flex";
+
+                                                        setTimeout(function () {
+                                                            window.location.href = "viewPatientDetail.jsp";
+                                                        }, 2000);
+                                                    }
+    </script>
+    <script>
+    function checkAge() {
+        const dob = document.getElementById('dob').value;
+        if (dob) {
+            const dobDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - dobDate.getFullYear();
+            const monthDifference = today.getMonth() - dobDate.getMonth();
+
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+                age--;
+            }
+
+            if (age < 14) {
+                document.getElementById('representativeForm').style.display = 'block';
+            } else {
+                document.getElementById('representativeForm').style.display = 'none';
             }
         }
-        $("#imageUpload").change(function () {
-            readURL(this);
-        });
-        function showCodeAndRedirect() {
-            var resultDiv = document.getElementById("result");
-            resultDiv.style.display = "flex";
+    }
+</script>
 
-            setTimeout(function () {
-                window.location.href = "viewPatientDetail.jsp";
-            }, 2000);
-        }
-    </script>
 </html> 

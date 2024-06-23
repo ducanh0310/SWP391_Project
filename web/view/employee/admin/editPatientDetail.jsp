@@ -270,38 +270,8 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
-                                    <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
                                 </a>
                             </li>
                         </ul>

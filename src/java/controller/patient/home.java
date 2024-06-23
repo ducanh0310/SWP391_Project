@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.patient;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ngphn
  */
-@WebServlet(name = "home", urlPatterns = {"/home"})
+@WebServlet(name = "home", urlPatterns = {"/appointment"})
 public class home extends HttpServlet {
 
     /**
@@ -59,7 +59,7 @@ public class home extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
+        request.getRequestDispatcher("view/patient/appointment.jsp").forward(request, response);
     }
 
     /**

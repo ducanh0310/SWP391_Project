@@ -15,6 +15,38 @@
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+        <!-- BoxIcons v2.1.2 -->
+        <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+
+        <!-- Roboto Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+        <!-- CSS File -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- comment -->
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
@@ -215,7 +247,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../PatientController">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-people"></i> Employee
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
@@ -250,67 +287,29 @@
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">Welcome, doctor</h5>
+                                <h5 class="mb-0">Welcome, Admin</h5>
                             </div>
                             <div class="row justify-content-center " >
-                                <div class="col-md-3 container-box">
-                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <div class="profile-pic-wrapper" id="uploadImageButton">
-
-                                            <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
-                                            <i class="fa fa-camera camera-icon"></i>
-                                        </div>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form id="imageForm" action="../../uploadimage" method="POST">
-                                                            <div class="mb-3" style="">
-                                                                <label for="imageUrl" class="form-label">Image URL</label>
-                                                                <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <span class="font-weight-bold">${username}</span>
-                                        <span class="text-black-50">${emInfo.email}</span>
-                                        <br>
-                                        <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
-                                        <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
-                                        <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
-
-                                    </div>
-                                </div>
                                 <div class="col-md-1"></div>
-                                <div class="col-md-5 container-box">
-                                    <form action="edit" method="POST">
+                                <div class="col-md-8 container-box">
+                                    <form action="AddEmployee" method="POST">
                                         <div class="p-3 py-5">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h4 class="text-right">My account</h4>
+                                                <h4 class="text-right">Add New Employee</h4>
                                             </div>
                                             <hr>
                                             <div class="row mt-3">
-                                                <input type="hidden" name="id" id="id" value="${emInfo.id}">
+                                                <input type="hidden" name="id" id="id" value="">
                                                 <div class="col-md-6">
                                                     <label class="labels">Fullname</label>
-                                                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${emInfo.name}" >
+                                                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="" >
                                                     <c:if test="${not empty errorMsg.fullname}">
                                                         <span style="color:red">${errorMsg.fullname}</span>
                                                     </c:if>
                                                 </div>        
                                                 <div class="col-md-6">
                                                     <label class="labels">Phone Number</label>
-                                                    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${emInfo.phoneNumber}">
+                                                    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="">
                                                     <c:if test="${not empty errorMsg.phoneNumber}">
                                                         <span style="color:red">${errorMsg.phoneNumber}</span>
                                                     </c:if>
@@ -320,11 +319,11 @@
                                             <div class="row mt-3">
                                                 <div class="col-md-6">
                                                     <label class="labels">Email</label>
-                                                    <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}" readonly="">
+                                                    <input type="text" id="email" name="email" class="form-control" placeholder="" value="">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="labels">Medicine code</label>
-                                                    <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${emInfo.employeeSin}">
+                                                    <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="">
                                                     <c:if test="${not empty errorMsg.medicalCode}">
                                                         <span style="color:red">${errorMsg.medicalCode}</span>
                                                     </c:if>
@@ -335,15 +334,15 @@
                                                 <div class="col-md-6">
                                                     <label class="labels" for="gender">Gender</label>
                                                     <select class="form-select" id="gender" name="gender">
-                                                        <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
-                                                        <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
-                                                        <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
-                                                        </select>
-                                                    </div>                    
+                                                        <option value="M">Male</option>
+                                                        <option value="F">Female</option>
+                                                        <option value="X" selected>Other</option>
+                                                    </select>
+                                                </div>                    
 
-                                                    <div class="col-md-6">
-                                                        <label class="labels">Date of birth</label>
-                                                        <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}">
+                                                <div class="col-md-6">
+                                                    <label class="labels">Date of birth</label>
+                                                    <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="">
                                                     <c:if test="${not empty errorMsg.dob}">
                                                         <span style="color:red">${errorMsg.dob}</span>
                                                     </c:if>
@@ -353,53 +352,40 @@
                                             <div class="row mt-3">
                                                 <div class="col-md-6">
                                                     <label class="labels">Role</label>
-                                                    <input type="text"  class="form-control" placeholder=""  readonly=""
-                                                           <c:if test="${emInfo.employeeType == 'r'}">value="Receptionist"</c:if>
-                                                           <c:if test="${emInfo.employeeType == 'd'}">value="Doctor"</c:if>
-                                                           <c:if test="${emInfo.employeeType == 'h'}">value="Nurse"</c:if>
-                                                           <c:if test="${emInfo.employeeType == 'b'}">value="Branch Manage"</c:if>
-                                                               >
-                                                           <input type="hidden" id="role" name="role" value="${emInfo.employeeType}">
+                                                    <select class="form-select" name="role">
+                                                        <option value="r">Receptionist</option>
+                                                        <option value="d" >Doctor</option>
+                                                        <option value="n">Nurse</option>
+                                                        <option value="b" >Branch Manager</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="labels">Salary / year</label>
-                                                    <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="${emInfo.annualSalary}" readonly="">
+                                                    <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="">
                                                 </div>
                                             </div>
 
                                             <div class="row mt-3">
                                                 <div class="col-md-6">
                                                     <label class="labels">Address</label>
-                                                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="${emInfo.address}" >
+                                                    <input type="text" id="address" name="address" class="form-control" placeholder="" value="" >
                                                     <c:if test="${not empty errorMsg.address}">
                                                         <span style="color:red">${errorMsg.address}</span>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="labels">Working Branch</label>
-                                                    <input type="hidden" id="branchid" name="branchid" class="form-control" placeholder="" value="${emInfo.branchId}">
-                                                    <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
+                                                    <select class="form-select" id="branchid" name="branchid">
+                                                        <c:forEach var="branch" items="${listBranch}">
+                                                            <option value="${branch.id}">${branch.city}</option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
                                             </div>
-
                                             <br>
-                                            <label class="labels">Certification</label>
+                                            <h2>Click to add certification</h2>
                                             <div id="certificateContainer">
-                                                <c:forEach items="${requestScope.arrayCerti}" var="cer">
-                                                    <div class="row mt-3">
-                                                        <input type="hidden" name="idCer"value="${cer.id}">
-                                                        <div class="col-md-6">
 
-                                                            <label class="labels">Name</label>
-                                                            <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="${cer.name}" >
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label class="labels">URL</label>
-
-                                                            <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="${cer.url}">
-                                                        </div>
-                                                    </div>
-                                                </c:forEach>
                                                 <c:if test="${not empty errorMsg.link}">
                                                     <span style="color:red">${errorMsg.link}</span>
                                                 </c:if>
@@ -407,18 +393,12 @@
                                             <br>
                                             <button type="button" class="btn btn-secondary" onclick="addCertificateForm()">Add Certificate</button>
 
-                                            <!-- Button to add new certification fields -->
-                                            <!--                        <button id="addCertButton" class="btn btn-secondary mt-3">Add Certification</button>-->
 
-                                            <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
+                                            <div class="mt-5 text-center"><input class="btn btn-primary py-2 px-4 ms-3" type="submit" value="Add Profile"></div>
 
                                         </div>
                                     </form>
                                 </div>  
-
-
-
-
                             </div>            
                         </div>
                     </div>
@@ -427,12 +407,27 @@
         </div>
 
 
+
         <!-- Footer End -->
 
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+
+        <!-- Template Javascript -->
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -454,18 +449,28 @@
                                                 function addCertificateForm() {
                                                     const certificateContainer = document.getElementById('certificateContainer');
                                                     const newCertificateForm = `
-                <div class="row mt-3">
+                <div class="row mt-3 certificate-row">
                     <input type="hidden" name="idCer" value="">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label class="labels">Name</label>
                         <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label class="labels">URL</label>
                         <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="">
                     </div>
+        <div class="col-md-2">
+                    <label class="labels">&nbsp;</label>
+                    <button type="button" class="btn btn-danger form-control" onclick="deleteCertificateRow(this)">Delete</button>
+                </div>
                 </div>`;
                                                     certificateContainer.insertAdjacentHTML('beforeend', newCertificateForm);
+                                                }
+                                                function deleteCertificateRow(button) {
+                                                    const row = button.closest('.certificate-row');
+                                                    if (row) {
+                                                        row.remove();
+                                                    }
                                                 }
         </script>
 
@@ -476,7 +481,7 @@
                 $('#uploadModal').modal('show');
             });
 
-// Handle form submission with AJAX
+            // Handle form submission with AJAX
             document.getElementById('imageForm').addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevent traditional form submission
 
@@ -507,9 +512,6 @@
                     }
                 });
             });
-
-
-
         </script>
     </body>
 </html>

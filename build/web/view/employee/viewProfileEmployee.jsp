@@ -235,9 +235,6 @@
                         <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="" readonly="">
                     </div>
                 </div>
-                
-                
-                
                 <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Edit Profile</button></div>
 
             </div>
