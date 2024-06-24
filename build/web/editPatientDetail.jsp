@@ -245,6 +245,33 @@
                 background-repeat: no-repeat;
                 background-position: center;
             }
+            body {
+                font-size: 16px
+            }
+
+            .form-group {
+                width: 300px;
+            }
+
+            label, input {
+                display: block;
+                font-size: 16px;
+                font-family: sans-serif;
+            }
+
+            label {
+                margin-bottom: 10px;
+                font-weight: bold
+            }
+
+            input {
+                padding: 12px 16px;
+                width: 100%;
+                border-radius: 3px;
+                border: none;
+                outline: 2px solid #efefef;
+            }
+
         </style>
 
     </head>
@@ -334,55 +361,57 @@
                 <div class="main-body">
                     <div class="row">
                         <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center text-center">
-                                            <div class="containerimg">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="containerimg">
 
-                                                <div class="avatar-upload">
-                                                    <div class="avatar-edit">
-                                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                                        <label for="imageUpload"></label>
-                                                    </div>
-                                                    <div class="avatar-preview">
-                                                        <div id="imagePreview" style="background-image: url('https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png');">
-                                                        </div>
+                                            <div class="avatar-upload">
+                                                <div class="avatar-edit">
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                    <label for="imageUpload"></label>
+                                                </div>
+                                                <div class="avatar-preview">
+                                                    <div id="imagePreview" style="background-image: url('https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png');">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="mt-3">
-                                                <h4>${patients.name}</h4>
-                                            </div>
                                         </div>
-                                        <hr class="my-4">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0">Date</h6>
-                                                <input type="text" class="form-control" value="${history.dop}">
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0">Description</h6>
-                                                <input type="text" class="form-control" value="${history.appointment_description}">
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0">Date</h6>
-                                                <input type="text" class="form-control" value="${history.patient_details.patient_details}">
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0">Patient Charge</h6>
-                                                <input type="text" class="form-control" value="${history.patient_charge}">
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0">Insurance charge</h6>
-                                                <input type="text" class="form-control" value="${history.insurance_charge}">
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0">Total charge</h6>
-                                                <input type="text" class="form-control" value="${history.total_charge}">
-                                            </li>
-                                        </ul>
+                                        <div class="mt-3">
+                                            <h4>${patients.name}</h4>
+                                        </div>
                                     </div>
+                                    <hr class="my-4">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Date</h6>
+                                            <div class="form-group">                                              
+                                                <input type="date" class="form-control" id="exampleInputDOB1" value="${history.dop}">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Description</h6>
+                                            <input type="text" class="form-control" value="${history.appointment_description}">
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Medical History</h6>
+                                            <input type="text" class="form-control" value="${history.patient_details.patient_details}">
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Patient Charge</h6>
+                                            <input type="text" class="form-control" value="${history.patient_charge}">
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Insurance charge</h6>
+                                            <input type="text" class="form-control" value="${history.insurance_charge}">
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">Total charge</h6>
+                                            <input type="text" class="form-control" value="${history.total_charge}">
+                                        </li>
+                                    </ul>
                                 </div>
+                            </div>
                         </div>
 
                         <div class="col-lg-8">
@@ -423,10 +452,10 @@
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Birthday</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="${patients.dob}">
-                                        </div>
+                                        </div>                                      
+                                        <div class="form-group">                                              
+                                            <input type="date" class="form-control" id="exampleInputDOB1" value="${patients.dob}"placeholder="Date of Birth">
+                                        </div>                              
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
@@ -470,7 +499,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -514,5 +543,67 @@
                                                             window.location.href = "patientDetail?pid=${patients.id}";
                                                         }, 2000);
                                                     }
+                                                    function validateForm() {
+  // Lấy giá trị từ các trường dữ liệu
+  var fullName = document.getElementById('fullName').value;
+  var sin = document.getElementById('sin').value;
+  var email = document.getElementById('email').value;
+  var phone = document.getElementById('phone').value;
+  var birthday = document.getElementById('birthday').value;
+  var gender = document.getElementById('gender').value;
+  var address = document.getElementById('address').value;
+
+  // Kiểm tra điều kiện hợp lệ cho mỗi trường
+  if (fullName === '') {
+    alert('Vui lòng nhập họ và tên.');
+    return false;
+  }
+
+  if (sin === '') {
+    alert('Vui lòng nhập số SIN.');
+    return false;
+  }
+
+  // Kiểm tra định dạng email sử dụng biểu thức chính quy
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert('Vui lòng nhập địa chỉ email hợp lệ.');
+    return false;
+  }
+
+  // Kiểm tra định dạng số điện thoại
+  var phoneRegex = /^\d{10}$/;
+  if (!phoneRegex.test(phone)) {
+    alert('Vui lòng nhập số điện thoại hợp lệ (10 chữ số).');
+    return false;
+  }
+
+  // Kiểm tra định dạng ngày sinh (ở đây giả sử dd/mm/yyyy)
+  var birthdayRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+  if (!birthdayRegex.test(birthday)) {
+    alert('Vui lòng nhập ngày sinh hợp lệ (dd/mm/yyyy).');
+    return false;
+  }
+
+  // Kiểm tra giới tính
+  if (gender === '') {
+    alert('Vui lòng chọn giới tính.');
+    return false;
+  }
+
+  if (address === '') {
+    alert('Vui lòng nhập địa chỉ.');
+    return false;
+  }
+
+  return true; // Trả về true nếu dữ liệu hợp lệ
+}
+
+function showCodeAndRedirect() {
+  if (validateForm()) {
+    // Thực hiện lưu dữ liệu và chuyển hướng đến trang khác
+    // ...
+  }
+}
                 </script>
                 </html> 

@@ -87,7 +87,7 @@
                 padding:15px;
                 padding-bottom:15px;
                 color:black;
-                min-width:200px;
+                min-width:250px;
                 margin-left: 70px;
             }
             .itemprice{
@@ -107,7 +107,7 @@
             .btncontainer{
                 width:90px;
                 background:none;
-                margin-left: 350px;
+                margin-left: 300px;
             }
             .cbbtn{
                 float:right;
@@ -327,11 +327,11 @@
                                             <div class="itemtitle">${service.procedure_name}</div>
                                             <div class="itemprice">$${service.price}</div>
                                             <div class="btncontainer">
-                                                <button class="cbbtn"><i class="bi bi-trash" aria-hidden="true"></i></button>
+                                                <button class="cbbtn" onclick="deleteService(${service.procedure_id})"><i class="bi bi-trash" aria-hidden="true"></i></button>
                                                 <button class="cbbtn"><i class="bi bi-pencil-square" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
-                                    </c:forEach> 
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -360,34 +360,57 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
-                                                var mnu = document.getElementById("mnu");
-                                                var mstate = false;
+            var mnu = document.getElementById("mnu");
+            var mstate = false;
 
-                                                function slideMenu() {
-                                                    mstate = !mstate;
-                                                    if (mstate) {
-                                                        mnu.style.left = "0px";
-                                                        mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
-                                                    } else {
-                                                        mnu.style.left = "-250px";
-                                                        mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
-                                                    }
-                                                }
-                                                function searchServices(event) {
-                                                    var keyword = event.target.value.toLowerCase();
-                                                    var items = document.getElementsByClassName("itemtitle");
+            function slideMenu() {
+                mstate = !mstate;
+                if (mstate) {
+                    mnu.style.left = "0px";
+                    mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
+                } else {
+                    mnu.style.left = "-250px";
+                    mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
+                }
+            }
+            function searchServices(event) {
+                var keyword = event.target.value.toLowerCase();
+                var items = document.getElementsByClassName("itemtitle");
 
-                                                    Array.from(items).forEach(function (item) {
-                                                        var itemText = item.textContent.toLowerCase();
-                                                        var contentBar = item.closest(".content-bar");
+                Array.from(items).forEach(function (item) {
+                    var itemText = item.textContent.toLowerCase();
+                    var contentBar = item.closest(".content-bar");
 
-                                                        if (itemText.includes(keyword)) {
-                                                            contentBar.style.display = "grid";
-                                                        } else {
-                                                            contentBar.style.display = "none";
-                                                        }
-                                                    });
-                                                }
+                    if (itemText.includes(keyword)) {
+                        contentBar.style.display = "grid";
+                    } else {
+                        contentBar.style.display = "none";
+                    }
+                });
+            }
+            function deleteService(serviceId) {
+                if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
+                    // Gửi yêu cầu xóa dịch vụ thông qua Ajax
+                    fetch(`/delete-service/${serviceId}`, {
+                        method: "DELETE"
+                    })
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log("Dịch vụ đã được xóa thành công!");
+                                    // Xóa phần tử giao diện người dùng tương ứng sau khi xóa thành công
+                                    const serviceElement = document.getElementById(`service${serviceId}`);
+                                    if (serviceElement) {
+                                        serviceElement.remove();
+                                    }
+                                } else {
+                                    console.error("Đã xảy ra lỗi khi xóa dịch vụ");
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Đã xảy ra lỗi khi gửi yêu cầu xóa dịch vụ: " + error);
+                            });
+                }
+            }
         </script>
     </body>
 </html>

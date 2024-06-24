@@ -92,6 +92,7 @@ public class PatientViewDB extends DBContext {
         return null;
     }
 
+    
     public static void main(String[] args) {
         PatientViewDB p = new PatientViewDB();
         System.out.println(p.getHistory(4));
