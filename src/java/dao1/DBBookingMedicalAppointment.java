@@ -72,7 +72,7 @@ public class DBBookingMedicalAppointment extends DBContext {
     public ArrayList<Slot> getExistSlot(String idService, Date date) {
         ArrayList<Slot> arrSlot = new ArrayList<>();
         try {
-            String sql ="""
+            String sql = """
                         select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime, s.id, e.employee_id, sb.id as statusId  from Booking_Appointment ba
                                                     join Room r on r.id = ba.room_id
                                                     join Employee e on e.employee_id = ba.doctor_id
@@ -161,8 +161,10 @@ public class DBBookingMedicalAppointment extends DBContext {
                join Room r on r.id = ba.room_id
                join Status_Book sb on sb.id = ba.status_id
                join Patient p on p.Patient_id = ba.patient_id
-               where ba.patient_id = ?""";
-
+               where ba.patient_id = ?
+                 ORDER BY ba.id DESC;       
+                         """;
+//ORDER BY ba.id DESC; 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, patientId);
             ResultSet rs = stm.executeQuery();

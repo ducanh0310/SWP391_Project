@@ -47,7 +47,7 @@
             #editSuccessNotification {
                 display: none;
             }
-            
+
             #bookSuccessNotification {
                 display: none;
             }
@@ -170,6 +170,100 @@
                 color: black;
                 cursor: pointer;
             }
+
+
+            /* DataTable Customization */
+
+
+
+            .text-primary {
+                --x-text-opacity: 1;
+                color: #06a3da !important;
+            }
+            .m-0 {
+                margin-left: 30px !important;
+            }
+            body{
+                background: #f7f7ff;
+                margin-top:0px;
+            }
+            table th , table td{
+                text-align: center;
+            }
+            th {
+                background: #333;
+                color: #fff;
+            }
+            .header_wrap {
+                padding:30px 0;
+            }
+
+
+
+            .dataTables_filter input[type="search"] {
+                border: 2px solid #000;
+                font-weight: bold;
+                border-radius: 10px;
+                padding: 5px 5px;
+                height: 35px;
+            }
+            /*            .mb-0{
+                            font-weight:500;
+                            font-size:26px;
+                            padding-left:20px;
+                        }*/
+            /* DataTable Customization */
+            .dataTables_wrapper .dataTables_paginate {
+                display: flex;
+                justify-content: center; /* Center align pagination */
+                margin-top: 20px; /* Adjust as needed */
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 5px 10px;
+                margin: 0 2px;
+                border-radius: 3px;
+                background-color: #06a3da;
+                color: white !important;
+                cursor: pointer;
+                border: none; /* Remove border */
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: #005f7f;
+                border: 1px solid #005f7f;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+                background-color: #004156;
+                border: 1px solid #004156;
+            }
+
+            
+
+            .dataTables_wrapper .dataTables_length{
+                margin-left: 20px;
+                margin-bottom: 20px;
+            }
+            .dataTables_wrapper .dataTables_filter{
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+            .dataTables_wrapper .dataTables_info {
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter
+            {
+                float: right; /* Dịch sang trái */
+               margin-right: 20px;
+            }
+
+
+
         </style>
     </head>
 
@@ -374,18 +468,18 @@
                     <div class="card-header">
                         <h5 class="mb-0">Medical Appointment History</h5>
                     </div>
-                    <div class="wrapper">
-                        <div class="search-input">
-                            <a href="" target="_blank" hidden></a>
-                            <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
-                            <div class="autocom-box">
-                                <!-- Các mục sẽ được chèn từ JavaScript -->
-                            </div>
-                            <div class="icon"><i class="fas fa-search"></i></div>
-                        </div>
-                    </div>
+                    <!--                    <div class="wrapper">
+                                            <div class="search-input">
+                                                <a href="" target="_blank" hidden></a>
+                                                <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
+                                                <div class="autocom-box">
+                                                     Các mục sẽ được chèn từ JavaScript 
+                                                </div>
+                                                <div class="icon"><i class="fas fa-search"></i></div>
+                                            </div>
+                                        </div>-->
                     <div class="table-responsive">
-                        <table class="table table-hover table-nowrap">
+                        <table class="table table-hover table-nowrap" id="myTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">No</th>
@@ -470,7 +564,7 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5">
-                        <span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
+
                     </div>
                 </div>
             </div>
@@ -571,154 +665,177 @@
         <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
         <script src="../lib/twentytwenty/jquery.event.move.js"></script>
         <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
-
-        <!-- Template Javascript -->
         <script src="../js/main.js"></script>
-
-
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
-                                function searchServices(event) {
-                                    var keyword = event.target.value.toLowerCase();
-                                    var rows = document.querySelectorAll("#appointmentHistoryBody tr");
 
-                                    rows.forEach(function (row) {
-                                        var text = row.textContent.toLowerCase();
-                                        var displayStyle = text.includes(keyword) ? "table-row" : "none";
-                                        row.style.display = displayStyle;
-                                    });
-                                }
+            $(document).ready(function () {
+                $('#myTable').DataTable({
+                    "language": {
+                        "lengthMenu": "Show _MENU_",
+                        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                        "infoEmpty": "Showing 0 to 0 of 0 entries",
+                        "infoFiltered": "(filtered from _MAX_ total entries)",
+                        "search": "Search:",
+                        "paginate": {
+                            "first": "First",
+                            "last": "Last",
+                            "next": "Next",
+                            "previous": "Previous"
+                        }
+                    },
+                    "dom": '<"header_wrap"lf>t<"footer_wrap"ip>',
+                    "pagingType": "full_numbers",
+                    "pageLength": 10
+
+                });
+            });
+
+
+
+
+            function searchServices(event) {
+                var keyword = event.target.value.toLowerCase();
+                var rows = document.querySelectorAll("#appointmentHistoryBody tr");
+
+                rows.forEach(function (row) {
+                    var text = row.textContent.toLowerCase();
+                    var displayStyle = text.includes(keyword) ? "table-row" : "none";
+                    row.style.display = displayStyle;
+                });
+            }
 
 
 
 
 
 
-                                $(document).ready(function () {
-                                    let editId;
-                                    let service;
-                                    let room;
-                                    let doctor;
-                                    let date;
-                                    let time;
-                                    $('.edit-button').click(function (event) {
-                                        event.preventDefault(); // Prevent the default anchor behavior
-                                        editId = $(this).data('id');
-                                        service = $(this).data('service');
-                                        room = $(this).data('room');
-                                        doctor = $(this).data('doctor');
-                                        date = $(this).data('date');
-                                        time = $(this).data('time');
+            $(document).ready(function () {
+                let editId;
+                let service;
+                let room;
+                let doctor;
+                let date;
+                let time;
+                $('.edit-button').click(function (event) {
+                    event.preventDefault(); // Prevent the default anchor behavior
+                    editId = $(this).data('id');
+                    service = $(this).data('service');
+                    room = $(this).data('room');
+                    doctor = $(this).data('doctor');
+                    date = $(this).data('date');
+                    time = $(this).data('time');
 
-                                        document.getElementById('serviceName').value = service;
-                                        document.getElementById('room').value = room;
-                                        document.getElementById('doctor').value = doctor;
-                                        document.getElementById('date').value = date;
-                                        document.getElementById('time').value = time;
-                                        console.log("Edit ID: " + editId);  // Log the ID for debugging
+                    document.getElementById('serviceName').value = service;
+                    document.getElementById('room').value = room;
+                    document.getElementById('doctor').value = doctor;
+                    document.getElementById('date').value = date;
+                    document.getElementById('time').value = time;
+                    console.log("Edit ID: " + editId);  // Log the ID for debugging
 
-                                        // Redirect to the edit URL with the captured ID
-                                        if (editId) {
-                                            $('#confirmEditButton').click(function () {
-                                                window.location.href = 'editAppointment?id=' + editId;
-                                            });
-                                        }
-                                    });
+                    // Redirect to the edit URL with the captured ID
+                    if (editId) {
+                        $('#confirmEditButton').click(function () {
+                            window.location.href = 'editAppointment?id=' + editId;
+                        });
+                    }
+                });
 
-                                    //Edit appointment
-                                    function showEditSuccessNotification() {
-                                        $('#editSuccessNotification').show();
-                                        let progressBar = $('#editSuccessProgressBar');
-                                        let width = 0;
-                                        let interval = setInterval(function () {
-                                            width++;
-                                            progressBar.css('width', width + '%');
-                                            if (width === 200) {
-                                                clearInterval(interval);
-                                                $('#editSuccessNotification').fadeOut();
-                                            }
-                                        }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                                    }
+                //Edit appointment
+                function showEditSuccessNotification() {
+                    $('#editSuccessNotification').show();
+                    let progressBar = $('#editSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#editSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
 
-                                    // Close notification button handler
-                                    $('#closeEditNotificationButton').click(function () {
-                                        $('#editSuccessNotification').hide();
-                                    });
+                // Close notification button handler
+                $('#closeEditNotificationButton').click(function () {
+                    $('#editSuccessNotification').hide();
+                });
 
-                                    // Check for success message from the server
-                                    let successMessage = '${sessionScope.success}';
-                                    if (successMessage) {
-                                        showEditSuccessNotification();
-                                    }
+                // Check for success message from the server
+                let successMessage = '${sessionScope.success}';
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
 
-                                    //Delete appointment
-                                    $('.delete-button').click(function (event) {
-                                        event.preventDefault(); // Prevent the default anchor behavior
-                                        deleteId = $(this).data('id');
-                                        service = $(this).data('service');
-                                        room = $(this).data('room');
-                                        doctor = $(this).data('doctor');
-                                        date = $(this).data('date');
-                                        time = $(this).data('time');
+                //Delete appointment
+                $('.delete-button').click(function (event) {
+                    event.preventDefault(); // Prevent the default anchor behavior
+                    deleteId = $(this).data('id');
+                    service = $(this).data('service');
+                    room = $(this).data('room');
+                    doctor = $(this).data('doctor');
+                    date = $(this).data('date');
+                    time = $(this).data('time');
 
-                                        document.getElementById('serviceDelete').value = service;
-                                        document.getElementById('roomDelete').value = room;
-                                        document.getElementById('doctorDelete').value = doctor;
-                                        document.getElementById('dateDelete').value = date;
-                                        document.getElementById('timeDelete').value = time;
-                                        document.getElementById('idDelete').value = deleteId;
-                                    });
+                    document.getElementById('serviceDelete').value = service;
+                    document.getElementById('roomDelete').value = room;
+                    document.getElementById('doctorDelete').value = doctor;
+                    document.getElementById('dateDelete').value = date;
+                    document.getElementById('timeDelete').value = time;
+                    document.getElementById('idDelete').value = deleteId;
+                });
 
-                                    // Handle notification display for delete success
-                                    function showDeleteSuccessNotification() {
-                                        $('#deleteSuccessNotification').show();
-                                        let progressBar = $('#deleteSuccessProgressBar');
-                                        let width = 0;
-                                        let interval = setInterval(function () {
-                                            width++;
-                                            progressBar.css('width', width + '%');
-                                            if (width === 200) {
-                                                clearInterval(interval);
-                                                $('#deleteSuccessNotification').fadeOut();
-                                            }
-                                        }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                                    }
+                // Handle notification display for delete success
+                function showDeleteSuccessNotification() {
+                    $('#deleteSuccessNotification').show();
+                    let progressBar = $('#deleteSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#deleteSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
 
-                                    // Close notification button handler
-                                    $('#closeNotificationButton').click(function () {
-                                        $('#deleteSuccessNotification').hide();
-                                    });
+                // Close notification button handler
+                $('#closeNotificationButton').click(function () {
+                    $('#deleteSuccessNotification').hide();
+                });
 
-                                    // Check for success message from the server
-                                    let deleteSuccess = '${sessionScope.deleteSuccess}';
-                                    if (deleteSuccess) {
-                                        showDeleteSuccessNotification();
-                                    }
+                // Check for success message from the server
+                let deleteSuccess = '${sessionScope.deleteSuccess}';
+                if (deleteSuccess) {
+                    showDeleteSuccessNotification();
+                }
 
-                                    function showBookSuccessNotification() {
-                                        $('#bookSuccessNotification').show();
-                                        let progressBar = $('#bookSuccessProgressBar');
-                                        let width = 0;
-                                        let interval = setInterval(function () {
-                                            width++;
-                                            progressBar.css('width', width + '%');
-                                            if (width === 200) {
-                                                clearInterval(interval);
-                                                $('#bookSuccessNotification').fadeOut();
-                                            }
-                                        }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                                    }
+                function showBookSuccessNotification() {
+                    $('#bookSuccessNotification').show();
+                    let progressBar = $('#bookSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#bookSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
 
-                                    // Close notification button handler
-                                    $('#closeBookNotificationButton').click(function () {
-                                        $('#bookSuccessNotification').hide();
-                                    });
+                // Close notification button handler
+                $('#closeBookNotificationButton').click(function () {
+                    $('#bookSuccessNotification').hide();
+                });
 
-                                    // Check for success message from the server
-                                    let bookSuccess = '${sessionScope.bookSuccess}';
-                                    if (bookSuccess) {
-                                        showBookSuccessNotification();
-                                    }
-                                });
+                // Check for success message from the server
+                let bookSuccess = '${sessionScope.bookSuccess}';
+                if (bookSuccess) {
+                    showBookSuccessNotification();
+                }
+            });
         </script>
     </body>
 
