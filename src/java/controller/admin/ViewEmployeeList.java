@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Employee;
 import model.Employees;
+import model.PageControll;
 import model.User;
 
 /**
@@ -69,6 +70,7 @@ public class ViewEmployeeList extends HttpServlet {
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
+            PageControll pageControll = new PageControll();
             User currentUser = (User) session.getAttribute("currentUser");
             String userRole = (String) session.getAttribute("userRole");
             if (currentUser == null) {

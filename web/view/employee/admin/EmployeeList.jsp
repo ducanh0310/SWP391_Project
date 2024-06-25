@@ -211,32 +211,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${EmployeeList}" var="emp"  varStatus="loop">
-                                            <tr>
-                                                <td>${emp.id}</td>
-                                                <td>${emp.name}</td>
-                                                <td>${emp.employeeSin}</td>
-                                                <td><c:choose>
-                                                        <c:when test= "${emp.employeeType == 'r'}">Receptionist</c:when>
-                                                        <c:when test="${emp.employeeType == 'd'}">Doctor</c:when>
-                                                        <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
-                                                        <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
-                                                    </c:choose></td>
-                                                <td>${emp.phoneNumber}</td>
-                                                <td><c:choose>
-                                                        <c:when test="${emp.gender == 'M'}">Male</c:when>
-                                                        <c:when test="${emp.gender == 'F'}">Female</c:when>
-                                                        <c:otherwise>Other</c:otherwise>
-                                                    </c:choose></td>
-                                                <td class="text-end">
-                                                    <form action="DeleteEmployee?employeeId=${emp.id}" method="post">
-                                                        <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}" class="btn btn-sm btn-neutral">View</a>
-                                                        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <c:forEach items="${EmployeeList}" var="emp"  >
+                                            <c:if test="${emp.employeeType != 'I'}">
+                                                <tr>
+                                                    <td>${emp.id}</td>
+                                                    <td>${emp.name}</td>
+                                                    <td>${emp.employeeSin}</td>
+                                                    <td><c:choose>
+                                                            <c:when test= "${emp.employeeType == 'r'}">Receptionist</c:when>
+                                                            <c:when test="${emp.employeeType == 'd'}">Doctor</c:when>
+                                                            <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
+                                                            <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
+                                                        </c:choose></td>
+                                                    <td>${emp.phoneNumber}</td>
+                                                    <td><c:choose>
+                                                            <c:when test="${emp.gender == 'M'}">Male</c:when>
+                                                            <c:when test="${emp.gender == 'F'}">Female</c:when>
+                                                            <c:otherwise>Other</c:otherwise>
+                                                        </c:choose></td>
+                                                    <td class="text-end">
+                                                        <form action="DeleteEmployee?employeeId=${emp.id}" method="post">
+                                                            <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}" class="btn btn-sm btn-neutral">View</a>
+                                                            <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                         </c:forEach>
 
                                     </tbody>
@@ -278,7 +280,7 @@
             <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
 
             <script src="../../../js/main.js"></script>
-            
-            </script>
+
+
     </body>
 </html>
