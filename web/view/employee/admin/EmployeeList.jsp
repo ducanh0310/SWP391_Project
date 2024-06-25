@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -97,11 +95,6 @@
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
-                                </a>
-                            </li>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -116,7 +109,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -158,7 +151,7 @@
                                     </thead>
                                     <tbody id="employeeTableBody">
                                         <c:forEach items="${EmployeeList}" var="emp"  varStatus="loop">
-                                            <c:if test="${emp.employeeType != 'I'}" >
+                                            <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
                                                 <tr class="employee-row">
                                                     <td>${emp.id}</td>
                                                     <td>${emp.name}</td>
@@ -230,9 +223,9 @@
                     const end = start + rowsPerPage;
                     rows.forEach((row, index) => {
                         if (index >= start && index < end) {
-                            row.style.display = 'table-row'; 
+                            row.style.display = 'table-row'; // hiển thị hàng dữ liệu
                         } else {
-                            row.style.display = 'none'; 
+                            row.style.display = 'none'; // ẩn các hàng không nằm trong khoảng hiển thị
                         }
                     });
                 }
@@ -266,23 +259,6 @@
                         }
                     });
                     pagination.appendChild(li);
-
-                    // Page numbers
-                    for (let i = 1; i <= totalPages; i++) {
-                        li = document.createElement('li');
-                        li.className = 'page-item';
-                        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                        li.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            currentPage = i;
-                            displayRows(currentPage);
-                            updatePaginationUI();
-                        });
-                        if (i === currentPage) {
-                            li.classList.add('active');
-                        }
-                        pagination.appendChild(li);
-                    }
 
                     // Next page button
                     li = document.createElement('li');
