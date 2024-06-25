@@ -12,6 +12,7 @@
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/editProfileAdmin.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/DeleteEmployee.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/home.jsp</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/authen/NewPasswordController.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/ViewEmployeeList.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/ViewEmployeeDetails.jsp</file>
         </group>

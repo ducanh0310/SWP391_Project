@@ -69,19 +69,24 @@ public class ViewEmployeeList extends HttpServlet {
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
-            response.sendRedirect("index.jsp");
-        }else{
-            
-            EmployeeDAO employeeDAO = new EmployeeDAO();
+            User currentUser = (User) session.getAttribute("currentUser");
+            String userRole = (String) session.getAttribute("userRole");
+            if (currentUser == null) {
+                request.setAttribute("error", "You are not permission!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                if (userRole != "admin") {
+                    request.setAttribute("error", "You are not permission!");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } else {
+                    EmployeeDAO employeeDAO = new EmployeeDAO();
 
-                ArrayList<Employees> empList = employeeDAO.getEmployees();
-                request.setAttribute("EmployeeList", empList);
-                request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
-            
-        }
-            
+                    ArrayList<Employees> empList = employeeDAO.getEmployees();
+                    request.setAttribute("EmployeeList", empList);
+                    request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
+                }
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ViewEmployeeList.class.getName()).log(Level.SEVERE, null, ex);
         }
