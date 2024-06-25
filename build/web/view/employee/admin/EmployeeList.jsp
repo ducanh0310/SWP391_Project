@@ -1,27 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="pageSize" value="9" />
+
+
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <title>DentCare - Dental Clinic</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
-
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
-
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
-
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
         <!-- Libraries Stylesheet -->
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="lib/animate/animate.min.css" rel="stylesheet">
@@ -29,52 +25,14 @@
         <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
         <!-- BoxIcons v2.1.2 -->
         <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
-
         <!-- Roboto Font -->
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
         <!-- CSS File -->
         <link rel="stylesheet" href="css/style.css">
-
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-
-
-
-        <!-- Favicon -->
-
-        <link href="../../../img/favicon.ico" rel="icon">
-
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
-
-        <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-        <!-- Libraries Stylesheet -->
-        <link href="../../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="../../../lib/animate/animate.min.css" rel="stylesheet">
-        <link href="../../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-        <link href="../../../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
-        <!-- BoxIcons v2.1.2 -->
-        <link href="../../../https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
-
-        <!-- Roboto Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-        <!-- CSS File -->
-        <link rel="stylesheet" href="../../../css/style.css">
-
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Template Stylesheet -->
-        <link href="../../../css/style.css" rel="stylesheet">
         <style>
             .text-primary {
                 --x-text-opacity: 1;
@@ -83,14 +41,17 @@
             .m-0 {
                 margin-left: 30px !important;
             }
-            body{
+            body {
                 background: #f7f7ff;
-                margin-top:0px;
+                margin-top: 0px;
+            }
+            .pagination .page-item.active .page-link {
+                background-color: black;
+                color: white;
             }
         </style>
 
     </head>
-
     <body>
         <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
@@ -138,16 +99,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
                                     <i class="bi bi-people"></i> Users
                                 </a>
                             </li>
@@ -155,7 +106,6 @@
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
                         <!-- Navigation -->
-
                         <!-- Push content down -->
                         <hr>
                         <!-- User (md) -->
@@ -166,7 +116,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -176,19 +126,16 @@
             </nav>
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">                   
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
                                 <h5 class="mb-0">Welcome, admin</h5>
-
                             </div>
                             <form method="get" action="SearchEmployeeServlet" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2" name="searchKey">
+                                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" name="searchKey">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
@@ -196,7 +143,6 @@
                                     </div>
                                 </div>
                             </form>   
-
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
@@ -210,25 +156,29 @@
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <c:forEach items="${EmployeeList}" var="emp"  >
-                                            <c:if test="${emp.employeeType != 'I'}">
-                                                <tr>
+                                    <tbody id="employeeTableBody">
+                                        <c:forEach items="${EmployeeList}" var="emp"  varStatus="loop">
+                                            <c:if test="${emp.employeeType != 'I'}" >
+                                                <tr class="employee-row">
                                                     <td>${emp.id}</td>
                                                     <td>${emp.name}</td>
                                                     <td>${emp.employeeSin}</td>
-                                                    <td><c:choose>
-                                                            <c:when test= "${emp.employeeType == 'r'}">Receptionist</c:when>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${emp.employeeType == 'r'}">Receptionist</c:when>
                                                             <c:when test="${emp.employeeType == 'd'}">Doctor</c:when>
                                                             <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
                                                             <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
-                                                        </c:choose></td>
+                                                        </c:choose>
+                                                    </td>
                                                     <td>${emp.phoneNumber}</td>
-                                                    <td><c:choose>
+                                                    <td>
+                                                        <c:choose>
                                                             <c:when test="${emp.gender == 'M'}">Male</c:when>
                                                             <c:when test="${emp.gender == 'F'}">Female</c:when>
                                                             <c:otherwise>Other</c:otherwise>
-                                                        </c:choose></td>
+                                                        </c:choose>
+                                                    </td>
                                                     <td class="text-end">
                                                         <form action="DeleteEmployee?employeeId=${emp.id}" method="post">
                                                             <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}" class="btn btn-sm btn-neutral">View</a>
@@ -240,19 +190,20 @@
                                                 </tr>
                                             </c:if>
                                         </c:forEach>
-
                                     </tbody>
                                 </table>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center" id="pagination">
+                                        <!-- Pagination buttons will be appended here by JavaScript -->
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </main>
             </div>
-
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
             <!-- JavaScript Libraries -->
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -265,22 +216,119 @@
             <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
             <script src="lib/twentytwenty/jquery.event.move.js"></script>
             <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
-
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
+            <script>
+                // Client-side pagination script
+                const rowsPerPage = 8;
+                let currentPage = 1;
+                const rows = document.querySelectorAll('.employee-row');
+                let totalPages = Math.ceil(rows.length / rowsPerPage);
 
-            <script src="../../../lib/wow/wow.min.js"></script>
-            <script src="../../../libeasing/easing.min.js"></script>
-            <script src="../../../libwaypoints/waypoints.min.js"></script>
-            <script src="../../../libowlcarousel/owl.carousel.min.js"></script>
-            <script src="../../../libtempusdominus/js/moment.min.js"></script>
-            <script src="../../../libtempusdominus/js/moment-timezone.min.js"></script>
-            <script src="../../../libtempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script src="../../../libtwentytwenty/jquery.event.move.js"></script>
-            <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
+                function displayRows(page) {
+                    const start = (page - 1) * rowsPerPage;
+                    const end = start + rowsPerPage;
+                    rows.forEach((row, index) => {
+                        if (index >= start && index < end) {
+                            row.style.display = 'table-row'; 
+                        } else {
+                            row.style.display = 'none'; 
+                        }
+                    });
+                }
 
-            <script src="../../../js/main.js"></script>
+                function setupPagination() {
+                    const pagination = document.getElementById('pagination');
+                    pagination.innerHTML = '';
 
+                    // First page button
+                    let li = document.createElement('li');
+                    li.className = 'page-item';
+                    li.innerHTML = `<a class="page-link" href="#">First</a>`;
+                    li.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = 1;
+                        displayRows(currentPage);
+                        updatePaginationUI();
+                    });
+                    pagination.appendChild(li);
 
+                    // Previous page button
+                    li = document.createElement('li');
+                    li.className = 'page-item';
+                    li.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+                    li.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (currentPage > 1) {
+                            currentPage--;
+                            displayRows(currentPage);
+                            updatePaginationUI();
+                        }
+                    });
+                    pagination.appendChild(li);
+
+                    // Page numbers
+                    for (let i = 1; i <= totalPages; i++) {
+                        li = document.createElement('li');
+                        li.className = 'page-item';
+                        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                        li.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            currentPage = i;
+                            displayRows(currentPage);
+                            updatePaginationUI();
+                        });
+                        if (i === currentPage) {
+                            li.classList.add('active');
+                        }
+                        pagination.appendChild(li);
+                    }
+
+                    // Next page button
+                    li = document.createElement('li');
+                    li.className = 'page-item';
+                    li.innerHTML = `<a class="page-link" href="#">Next</a>`;
+                    li.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            displayRows(currentPage);
+                            updatePaginationUI();
+                        }
+                    });
+                    pagination.appendChild(li);
+
+                    // Last page button
+                    li = document.createElement('li');
+                    li.className = 'page-item';
+                    li.innerHTML = `<a class="page-link" href="#">Last</a>`;
+                    li.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = totalPages;
+                        displayRows(currentPage);
+                        updatePaginationUI();
+                    });
+                    pagination.appendChild(li);
+
+                    updatePaginationUI();
+                }
+
+                function updatePaginationUI() {
+                    const pageItems = document.querySelectorAll('.page-item');
+                    pageItems.forEach(item => {
+                        if (item.querySelector('.page-link').textContent == currentPage) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    displayRows(currentPage);
+                    setupPagination();
+                });
+            </script>
+        </div>
     </body>
 </html>
