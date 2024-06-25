@@ -68,10 +68,19 @@ public class ViewEmployeeList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            response.sendRedirect("index.jsp");
+        }else{
+            
             EmployeeDAO employeeDAO = new EmployeeDAO();
+
                 ArrayList<Employees> empList = employeeDAO.getEmployees();
                 request.setAttribute("EmployeeList", empList);
                 request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
+            
+        }
             
         } catch (SQLException ex) {
             Logger.getLogger(ViewEmployeeList.class.getName()).log(Level.SEVERE, null, ex);

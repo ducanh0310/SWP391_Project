@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="pageSize" value="9" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -210,7 +211,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${EmployeeList}" var="emp">
+                                        <c:forEach items="${EmployeeList}" var="emp"  varStatus="loop">
                                             <tr>
                                                 <td>${emp.id}</td>
                                                 <td>${emp.name}</td>
@@ -241,9 +242,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer border-0 py-5">
-                                <span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
-                            </div>
                         </div>
                     </div>
                 </main>
@@ -265,7 +263,7 @@
             <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
             <script src="lib/twentytwenty/jquery.event.move.js"></script>
             <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
-            
+
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
 
@@ -280,5 +278,7 @@
             <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
 
             <script src="../../../js/main.js"></script>
+            
+            </script>
     </body>
 </html>

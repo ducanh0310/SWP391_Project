@@ -99,7 +99,6 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
-    
     //get all employee when have username
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -136,26 +135,24 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
-    
-    
     public void deleteEmployee(String key) throws SQLException {
-        String sql = "DELETE DC FROM Doctor_Certification DC INNER JOIN Employee E ON DC.id = E.employee_id WHERE E.employee_id = ?;\n"
-                + "DELETE FROM Employee WHERE employee_id = ?;";
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try{
-            connection = getConnection();
-            statement = connection.prepareStatement(sql);
-             statement.setString(1, key);
-             statement.setString(2, key);
-             ResultSet rs = statement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePreparedStatement(statement);
-            closeConnection(connection);
-        }
+    String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
+    Connection connection = null;
+    PreparedStatement statement = null;
+    try {
+        connection = getConnection();
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, key);
+        statement.executeUpdate();  // Corrected to executeUpdate
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw e;  // Rethrow the exception to inform the caller
+    } finally {
+        closePreparedStatement(statement);
+        closeConnection(connection);
     }
+}
+
 
     public static void main(String[] args) {
         try {

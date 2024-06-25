@@ -5,6 +5,7 @@
 
 package controller.admin;
 
+import dao.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -68,7 +72,14 @@ public class DeleteEmployee extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        try {
+            String employeeId = request.getParameter("employeeId");
+            EmployeeDAO empDAO = new EmployeeDAO();
+            empDAO.deleteEmployee(employeeId);
+            response.sendRedirect("ViewEmployeeList");
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 
