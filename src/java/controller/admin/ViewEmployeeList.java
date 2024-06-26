@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Employee;
 import model.Employees;
-import model.PageControll;
 import model.User;
 
 /**
@@ -68,9 +67,9 @@ public class ViewEmployeeList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // check role of user, if not is admin role. Prevent.
         try {
             HttpSession session = request.getSession();
-            PageControll pageControll = new PageControll();
             User currentUser = (User) session.getAttribute("currentUser");
             String userRole = (String) session.getAttribute("userRole");
             if (currentUser == null) {
@@ -80,9 +79,8 @@ public class ViewEmployeeList extends HttpServlet {
                 if (userRole != "admin") {
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
-                } else {
+                } else { // if role is admin then do some service for admin
                     EmployeeDAO employeeDAO = new EmployeeDAO();
-
                     ArrayList<Employees> empList = employeeDAO.getEmployees();
                     request.setAttribute("EmployeeList", empList);
                     request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);

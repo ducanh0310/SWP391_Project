@@ -85,7 +85,7 @@
                                     <i class="bi bi-list-task"></i> Employee
                                 </a>
                             </li>
-                            <li class="nav-item">
+<!--                            <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clipboard-check"></i> Treatment
                                 </a>
@@ -94,7 +94,7 @@
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -109,7 +109,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -149,8 +149,10 @@
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
+                                    <!-- Display employee with condition -->
                                     <tbody id="employeeTableBody">
                                         <c:forEach items="${EmployeeList}" var="emp"  varStatus="loop">
+                                            <!-- just display employee do not have admin role or inactive role -->
                                             <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
                                                 <tr class="employee-row">
                                                     <td>${emp.id}</td>
@@ -213,7 +215,7 @@
             <script src="js/main.js"></script>
             <script>
                 // Client-side pagination script
-                const rowsPerPage = 8;
+                const rowsPerPage = 5;
                 let currentPage = 1;
                 const rows = document.querySelectorAll('.employee-row');
                 let totalPages = Math.ceil(rows.length / rowsPerPage);

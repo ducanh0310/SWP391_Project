@@ -111,21 +111,21 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="view/employee/admin/home.jsp">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-house"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
+                                <a class="nav-link" href="../../../PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="ViewEmployeeList">
+                                <a class="nav-link" href="../../../ViewEmployeeList">
                                     <i class="bi bi-list-task"></i> Employee
                                 </a>
                             </li>
-                            <li class="nav-item">
+<!--                            <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clipboard-check"></i> Treatment
                                 </a>
@@ -149,7 +149,7 @@
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-people"></i> Users
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -165,7 +165,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>

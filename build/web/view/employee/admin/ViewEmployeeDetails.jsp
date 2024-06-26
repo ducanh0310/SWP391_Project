@@ -91,7 +91,7 @@
                                     <i class="bi bi-list-task"></i> Employee
                                 </a>
                             </li>
-                            <li class="nav-item">
+<!--                            <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clipboard-check"></i> Treatment
                                 </a>
@@ -100,7 +100,7 @@
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -269,13 +269,12 @@
                                         </div>
                                     </div>
                                     
-                                    <hr>
+<!--                                    <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <a class="btn btn-info "  href="editPatientDetail.jsp">Edit</a>
-                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Move out</a>
                                         </div>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                             </div>

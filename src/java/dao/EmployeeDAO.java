@@ -24,6 +24,8 @@ import java.util.logging.Logger;
  */
 public class EmployeeDAO extends DBContext implements IEmployeeDAO {
 
+    //Get Employee table and doctor certification table
+    @Override
     public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -66,6 +68,8 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return emp;
     }
 
+    //Get all list of employee do not have condition
+    @Override
     public ArrayList<Employees> getEmployees() throws SQLException {
         Employee employeeInfo = new Employee();
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -100,6 +104,7 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
     }
 
     //get all employee when have username
+    @Override
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
         String sql = "SELECT * FROM Employee WHERE LOWER(name) LIKE ?";
@@ -108,7 +113,7 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
+            // convert to lower case
             String searchKey = "%" + key.toLowerCase() + "%";
             statement.setString(1, searchKey);
             ResultSet rs = statement.executeQuery();
@@ -135,6 +140,8 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
+    // Set role is inactive
+    @Override
     public void deleteEmployee(String key) throws SQLException {
     String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
     Connection connection = null;
