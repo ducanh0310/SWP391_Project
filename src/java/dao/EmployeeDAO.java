@@ -105,17 +105,22 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
 
     //get all employee when have username
     @Override
+    //get all employee when have username
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
-        String sql = "SELECT * FROM Employee WHERE LOWER(name) LIKE ?";
+        String sql = "SELECT * FROM Employee WHERE LOWER(name) LIKE ? OR LOWER(employee_id) LIKE ? OR LOWER(employee_sin) LIKE ? OR LOWER(employee_type) LIKE ? OR LOWER(phone) LIKE ?";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            // convert to lower case
+            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
             String searchKey = "%" + key.toLowerCase() + "%";
             statement.setString(1, searchKey);
+            statement.setString(2, searchKey);
+            statement.setString(3, searchKey);
+            statement.setString(4, searchKey);
+            statement.setString(5, searchKey);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Employees e = new Employees(rs.getInt(1),
