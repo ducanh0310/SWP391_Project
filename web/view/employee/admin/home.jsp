@@ -121,7 +121,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../../ViewEmployeeList">
+                                <a class="nav-link" href="ViewEmployeeList">
                                     <i class="bi bi-list-task"></i> Employee
                                 </a>
                             </li>
