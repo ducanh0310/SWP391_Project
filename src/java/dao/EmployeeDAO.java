@@ -114,7 +114,7 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
+            //set to lower case
             String searchKey = "%" + key.toLowerCase() + "%";
             statement.setString(1, searchKey);
             statement.setString(2, searchKey);
