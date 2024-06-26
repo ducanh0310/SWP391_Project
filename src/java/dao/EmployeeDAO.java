@@ -148,24 +148,47 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
     // Set role is inactive
     @Override
     public void deleteEmployee(String key) throws SQLException {
-    String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
-    Connection connection = null;
-    PreparedStatement statement = null;
-    try {
-        connection = getConnection();
-        statement = connection.prepareStatement(sql);
-        statement.setString(1, key);
-        statement.executeUpdate();  // Corrected to executeUpdate
-    } catch (SQLException e) {
-        e.printStackTrace();
-        throw e;  // Rethrow the exception to inform the caller
-    } finally {
-        closePreparedStatement(statement);
-        closeConnection(connection);
+        String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, key);
+            statement.executeUpdate();  // Corrected to executeUpdate
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;  // Rethrow the exception to inform the caller
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
     }
-}
 
-
+    
+    public ArrayList<Branch> getBranch() throws SQLException{
+        ArrayList<Branch> branchList = new ArrayList<>();
+        String sql = "select * from Branch";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                Branch b = new Branch();
+                b.setCity(rs.getString("city"));
+                branchList.add(b);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;  // Rethrow the exception to inform the caller
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return branchList;
+    }
     public static void main(String[] args) {
         try {
             EmployeeDAO emp = new EmployeeDAO();

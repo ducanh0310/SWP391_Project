@@ -215,7 +215,7 @@
             <script src="js/main.js"></script>
             <script>
                 // Client-side pagination script
-                const rowsPerPage = 5;
+                const rowsPerPage = 3;
                 let currentPage = 1;
                 const rows = document.querySelectorAll('.employee-row');
                 let totalPages = Math.ceil(rows.length / rowsPerPage);

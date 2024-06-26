@@ -14,8 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Branch;
 import model.Employee;
 import model.Employees;
 import model.User;
@@ -84,7 +86,10 @@ public class ViewEmployeeDetailsServlet extends HttpServlet {
                     if (employeeId != null) {
                         try {
                             EmployeeDAO empDAO = new EmployeeDAO();
+                            ArrayList<Branch> branchList = new ArrayList<>();
                             Employee emp = empDAO.getEmployeeByEmployeeId(employeeId);
+                            branchList = empDAO.getBranch();
+                            request.setAttribute("branchList", branchList);
                             request.setAttribute("employee", emp);
                             request.getRequestDispatcher("view/employee/admin/ViewEmployeeDetails.jsp").forward(request, response);
                         } catch (SQLException ex) {

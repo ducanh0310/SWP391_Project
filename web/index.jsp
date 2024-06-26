@@ -84,10 +84,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="form-group">
+                    <div style="color: red"> ${error}</div>
+                </div>
                 <div class="navbar-nav ms-auto py-0">
-                    <div class="form-group">
-                        <div style="color: red"> ${error}</div>
-                    </div>
                     <a href="index.jsp" class="nav-item nav-link active">Home</a>
                     <a href="about.jsp" class="nav-item nav-link">About</a>
                     <a href="service.jsp" class="nav-item nav-link">Service</a>
