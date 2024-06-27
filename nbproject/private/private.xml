@@ -6,13 +6,17 @@
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/dao/EmployeeDAO.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/viewListPatient.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/EmployeeList.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/patient/viewListPatient.jsp</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/editProfileEmployee.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/ViewEmployeeDetailsServlet.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/SearchEmployeeServlet.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/DeleteEmployee.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/model/Branch.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/patient/EditProfilePatientController.java</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/home.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/ViewEmployeeList.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/viewListPatient.jsp</file>
             <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/ViewEmployeeDetails.jsp</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/patient/editProfilePatient.jsp</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/patient/viewListPatient.jsp</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/index.jsp</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/ViewEmployeeList.java</file>
         </group>
     </open-files>
 </project-private>
