@@ -3,18 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewListPatient.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/EditPatientController.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/editPatientDetail.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientList.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewPatientDetail.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dao/DBAccount.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/ProcedureCodes.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/DeleteServiceController.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ViewServiceDetailController.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewServiceDetail.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/ServiceDB.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientViewDB.java</file>
         </group>
     </open-files>
 </project-private>

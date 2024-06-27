@@ -543,67 +543,6 @@
                                                             window.location.href = "patientDetail?pid=${patients.id}";
                                                         }, 2000);
                                                     }
-                                                    function validateForm() {
-  // Lấy giá trị từ các trường dữ liệu
-  var fullName = document.getElementById('fullName').value;
-  var sin = document.getElementById('sin').value;
-  var email = document.getElementById('email').value;
-  var phone = document.getElementById('phone').value;
-  var birthday = document.getElementById('birthday').value;
-  var gender = document.getElementById('gender').value;
-  var address = document.getElementById('address').value;
-
-  // Kiểm tra điều kiện hợp lệ cho mỗi trường
-  if (fullName === '') {
-    alert('Vui lòng nhập họ và tên.');
-    return false;
-  }
-
-  if (sin === '') {
-    alert('Vui lòng nhập số SIN.');
-    return false;
-  }
-
-  // Kiểm tra định dạng email sử dụng biểu thức chính quy
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    alert('Vui lòng nhập địa chỉ email hợp lệ.');
-    return false;
-  }
-
-  // Kiểm tra định dạng số điện thoại
-  var phoneRegex = /^\d{10}$/;
-  if (!phoneRegex.test(phone)) {
-    alert('Vui lòng nhập số điện thoại hợp lệ (10 chữ số).');
-    return false;
-  }
-
-  // Kiểm tra định dạng ngày sinh (ở đây giả sử dd/mm/yyyy)
-  var birthdayRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-  if (!birthdayRegex.test(birthday)) {
-    alert('Vui lòng nhập ngày sinh hợp lệ (dd/mm/yyyy).');
-    return false;
-  }
-
-  // Kiểm tra giới tính
-  if (gender === '') {
-    alert('Vui lòng chọn giới tính.');
-    return false;
-  }
-
-  if (address === '') {
-    alert('Vui lòng nhập địa chỉ.');
-    return false;
-  }
-
-  return true; // Trả về true nếu dữ liệu hợp lệ
-}
-
-function showCodeAndRedirect() {
-  if (validateForm()) {
-    // Thực hiện lưu dữ liệu và chuyển hướng đến trang khác
-    // ...
-  }
-}
+                                                    
                 </script>
                 </html> 

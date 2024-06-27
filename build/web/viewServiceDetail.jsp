@@ -63,7 +63,7 @@
                 padding:30px 0;
             }
 
-.page-title{
+            .page-title{
                 font-weight:500;
                 font-size:26px;
                 padding-left:20px;
@@ -258,28 +258,53 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${services}" var="service">
-                                                    <tr>
-                                                        <td>${service.procedure_name}</td>
-                                                        <td>${'$'}${service.price}</td>
-                                                        <td class="text-end">
-                                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                                <i class="bi bi-pencil-square"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            <tbody>
+    <c:forEach items="${servicesExist}" var="service">
+        <tr id="service${service.procedure_id}">
+            <td>${service.procedure_name}</td>
+            <td>${'$'}${service.price}</td>
+            <td class="text-end">
+                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <form action="deleteService" method="POST" style="display: inline-block;">
+                    <input type="hidden" name="serviceID" value="${service.procedure_id}">
+                    <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="confirmDelete(${service.procedure_id})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+<tbody>
                                         </table>
 
                                         <!--		Start Pagination -->
                                         <div class="pagination-container">
                                             <nav>
-                                                <ul class="pagination"><li data-page="1" class="">								      <span>1<span class="sr-only">(current)</span></span>								    </li><li data-page="2" class="active">								      <span>2<span class="sr-only">(current)</span></span>								    </li><li data-page="3">								      <span>3<span class="sr-only">(current)</span></span>								    </li><li data-page="4" class="">								      <span>4<span class="sr-only">(current)</span></span>								    </li><li data-page="5">								      <span>5<span class="sr-only">(current)</span></span>								    </li><li data-page="6">								      <span>6<span class="sr-only">(current)</span></span>								    </li><li data-page="7">								      <span>7<span class="sr-only">(current)</span></span>								    </li><li data-page="8">								      <span>8<span class="sr-only">(current)</span></span>								    </li><li data-page="9">								      <span>9<span class="sr-only">(current)</span></span>								    </li><li data-page="10">								      <span>10<span class="sr-only">(current)</span></span>								    </li></ul>
+                                                <ul class="pagination"><li data-page="1" class="">								      
+                                                        <span>1<span class="sr-only">(current)</span></span>	
+                                                    </li><li data-page="2" class="active">			
+                                                        <span>2<span class="sr-only">(current)</span></span>	
+                                                    </li><li data-page="3">					
+                                                        <span>3<span class="sr-only">(current)</span></span>	
+                                                    </li><li data-page="4" class="">				
+                                                        <span>4<span class="sr-only">(current)</span></span>	
+                                                    </li><li data-page="5">					
+                                                        <span>5<span class="sr-only">(current)</span></span>	
+                                                    </li><li data-page="6">						
+
+                                                        <span>6<span class="sr-only">(current)</span></span>		
+                                                    </li><li data-page="7">						
+                                                        <span>7<span class="sr-only">(current)</span></span>		
+                                                    </li><li data-page="8">						
+                                                        <span>8<span class="sr-only">(current)</span></span>		
+                                                    </li><li data-page="9">						
+                                                        <span>9<span class="sr-only">(current)</span></span>		
+                                                    </li><li data-page="10">						
+                                                        <span>10<span class="sr-only">(current)</span></span>		
+                                                    </li></ul>
                                             </nav>
+
                                         </div>
                                         <div class="rows_count">Showing 11 to 20 of 91 entries</div>
 
@@ -330,29 +355,7 @@
                                                         }
                                                     }
 
-                                                    function deleteService(serviceId) {
-                                                        if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
-                                                            // Gửi yêu cầu xóa dịch vụ thông qua Ajax
-                                                            fetch(`/delete-service/${serviceId}`, {
-                                                                method: "DELETE"
-                                                            })
-                                                                    .then(response => {
-                                                                        if (response.ok) {
-                                                                            console.log("Dịch vụ đã được xóa thành công!");
-                                                                            // Xóa phần tử giao diện người dùng tương ứng sau khi xóa thành công
-                                                                            const serviceElement = document.getElementById(`service${serviceId}`);
-                                                                            if (serviceElement) {
-                                                                                serviceElement.remove();
-                                                                            }
-                                                                        } else {
-                                                                            console.error("Đã xảy ra lỗi khi xóa dịch vụ");
-                                                                        }
-                                                                    })
-                                                                    .catch(error => {
-                                                                        console.error("Đã xảy ra lỗi khi gửi yêu cầu xóa dịch vụ: " + error);
-                                                                    });
-                                                        }
-                                                    }
+                                                    
 
                                                     getPagination('#table-id');
                                                     $('#maxRows').trigger('change');
@@ -500,6 +503,14 @@
                                                             $('#maxRows').trigger('change');
                                                         }
                                                     }
+                                                    function confirmDelete(serviceId) {
+        if (confirm("Are you sure you want to delete this service?")) {
+            // Proceed with the delete operation
+        } else {
+            // Cancel the delete operation
+            event.preventDefault();
+        }
+    }
         </script>
     </body>
 </html>

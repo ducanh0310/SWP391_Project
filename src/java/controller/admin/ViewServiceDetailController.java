@@ -19,16 +19,44 @@ import model.ProcedureCodes;
  */
 public class ViewServiceDetailController extends HttpServlet {
 
+    private ServiceDB serviceDB;
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            ServiceDB service = new ServiceDB();
-            ArrayList<ProcedureCodes> services = service.getService();
-            request.setAttribute("services", services);
-            request.getRequestDispatcher("viewServiceDetail.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
-        }
+    public void init() throws ServletException {
+        super.init();
+        serviceDB = new ServiceDB();
     }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //int sID = Integer.parseInt(request.getParameter("serviceId"));
+        ArrayList<ProcedureCodes> servicesExist = new ArrayList<>();
+        ArrayList<ProcedureCodes> services = serviceDB.getService();
+        for (ProcedureCodes service : services) {
+            if (service.getType().equals("a") ) {
+                servicesExist.add(service);
+            }
+        }
+        request.setAttribute("servicesExist", servicesExist);
+        request.setAttribute("services", services);
+        request.getRequestDispatcher("viewServiceDetail.jsp").forward(request, response);
+    }
+
+//    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        try {
+//            int serviceId = Integer.parseInt(request.getPathInfo().substring(1)); // Lấy serviceId từ URL
+//
+//            //ProcedureCodes deletedService = serviceDB.deleteService(serviceId);
+//
+//            if (deletedService != null) {
+//                response.setStatus(HttpServletResponse.SC_OK);
+//            } else {
+//                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//            }
+//        } catch (NumberFormatException e) {
+//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//        } catch (Exception e) {
+//            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 }
