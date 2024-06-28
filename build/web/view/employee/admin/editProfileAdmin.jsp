@@ -268,6 +268,7 @@
             <div class="mb-3">
               <label for="imageUrl" class="form-label">Image URL</label>
               <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+              <input type="text" id="errorURL" readonly="" style="color: red">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -431,10 +432,11 @@ document.getElementById('imageForm').addEventListener('submit', function(event) 
         success: function(response) {
             if (response.success) {
                 $('#uploadModal').modal('hide'); // Hide modal
-                alert('Image uploaded successfully');
+                //alert('Image uploaded successfully');
                 document.getElementById('profile-pic').src = response.imageUrl; // Update image
             } else {
-                alert('Message: ' + response.message);
+                //alert('Message: ' + response.message);
+                document.getElementById('errorURL').value = response.message;
             }
         },
         error: function(xhr, status, error) {

@@ -28,7 +28,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-        
+
         <!-- Libraries Stylesheet -->
         <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="../../lib/animate/animate.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
 
         <!-- Template Stylesheet -->
         <link href="../../css/style.css" rel="stylesheet">
-        
+
         <style>
             body {
                 /*background: rgb(99, 39, 120)*/
@@ -86,111 +86,113 @@
                 cursor: pointer;
                 border: solid 1px #BA68C8
             }
-            
+
             .profile_button{
                 margin: 5px;
                 width: 85%;
             }
-            
+
             .container-box {
                 margin-bottom: 120px; /* Khoảng cách giữa các box dưới cùng */
-                
-                
+
+
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
-            
-    
-        .profile-pic-wrapper {
-            position: relative;
-            display: inline-block;
-        }
 
-        .profile-pic {
-            display: block;
-        }
 
-        .camera-icon {
-            position: absolute;
-            bottom: 0;
-            right: 25px;
-            background: #fff;
-            border-radius: 50%;
-            padding: 5px;
-            cursor: pointer;
-        }
+            .profile-pic-wrapper {
+                position: relative;
+                display: inline-block;
+            }
 
-        .hidden-input {
-            display: none;
-        }
-        
-        .rounded-circle {
-            border-radius: 50% !important;
-            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
-            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
-            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
-        }
-    </style>
+            .profile-pic {
+                display: block;
+            }
+
+            .camera-icon {
+                position: absolute;
+                bottom: 0;
+                right: 25px;
+                background: #fff;
+                border-radius: 50%;
+                padding: 5px;
+                cursor: pointer;
+            }
+
+            .hidden-input {
+                display: none;
+            }
+
+            .rounded-circle {
+                border-radius: 50% !important;
+                width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+                height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+                object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+            }
         </style>
-    </head>
-    <body>  
-        <!-- Topbar Start -->
-        <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
-            <div class="row gx-0">
-                <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
-                    <div class="d-inline-flex align-items-center">
-                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Sat : 6.00 am - 10.00 pm, Sunday Closed </small>
-                    </div>
+    </style>
+</head>
+<body>  
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Sat : 6.00 am - 10.00 pm, Sunday Closed </small>
                 </div>
-                <div class="col-md-6 text-center text-lg-end">
-                    <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
-                        <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-envelope-open me-2"></i>dentcare23@medical.com</p>
-                        </div>
-                        <div class="me-3 pe-3 border-end py-2">
-                            <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
-                        </div>
-                        <div class="py-2">
-                            <p class="m-0" ><a href="" style="color: #ffffff">Username</a></p>                        
-                        </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    <div class="me-3 pe-3 border-end py-2">
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>dentcare23@medical.com</p>
+                    </div>
+                    <div class="me-3 pe-3 border-end py-2">
+                        <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
+                    </div>
+                    <div class="py-2">
+                        <p class="m-0" ><a href="" style="color: #ffffff">Username</a></p>                        
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Topbar End -->
-        
-        <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                            <a href="team.html" class="dropdown-item">Our Dentist</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="appointment.html" class="dropdown-item">Appointment</a>
-                        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Service</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                        <a href="team.html" class="dropdown-item">Our Dentist</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="appointment.html" class="dropdown-item">Appointment</a>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-                <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
-         </nav>
+            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+            <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+        </div>
+    </nav>
     <!-- Navbar End -->
-    
-    
+
+
     <div class="container-fluid bg-primary py-5 hero-header mb-5">
         <div class="row py-3">
             <div class="col-12 text-center">
@@ -201,21 +203,21 @@
             </div>
         </div>
     </div>
-    
+
     <!--profile-->
-    
-    
-    
+
+
+
     <div class="row justify-content-center " >
-        
+
         <div class="col-md-3 container-box">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <div class="profile-pic-wrapper" id="uploadImageButton">
-                    
+
                     <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
                     <i class="fa fa-camera camera-icon"></i>
                 </div>
-                
+
                 <span class="font-weight-bold">${username}</span>
                 <span class="text-black-50">${paInfo.email}</span>
                 <br>
@@ -224,28 +226,29 @@
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
             </div>
 
-                <!-- Modal -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <form id="imageForm" action="../../uploadimage" method="POST">
-            <div class="mb-3">
-              <label for="imageUrl" class="form-label">Image URL</label>
-              <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+            <!-- Modal -->
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadModalLabel">Upload Image Link</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="imageForm" action="../../uploadimage" method="POST">
+                                <div class="mb-3">
+                                    <label for="imageUrl" class="form-label">Image URL</label>
+                                    <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+                                    <input type="text" id="errorURL" readonly="" style="color: red">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
-        
+
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5 container-box">
@@ -297,12 +300,12 @@
                                 <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
                                 <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
                                 <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
-                            </select>
-                        </div>                    
+                                </select>
+                            </div>                    
 
-                        <div class="col-md-6">
-                            <label class="labels" >Date of birth</label>
-                            <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}">
+                            <div class="col-md-6">
+                                <label class="labels" >Date of birth</label>
+                                <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${paInfo.dob}">
                             <c:if test="${not empty errorMsg.dob}">
                                 <span style="color:red">${errorMsg.dob}</span>
                             </c:if>
@@ -313,21 +316,21 @@
                         <label class="labels">Address</label>
                         <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}">
                         <c:if test="${not empty errorMsg.address}">
-                                <span style="color:red">${errorMsg.address}</span>
+                            <span style="color:red">${errorMsg.address}</span>
                         </c:if>
                     </div>
 
                     <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
                 </form>
-                
+
 
             </div>
         </div>    
-        
+
     </div>
 
-                    
-    
+
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
         <div class="container pt-5">
@@ -362,12 +365,12 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h3 class="text-white mb-4">Payment</h3>
-                    
+
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Footer End -->
 
 
@@ -377,46 +380,50 @@
 
     <!-- JavaScript Libraries -->
     <script>
-        
- // Show modal when clicking the upload image button
-document.getElementById('uploadImageButton').addEventListener('click', function() {
-    $('#uploadModal').modal('show');
-});
+
+        // Show modal when clicking the upload image button
+        document.getElementById('uploadImageButton').addEventListener('click', function () {
+            $('#uploadModal').modal('show');
+        });
 
 // Handle form submission with AJAX
-document.getElementById('imageForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent traditional form submission
+        document.getElementById('imageForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent traditional form submission
 
-    var element = $(this);
+            var element = $(this);
 
-    $.ajax({
-        url: '../../uploadimage',
-        type: 'POST',
-        data:element.serializeArray(),// serializes the form data.
-        dataType:'json',
-        success: function(response) {
-            if (response.success) {
-                $('#uploadModal').modal('hide'); // Hide modal
-                alert('Image uploaded successfully');
-                document.getElementById('profile-pic').src = response.imageUrl; // Update image
-            } else {
-                alert('Message: ' + response.message);
-            }
-        },
-        error: function(xhr, status, error) {
-            var responseText = xhr.responseText;
-            try {
-                var jsonResponse = JSON.parse(responseText);
-                alert('An error occurred: ' + jsonResponse.message);
-            } catch (e) {
-                alert('An error occurred: ' + responseText);
-            }
-        }
-    });
-});
-        
+            $.ajax({
+                url: '../../uploadimage',
+                type: 'POST',
+                data: element.serializeArray(), // serializes the form data.
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        $('#uploadModal').modal('hide'); // Hide modal
+                       // alert('Image uploaded successfully');
+                        document.getElementById('profile-pic').src = response.imageUrl; // Update image
+                    } else {
+                        //alert('Message: ' + response.message);
+                        //$('#urlErrorModal').show();
+                        document.getElementById('errorURL').value = response.message;
 
-           
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var responseText = xhr.responseText;
+                    try {
+                        var jsonResponse = JSON.parse(responseText);
+                        alert('An error occurred: ' + jsonResponse.message);
+                    } catch (e) {
+                        alert('An error occurred: ' + responseText);
+
+                    }
+                }
+            });
+        });
+
+
+
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -432,5 +439,5 @@ document.getElementById('imageForm').addEventListener('submit', function(event) 
 
     <!-- Template Javascript -->
     <script src="../../js/main.js"></script>
-    </body>
+</body>
 </html>
