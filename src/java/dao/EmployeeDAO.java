@@ -29,16 +29,8 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
     public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
-        String query = "SELECT \n"
-                + "    e.*,\n"
-                + "    dc.url,\n"
-                + "    dc.name_cetification\n"
-                + "FROM \n"
-                + "    Employee e\n"
-                + "LEFT JOIN \n"
-                + "    Doctor_Certification dc ON e.employee_id = dc.id_doctor\n"
-                + "WHERE \n"
-                + "    e.employee_id = ?";
+        String query = "SELECT e.*, dc.url, dc.name_cetification FROM Employee e LEFT JOIN Doctor_Certification dc "
+                + "ON e.employee_id = dc.id_doctor WHERE e.employee_id = ?";
         Employee emp = new Employee();
         try {
             connection = getConnection();

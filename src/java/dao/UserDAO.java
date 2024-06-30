@@ -22,7 +22,12 @@ import model.User;
 public class UserDAO extends DBContext {
 
     public User checkUser(String username) throws SQLException {
-        String query = "select * from User_account where username = ? or patient_id = (select patient_id from Patient where email =  ?) or employee_id = (select employee_id from Employee where email = ?)";
+
+        String query = "SELECT ua.* FROM User_account ua LEFT JOIN Employee e ON ua.employee_id = e.employee_id WHERE (ua.username = ?"
+                + "       OR ua.patient_id = (SELECT p.patient_id FROM Patient p WHERE p.email = ?)"
+                + "       OR ua.employee_id = (SELECT e.employee_id FROM Employee e WHERE e.email = ?))"
+                + "  AND (LOWER(e.employee_type) != 'i' OR e.employee_type IS NULL);";
+        //String query = "select * from User_account where username = ? or patient_id = (select patient_id from Patient where email =  ?) or employee_id = (select employee_id from Employee where email = ? and employee_type != 'i')";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
