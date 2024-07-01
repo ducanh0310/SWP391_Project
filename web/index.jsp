@@ -114,6 +114,7 @@
                 <a href="register.jsp" class="btn btn-primary py-2 px-4 ms-3">Login/Register</a>
                 <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
                 <a href="admin.jsp" class="btn btn-primary py-2 px-4 ms-3">Admin</a>
+                <a href="doctorAndNurse.jsp" class="btn btn-primary py-2 px-4 ms-3">Doctor</a>
             </div>
         </nav>
         <!-- Navbar End -->
