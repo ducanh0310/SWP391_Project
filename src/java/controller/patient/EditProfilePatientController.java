@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
 import java.sql.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import model.Account;
@@ -142,6 +143,19 @@ public class EditProfilePatientController extends HttpServlet {
 
             DBPatientProfile db = new DBPatientProfile();
             db.editInfoPatient(paInfo);
+            
+            // Xóa tất cả các thuộc tính trong session
+            Enumeration<String> attributeNames = session.getAttributeNames();
+            while (attributeNames.hasMoreElements()) {
+                
+                String attributeName = attributeNames.nextElement();
+                if(!attributeName.equals("currentUser")){
+                    session.removeAttribute(attributeName);
+                }
+                
+            }
+            
+            session.setAttribute("EditSuccess", "Editing profile successfully");
             response.sendRedirect("view");
         }
 

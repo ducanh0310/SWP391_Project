@@ -5,7 +5,6 @@
 
 package controller.uploadImage;
 
-import dao1.DBAccount;
 import dao1.DBImageProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,12 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import static java.lang.System.out;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import model.Account;
 import model.User;
 
 /**

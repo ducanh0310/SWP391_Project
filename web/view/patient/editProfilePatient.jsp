@@ -402,6 +402,7 @@
                         $('#uploadModal').modal('hide'); // Hide modal
                        // alert('Image uploaded successfully');
                         document.getElementById('profile-pic').src = response.imageUrl; // Update image
+                        document.getElementById('errorURL').value = ''; // Clear error message
                     } else {
                         //alert('Message: ' + response.message);
                         //$('#urlErrorModal').show();

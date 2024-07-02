@@ -39,7 +39,7 @@
 
         <!-- Template Stylesheet -->
         <link href="../../css/style.css" rel="stylesheet">
-        
+
         <style>
             body {
                 /*background: rgb(99, 39, 120)*/
@@ -85,30 +85,82 @@
                 cursor: pointer;
                 border: solid 1px #BA68C8
             }
-            
+
             .profile_button{
                 margin: 5px;
                 width: 85%;
             }
-            
+
             .container-box {
                 margin-bottom: 120px; /* Khoảng cách giữa các box dưới cùng */
-                
-                
+
+
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
             }
             .rounded-circle {
-            border-radius: 50% !important;
-            width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
-            height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
-            object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
-        }
+                border-radius: 50% !important;
+                width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+                height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+                object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+            }
+            /*Editing announcement successfully*/
+            #editSuccessNotification {
+                display: none;
+            }
+            
+            /* Style for the progress bar */
+            .progress-bar {
+                transition: width 5s linear;
+            }
+
+            /* Position notification at top right */
+            #notificationContainer {
+                display: none; /* Hide by default */
+            }
+
+            /* Style for the progress bar */
+
+            #editSuccessNotification{
+                display: none;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1060;
+            }
+
+            
+            .status-verify {
+                color: blue;
+            }
+            .status-done {
+                color: green;
+            }
+            .status-cancel {
+                color: red;
+            }
+            .status-not-started {
+                color: black;
+            }
+            
+            
         </style>
     </head>
     <body>
-        
-        
+
+        <!-- Edit Success Notification start-->
+        <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${EditSuccess}
+                <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Success Notification end-->
+
+
         <!-- Topbar Start -->
         <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
             <div class="row gx-0">
@@ -133,73 +185,73 @@
             </div>
         </div>
         <!-- Topbar End -->
-        
+
         <!-- Navbar Start -->
-            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="index.html" class="navbar-brand p-0">
-            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                        <a href="team.html" class="dropdown-item">Our Dentist</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="appointment.html" class="dropdown-item">Appointment</a>
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Service</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                            <a href="team.html" class="dropdown-item">Our Dentist</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="appointment.html" class="dropdown-item">Appointment</a>
+                        </div>
                     </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+                <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
             </div>
-            <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-            <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
-        </div>
-         </nav>
-    <!-- Navbar End -->
-    
-    
-    <div class="container-fluid bg-primary py-5 hero-header mb-5">
-        <div class="row py-3">
-            <div class="col-12 text-center">
-                <h1 class="display-3 text-white animated zoomIn">Personal information</h1>
-                <a href="" class="h4 text-white">Home</a>
-                <i class="far fa-circle text-white px-2"></i>
-                <a href="" class="h4 text-white">Profile</a>
+        </nav>
+        <!-- Navbar End -->
+
+
+        <div class="container-fluid bg-primary py-5 hero-header mb-5">
+            <div class="row py-3">
+                <div class="col-12 text-center">
+                    <h1 class="display-3 text-white animated zoomIn">Personal information</h1>
+                    <a href="" class="h4 text-white">Home</a>
+                    <i class="far fa-circle text-white px-2"></i>
+                    <a href="" class="h4 text-white">Profile</a>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!--profile-->
-    
-    <div class="row justify-content-center " >
-        
-        <div class="col-md-3 container-box">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+        <!--profile-->
+
+        <div class="row justify-content-center " >
+
+            <div class="col-md-3 container-box">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
-                <span class="font-weight-bold">${username}</span>
-                <span class="text-black-50">${paInfo.email}</span>
-                <br>
-                <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
-                
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-5 container-box">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">My account</h4>
+                    <span class="font-weight-bold">${username}</span>
+                    <span class="text-black-50">${paInfo.email}</span>
+                    <br>
+                    <a href="view" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
+                    <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>
+                    <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+
                 </div>
-                <hr>               
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 container-box">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">My account</h4>
+                    </div>
+                    <hr>               
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label class="labels">Fullname</label>
@@ -227,15 +279,15 @@
                             <label class="labels" for="gender">Gender</label>
                             <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder=""
                                    <c:if test="${paInfo.gender == 'M'}">
-                                        value="Male"
-                                    </c:if>
-                                    <c:if test="${paInfo.gender == 'F'}">
-                                        value="Female"
-                                    </c:if>
-                                    <c:if test="${paInfo.gender == 'X'}">
-                                        value="Other"
-                                    </c:if>
-                            >
+                                       value="Male"
+                                   </c:if>
+                                   <c:if test="${paInfo.gender == 'F'}">
+                                       value="Female"
+                                   </c:if>
+                                   <c:if test="${paInfo.gender == 'X'}">
+                                       value="Other"
+                                   </c:if>
+                                   >
                         </div>                    
 
                         <div class="col-md-6">
@@ -248,77 +300,103 @@
                         <label class="labels">Address</label>
                         <input type="text" id="address" name="address" class="form-control" placeholder="" value="${paInfo.address}" readonly>
                     </div>
-                
-                <div class="mt-5 text-center">
-                    <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
-                </div>
-            </div>
-        </div>    
-        
-    </div>
 
-
-    
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
-        <div class="container pt-5">
-            <div class="row g-5 pt-4">
-                <div class="col-lg-3 col-md-6">
-                    <a href="index.html" class="navbar-brand p-0">
-                        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>dentcare23@medical.com</p>
-                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Popular Links</h3>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                    <div class="mt-5 text-center">
+                        <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Follow Us</h3>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/groups/490263423665224" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h3 class="text-white mb-4">Payment</h3>
-                    
+            </div>    
+
+        </div>
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
+            <div class="container pt-5">
+                <div class="row g-5 pt-4">
+                    <div class="col-lg-3 col-md-6">
+                        <a href="index.html" class="navbar-brand p-0">
+                            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>dentcare23@medical.com</p>
+                        <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Popular Links</h3>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
+                            <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Follow Us</h3>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/groups/490263423665224" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Payment</h3>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Footer End -->
+        <!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../lib/wow/wow.min.js"></script>
-    <script src="../../lib/easing/easing.min.js"></script>
-    <script src="../../lib/waypoints/waypoints.min.js"></script>
-    <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../../lib/tempusdominus/js/moment.min.js"></script>
-    <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../../lib/wow/wow.min.js"></script>
+        <script src="../../lib/easing/easing.min.js"></script>
+        <script src="../../lib/waypoints/waypoints.min.js"></script>
+        <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../../lib/tempusdominus/js/moment.min.js"></script>
+        <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="../../js/main.js"></script>
+        <!-- Template Javascript -->
+        <script src="../../js/main.js"></script>
+        <script>
+            function showEditSuccessNotification() {
+                    $('#editSuccessNotification').show();
+                    let progressBar = $('#editSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#editSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
+
+                // Close notification button handler
+                $('#closeEditNotificationButton').click(function () {
+                    $('#editSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let successMessage = '${sessionScope.EditSuccess}';
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
+        </script>
     </body>
 </html>

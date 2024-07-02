@@ -109,10 +109,61 @@
             height: 150px; /* ??m b?o r?ng width và height có giá tr? b?ng nhau */
             object-fit: cover; /* ??m b?o hình ?nh ???c c?t g?n v?a v?i hình tròn */
         }
+        
+        /*Editing announcement successfully*/
+            #editSuccessNotification {
+                display: none;
+            }
+            
+            /* Style for the progress bar */
+            .progress-bar {
+                transition: width 5s linear;
+            }
+
+            /* Position notification at top right */
+            #notificationContainer {
+                display: none; /* Hide by default */
+            }
+
+            /* Style for the progress bar */
+
+            #editSuccessNotification{
+                display: none;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1060;
+            }
+
+            
+            .status-verify {
+                color: blue;
+            }
+            .status-done {
+                color: green;
+            }
+            .status-cancel {
+                color: red;
+            }
+            .status-not-started {
+                color: black;
+            }
     </style>
 </head>
 
 <body>
+    <!-- Edit Success Notification start-->
+        <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${EditSuccess}
+                <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Success Notification end-->
+    
     <!-- Dashboard -->
     <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
         <!-- Vertical Navbar -->
@@ -333,5 +384,31 @@
 
         <!-- Template Javascript -->
         <script src="../../js/main.js"></script>
+        <script>
+            function showEditSuccessNotification() {
+                    $('#editSuccessNotification').show();
+                    let progressBar = $('#editSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#editSuccessNotification').fadeOut();
+                        }
+                    }, 40); // T?c ?? gi?m thanh ti?n ?? (milliseconds)
+                }
+
+                // Close notification button handler
+                $('#closeEditNotificationButton').click(function () {
+                    $('#editSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let successMessage = '${sessionScope.EditSuccess}';
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
+        </script>
     </body>
 </html>
