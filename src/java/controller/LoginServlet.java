@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
         if (currentUser != null) {
             session.invalidate();
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class LoginServlet extends HttpServlet {
         if (userName == null || passWord == null
                 || userName.trim().isEmpty() || passWord.trim().isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             try {
                 UserDAO userDAO = new UserDAO();
@@ -130,7 +130,7 @@ public class LoginServlet extends HttpServlet {
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("Login.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -153,7 +153,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO user = new UserDAO();
         ArrayList<User> userList = user.getAll();
         request.setAttribute("Users", userList);
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     @Override
