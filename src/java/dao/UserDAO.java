@@ -22,12 +22,7 @@ import model.User;
 public class UserDAO extends DBContext {
 
     public User checkUser(String username) throws SQLException {
-
-        String query = "SELECT ua.* FROM User_account ua LEFT JOIN Employee e ON ua.employee_id = e.employee_id WHERE (ua.username = ?"
-                + "       OR ua.patient_id = (SELECT p.patient_id FROM Patient p WHERE p.email = ?)"
-                + "       OR ua.employee_id = (SELECT e.employee_id FROM Employee e WHERE e.email = ?))"
-                + "  AND (LOWER(e.employee_type) != 'i' OR e.employee_type IS NULL);";
-        //String query = "select * from User_account where username = ? or patient_id = (select patient_id from Patient where email =  ?) or employee_id = (select employee_id from Employee where email = ? and employee_type != 'i')";
+        String query = "SELECT ua.* FROM User_account ua LEFT JOIN Employee e ON ua.employee_id = e.employee_id WHERE (ua.username = ? OR ua.patient_id = (SELECT p.patient_id FROM Patient p WHERE p.email = ?)  OR ua.employee_id = (SELECT e.employee_id FROM Employee e WHERE e.email = ?)) AND (LOWER(e.employee_type) != 'i' OR e.employee_type IS NULL);";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -108,6 +103,31 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+    public User getUserByEmployeeId(int patientId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "SELECT * FROM User_account WHERE [employee_id] = ?";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, patientId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                User u = new User(rs.getString(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5));
+                return u;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return null;
+    }
 
     public String checkPasswordByUsername(String username) throws SQLException {
         String query = "select password from User_account where username = ?";
@@ -150,6 +170,14 @@ public class UserDAO extends DBContext {
             closeConnection(connection);
         }
 
+    }
+    public static void main(String[] args) {
+        try {
+            User u = new UserDAO().getUserByEmployeeId(3);
+            System.out.println(u.getName());
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

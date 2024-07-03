@@ -122,7 +122,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -174,39 +174,6 @@
                                             </tr>
                                         </c:forEach>
 
-
-                                        <tr>
-                                            <td>
-                                                <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Darlene Robertson
-                                                </a>
-                                            </td>
-                                            <td>
-                                                Apr 15, 2021
-                                            </td>
-                                            <td>
-                                                <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-2.png" class="avatar avatar-xs rounded-circle me-2">
-                                                <a class="text-heading font-semibold" href="#">
-                                                    Netguru
-                                                </a>
-                                            </td>
-                                            <td>
-                                                $2.750
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-lg badge-dot">
-                                                    <i class="bg-warning"></i>Postponed
-                                                </span>
-                                            </td>
-                                            <td></td>
-                                            <td class="text-end">
-                                                <a href="viewPatientDetail.jsp" class="btn btn-sm btn-neutral">View</a>
-                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>

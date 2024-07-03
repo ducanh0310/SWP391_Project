@@ -61,12 +61,12 @@ public class SearchEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
-            String searchKey = request.getParameter("searchKey").trim(); // get the search key from jsp
-            ArrayList<Employees> employees = new ArrayList<>(); // create array list to contain employee result search
+            String searchKey = request.getParameter("searchKey").trim();
+            ArrayList<Employees> employees = new ArrayList<>();
             EmployeeDAO empDAO = new EmployeeDAO();
-            employees = empDAO.getEmployeeByName(searchKey); // call to function handle in db
-            request.setAttribute("EmployeeList", employees); // push to jsp to display
-            request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response); 
+            employees = empDAO.getEmployeeByName(searchKey);
+            request.setAttribute("EmployeeList", employees);
+            request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(SearchEmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

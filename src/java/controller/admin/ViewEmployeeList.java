@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Branch;
 import model.Employee;
 import model.Employees;
 import model.User;
@@ -68,7 +67,6 @@ public class ViewEmployeeList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // check role of user, if not is admin role. Prevent.
         try {
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("currentUser");
@@ -80,14 +78,14 @@ public class ViewEmployeeList extends HttpServlet {
                 if (userRole != "admin") {
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
-                } else { // if role is admin then do some service for admin
+                } else {
                     EmployeeDAO employeeDAO = new EmployeeDAO();
+
                     ArrayList<Employees> empList = employeeDAO.getEmployees();
                     request.setAttribute("EmployeeList", empList);
                     request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
                 }
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ViewEmployeeList.class.getName()).log(Level.SEVERE, null, ex);
         }

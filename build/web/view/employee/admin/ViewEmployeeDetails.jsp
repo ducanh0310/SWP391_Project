@@ -10,7 +10,7 @@
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
-        <!-- Favicon -->
+       <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
@@ -40,6 +40,32 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <!-- comment -->
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        <!-- Libraries Stylesheet -->
+        <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="../../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="../../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="../../css/style.css" rel="stylesheet">
+
         <style>
             .text-primary {
                 --x-text-opacity: 1;
@@ -76,11 +102,7 @@
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
@@ -88,19 +110,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="ViewEmployeeList">
-                                    <i class="bi bi-list-task"></i> Employee
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
-<!--                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>-->
+                        </ul>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -111,7 +124,7 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="employee/profile/view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -269,12 +282,13 @@
                                         </div>
                                     </div>
                                     
-<!--                                    <hr>
+                                    <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Edit</a>
+                                            <a class="btn btn-info "  href="UpdateEmployee?eId=${employee.id}">Edit</a>
+                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Move out</a>
                                         </div>
-                                    </div>-->
+                                    </div>
 
                                 </div>
                             </div>
@@ -285,21 +299,40 @@
             </div>
 
 
-            <!-- JavaScript Libraries -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/wow/wow.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-            <script src="lib/tempusdominus/js/moment.min.js"></script>
-            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script src="lib/twentytwenty/jquery.event.move.js"></script>
-            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-            <!-- Template Javascript -->
-            <script src="js/main.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <script src="js/main.js"></script>
+        <!-- Template Javascript -->
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../../lib/wow/wow.min.js"></script>
+        <script src="../../lib/easing/easing.min.js"></script>
+        <script src="../../lib/waypoints/waypoints.min.js"></script>
+        <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../../lib/tempusdominus/js/moment.min.js"></script>
+        <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="../../js/main.js"></script>
+
     </body>
 
 </html> 

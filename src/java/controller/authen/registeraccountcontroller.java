@@ -91,7 +91,7 @@ public class registeraccountcontroller extends HttpServlet {
                 return;
             }
             if (!validation.Validation.isValidPassword(password)) {
-                request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase and numbers!");
+                request.setAttribute("error", "Password must be at least 8 characters, uppercase, lowercase, numbers and cannot contain spaces.!");
                 request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
                 return;
             } else if (!password.equals(repassword)) {
@@ -108,7 +108,7 @@ public class registeraccountcontroller extends HttpServlet {
             }
             //insert account
             accountDAO.addPatientAccount(email, username, password);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("view/patient/appointment.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(registeraccountcontroller.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -26,7 +26,6 @@ import model.PatientGetByIdDTO;
  */
 @WebServlet(name="EditPatientController", urlPatterns={"/editpatient"})
 public class EditPatientController extends HttpServlet {
-   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -67,7 +66,7 @@ public class EditPatientController extends HttpServlet {
             PatientDAO pa = new PatientDAO();
             PatientGetByIdDTO p = pa.getPatientById(id);
             request.setAttribute("patient", p);
-            request.getRequestDispatcher("editPatient.jsp").forward(request, response);
+            request.getRequestDispatcher("view/employee/admin/editPatientDetail.jsp").forward(request, response);
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(EditPatientController.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,8 +98,6 @@ public class EditPatientController extends HttpServlet {
             PatientDAO pa = new PatientDAO();
             if(pa.updatePatient(p)) {
                 request.getRequestDispatcher("home.jsp").forward(request, response);
-            } else {
-                
             }
             processRequest(request, response);
         } catch (SQLException ex) {

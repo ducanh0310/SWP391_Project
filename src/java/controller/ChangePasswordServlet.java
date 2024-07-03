@@ -22,7 +22,7 @@ import model.User;
  *
  * @author trung
  */
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/changepass"})
+@WebServlet(name="ChangePasswordServlet", urlPatterns={"/changepass"})
 public class ChangePasswordServlet extends HttpServlet {
 
     /**
@@ -67,7 +67,7 @@ public class ChangePasswordServlet extends HttpServlet {
         User currentUser = (User) session.getAttribute("currentUser");
         if (currentUser == null) {
             response.sendRedirect("index.jsp");
-        } else {
+        }else{
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
 
         }
@@ -84,18 +84,8 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String newPass = request.getParameter("newPass").trim();
-        String reEnter = request.getParameter("rePass").trim();
-        if (newPass.length() < 5 || newPass.length() > 32) {
-            request.setAttribute("error", "Password must in range 5 - 32 character!");
-            request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-            return;
-        }
-        if (!newPass.matches("")) {
-            request.setAttribute("error", "Password must in range 5 - 32 character!");
-            request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-            return;
-        }
+        String newPass = request.getParameter("newPass");
+        String reEnter = request.getParameter("rePass");
 
         if (newPass.equals(reEnter)) {
             try {

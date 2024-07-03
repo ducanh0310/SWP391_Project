@@ -77,38 +77,13 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
+                                <a class="nav-link" href="ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
                         </ul>
@@ -121,7 +96,7 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="employee/profile/view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -246,7 +221,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a class="btn btn-info "  href="view/employee/admin/editPatient.jsp">Edit</a>
+                                            <a class="btn btn-info "  href="editpatient">Edit</a>
                                         </div>
                                     </div>
 

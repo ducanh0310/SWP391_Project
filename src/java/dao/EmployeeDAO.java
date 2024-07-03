@@ -5,32 +5,40 @@
 package dao;
 
 import dal.DBContext;
+import java.lang.reflect.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import model.DoctorCertification;
 import model.Employee;
+import model.EmployeeDTO;
 import model.Employees;
+import model.Patient;
 import model.User;
-import model.Branch;
-import Service.IEmployeeDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author trung
  */
-public class EmployeeDAO extends DBContext implements IEmployeeDAO {
+public class EmployeeDAO extends DBContext {
 
-    //Get Employee table and doctor certification table
-    @Override
     public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
-        String query = "SELECT e.*, dc.url, dc.name_cetification FROM Employee e LEFT JOIN Doctor_Certification dc "
-                + "ON e.employee_id = dc.id_doctor WHERE e.employee_id = ?";
+        String query = "SELECT \n"
+                + "    e.*,\n"
+                + "    dc.url,\n"
+                + "    dc.name_cetification\n"
+                + "FROM \n"
+                + "    Employee e\n"
+                + "LEFT JOIN \n"
+                + "    Doctor_Certification dc ON e.employee_id = dc.id_doctor\n"
+                + "WHERE \n"
+                + "    e.employee_id = ?";
         Employee emp = new Employee();
         try {
             connection = getConnection();
@@ -60,8 +68,137 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return emp;
     }
 
-    //Get all list of employee do not have condition
-    @Override
+    public Employee getEmployeeByEmployeeId(int employeeId) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = "select * from Employee where employee_id = ?";
+        Employee emp = new Employee();
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, employeeId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                emp.setId(rs.getInt("employee_id"));
+                emp.setEmployeeSin(rs.getString("employee_sin"));
+                emp.setEmployeeType(rs.getString("employee_type"));
+                emp.setName(rs.getString("name"));
+                emp.setAddress(rs.getString("address"));
+                emp.setAnnualSalary(rs.getFloat("annual_salary"));
+                emp.setBranchId(rs.getInt("branch_id"));
+                emp.setGender(rs.getString("gender"));
+                emp.setPhoneNumber(rs.getString("phone"));
+                emp.setDob(rs.getDate("dob"));
+                emp.setEmail(rs.getString("email"));
+                return emp;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return null;
+    }
+
+    public boolean addEmployeeAccount(Employee employee, String username, String password, ArrayList<DoctorCertification> certificates) {
+        String insertEmployeeSQL = "INSERT INTO [dbo].[Employee] ([employee_sin], [employee_type], [name], [address], [annual_salary], [branch_id], [gender], [phone], [dob], [email] ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertUserAccountSQL = "INSERT INTO User_account (username, password, type_id, [employee_id]) VALUES (?, ?, ?, ?)";
+        String insertCertificationSQL = "INSERT INTO [dbo].[Doctor_Certification] ([url], [id_doctor], [name_cetification]) VALUES (?, ?, ?)";
+        Connection connection = null;
+        PreparedStatement insertEmployeeStmt = null;
+        PreparedStatement insertUserAccountStmt = null;
+        PreparedStatement insertCertificationStmt = null;
+        ResultSet generatedKeys = null;
+
+        try {
+            // Start transaction
+            connection = getConnection();
+            connection.setAutoCommit(false);
+
+            // Insert into Patient table
+            insertEmployeeStmt = connection.prepareStatement(insertEmployeeSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            insertEmployeeStmt.setString(1, employee.getEmployeeSin());
+            insertEmployeeStmt.setString(2, employee.getEmployeeType());
+            insertEmployeeStmt.setString(3, employee.getName());
+            insertEmployeeStmt.setString(4, employee.getAddress());
+            insertEmployeeStmt.setFloat(5, employee.getAnnualSalary());
+            insertEmployeeStmt.setInt(6, employee.getBranchId());
+            insertEmployeeStmt.setString(7, employee.getGender());
+            insertEmployeeStmt.setString(8, employee.getPhoneNumber());
+            insertEmployeeStmt.setDate(9, (Date) employee.getDob());
+            insertEmployeeStmt.setString(10, employee.getEmail());
+            int affectedRows = insertEmployeeStmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Inserting employee failed, no rows affected.");
+            }
+
+            // Get the generated employee id
+            generatedKeys = insertEmployeeStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int employeeid = generatedKeys.getInt(1);
+
+                // Insert into User_account table
+                insertUserAccountStmt = connection.prepareStatement(insertUserAccountSQL);
+                insertUserAccountStmt.setString(1, username);
+                insertUserAccountStmt.setString(2, password);
+                insertUserAccountStmt.setInt(3, 1); // Assuming 1 is the type_id for employee
+                insertUserAccountStmt.setInt(4, employeeid);
+
+                insertUserAccountStmt.executeUpdate();
+                if (certificates != null && !certificates.isEmpty()) {
+                    insertCertificationStmt = connection.prepareStatement(insertCertificationSQL);
+                    for (DoctorCertification cert : certificates) {
+                        insertCertificationStmt.setString(1, cert.getUrl());
+                        insertCertificationStmt.setInt(2, employeeid);
+                        insertCertificationStmt.setString(3, cert.getName());
+                        insertCertificationStmt.executeUpdate();
+                    }
+                }
+            } else {
+                throw new SQLException("Inserting employee failed, no ID obtained.");
+            }
+
+            // Commit transaction
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            // Rollback transaction in case of error
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Clean up resources
+            try {
+                if (generatedKeys != null) {
+                    generatedKeys.close();
+                }
+                if (insertEmployeeStmt != null) {
+                    insertEmployeeStmt.close();
+                }
+                if (insertUserAccountStmt != null) {
+                    insertUserAccountStmt.close();
+                }
+                if (insertCertificationStmt != null) {
+                    insertCertificationStmt.close();
+                }
+                if (connection != null) {
+                    connection.setAutoCommit(true); // Reset auto-commit to true
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public ArrayList<Employees> getEmployees() throws SQLException {
         Employee employeeInfo = new Employee();
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -95,8 +232,24 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
-    //get all employee when have username
-    @Override
+
+    public void deleteEmployee(String key) throws SQLException {
+        String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, key);
+            statement.executeUpdate();  // Corrected to executeUpdate
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;  // Rethrow the exception to inform the caller
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+    }
     //get all employee when have username
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -106,7 +259,7 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            //set to lower case
+            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
             String searchKey = "%" + key.toLowerCase() + "%";
             statement.setString(1, searchKey);
             statement.setString(2, searchKey);
@@ -137,56 +290,15 @@ public class EmployeeDAO extends DBContext implements IEmployeeDAO {
         return employeeList;
     }
 
-    // Set role is inactive
-    @Override
-    public void deleteEmployee(String key) throws SQLException {
-        String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, key);
-            statement.executeUpdate();  // Corrected to executeUpdate
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;  // Rethrow the exception to inform the caller
-        } finally {
-            closePreparedStatement(statement);
-            closeConnection(connection);
-        }
-    }
-
-    
-    public ArrayList<Branch> getBranch() throws SQLException{
-        ArrayList<Branch> branchList = new ArrayList<>();
-        String sql = "select * from Branch";
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()){
-                Branch b = new Branch();
-                b.setCity(rs.getString("city"));
-                branchList.add(b);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;  // Rethrow the exception to inform the caller
-        } finally {
-            closePreparedStatement(statement);
-            closeConnection(connection);
-        }
-        return branchList;
-    }
     public static void main(String[] args) {
-        try {
-            EmployeeDAO emp = new EmployeeDAO();
-            emp.deleteEmployee("2");
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Employee employee = new Employee("11111", "d", "test dc", "hahah", (float) 10.5, 1, "0123456789", "a.bc@new.b", Date.valueOf("2003-05-02"), "X");
+        EmployeeDAO dao = new EmployeeDAO();
+        DoctorCertification dc = new DoctorCertification();
+        dc.setName("a");
+        dc.setUrl("b");
+        ArrayList<DoctorCertification> dcArr = new ArrayList<>();
+        dcArr.add(dc);
+        boolean isAdded = dao.addEmployeeAccount(employee, "a.bc", "vailonluonaothaatday", dcArr);
+        System.out.println(isAdded);
     }
 }
