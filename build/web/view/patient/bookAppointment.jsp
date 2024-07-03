@@ -312,7 +312,9 @@
                                 <select class="form-select bg-light border-0 mb-3" id="service" name="service" style="height: 40px;">
                                     <option value="0">---Select A Service---</option>
                                     <c:forEach items="${requestScope.arrService}" var="service">
-                                        <option value="${service.id}">${service.name} (${service.price}$)</option>
+                                        <c:if test="${service.type == 'a'}">
+                                            <option value="${service.id}">${service.name} (${service.price}$)</option>
+                                        </c:if>
                                     </c:forEach>
                                 </select>
 

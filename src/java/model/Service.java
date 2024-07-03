@@ -13,6 +13,15 @@ public class Service {
     private String name;
     private String price;
     private int idDoctor;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getPrice() {
         return price;
