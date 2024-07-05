@@ -32,6 +32,10 @@
         <servlet-name>DeleteServiceController</servlet-name>
         <servlet-class>controller.admin.DeleteServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DoctorController</servlet-name>
+        <servlet-class>controller.employee.DoctorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/view</url-pattern>
@@ -63,5 +67,9 @@
     <servlet-mapping>
         <servlet-name>DeleteServiceController</servlet-name>
         <url-pattern>/delete-service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DoctorController</servlet-name>
+        <url-pattern>/prescription</url-pattern>
     </servlet-mapping>
 </web-app>
