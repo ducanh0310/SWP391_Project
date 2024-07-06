@@ -9,33 +9,44 @@ package model;
  * @author Vu Minh Quan
  */
 public class Payment {
-    private String id;
-    private long money;
-    private Patient patient;
+    private int id;
+    private BookingAppointmentHistory bAH;
+    private String amount;
+    private String payment_type;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getMoney() {
-        return money;
+    public BookingAppointmentHistory getbAH() {
+        return bAH;
     }
 
-    public void setMoney(long money) {
-        this.money = money;
+    public void setbAH(BookingAppointmentHistory bAH) {
+        this.bAH = bAH;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
+
+    public String getPayment_type() {
+        return payment_type;
+    }
+
+    public void setPayment_type(String payment_type) {
+        this.payment_type = payment_type;
+    }
+    
+    
     
     
 }

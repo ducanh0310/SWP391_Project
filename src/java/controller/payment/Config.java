@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package controller.onlinepay;
+
+package controller.payment;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -20,14 +17,14 @@ import jakarta.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Vu Minh Quan
+ * @author CTT VNPAY
  */
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:8080/fap/checkPayment";
-    public static String vnp_TmnCode = "Z2FFUFTL";
-    public static String secretKey = "GKOOBFJIWYZMUBXYZMHPAEQUHFHHNDKP";
+    public static String vnp_ReturnUrl = "http://localhost:9999/SWP391_Project/payment";
+    public static String vnp_TmnCode = "N2GK2W5D";
+    public static String secretKey = "CWPBPONGLOG3LO9TIFA9XRKWSSAHZTRB";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
     public static String md5(String message) {
@@ -84,9 +81,9 @@ public class Config {
                 sb.append("&");
             }
         }
-        return hmacSHA512(secretKey, sb.toString());
+        return hmacSHA512(secretKey,sb.toString());
     }
-
+    
     public static String hmacSHA512(final String key, final String data) {
         try {
 
@@ -109,7 +106,7 @@ public class Config {
             return "";
         }
     }
-
+    
     public static String getIpAddress(HttpServletRequest request) {
         String ipAdress;
         try {

@@ -124,9 +124,11 @@ public class DBBookingMedicalAppointment extends DBContext {
                                                 ,[slot_id]
                                                 ,[status_id]
                                                 ,[room_id]
-                                                ,[service_id])
+                                                ,[service_id]
+                                                ,[payReservationStatus])
                                           VALUES
                                                 (?
+                                                ,?
                                                 ,?
                                                 ,?
                                                 ,?
@@ -142,6 +144,7 @@ public class DBBookingMedicalAppointment extends DBContext {
             stm.setInt(5, ba.getStatusId());
             stm.setInt(6, ba.getRoomId());
             stm.setInt(7, ba.getServiceId());
+            stm.setString(8, "Not pay");
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,7 +157,7 @@ public class DBBookingMedicalAppointment extends DBContext {
         ArrayList<BookingAppointmentHistory> arrBookHistory = new ArrayList<>();
         try {
             String sql = """
-            Select ba.id, ba.patient_id, pc.procedure_name as service, pc.price, e.name as doctor, ba.booking_date, s.startedTime, s.endTime, r.name as room,sb.id as idStatus, sb.name as status from Booking_Appointment ba
+            Select ba.id, ba.patient_id, pc.procedure_name as service, pc.price, e.name as doctor, ba.booking_date, s.startedTime, s.endTime, r.name as room,sb.id as idStatus, sb.name as status, ba.payReservationStatus from Booking_Appointment ba
                join Procedure_codes pc on pc.procedure_id = ba.service_id
                join Employee e on e.employee_id = ba.doctor_id
                join Slot s on s.id = ba.slot_id
@@ -201,6 +204,8 @@ public class DBBookingMedicalAppointment extends DBContext {
                 statusBook.setName(rs.getString("status"));
                 statusBook.setId(rs.getInt("idStatus"));
                 bah.setStatusBook(statusBook);
+                // Reservation fee status
+                bah.setReservationStatus(rs.getString("payReservationStatus"));
                 //add arrayList
                 arrBookHistory.add(bah);
 
@@ -303,10 +308,11 @@ public class DBBookingMedicalAppointment extends DBContext {
             ArrayList<BookingAppointmentHistory> bah = db.showBookHistory(1);
 
             for (BookingAppointmentHistory bookingAppointmentHistory : bah) {
-                System.out.println(bookingAppointmentHistory.getDate());
-                System.out.println(bookingAppointmentHistory.getPatient().getName());
-                System.out.println(bookingAppointmentHistory.getDoctor().getName());
-                System.out.println(bookingAppointmentHistory.getSlot().getId());
+//                System.out.println(bookingAppointmentHistory.getDate());
+//                System.out.println(bookingAppointmentHistory.getPatient().getName());
+//                System.out.println(bookingAppointmentHistory.getDoctor().getName());
+//                System.out.println(bookingAppointmentHistory.getSlot().getId());
+                System.out.println(bookingAppointmentHistory.getReservationStatus());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);

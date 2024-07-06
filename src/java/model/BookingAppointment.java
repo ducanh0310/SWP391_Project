@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.sql.*;
+
 /**
  *
  * @author Vu Minh Quan
  */
 public class BookingAppointment {
+
     private int id;
     private int patiendId;
     private int doctorId;
@@ -17,6 +20,15 @@ public class BookingAppointment {
     private int statusId;
     private int roomId;
     private int serviceId;
+    private String reservationStatus;
+
+    public String getReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
 
     public int getId() {
         return id;
@@ -82,6 +94,4 @@ public class BookingAppointment {
         this.serviceId = serviceId;
     }
 
-    
-    
 }

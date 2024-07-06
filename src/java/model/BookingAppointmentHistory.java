@@ -18,7 +18,18 @@ public class BookingAppointmentHistory {
     private StatusBook statusBook;
     private Patient patient;
     private Date date;
+    private String reservationStatus;
 
+    public String getReservationStatus() {
+        return reservationStatus;
+    }
+
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
+
+    
+    
     public int getID() {
         return ID;
     }

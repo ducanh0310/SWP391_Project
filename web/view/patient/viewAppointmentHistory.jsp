@@ -240,7 +240,7 @@
                 border: 1px solid #004156;
             }
 
-            
+
 
             .dataTables_wrapper .dataTables_length{
                 margin-left: 20px;
@@ -259,7 +259,7 @@
             .dataTables_wrapper .dataTables_filter
             {
                 float: right; /* Dịch sang trái */
-               margin-right: 20px;
+                margin-right: 20px;
             }
 
 
@@ -468,28 +468,20 @@
                     <div class="card-header">
                         <h5 class="mb-0">Medical Appointment History</h5>
                     </div>
-                    <!--                    <div class="wrapper">
-                                            <div class="search-input">
-                                                <a href="" target="_blank" hidden></a>
-                                                <input type="text" placeholder="Type to search.." onkeyup="searchServices(event)">
-                                                <div class="autocom-box">
-                                                     Các mục sẽ được chèn từ JavaScript 
-                                                </div>
-                                                <div class="icon"><i class="fas fa-search"></i></div>
-                                            </div>
-                                        </div>-->
+                    <div style="color: red; margin-left: 10px">${payNotification}</div>
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap" id="myTable">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Service</th>
-                                    <th scope="col">Price of Service</th>
-                                    <th scope="col">Doctor</th>
-                                    <th scope="col">Day</th>
-                                    <th scope="col">Slot</th>
-                                    <th scope="col">Room</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">No <i class="fas fa-sort"></th>
+                                    <th scope="col">Service <i class="fas fa-sort"></th>
+                                    <th scope="col">Price of Service <i class="fas fa-sort"></th>
+                                    <th scope="col">Payment <i class="fas fa-sort"></th>
+                                    <th scope="col">Doctor <i class="fas fa-sort"></th>
+                                    <th scope="col">Day <i class="fas fa-sort"></th>
+                                    <th scope="col">Slot <i class="fas fa-sort"></th>
+                                    <th scope="col">Room <i class="fas fa-sort"></th>
+                                    <th scope="col">Status <i class="fas fa-sort"></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -504,6 +496,19 @@
                                         </td>
                                         <td>
                                             <span>${bAH.service.price}$</span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                <c:if test="${bAH.reservationStatus =='Not pay'}">
+                                                    Don't pay reservation fee.
+                                                </c:if>
+                                                <c:if test="${bAH.reservationStatus =='Pay reser'}">
+                                                    50$ (Reservation fee)
+                                                </c:if>
+                                                <c:if test="${bAH.reservationStatus =='Pay ser'}">
+                                                    Paid all
+                                                </c:if>
+                                            </span>
                                         </td>
                                         <td>
                                             <span>${bAH.doctor.name}</span>
@@ -546,6 +551,16 @@
                                                         data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
                                                     Cancel
                                                 </button>
+                                                <c:if test="${bAH.reservationStatus =='Not pay'}">
+                                                    <!--<form action="yourServerEndpoint" method="post">
+                                                    <input type="hidden" name="bookingID" value="${bAH.ID}" />
+                                                    <button type="submit" class="btn btn-sm btn-neutral">Pay</button>
+                                                    </form>-->
+                                                    <button class="btn btn-sm btn-neutral delete-button" onclick="window.location.href = '../view/payment/vnpay_pay.jsp?id=${bAH.ID}';">
+                                                        Pay
+                                                    </button>
+                                                </c:if>
+
                                             </c:if>
                                             <c:if test="${bAH.statusBook.id == 2}">
                                                 <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
@@ -554,12 +569,10 @@
                                                     Cancel
                                                 </button>
                                             </c:if>
+
                                         </td>
                                     </tr>
                                 </c:forEach>
-
-
-
                             </tbody>
                         </table>
                     </div>
@@ -669,173 +682,173 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
 
-            $(document).ready(function () {
-                $('#myTable').DataTable({
-                    "language": {
-                        "lengthMenu": "Show _MENU_",
-                        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                        "infoEmpty": "Showing 0 to 0 of 0 entries",
-                        "infoFiltered": "(filtered from _MAX_ total entries)",
-                        "search": "Search:",
-                        "paginate": {
-                            "first": "First",
-                            "last": "Last",
-                            "next": "Next",
-                            "previous": "Previous"
-                        }
-                    },
-                    "dom": '<"header_wrap"lf>t<"footer_wrap"ip>',
-                    "pagingType": "full_numbers",
-                    "pageLength": 10
+                                                        $(document).ready(function () {
+                                                            $('#myTable').DataTable({
+                                                                "language": {
+                                                                    "lengthMenu": "Show _MENU_",
+                                                                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                                                                    "infoEmpty": "Showing 0 to 0 of 0 entries",
+                                                                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                                                                    "search": "Search:",
+                                                                    "paginate": {
+                                                                        "first": "First",
+                                                                        "last": "Last",
+                                                                        "next": "Next",
+                                                                        "previous": "Previous"
+                                                                    }
+                                                                },
+                                                                "dom": '<"header_wrap"lf>t<"footer_wrap"ip>',
+                                                                "pagingType": "full_numbers",
+                                                                "pageLength": 10
 
-                });
-            });
-
-
-
-
-            function searchServices(event) {
-                var keyword = event.target.value.toLowerCase();
-                var rows = document.querySelectorAll("#appointmentHistoryBody tr");
-
-                rows.forEach(function (row) {
-                    var text = row.textContent.toLowerCase();
-                    var displayStyle = text.includes(keyword) ? "table-row" : "none";
-                    row.style.display = displayStyle;
-                });
-            }
+                                                            });
+                                                        });
 
 
 
 
+                                                        function searchServices(event) {
+                                                            var keyword = event.target.value.toLowerCase();
+                                                            var rows = document.querySelectorAll("#appointmentHistoryBody tr");
+
+                                                            rows.forEach(function (row) {
+                                                                var text = row.textContent.toLowerCase();
+                                                                var displayStyle = text.includes(keyword) ? "table-row" : "none";
+                                                                row.style.display = displayStyle;
+                                                            });
+                                                        }
 
 
-            $(document).ready(function () {
-                let editId;
-                let service;
-                let room;
-                let doctor;
-                let date;
-                let time;
-                $('.edit-button').click(function (event) {
-                    event.preventDefault(); // Prevent the default anchor behavior
-                    editId = $(this).data('id');
-                    service = $(this).data('service');
-                    room = $(this).data('room');
-                    doctor = $(this).data('doctor');
-                    date = $(this).data('date');
-                    time = $(this).data('time');
 
-                    document.getElementById('serviceName').value = service;
-                    document.getElementById('room').value = room;
-                    document.getElementById('doctor').value = doctor;
-                    document.getElementById('date').value = date;
-                    document.getElementById('time').value = time;
-                    console.log("Edit ID: " + editId);  // Log the ID for debugging
 
-                    // Redirect to the edit URL with the captured ID
-                    if (editId) {
-                        $('#confirmEditButton').click(function () {
-                            window.location.href = 'editAppointment?id=' + editId;
-                        });
-                    }
-                });
 
-                //Edit appointment
-                function showEditSuccessNotification() {
-                    $('#editSuccessNotification').show();
-                    let progressBar = $('#editSuccessProgressBar');
-                    let width = 0;
-                    let interval = setInterval(function () {
-                        width++;
-                        progressBar.css('width', width + '%');
-                        if (width === 200) {
-                            clearInterval(interval);
-                            $('#editSuccessNotification').fadeOut();
-                        }
-                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                }
 
-                // Close notification button handler
-                $('#closeEditNotificationButton').click(function () {
-                    $('#editSuccessNotification').hide();
-                });
+                                                        $(document).ready(function () {
+                                                            let editId;
+                                                            let service;
+                                                            let room;
+                                                            let doctor;
+                                                            let date;
+                                                            let time;
+                                                            $('.edit-button').click(function (event) {
+                                                                event.preventDefault(); // Prevent the default anchor behavior
+                                                                editId = $(this).data('id');
+                                                                service = $(this).data('service');
+                                                                room = $(this).data('room');
+                                                                doctor = $(this).data('doctor');
+                                                                date = $(this).data('date');
+                                                                time = $(this).data('time');
 
-                // Check for success message from the server
-                let successMessage = '${sessionScope.success}';
-                if (successMessage) {
-                    showEditSuccessNotification();
-                }
+                                                                document.getElementById('serviceName').value = service;
+                                                                document.getElementById('room').value = room;
+                                                                document.getElementById('doctor').value = doctor;
+                                                                document.getElementById('date').value = date;
+                                                                document.getElementById('time').value = time;
+                                                                console.log("Edit ID: " + editId);  // Log the ID for debugging
 
-                //Delete appointment
-                $('.delete-button').click(function (event) {
-                    event.preventDefault(); // Prevent the default anchor behavior
-                    deleteId = $(this).data('id');
-                    service = $(this).data('service');
-                    room = $(this).data('room');
-                    doctor = $(this).data('doctor');
-                    date = $(this).data('date');
-                    time = $(this).data('time');
+                                                                // Redirect to the edit URL with the captured ID
+                                                                if (editId) {
+                                                                    $('#confirmEditButton').click(function () {
+                                                                        window.location.href = 'editAppointment?id=' + editId;
+                                                                    });
+                                                                }
+                                                            });
 
-                    document.getElementById('serviceDelete').value = service;
-                    document.getElementById('roomDelete').value = room;
-                    document.getElementById('doctorDelete').value = doctor;
-                    document.getElementById('dateDelete').value = date;
-                    document.getElementById('timeDelete').value = time;
-                    document.getElementById('idDelete').value = deleteId;
-                });
+                                                            //Edit appointment
+                                                            function showEditSuccessNotification() {
+                                                                $('#editSuccessNotification').show();
+                                                                let progressBar = $('#editSuccessProgressBar');
+                                                                let width = 0;
+                                                                let interval = setInterval(function () {
+                                                                    width++;
+                                                                    progressBar.css('width', width + '%');
+                                                                    if (width === 200) {
+                                                                        clearInterval(interval);
+                                                                        $('#editSuccessNotification').fadeOut();
+                                                                    }
+                                                                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                                            }
 
-                // Handle notification display for delete success
-                function showDeleteSuccessNotification() {
-                    $('#deleteSuccessNotification').show();
-                    let progressBar = $('#deleteSuccessProgressBar');
-                    let width = 0;
-                    let interval = setInterval(function () {
-                        width++;
-                        progressBar.css('width', width + '%');
-                        if (width === 200) {
-                            clearInterval(interval);
-                            $('#deleteSuccessNotification').fadeOut();
-                        }
-                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                }
+                                                            // Close notification button handler
+                                                            $('#closeEditNotificationButton').click(function () {
+                                                                $('#editSuccessNotification').hide();
+                                                            });
 
-                // Close notification button handler
-                $('#closeNotificationButton').click(function () {
-                    $('#deleteSuccessNotification').hide();
-                });
+                                                            // Check for success message from the server
+                                                            let successMessage = '${sessionScope.success}';
+                                                            if (successMessage) {
+                                                                showEditSuccessNotification();
+                                                            }
 
-                // Check for success message from the server
-                let deleteSuccess = '${sessionScope.deleteSuccess}';
-                if (deleteSuccess) {
-                    showDeleteSuccessNotification();
-                }
+                                                            //Delete appointment
+                                                            $('.delete-button').click(function (event) {
+                                                                event.preventDefault(); // Prevent the default anchor behavior
+                                                                deleteId = $(this).data('id');
+                                                                service = $(this).data('service');
+                                                                room = $(this).data('room');
+                                                                doctor = $(this).data('doctor');
+                                                                date = $(this).data('date');
+                                                                time = $(this).data('time');
 
-                function showBookSuccessNotification() {
-                    $('#bookSuccessNotification').show();
-                    let progressBar = $('#bookSuccessProgressBar');
-                    let width = 0;
-                    let interval = setInterval(function () {
-                        width++;
-                        progressBar.css('width', width + '%');
-                        if (width === 200) {
-                            clearInterval(interval);
-                            $('#bookSuccessNotification').fadeOut();
-                        }
-                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                }
+                                                                document.getElementById('serviceDelete').value = service;
+                                                                document.getElementById('roomDelete').value = room;
+                                                                document.getElementById('doctorDelete').value = doctor;
+                                                                document.getElementById('dateDelete').value = date;
+                                                                document.getElementById('timeDelete').value = time;
+                                                                document.getElementById('idDelete').value = deleteId;
+                                                            });
 
-                // Close notification button handler
-                $('#closeBookNotificationButton').click(function () {
-                    $('#bookSuccessNotification').hide();
-                });
+                                                            // Handle notification display for delete success
+                                                            function showDeleteSuccessNotification() {
+                                                                $('#deleteSuccessNotification').show();
+                                                                let progressBar = $('#deleteSuccessProgressBar');
+                                                                let width = 0;
+                                                                let interval = setInterval(function () {
+                                                                    width++;
+                                                                    progressBar.css('width', width + '%');
+                                                                    if (width === 200) {
+                                                                        clearInterval(interval);
+                                                                        $('#deleteSuccessNotification').fadeOut();
+                                                                    }
+                                                                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                                            }
 
-                // Check for success message from the server
-                let bookSuccess = '${sessionScope.bookSuccess}';
-                if (bookSuccess) {
-                    showBookSuccessNotification();
-                }
-            });
+                                                            // Close notification button handler
+                                                            $('#closeNotificationButton').click(function () {
+                                                                $('#deleteSuccessNotification').hide();
+                                                            });
+
+                                                            // Check for success message from the server
+                                                            let deleteSuccess = '${sessionScope.deleteSuccess}';
+                                                            if (deleteSuccess) {
+                                                                showDeleteSuccessNotification();
+                                                            }
+
+                                                            function showBookSuccessNotification() {
+                                                                $('#bookSuccessNotification').show();
+                                                                let progressBar = $('#bookSuccessProgressBar');
+                                                                let width = 0;
+                                                                let interval = setInterval(function () {
+                                                                    width++;
+                                                                    progressBar.css('width', width + '%');
+                                                                    if (width === 200) {
+                                                                        clearInterval(interval);
+                                                                        $('#bookSuccessNotification').fadeOut();
+                                                                    }
+                                                                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                                            }
+
+                                                            // Close notification button handler
+                                                            $('#closeBookNotificationButton').click(function () {
+                                                                $('#bookSuccessNotification').hide();
+                                                            });
+
+                                                            // Check for success message from the server
+                                                            let bookSuccess = '${sessionScope.bookSuccess}';
+                                                            if (bookSuccess) {
+                                                                showBookSuccessNotification();
+                                                            }
+                                                        });
         </script>
     </body>
 

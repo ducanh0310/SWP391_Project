@@ -1,16 +1,13 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+package controller.payment;
 
-package controller.onlinepay;
-
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import java.io.IOException;
-import java.net.URLEncoder;
+import java.io.IOException;import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,54 +19,62 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author Vu Minh Quan
+ * @author CTT VNPAY
  */
-@WebServlet(name="AjaxController", urlPatterns={"/AjaxController"})
-public class AjaxController extends HttpServlet {
-   
-    
-
-    
+@WebServlet(name="ajaxServlet", urlPatterns={"/vnpayajax"})
+public class ajaxServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("vnpay_view/vnpay_pay.jsp").forward(request, response);
-    } 
+       HttpSession session = request.getSession();
+        if(session == null){
+            response.getWriter().print("invalid signature");
+        }
+    }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-         String vnp_Version = "2.1.0";
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if(session == null){
+            resp.getWriter().print("invalid signature");
+        }
+         String bookingId = req.getParameter("bookingId");
+         session.setAttribute("idAppointment",bookingId);
+        // Bạn có thể sử dụng bookingId ở đây để lưu hoặc xử lý theo logic của bạn.
+        String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
-        long amount = Integer.parseInt(request.getParameter("amount")) * 100;
-        String bankCode = request.getParameter("bankCode");
-
+        long amount = Integer.parseInt(req.getParameter("amount"))*100;
+        String bankCode = req.getParameter("bankCode");
+        
         String vnp_TxnRef = Config.getRandomNumber(8);
-        String vnp_IpAddr = Config.getIpAddress(request);
+        String vnp_IpAddr = Config.getIpAddress(req);
 
         String vnp_TmnCode = Config.vnp_TmnCode;
-
+        
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
         vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
         vnp_Params.put("vnp_Amount", String.valueOf(amount));
         vnp_Params.put("vnp_CurrCode", "VND");
-
+        //vnp_Params.put("bookingId", bookingId);
         if (bankCode != null && !bankCode.isEmpty()) {
             vnp_Params.put("vnp_BankCode", bankCode);
         }
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-        vnp_Params.put("vnp_OrderInfo", request.getParameter("id"));
+        vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
         vnp_Params.put("vnp_OrderType", orderType);
 
-        String locate = request.getParameter("language");
+        String locate = req.getParameter("language");
         if (locate != null && !locate.isEmpty()) {
             vnp_Params.put("vnp_Locale", locate);
         } else {
@@ -82,11 +87,11 @@ public class AjaxController extends HttpServlet {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String vnp_CreateDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
-
+        
         cld.add(Calendar.MINUTE, 15);
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
-
+        
         List fieldNames = new ArrayList(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
@@ -119,13 +124,7 @@ public class AjaxController extends HttpServlet {
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
-        response.getWriter().write(gson.toJson(job));
+        resp.getWriter().write(gson.toJson(job));
     }
-
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

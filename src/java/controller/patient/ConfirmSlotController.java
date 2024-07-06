@@ -71,7 +71,7 @@ public class ConfirmSlotController extends HttpServlet {
                 }
                 
             }
-            
+            session.setAttribute("payNotification", "Your appointment are verified when you pay reservation fee by clicking on 'Pay' button. If you cancel appointment, your money will not refund.");
             session.setAttribute("bookSuccess", "Appointment booked successfully");
             response.sendRedirect("viewAppointmentHistory");
         } catch (ClassNotFoundException ex) {
