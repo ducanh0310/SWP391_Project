@@ -72,13 +72,13 @@ public class PaymentController extends HttpServlet {
 
                     }
                     
-                    session.setAttribute("success", "***You pay reservation fee successfully***");
+                    session.setAttribute("success", "You pay reservation fee successfully");
                     response.sendRedirect("patient/viewAppointmentHistory");
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                session.setAttribute("success", "You pay reservation fee fail");
+                session.setAttribute("deleteSuccess", "You pay reservation fee fail");
                 response.sendRedirect("patient/viewAppointmentHistory");
             }
 

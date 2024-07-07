@@ -461,6 +461,18 @@
         </div>
         <!-- Hero End -->
 
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <h4>Note</h4>
+                <ul>
+                    <li>- You must pay a reservation fee before we can confirm your appointment.</li>
+                    <li>- If you cancel your appointment, your paying reservation fee does not refund.</li>
+                    <li>- If your appointment are confirmed, please wait a minute.</li>
+                    <li>- If you have paid the reservation fee and your appointment has not been confirmed, we sincerely apologize and you can edit another slot or you can contact to us by the information in the end page.<b style="color: red">(rare occur)</b></li>
+                </ul>
+            </div>
+        </main>
+        
         <!--View Medical Appointment History Start-->
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">                   
@@ -478,8 +490,8 @@
                                     <th scope="col">Price of Service <i class="fas fa-sort"></th>
                                     <th scope="col">Payment <i class="fas fa-sort"></th>
                                     <th scope="col">Doctor <i class="fas fa-sort"></th>
-                                    <th scope="col">Day <i class="fas fa-sort"></th>
-                                    <th scope="col">Slot <i class="fas fa-sort"></th>
+                                    <th scope="col">Examination Time <i class="fas fa-sort"></th>
+                                    
                                     <th scope="col">Room <i class="fas fa-sort"></th>
                                     <th scope="col">Status <i class="fas fa-sort"></th>
                                     <th></th>
@@ -506,7 +518,7 @@
                                                     50$ (Reservation fee)
                                                 </c:if>
                                                 <c:if test="${bAH.reservationStatus =='Pay ser'}">
-                                                    Paid all
+                                                    Paid service
                                                 </c:if>
                                             </span>
                                         </td>
@@ -514,11 +526,10 @@
                                             <span>${bAH.doctor.name}</span>
                                         </td>
                                         <td>
-                                            <span>${bAH.date}</span>
-                                        </td>
-                                        <td>
+                                            <span>${bAH.date}</span><br>
                                             <span>${bAH.slot.startedTime}-${bAH.slot.endTime}</span>
                                         </td>
+                                      
                                         <td>
                                             <span>${bAH.room.name}</span>
                                         </td>
@@ -596,7 +607,6 @@
                     <li>- <b style="color:red">Cancel:</b> Your booking appointment were cancelled.</li>
                     <li>- <b style="color:black">Not Started</b>: You have successfully scheduled an appointment but have not seen the doctor yet.</li>
                     <li>- <b style="color: #157347">Completed</b>: You have completed the medical examination.</li>
-
                 </ul>
             </div>
         </main>
