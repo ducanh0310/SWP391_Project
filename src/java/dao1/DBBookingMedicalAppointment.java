@@ -73,7 +73,7 @@ public class DBBookingMedicalAppointment extends DBContext {
         ArrayList<Slot> arrSlot = new ArrayList<>();
         try {
             String sql = """
-                        select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime, s.id, e.employee_id, sb.id as statusId  from Booking_Appointment ba
+                        select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime, s.id, e.employee_id, sb.id as statusId, ba.payReservationStatus  from Booking_Appointment ba
                                                     join Room r on r.id = ba.room_id
                                                     join Employee e on e.employee_id = ba.doctor_id
                                                     join Slot s on s.id = ba.slot_id
@@ -100,12 +100,16 @@ public class DBBookingMedicalAppointment extends DBContext {
                 slot.setEndTime(rs.getTimestamp("endTime").toLocalDateTime().toLocalTime());
                 //ID of slot
                 slot.setId(rs.getInt("id"));
+                //payment
+                BookingAppointment ba = new BookingAppointment();
+                ba.setReservationStatus(rs.getString("payReservationStatus"));
+                slot.setBookingAppointment(ba);
                 //Status
                 StatusBook statusBook = new StatusBook();
                 statusBook.setId(rs.getInt("statusId"));
                 slot.setStatusBook(statusBook);
                 arrSlot.add(slot);
-
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);

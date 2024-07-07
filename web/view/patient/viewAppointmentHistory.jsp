@@ -563,15 +563,10 @@
                                                     Cancel
                                                 </button>
                                                 <c:if test="${bAH.reservationStatus =='Not pay'}">
-                                                    <!--<form action="yourServerEndpoint" method="post">
-                                                    <input type="hidden" name="bookingID" value="${bAH.ID}" />
-                                                    <button type="submit" class="btn btn-sm btn-neutral">Pay</button>
-                                                    </form>-->
-                                                    <button class="btn btn-sm btn-neutral delete-button" onclick="window.location.href = '../view/payment/vnpay_pay.jsp?id=${bAH.ID}';">
-                                                        Pay
+                                                    <button class="btn btn-sm btn-neutral delete-button" onclick="window.location.href = '../choosePayment?id=${bAH.ID}';">
+                                                        Pay 
                                                     </button>
                                                 </c:if>
-
                                             </c:if>
                                             <c:if test="${bAH.statusBook.id == 2}">
                                                 <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"

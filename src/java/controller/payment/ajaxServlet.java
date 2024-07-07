@@ -31,14 +31,14 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name="ajaxServlet", urlPatterns={"/vnpayajax"})
 public class ajaxServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       HttpSession session = request.getSession();
-        if(session == null){
-            response.getWriter().print("invalid signature");
-        }
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//    throws ServletException, IOException {
+//       HttpSession session = request.getSession();
+//        if(session == null){
+//            response.getWriter().print("invalid signature");
+//        }
+//    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -124,6 +124,7 @@ public class ajaxServlet extends HttpServlet {
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
+        resp.sendRedirect(paymentUrl);
         resp.getWriter().write(gson.toJson(job));
     }
 

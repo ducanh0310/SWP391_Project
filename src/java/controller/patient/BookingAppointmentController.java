@@ -72,7 +72,12 @@ public class BookingAppointmentController extends HttpServlet {
                 for (Slot slotExist : arrExitSlot) {
                     //Slots are not booked by patient 
                     if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
-                            && slotExist.getStatusBook().getId() != 4) {
+                            && slotExist.getStatusBook().getId() != 4 && slotExist.getStatusBook().getId() != 1) {
+                        isExist = true;
+                        break;
+                    }
+                    if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
+                             && slotExist.getStatusBook().getId() == 1 && slotExist.getBookingAppointment().getReservationStatus().equals("Pay reser")) {
                         isExist = true;
                         break;
                     }

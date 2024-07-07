@@ -10,10 +10,10 @@
         <meta name="author" content="">
         <title>Tạo mới đơn hàng</title>
         <!-- Bootstrap core CSS -->
-        <link href="assets/bootstrap.min.css" rel="stylesheet"/>
+        <link href="view/payment/assets/bootstrap.min.css" rel="stylesheet"/>
         <!-- Custom styles for this template -->
-        <link href="assets/jumbotron-narrow.css" rel="stylesheet">      
-        <script src="assets/jquery-1.11.3.min.js"></script>
+        <link href="view/payment/assets/jumbotron-narrow.css" rel="stylesheet">      
+        <script src="view/payment/assets/jquery-1.11.3.min.js"></script>
     </head>
 
     <body>
@@ -25,7 +25,7 @@
             </div>
             <h3>Tạo mới đơn hàng</h3>
             <div class="table-responsive">
-                <form action="../../vnpayajax" id="frmCreateOrder" method="post">  
+                <form action="vnpayajax" id="frmCreateOrder" method="post">  
                     <input type="hidden" name="bookingId" value="<%= request.getParameter("id") %>" />
                     <div class="form-group">
                         <label for="amount">Số tiền</label>

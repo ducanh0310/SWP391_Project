@@ -18,6 +18,17 @@ public class Slot {
     private Room room;
     private Employee doctor; 
     private StatusBook statusBook;
+    private BookingAppointment bookingAppointment;
+
+    public BookingAppointment getBookingAppointment() {
+        return bookingAppointment;
+    }
+
+    public void setBookingAppointment(BookingAppointment bookingAppointment) {
+        this.bookingAppointment = bookingAppointment;
+    }
+
+
 
     public StatusBook getStatusBook() {
         return statusBook;
