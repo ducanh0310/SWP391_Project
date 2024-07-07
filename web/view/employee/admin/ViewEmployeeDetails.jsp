@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
-       <!-- Favicon -->
+        <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
@@ -102,18 +103,18 @@
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
                         <!-- Navigation -->
                         <ul class="navbar-nav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
-                                    <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="ViewEmployeeList">
-                                    <i class="bi bi-people"></i></i> Employee
-                                </a>
-                            </li>
-                        </ul>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="PatientController">
+                                        <i class="bi bi-list-task"></i> Patient
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="ViewEmployeeList">
+                                        <i class="bi bi-people"></i></i> Employee
+                                    </a>
+                                </li>
+                            </ul>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -149,6 +150,7 @@
                     <!-- /Breadcrumb -->
 
                     <div class="row gutters-sm">
+                        <div style="text-align: center; font-size:25px">Employee Infomation</div>
                         <div class="col-md-4 mb-3">
                             <div class="card">
                                 <div class="card-body">
@@ -160,12 +162,12 @@
                                     </div>
                                 </div>
                             </div>
-                                        
+
                             <c:if test="${employee.employeeType == 'd'}">
                                 <div class="card mt-3">
                                     <img src="${employee.url}">
                                 </div>
-                                    </c:if>            
+                            </c:if>            
                         </div>
                         <div class="col-md-8">
                             <div class="card mb-3">
@@ -281,12 +283,11 @@
                                             ${employee.address}
                                         </div>
                                     </div>
-                                    
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <a class="btn btn-info "  href="UpdateEmployee?eId=${employee.id}">Edit</a>
-                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Move out</a>
                                         </div>
                                     </div>
 
@@ -294,44 +295,82 @@
                             </div>
                         </div>
                     </div>
+                    <c:if test="${!appointment.isEmpty()}" >
+                        <div id="employeeTable" class="table-responsive">
+                            <div style="text-align: center; font-size: 25px">Appointment</div>
+                            <table class="table table-hover table-nowrap">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Appointment ID</th>
+                                        <th scope="col">Patient ID</th>
+                                        <th scope="col">Dentist ID</th>
+                                        <th scope="col">Date of Appointment</th>
+                                        <th scope="col">Start Time</th>
+                                        <th scope="col">End Time</th>
+                                        <th scope="col">Appointment Type</th>
+                                        <th scope="col">Appointment Status</th>
+                                        <th scope="col">Room</th>
+                                    </tr>
+                                </thead>
+                                <tbody  id="appointmentTableBody">
+                                    <c:forEach items="${appointment}" var="appointment">
 
+                                        <tr>
+                                            <td>${appointment.appointment_Id}</td>
+                                            <td>${appointment.patient_Id}</td>
+                                            <td>${appointment.dentist_Id}</td>
+                                            <td>${appointment.date_of_Appointment}</td>
+                                            <td>${appointment.start_Time}</td>
+                                            <td>${appointment.end_Time}</td>
+                                            <td>${appointment.appointment_Type}</td>
+                                            <td>${appointment.appointment_Status}</td>
+                                            <td>${appointment.room}</td>
+                                        </tr>
+
+                                    </c:forEach>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </c:if>
                 </div>
             </div>
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/tempusdominus/js/moment.min.js"></script>
-        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="lib/twentytwenty/jquery.event.move.js"></script>
-        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
-        <script src="js/main.js"></script>
-        <!-- Template Javascript -->
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script src="lib/twentytwenty/jquery.event.move.js"></script>
+            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+            <script src="js/main.js"></script>
+            <!-- Template Javascript -->
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../../lib/wow/wow.min.js"></script>
-        <script src="../../lib/easing/easing.min.js"></script>
-        <script src="../../lib/waypoints/waypoints.min.js"></script>
-        <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="../../lib/tempusdominus/js/moment.min.js"></script>
-        <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
-        <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../../lib/wow/wow.min.js"></script>
+            <script src="../../lib/easing/easing.min.js"></script>
+            <script src="../../lib/waypoints/waypoints.min.js"></script>
+            <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="../../lib/tempusdominus/js/moment.min.js"></script>
+            <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
+            <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-        <!-- Template Javascript -->
-        <script src="../../js/main.js"></script>
+            <!-- Template Javascript -->
+            <script src="../../js/main.js"></script>
 
     </body>
 

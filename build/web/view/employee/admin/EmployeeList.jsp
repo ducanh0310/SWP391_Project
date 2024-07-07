@@ -199,15 +199,29 @@
                                             <th scope="col">Employee ID</th>
                                             <th scope="col">Employee Name</th>
                                             <th scope="col">Employee Sin</th>
-                                            <th scope="col">Employee Type</th>
+                                            <th scope="col">
+                                                <select id="filterEmployeeType" class="form-select" >
+                                                    <option value="all">Employee Type</option>
+                                                    <option value="Receptionist">Receptionist</option>
+                                                    <option value="Doctor">Doctor</option>
+                                                    <option value="Nurse">Nurse</option>
+                                                </select>
+                                            </th>
                                             <th scope="col">Phone Number</th>
-                                            <th scope="col">Gender</th>
+                                            <th scope="col">
+                                                <select id="filterGender" class="form-select">
+                                                    <option value="all">Genders</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody  id="employeeTableBody">
                                         <c:forEach items="${EmployeeList}" var="emp">
-                                            <c:if test="${emp.employeeType != 'I'}">
+                                            <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
                                                 <tr>
                                                     <td>${emp.id}</td>
                                                     <td>${emp.name}</td>
@@ -298,7 +312,7 @@
             <script src="../../../js/main.js"></script>
 
             <script>
-                const rowsPerPage = 10;
+                const rowsPerPage = 8;
                 let currentPage = 1;
                 const table = document.getElementById("employeeTableBody");
                 const rows = table.getElementsByTagName("tr");
@@ -365,6 +379,43 @@
                 // Initialize the table
                 displayRows(currentPage);
                 updatePagination();
+            </script>
+            <script>
+                // fill by gender
+                document.getElementById("filterGender").addEventListener("change", function () {
+                    const selectedGender = this.value;
+
+                    for (let i = 0; i < totalRows; i++) {
+                        const genderCell = rows[i].getElementsByTagName("td")[5]; // Cột giới tính là cột thứ 6 trong table
+                        const gender = genderCell.textContent.trim();
+
+                        if (selectedGender === "all" || gender === selectedGender) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                });
+            </script>
+            <script>
+                // fill by employee role
+                document.getElementById("filterEmployeeType").addEventListener("change", function () {
+                    const selectedEmployeeType = this.value;
+
+                    for (let i = 0; i < totalRows; i++) {
+                        const employeeTypeCell = rows[i].getElementsByTagName("td")[3]; // Cột vai trò nhân viên là cột thứ 4 trong table
+                        const employeeType = employeeTypeCell.textContent.trim();
+
+                        if (selectedEmployeeType === "all" || employeeType === selectedEmployeeType) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+
+                });
+
+
             </script>
 
     </body>
