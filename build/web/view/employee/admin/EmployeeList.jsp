@@ -219,6 +219,7 @@
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
+                                    <!--Display employee information-->
                                     <tbody  id="employeeTableBody">
                                         <c:forEach items="${EmployeeList}" var="emp">
                                             <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
