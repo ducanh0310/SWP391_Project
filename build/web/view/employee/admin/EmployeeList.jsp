@@ -196,9 +196,9 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">Employee ID</th>
-                                            <th scope="col">Employee Name</th>
-                                            <th scope="col">Employee Sin</th>
+                                            <th scope="col" style="font-size: 20px">Employee ID</th>
+                                            <th scope="col" style="font-size: 20px">Employee Name</th>
+                                            <th scope="col" style="font-size: 20px">Employee Sin</th>
                                             <th scope="col">
                                                 <select id="filterEmployeeType" class="form-select" >
                                                     <option value="all">Employee Type</option>
@@ -207,7 +207,7 @@
                                                     <option value="Nurse">Nurse</option>
                                                 </select>
                                             </th>
-                                            <th scope="col">Phone Number</th>
+                                            <th scope="col" style="font-size: 20px">Phone Number</th>
                                             <th scope="col">
                                                 <select id="filterGender" class="form-select">
                                                     <option value="all">Genders</option>

@@ -234,7 +234,6 @@ public class EmployeeDAO extends DBContext {
         return employeeList;
     }
 
-
     public void deleteEmployee(String key) throws SQLException {
         String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
         Connection connection = null;
@@ -252,6 +251,7 @@ public class EmployeeDAO extends DBContext {
             closeConnection(connection);
         }
     }
+
     //get all employee when have username
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -292,18 +292,18 @@ public class EmployeeDAO extends DBContext {
         return employeeList;
     }
 
-    public ArrayList<Appointment> getAppointmentByDentisId(String DentistId) throws SQLException{
+    public ArrayList<Appointment> getAppointmentByDentisId(String DentistId) throws SQLException {
         ArrayList<Appointment> appointmentList = new ArrayList<>();
         String query = "select * from Appointment where dentist_id = ?";
         Connection connection = null;
         PreparedStatement statement = null;
-        Appointment appointment = new Appointment();
-        try{
+        try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
             statement.setString(1, DentistId);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
+                Appointment appointment = new Appointment();
                 appointment.setAppointment_Id(rs.getInt("appointment_id"));
                 appointment.setPatient_Id(rs.getInt("patient_id"));
                 appointment.setDentist_Id(rs.getString("dentist_id"));
@@ -321,12 +321,9 @@ public class EmployeeDAO extends DBContext {
             closePreparedStatement(statement);
             closeConnection(connection);
         }
-            return appointmentList;
+        return appointmentList;
     }
-    
-    
-    
-    
+
 //    public static void main(String[] args) {
 //        Employee employee = new Employee("11111", "d", "test dc", "hahah", (float) 10.5, 1, "0123456789", "a.bc@new.b", Date.valueOf("2003-05-02"), "X");
 //        EmployeeDAO dao = new EmployeeDAO();
@@ -338,7 +335,6 @@ public class EmployeeDAO extends DBContext {
 //        boolean isAdded = dao.addEmployeeAccount(employee, "a.bc", "vailonluonaothaatday", dcArr);
 //        System.out.println(isAdded);
 //    }
-    
     public static void main(String[] args) {
         try {
             Appointment app = new Appointment();
