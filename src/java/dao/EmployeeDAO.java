@@ -304,6 +304,7 @@ public class EmployeeDAO extends DBContext {
             statement.setString(1, DentistId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                //get appointment to list
                 Appointment appointment = new Appointment();
                 appointment.setAppointment_Id(rs.getInt("appointment_id"));
                 appointment.setPatient_Id(rs.getInt("patient_id"));
