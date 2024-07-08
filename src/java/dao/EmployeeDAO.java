@@ -292,6 +292,7 @@ public class EmployeeDAO extends DBContext {
         return employeeList;
     }
 
+    //get appoitment by employee id = dentis id
     public ArrayList<Appointment> getAppointmentByDentisId(String DentistId) throws SQLException {
         ArrayList<Appointment> appointmentList = new ArrayList<>();
         String query = "select * from Appointment where dentist_id = ?";
