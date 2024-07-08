@@ -76,8 +76,10 @@ public class DeleteEmployee extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            //get employee id
             String employeeId = request.getParameter("employeeId");
             EmployeeDAO empDAO = new EmployeeDAO();
+            //delete it
             empDAO.deleteEmployee(employeeId);
             response.sendRedirect("ViewEmployeeList");
         } catch (SQLException ex) {

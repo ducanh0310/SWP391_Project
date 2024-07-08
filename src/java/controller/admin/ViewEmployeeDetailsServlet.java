@@ -69,7 +69,9 @@ public class ViewEmployeeDetailsServlet extends HttpServlet {
         if (employeeId != null) {
             try {
                 EmployeeDAO empDAO = new EmployeeDAO();
+                //get each employee information
                 Employee emp = empDAO.getEmployeeByEmployeeId(employeeId);
+                //get all appointment if dentist id is not empty
                 ArrayList<Appointment> appointment = empDAO.getAppointmentByDentisId(employeeId);
                 request.setAttribute("appointment", appointment);
                 request.setAttribute("employee", emp);

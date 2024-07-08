@@ -29,6 +29,7 @@ import model.User;
  */
 public class EmployeeDAO extends DBContext {
 
+    //get employee and docter_certification
     public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -64,6 +65,7 @@ public class EmployeeDAO extends DBContext {
         return emp;
     }
 
+    //get employee information by employee id
     public Employee getEmployeeByEmployeeId(int employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -75,6 +77,7 @@ public class EmployeeDAO extends DBContext {
             statement.setInt(1, employeeId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
+                // set employee object
                 emp.setId(rs.getInt("employee_id"));
                 emp.setEmployeeSin(rs.getString("employee_sin"));
                 emp.setEmployeeType(rs.getString("employee_type"));
@@ -195,6 +198,7 @@ public class EmployeeDAO extends DBContext {
         }
     }
 
+    //get list employee
     public ArrayList<Employees> getEmployees() throws SQLException {
         Employee employeeInfo = new Employee();
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -206,6 +210,7 @@ public class EmployeeDAO extends DBContext {
             statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                //get each employee
                 Employees e = new Employees(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -217,6 +222,7 @@ public class EmployeeDAO extends DBContext {
                         rs.getString(9),
                         rs.getDate(10),
                         rs.getString(11));
+                //add employee to list
                 employeeList.add(e);
             }
         } catch (SQLException e) {
@@ -255,7 +261,7 @@ public class EmployeeDAO extends DBContext {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
+            // convert key to lower case
             String searchKey = "%" + key.toLowerCase() + "%";
             statement.setString(1, searchKey);
             statement.setString(2, searchKey);
