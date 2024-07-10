@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Notification</title>
     </head>
     <body>
         <h1 style="color: red">Because you cancelled this appointment, you can not edit it!</h1>
