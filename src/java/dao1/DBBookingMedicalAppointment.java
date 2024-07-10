@@ -7,6 +7,7 @@ package dao1;
 import dal.DBContext;
 import java.util.ArrayList;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BookingAppointment;
@@ -109,7 +110,7 @@ public class DBBookingMedicalAppointment extends DBContext {
                 statusBook.setId(rs.getInt("statusId"));
                 slot.setStatusBook(statusBook);
                 arrSlot.add(slot);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,7 +226,7 @@ public class DBBookingMedicalAppointment extends DBContext {
     public BookingAppointmentHistory getDateAppointment(int id) {
         try {
             String sql = """
-                            Select ba.booking_date, ba.service_id, pc.procedure_name from Booking_Appointment ba
+                            Select ba.booking_date, ba.service_id, pc.procedure_name, ba.status_id from Booking_Appointment ba
                             join Procedure_codes pc on pc.procedure_id = ba.service_id
                             where ba.id=?""";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -238,6 +239,10 @@ public class DBBookingMedicalAppointment extends DBContext {
                 Service service = new Service();
                 service.setId(rs.getInt("service_id"));
                 service.setName(rs.getString("procedure_name"));
+                //Status book
+                StatusBook statusBook = new StatusBook();
+                statusBook.setId(rs.getInt("status_id"));
+                bAH.setStatusBook(statusBook);
                 bAH.setService(service);
                 return bAH;
             }
@@ -307,20 +312,14 @@ public class DBBookingMedicalAppointment extends DBContext {
     }
 
     public static void main(String[] args) {
+
         try {
             DBBookingMedicalAppointment db = new DBBookingMedicalAppointment();
-            ArrayList<BookingAppointmentHistory> bah = db.showBookHistory(1);
-
-            for (BookingAppointmentHistory bookingAppointmentHistory : bah) {
-//                System.out.println(bookingAppointmentHistory.getDate());
-//                System.out.println(bookingAppointmentHistory.getPatient().getName());
-//                System.out.println(bookingAppointmentHistory.getDoctor().getName());
-//                System.out.println(bookingAppointmentHistory.getSlot().getId());
-                System.out.println(bookingAppointmentHistory.getReservationStatus());
-            }
+            ArrayList<Slot> getExistSlot1 = db.getExistSlot("2", Date.valueOf("2024-07-11"));
+            System.out.println(getExistSlot1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
 }

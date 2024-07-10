@@ -46,7 +46,7 @@ public class EditAppointmentController extends HttpServlet {
             ArrayList<Slot> arrAllSlot = db.getAllSlot(String.valueOf(idService));
             ArrayList<Slot> arrExitSlot = db.getExistSlot(String.valueOf(idService), date);
             ArrayList<Slot> arrRestSlot = new ArrayList<>();
-            int flag = 0;
+            boolean flag = false;
             for (Slot slotAll : arrAllSlot) {
                 boolean isExist = false;
                 for (Slot slotExist : arrExitSlot) {
@@ -55,8 +55,8 @@ public class EditAppointmentController extends HttpServlet {
                         isExist = true;
                         break;
                     }
-                    if (slotExist.getStatusBook().getId() == 4) {
-                        flag = 1;
+                    if (bAH.getStatusBook().getId()==4) {
+                        flag = true;
                     }
                 }
 
@@ -75,7 +75,7 @@ public class EditAppointmentController extends HttpServlet {
             request.setAttribute("arrService", arrService);
             request.setAttribute("DateServiceAppointment", bAH);
             request.setAttribute("arrRestSlot", arrRestSlot);
-            if (flag == 1) {
+            if (flag) {
                 request.getRequestDispatcher("../view/patient/notificationEdit.jsp").forward(request, response);
             }
             request.getRequestDispatcher("../view/patient/editAppointment.jsp").forward(request, response);
