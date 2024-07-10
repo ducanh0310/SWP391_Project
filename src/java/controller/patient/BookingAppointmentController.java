@@ -54,7 +54,7 @@ public class BookingAppointmentController extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             // Take parameters from the request
-            Date dateBook = Date.valueOf(request.getParameter("date"));
+            Date dateBook = Date.valueOf(request.getParameter("date"));            
             String service = request.getParameter("service");
             String serviceName = request.getParameter("serviceName");
 

@@ -534,7 +534,6 @@
                                             <span>${bAH.room.name}</span>
                                         </td>
                                         <td>
-
                                             <c:choose>
                                                 <c:when test="${bAH.statusBook.id == 1}">
                                                     <span class="status-verify">${bAH.statusBook.name}</span>

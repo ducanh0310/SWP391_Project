@@ -261,7 +261,7 @@
                     <input type="hidden" id="id" name="id" value="${paInfo.patientId}">
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <label class="labels">Fullname</label>
+                            <label class="labels">Fullname*</label>
                             <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${paInfo.name}" >
                             <c:if test="${not empty errorMsg.fullname}">
                                 <span style="color:red">${errorMsg.fullname}</span>
@@ -278,7 +278,7 @@
 
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <label class="labels">Email</label>
+                            <label class="labels">Email*</label>
                             <input type="text" id="email" name="email" class="form-control" placeholder="" value="${paInfo.email}">
                             <c:if test="${not empty errorMsg.email}">
                                 <span style="color:red">${errorMsg.email}</span>

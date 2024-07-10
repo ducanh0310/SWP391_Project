@@ -124,7 +124,7 @@ public class ajaxServlet extends HttpServlet {
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
-        resp.sendRedirect(paymentUrl);
+//        resp.sendRedirect(paymentUrl);
         resp.getWriter().write(gson.toJson(job));
     }
 

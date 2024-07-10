@@ -42,25 +42,30 @@ public class EditAppointmentController extends HttpServlet {
 
             int idService = bAH.getService().getId();
             Date date = bAH.getDate();
-            
+
             ArrayList<Slot> arrAllSlot = db.getAllSlot(String.valueOf(idService));
             ArrayList<Slot> arrExitSlot = db.getExistSlot(String.valueOf(idService), date);
             ArrayList<Slot> arrRestSlot = new ArrayList<>();
-
+            int flag = 0;
             for (Slot slotAll : arrAllSlot) {
                 boolean isExist = false;
                 for (Slot slotExist : arrExitSlot) {
                     if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
-                            &&  slotExist.getStatusBook().getId() != 4 ) {
+                            && slotExist.getStatusBook().getId() != 4) {
                         isExist = true;
                         break;
                     }
+                    if (slotExist.getStatusBook().getId() == 4) {
+                        flag = 1;
+                    }
                 }
+
                 if (!isExist) {
+
                     arrRestSlot.add(slotAll);
                 }
             }
-            
+
             //Get Service
             DBService dbService = new DBService();
             ArrayList<Service> arrService = dbService.getService();
@@ -70,6 +75,9 @@ public class EditAppointmentController extends HttpServlet {
             request.setAttribute("arrService", arrService);
             request.setAttribute("DateServiceAppointment", bAH);
             request.setAttribute("arrRestSlot", arrRestSlot);
+            if (flag == 1) {
+                request.getRequestDispatcher("../view/patient/notificationEdit.jsp").forward(request, response);
+            }
             request.getRequestDispatcher("../view/patient/editAppointment.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,7 +96,7 @@ public class EditAppointmentController extends HttpServlet {
             Date dateBook = Date.valueOf(request.getParameter("date"));
             String service = request.getParameter("service");
             String serviceName = request.getParameter("serviceName");
-            
+
             DBBookingMedicalAppointment db = new DBBookingMedicalAppointment();
             ArrayList<Slot> arrAllSlot = db.getAllSlot(service);
             ArrayList<Slot> arrExitSlot = db.getExistSlot(service, dateBook);
@@ -97,22 +105,20 @@ public class EditAppointmentController extends HttpServlet {
             // Get the current time
             LocalTime now = LocalTime.now();
             LocalDate today = LocalDate.now();
-            
-            
-            
+
             for (Slot slotAll : arrAllSlot) {
                 boolean isExist = false;
                 for (Slot slotExist : arrExitSlot) {
-                    if (slotAll.getId()==slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
-                            &&  slotExist.getStatusBook().getId() != 4 ) {
+                    if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
+                            && slotExist.getStatusBook().getId() != 4) {
                         isExist = true;
                         break;
                     }
                 }
                 // Check if the slot's start time is after the current time
-                LocalDate slotDate = dateBook.toLocalDate(); 
+                LocalDate slotDate = dateBook.toLocalDate();
                 LocalTime slotStartTime = slotAll.getStartedTime();
-                
+
                 if (!isExist && (slotDate.isAfter(today) || (slotDate.isEqual(today) && slotStartTime.isAfter(now)))) {
                     arrRestSlot.add(slotAll);
                 }
@@ -140,7 +146,7 @@ public class EditAppointmentController extends HttpServlet {
                 // Remove the last comma and close the JSON array and object
                 jsonResponse.setLength(jsonResponse.length() - 1);
                 jsonResponse.append("]}");
-                out.print(jsonResponse.toString());                
+                out.print(jsonResponse.toString());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);

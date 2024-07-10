@@ -39,8 +39,7 @@ public class choosePaymentController extends HttpServlet {
             for (BookingAppointmentHistory allSlot : paymentAllSlot) {
                 for (BookingAppointmentHistory onlySlot : paymentPersonalSlot) {
                     if(allSlot.getDate().equals(onlySlot.getDate()) && allSlot.getService().getId() == onlySlot.getService().getId() && allSlot.getSlot().getId() == onlySlot.getSlot().getId()
-                            && !(allSlot.getReservationStatus().equals(onlySlot.getReservationStatus()))){
-                        
+                        && !(allSlot.getStatusBook().getId() == 4)    && !(allSlot.getReservationStatus().equals(onlySlot.getReservationStatus()))){                       
                         flag=true;
                         break;
                     }

@@ -23,40 +23,41 @@
 
                 <h3 class="text-muted">VNPAY</h3>
             </div>
-            <h3>Tạo mới đơn hàng</h3>
+            <h3>Create a new order</h3>
             <div class="table-responsive">
                 <form action="vnpayajax" id="frmCreateOrder" method="post">  
                     <input type="hidden" name="bookingId" value="<%= request.getParameter("id") %>" />
                     <div class="form-group">
-                        <label for="amount">Số tiền</label>
+                        <label for="amount">Amount</label>
                         <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" name="amount" type="text" value="1250000" readonly="" />
                     </div>
-                     <h4>Chọn phương thức thanh toán</h4>
+                     <h4>Choose a payment method</h4>
                     <div class="form-group">
-                        <h5>Cách 1: Chuyển hướng sang Cổng VNPAY chọn phương thức thanh toán</h5>
+                        <h5>Option 1: Switch to VNPAY Portal and select a payment method</h5>
                        <input type="radio" Checked="True" id="bankCode" name="bankCode" value="">
-                       <label for="bankCode">Cổng thanh toán VNPAYQR</label><br>
+                       <label for="bankCode">VNPAYQR payment gateway</label><br>
                        
-                       <h5>Cách 2: Tách phương thức tại site của đơn vị kết nối</h5>
+                       <h5>Option 2: Split the method at the site of the connecting unit</h5>
                        <input type="radio" id="bankCode" name="bankCode" value="VNPAYQR">
-                       <label for="bankCode">Thanh toán bằng ứng dụng hỗ trợ VNPAYQR</label><br>
+                       <label for="bankCode">Pay with the application that supports VNPAYQR</label><br>
                        
                        <input type="radio" id="bankCode" name="bankCode" value="VNBANK">
-                       <label for="bankCode">Thanh toán qua thẻ ATM/Tài khoản nội địa</label><br>
+                       <label for="bankCode">Payment via ATM card/Local Account</label><br>
                        
                        <input type="radio" id="bankCode" name="bankCode" value="INTCARD">
-                       <label for="bankCode">Thanh toán qua thẻ quốc tế</label><br>
+                       <label for="bankCode">International card payments</label><br>
                        
                     </div>
                     <div class="form-group">
-                        <h5>Chọn ngôn ngữ giao diện thanh toán:</h5>
-                         <input type="radio" id="language" Checked="True" name="language" value="vn">
-                         <label for="language">Tiếng việt</label><br>
-                         <input type="radio" id="language" name="language" value="en">
-                         <label for="language">Tiếng anh</label><br>
+                        <h5>Select the language of the payment interface:</h5>
+                        <input type="radio" id="language" Checked="True" name="language" value="en">
+                         <label for="language">English</label><br>
+                         <input type="radio" id="language"  name="language" value="vn">
+                         <label for="language">Vietnamese</label><br>
+                         
                          
                     </div>
-                    <button type="submit" class="btn btn-default" href>Thanh toán</button>
+                    <button type="submit" class="btn btn-default" href>Pay</button>
                 </form>
             </div>
             <p>

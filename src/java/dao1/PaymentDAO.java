@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import model.BookingAppointmentHistory;
 import model.Service;
 import model.Slot;
+import model.StatusBook;
 
 /**
  *
@@ -57,7 +58,7 @@ public class PaymentDAO extends DBContext{
     public ArrayList<BookingAppointmentHistory> paymentPersonalSlot(int idAppointment){
         ArrayList<BookingAppointmentHistory> arrBA= new ArrayList<>();
          try {
-             String sql="select ba.id, ba.booking_date, ba.service_id, ba.slot_id, ba.payReservationStatus from Booking_Appointment ba where ba.id=?";
+             String sql="select ba.id, ba.booking_date, ba.service_id, ba.slot_id, ba.payReservationStatus, ba.status_id from Booking_Appointment ba where ba.id=?";
              PreparedStatement stm = connection.prepareStatement(sql);
              stm.setInt(1, idAppointment);
              ResultSet rs = stm.executeQuery();
@@ -65,6 +66,7 @@ public class PaymentDAO extends DBContext{
                  BookingAppointmentHistory bAH= new BookingAppointmentHistory();
                  bAH.setID(rs.getInt("id"));
                  bAH.setDate(rs.getDate("booking_date"));
+                
                  bAH.setReservationStatus(rs.getString("payReservationStatus"));
                  //Service
                  Service service = new Service();
@@ -73,7 +75,9 @@ public class PaymentDAO extends DBContext{
                  //Slot
                  Slot slot = new Slot();
                  slot.setId(rs.getInt("slot_id"));
+                 
                  bAH.setSlot(slot);
+                
                  
                  arrBA.add(bAH);
                  
@@ -88,7 +92,7 @@ public class PaymentDAO extends DBContext{
     public ArrayList<BookingAppointmentHistory> paymentAllSlot(int idAppointment){
         ArrayList<BookingAppointmentHistory> arrBA= new ArrayList<>();
          try {
-             String sql="select ba.id, ba.booking_date, ba.service_id, ba.slot_id, ba.payReservationStatus from Booking_Appointment ba";
+             String sql="select ba.id, ba.booking_date, ba.service_id, ba.slot_id, ba.payReservationStatus, ba.status_id from Booking_Appointment ba";
              PreparedStatement stm = connection.prepareStatement(sql);
              ResultSet rs = stm.executeQuery();
              while(rs.next()){
@@ -104,6 +108,10 @@ public class PaymentDAO extends DBContext{
                  Slot slot = new Slot();
                  slot.setId(rs.getInt("slot_id"));
                  bAH.setSlot(slot);
+                  //Status book
+                 StatusBook statusBook = new StatusBook();
+                 statusBook.setId(rs.getInt("status_id"));
+                 bAH.setStatusBook(statusBook);
                  
                  arrBA.add(bAH);
                  
