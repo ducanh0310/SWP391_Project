@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
     <head>
@@ -653,6 +654,13 @@
             background: #f7f7ff;
             margin-top:0px;
         }
+
+        .col-md-7 {
+            width: 75%;
+        }
+        .col-md-offset-1 {
+            margin-left: 0;
+        }
     </style>
     <body>
         <svg style="display:none;">
@@ -675,7 +683,7 @@
             </button>
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Admin</h3>
+                    <h3>Doctor/Nurse</h3>
                 </li>
                 <li>
                     <a href="doctorAndNurse.jsp">
@@ -784,7 +792,7 @@
                             <div class="col-md-7 module contact-list">
                                 <form>
                                     <div class="form-group">
-                                        <input placeholder="Search Names" class="form-control" ng-model="filters.name"></input>
+                                        <input placeholder="Search Names" class="form-control" ng-model="${doctor.name.name}"></input>
                                     </div>
                                     <div class="form-group">
                                         <input type="checkbox" ng-model="exactMatch"> Exact Match</input>
@@ -808,23 +816,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${doctors}" var="doctor" varStatus="loop">
-                                            <tr ng-repeat="obj in nameList| filter:filters:exactMatch | filter:filterFavs track by $index" class="{{obj.favorite}} animated fadeIn">
-                                                <td>${loop.index + 1}</td>
-                                                <td>${doctor.name.name}</td>
-                                                <td>${doctor.phone.phone}</td>
-                                                <td>${doctor.medication}</td>
-                                                <td>${doctor.dosage}</td>
-                                                <td>${doctor.duration}</td>
-                                                <td>${doctor.notes}</td>
-                                                <td class="text-right">
-                                                    <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <a href="#" ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
-                                                </td>
+                                            <c:forEach items="${doctors}" var="doctor" varStatus="loop">
+                                                <tr ng-repeat="doctor in nameList| filter:filters:exactMatch | filter:filterFavs track by $index" class="{{doctor.favorite}} animated fadeIn">
+                                                    <td>${loop.index + 1}</td>
+                                                    <td>${doctor.name.name}</td>
+                                                    <td>${doctor.phone.phone}</td>
+                                                    <td>${doctor.medication}</td>
+                                                    <td>${doctor.dosage}</td>
+                                                    <td>${doctor.duration}</td>
+                                                    <td>${doctor.notes}</td>
+                                                    <td class="text-right">
+                                                        <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                        <a href="#" ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
+                                                    </td>
 
-                                            </tr>
-                                            </foreach>
-                                            </tbody>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
                                     </table>
 
                                 </div>
@@ -1054,5 +1062,6 @@
 
                 }
             });
+            
 </script>
 </html>

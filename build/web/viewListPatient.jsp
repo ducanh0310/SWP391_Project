@@ -238,6 +238,9 @@
         <script>
             $(document).ready(function () {
                 $('#myTable').DataTable({
+                    "paging": true, // Enable pagination
+                    "pageLength": 5,
+                    "lengthMenu": [5, 10, 20, 50], 
                     "language": {
                         "lengthMenu": "Show _MENU_",
                         "info": "Showing _START_ to _END_ of _TOTAL_ entries",
@@ -250,6 +253,7 @@
                             "next": "Next",
                             "previous": "Previous"
                         }
+
                     }
                 });
             });

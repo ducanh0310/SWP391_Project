@@ -129,6 +129,43 @@
                 white-space: nowrap;
                 vertical-align: middle;
             }
+            .pagination-container {
+                text-align: left;
+                margin: 20px 0;
+            }
+
+            .pagination {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+
+            .pagination li {
+                display: inline;
+                margin: 0 5px;
+            }
+
+            .pagination li span {
+                display: block;
+                padding: 10px 15px;
+                color: #007bff;
+                text-decoration: none;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                background-color: #fff;
+            }
+
+            .pagination li.active span {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+
+            .pagination li span:hover {
+                background-color: #ddd;
+                cursor: pointer;
+            }
+
         </style>
 
     </head>
@@ -225,59 +262,106 @@
                                     <div class="page-title">Service</div>
 
                                     <div class="container">
-                                        <div class="header_wrap">
-                                            <div class="num_rows">
 
-                                                <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
-                                                    <select class  ="form-control" name="state" id="maxRows">
+                                        <!--                                        <table class="table table-striped table-class" id= "table-id">
+                                        
+                                        
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Name</th>
+                                                                                            <th>Price</th>
+                                                                                            <th></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                        <c:forEach items="${servicesExist}" var="service">
+                                            <tr id="service${service.procedure_id}">
+                                                <td>${service.procedure_name}</td>
+                                                <td>${'$'}${service.price}</td>
+                                                <td class="text-end">
+                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+                                                    <form action="deleteService" method="POST" style="display: inline-block;">
+                                                        <input type="hidden" name="serviceID" value="${service.procedure_id}">
+                                                        <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="confirmDelete(${service.procedure_id})">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    <tbody>
+                                </table>-->
+                                        <div class="table-responsive">
+                                            <div class="header_wrap">
+                                                <div class="num_rows">
 
+                                                    <div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
+                                                        <select class  ="form-control" name="state" id="maxRows">
+                                                            <option value="5">5</option>
+                                                            <option value="10">10</option>
+                                                            <option value="15">15</option>
+                                                            <option value="20">20</option>
+                                                            <option value="50">50</option>
+                                                            <option value="70">70</option>
+                                                            <option value="100">100</option>
+                                                            <option value="5000">Show ALL Rows</option>
+                                                        </select>
 
-                                                        <option value="10">10</option>
-                                                        <option value="15">15</option>
-                                                        <option value="20">20</option>
-                                                        <option value="50">50</option>
-                                                        <option value="70">70</option>
-                                                        <option value="100">100</option>
-                                                        <option value="5000">Show ALL Rows</option>
-                                                    </select>
-
+                                                    </div>
+                                                </div>
+                                                <div class="tb_search">
+                                                    <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="tb_search">
-                                                <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
-                                            </div>
-                                        </div>
-                                        <table class="table table-striped table-class" id= "table-id">
-
-
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Price</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${servicesExist}" var="service">
-                                                    <tr id="service${service.procedure_id}">
-                                                        <td>${service.procedure_name}</td>
-                                                        <td>${'$'}${service.price}</td>
-                                                        <td class="text-end">
-                                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                                <i class="bi bi-pencil-square"></i>
-                                                            </button>
-                                                            <form action="deleteService" method="POST" style="display: inline-block;">
-                                                                <input type="hidden" name="serviceID" value="${service.procedure_id}">
-                                                                <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="confirmDelete(${service.procedure_id})">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
+                                            <table class="table table-striped table-class" id= "table-id">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Status</th>
+                                                        <th></th>
                                                     </tr>
-                                                </c:forEach>
-                                            <tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${services}" var="service">
+                                                        <tr id="service${service.procedure_id}">
+                                                            <td><a class="text-heading font-semibold" href="patientDetail?pid=${service.procedure_id}"> ${service.procedure_name}</a>
+                                                            </td>
+                                                            <td>${'$'}${service.price}</td>
+                                                            <td>
+                                                                <span class="badge badge-lg badge-dot">
+                                                                    <c:choose>
+                                                                        <c:when test="${service.type == 'a'}">
+                                                                            <span class="badge badge-lg badge-dot">
+                                                                                <i class="bg-success"></i>Active
+                                                                            </span>
+                                                                        </c:when>
+                                                                        <c:when test="${service.type == 'i'}">
+                                                                            <span class="badge badge-lg badge-dot">
+                                                                                <i class="bg-danger"></i>Inactive
+                                                                            </span>
+                                                                        </c:when>
+                                                                        <c:otherwise>${service.type}</c:otherwise>
+                                                                    </c:choose>
 
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-end">
+                                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                                                <form action="deleteService" method="POST" style="display: inline-block;">
+                                                                    <input type="hidden" name="serviceID" value="${service.procedure_id}">
+                                                                    <button type="submit" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="confirmDelete(${service.procedure_id})">
+                                                                        <i class="bi bi-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <!--		Start Pagination -->
                                         <div class="pagination-container">
                                             <nav>
@@ -340,176 +424,176 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
-                        var mnu = document.getElementById("mnu");
-                        var mstate = false;
+                                                                        var mnu = document.getElementById("mnu");
+                                                                        var mstate = false;
 
-                        function slideMenu() {
-                            mstate = !mstate;
-                            if (mstate) {
-                                mnu.style.left = "0px";
-                                mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
-                            } else {
-                                mnu.style.left = "-250px";
-                                mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
-                            }
-                        }
+                                                                        function slideMenu() {
+                                                                            mstate = !mstate;
+                                                                            if (mstate) {
+                                                                                mnu.style.left = "0px";
+                                                                                mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
+                                                                            } else {
+                                                                                mnu.style.left = "-250px";
+                                                                                mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
+                                                                            }
+                                                                        }
 
 
 
-                        getPagination('#table-id');
-                        $('#maxRows').trigger('change');
-                        function getPagination(table) {
+                                                                        getPagination('#table-id');
+                                                                        $('#maxRows').trigger('change');
+                                                                        function getPagination(table) {
 
-                            $('#maxRows').on('change', function () {
-                                $('.pagination').html('');						// reset pagination div
-                                var trnum = 0;									// reset tr counter 
-                                var maxRows = parseInt($(this).val());			// get Max Rows from select option
+                                                                            $('#maxRows').on('change', function () {
+                                                                                $('.pagination').html('');						// reset pagination div
+                                                                                var trnum = 0;									// reset tr counter 
+                                                                                var maxRows = parseInt($(this).val());			// get Max Rows from select option
 
-                                var totalRows = $(table + ' tbody tr').length;		// numbers of rows 
-                                $(table + ' tr:gt(0)').each(function () {			// each TR in  table and not the header
-                                    trnum++;									// Start Counter 
-                                    if (trnum > maxRows) {						// if tr number gt maxRows
+                                                                                var totalRows = $(table + ' tbody tr').length;		// numbers of rows 
+                                                                                $(table + ' tr:gt(0)').each(function () {			// each TR in  table and not the header
+                                                                                    trnum++;									// Start Counter 
+                                                                                    if (trnum > maxRows) {						// if tr number gt maxRows
 
-                                        $(this).hide();							// fade it out 
-                                    }
-                                    if (trnum <= maxRows) {
-                                        $(this).show();
-                                    }// else fade in Important in case if it ..
-                                });											//  was fade out to fade it in 
-                                if (totalRows > maxRows) {						// if tr total rows gt max rows option
-                                    var pagenum = Math.ceil(totalRows / maxRows);	// ceil total(rows/maxrows) to get ..  
-                                    //	numbers of pages 
-                                    for (var i = 1; i <= pagenum; ) {			// for each page append pagination li 
-                                        $('.pagination').append('<li data-page="' + i + '">\
+                                                                                        $(this).hide();							// fade it out 
+                                                                                    }
+                                                                                    if (trnum <= maxRows) {
+                                                                                        $(this).show();
+                                                                                    }// else fade in Important in case if it ..
+                                                                                });											//  was fade out to fade it in 
+                                                                                if (totalRows > maxRows) {						// if tr total rows gt max rows option
+                                                                                    var pagenum = Math.ceil(totalRows / maxRows);	// ceil total(rows/maxrows) to get ..  
+                                                                                    //	numbers of pages 
+                                                                                    for (var i = 1; i <= pagenum; ) {			// for each page append pagination li 
+                                                                                        $('.pagination').append('<li data-page="' + i + '">\
                                                                       <span>' + i++ + '<span class="sr-only">(current)</span></span>\
                                                                     </li>').show();
-                                    }											// end for i 
+                                                                                    }											// end for i 
 
 
-                                } 												// end if row count > max rows
-                                $('.pagination li:first-child').addClass('active'); // add active class to the first li 
+                                                                                } 												// end if row count > max rows
+                                                                                $('.pagination li:first-child').addClass('active'); // add active class to the first li 
 
 
-                                //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
-                                showig_rows_count(maxRows, 1, totalRows);
-                                //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
+                                                                                //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
+                                                                                showig_rows_count(maxRows, 1, totalRows);
+                                                                                //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
 
-                                $('.pagination li').on('click', function (e) {		// on click each page
-                                    e.preventDefault();
-                                    var pageNum = $(this).attr('data-page');	// get it's number
-                                    var trIndex = 0;							// reset tr counter
-                                    $('.pagination li').removeClass('active');	// remove active class from all li 
-                                    $(this).addClass('active');					// add active class to the clicked 
-
-
-                                    //SHOWING ROWS NUMBER OUT OF TOTAL
-                                    showig_rows_count(maxRows, pageNum, totalRows);
-                                    //SHOWING ROWS NUMBER OUT OF TOTAL
+                                                                                $('.pagination li').on('click', function (e) {		// on click each page
+                                                                                    e.preventDefault();
+                                                                                    var pageNum = $(this).attr('data-page');	// get it's number
+                                                                                    var trIndex = 0;							// reset tr counter
+                                                                                    $('.pagination li').removeClass('active');	// remove active class from all li 
+                                                                                    $(this).addClass('active');					// add active class to the clicked 
 
 
+                                                                                    //SHOWING ROWS NUMBER OUT OF TOTAL
+                                                                                    showig_rows_count(maxRows, pageNum, totalRows);
+                                                                                    //SHOWING ROWS NUMBER OUT OF TOTAL
 
-                                    $(table + ' tr:gt(0)').each(function () {		// each tr in table not the header
-                                        trIndex++;								// tr index counter 
-                                        // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
-                                        if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
-                                            $(this).hide();
-                                        } else {
-                                            $(this).show();
-                                        } 				//else fade in 
-                                    }); 										// end of for each tr in table
-                                });										// end of on click pagination list
-                            });
-                            // end of on select change 
 
-                            // END OF PAGINATION 
 
-                        }
+                                                                                    $(table + ' tr:gt(0)').each(function () {		// each tr in table not the header
+                                                                                        trIndex++;								// tr index counter 
+                                                                                        // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+                                                                                        if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
+                                                                                            $(this).hide();
+                                                                                        } else {
+                                                                                            $(this).show();
+                                                                                        } 				//else fade in 
+                                                                                    }); 										// end of for each tr in table
+                                                                                });										// end of on click pagination list
+                                                                            });
+                                                                            // end of on select change 
+
+                                                                            // END OF PAGINATION 
+
+                                                                        }
 
 
 
 
 // SI SETTING
-                        $(function () {
-                            // Just to append id number for each row  
-                            default_index();
+                                                                        $(function () {
+                                                                            // Just to append id number for each row  
+                                                                            default_index();
 
-                        });
+                                                                        });
 
 //ROWS SHOWING FUNCTION
-                        function showig_rows_count(maxRows, pageNum, totalRows) {
-                            //Default rows showing
-                            var end_index = maxRows * pageNum;
-                            var start_index = ((maxRows * pageNum) - maxRows) + parseFloat(1);
-                            var string = 'Showing ' + start_index + ' to ' + end_index + ' of ' + totalRows + ' entries';
-                            $('.rows_count').html(string);
-                        }
+                                                                        function showig_rows_count(maxRows, pageNum, totalRows) {
+                                                                            //Default rows showing
+                                                                            var end_index = maxRows * pageNum;
+                                                                            var start_index = ((maxRows * pageNum) - maxRows) + parseFloat(1);
+                                                                            var string = 'Showing ' + start_index + ' to ' + end_index + ' of ' + totalRows + ' entries';
+                                                                            $('.rows_count').html(string);
+                                                                        }
 
 // CREATING INDEX
-                        function default_index() {
-                            $('table tr:eq(0)').prepend('<th> ID </th>')
+                                                                        function default_index() {
+                                                                            $('table tr:eq(0)').prepend('<th> No </th>')
 
-                            var id = 0;
+                                                                            var id = 0;
 
-                            $('table tr:gt(0)').each(function () {
-                                id++
-                                $(this).prepend('<td>' + id + '</td>');
-                            });
-                        }
+                                                                            $('table tr:gt(0)').each(function () {
+                                                                                id++
+                                                                                $(this).prepend('<td>' + id + '</td>');
+                                                                            });
+                                                                        }
 
 // All Table search script
-                        function FilterkeyWord_all_table() {
+                                                                        function FilterkeyWord_all_table() {
 
 // Count td if you want to search on all table instead of specific column
 
-                            var count = $('.table').children('tbody').children('tr:first-child').children('td').length;
+                                                                            var count = $('.table').children('tbody').children('tr:first-child').children('td').length;
 
-                            // Declare variables
-                            var input, filter, table, tr, td, i;
-                            input = document.getElementById("search_input_all");
-                            var input_value = document.getElementById("search_input_all").value;
-                            filter = input.value.toLowerCase();
-                            if (input_value != '') {
-                                table = document.getElementById("table-id");
-                                tr = table.getElementsByTagName("tr");
+                                                                            // Declare variables
+                                                                            var input, filter, table, tr, td, i;
+                                                                            input = document.getElementById("search_input_all");
+                                                                            var input_value = document.getElementById("search_input_all").value;
+                                                                            filter = input.value.toLowerCase();
+                                                                            if (input_value != '') {
+                                                                                table = document.getElementById("table-id");
+                                                                                tr = table.getElementsByTagName("tr");
 
-                                // Loop through all table rows, and hide those who don't match the search query
-                                for (i = 1; i < tr.length; i++) {
+                                                                                // Loop through all table rows, and hide those who don't match the search query
+                                                                                for (i = 1; i < tr.length; i++) {
 
-                                    var flag = 0;
+                                                                                    var flag = 0;
 
-                                    for (j = 0; j < count; j++) {
-                                        td = tr[i].getElementsByTagName("td")[j];
-                                        if (td) {
+                                                                                    for (j = 0; j < count; j++) {
+                                                                                        td = tr[i].getElementsByTagName("td")[j];
+                                                                                        if (td) {
 
-                                            var td_text = td.innerHTML;
-                                            if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                                                //var td_text = td.innerHTML;  
-                                                //td.innerHTML = 'shaban';
-                                                flag = 1;
-                                            } else {
-                                                //DO NOTHING
-                                            }
-                                        }
-                                    }
-                                    if (flag == 1) {
-                                        tr[i].style.display = "";
-                                    } else {
-                                        tr[i].style.display = "none";
-                                    }
-                                }
-                            } else {
-                                //RESET TABLE
-                                $('#maxRows').trigger('change');
-                            }
-                        }
-                        function confirmDelete(serviceId) {
-                            if (confirm("Are you sure you want to delete this service?")) {
-                                // Proceed with the delete operation
-                            } else {
-                                // Cancel the delete operation
-                                event.preventDefault();
-                            }
-                        }
+                                                                                            var td_text = td.innerHTML;
+                                                                                            if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                                                                                                //var td_text = td.innerHTML;  
+                                                                                                //td.innerHTML = 'shaban';
+                                                                                                flag = 1;
+                                                                                            } else {
+                                                                                                //DO NOTHING
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                    if (flag == 1) {
+                                                                                        tr[i].style.display = "";
+                                                                                    } else {
+                                                                                        tr[i].style.display = "none";
+                                                                                    }
+                                                                                }
+                                                                            } else {
+                                                                                //RESET TABLE
+                                                                                $('#maxRows').trigger('change');
+                                                                            }
+                                                                        }
+                                                                        function confirmDelete(serviceId) {
+                                                                            if (confirm("Are you sure you want to delete this service?")) {
+                                                                                // Proceed with the delete operation
+                                                                            } else {
+                                                                                // Cancel the delete operation
+                                                                                event.preventDefault();
+                                                                            }
+                                                                        }
         </script>
     </body>
 </html>

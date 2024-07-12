@@ -29,14 +29,8 @@ public class ViewServiceDetailController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //int sID = Integer.parseInt(request.getParameter("serviceId"));
-        ArrayList<ProcedureCodes> servicesExist = new ArrayList<>();
         ArrayList<ProcedureCodes> services = serviceDB.getService();
-        for (ProcedureCodes service : services) {
-            if (service.getType().equals("a") ) {
-                servicesExist.add(service);
-            }
-        }
-        request.setAttribute("servicesExist", servicesExist);
+     
         request.setAttribute("services", services);
         request.getRequestDispatcher("viewServiceDetail.jsp").forward(request, response);
     }

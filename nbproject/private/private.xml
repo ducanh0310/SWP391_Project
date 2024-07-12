@@ -5,15 +5,15 @@
         <group>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewListPatient.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ViewPatientDetailController.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/Prescription.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/DeleteServiceController.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/prescription.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/EditPatientController.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewPatientDetail.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/doctorAndNurse.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/DoctorDB.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/employee/DoctorController.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/Patient.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewServiceDetail.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

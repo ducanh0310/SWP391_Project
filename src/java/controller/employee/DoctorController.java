@@ -22,19 +22,13 @@ public class DoctorController extends HttpServlet {
    @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     try {
-        // Lấy danh sách đơn thuốc từ lớp DoctorDB
         DoctorDB doctorDB = new DoctorDB();
-        ArrayList<Prescription> prescriptions = doctorDB.getPrescription();
-        
-        // Đặt danh sách đơn thuốc vào thuộc tính của request
-        request.setAttribute("prescriptions", prescriptions);
-        
-        // Chuyển tiếp request đến prescription.jsp để hiển thị dữ liệu
+        ArrayList<Prescription> doctors = doctorDB.getPrescription();
+        request.setAttribute("doctors", doctors);
         request.getRequestDispatcher("prescription.jsp").forward(request, response);
         
     } catch (Exception e) {
-        // Xử lý ngoại lệ bằng cách chuyển hướng tới errorPage.jsp
-        request.setAttribute("error", e.getMessage()); // truyền thông tin lỗi vào request để hiển thị trang lỗi
+        request.setAttribute("error", e.getMessage()); 
         request.getRequestDispatcher("errorPage.jsp").forward(request, response);
     }
 }
