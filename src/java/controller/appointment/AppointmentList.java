@@ -69,12 +69,15 @@ public class AppointmentList extends HttpServlet {
             request.setAttribute("error", "You are not permission!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
-
+            if( !userRole.equals("doctor") && !userRole.equals("nurse")){
+                request.setAttribute("error", "You are not permission!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            }else{
             AppointmentDAO appointmentDAO = new AppointmentDAO();
             ArrayList<AppointmentDTO> appointmentList = appointmentDAO.getAppointment();
             request.setAttribute("appList", appointmentList);
             request.getRequestDispatcher("view/AppointmentList.jsp").forward(request, response);
-
+            } 
         }
     }
 
