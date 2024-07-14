@@ -113,7 +113,7 @@
                 </c:choose>
                 <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
                 <!--                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>-->
-                <a href="ViewEmployeeList" class="btn btn-primary py-2 px-4 ms-3">Employee List</a>
+                <a href="appointmentList" class="btn btn-primary py-2 px-4 ms-3">Appointment List</a>
             </div>
         </nav>
         <!-- Navbar End -->

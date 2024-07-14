@@ -99,6 +99,12 @@ public class LoginServlet extends HttpServlet {
                 User user = userDAO.checkUser(userName);
                 if (user != null && user.getPassword().equals(passWord)) {
                     session.setAttribute("currentUser", user);
+
+                    // Tạo cookie và thêm vào response
+                    Cookie userCookie = new Cookie("username", userName);
+                    userCookie.setMaxAge(24 * 60 * 60); // Cookie có thời hạn 1 ngày
+                    response.addCookie(userCookie);
+
                     Authorization author = new Authorization();
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();

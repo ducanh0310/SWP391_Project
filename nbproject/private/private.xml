@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/dao/EmployeeDAO.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/EmployeeList.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/ViewEmployeeDetailsServlet.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/ExamminationResultList.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/controller/admin/DeleteEmployee.java</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/employee/admin/ViewEmployeeDetails.jsp</file>
-            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/model/Appointment.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/dao/ServiceDAO.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/src/java/dao/DBPatientProfile.java</file>
+            <file>file:/D:/FPT/5_SU24/SWP391/SWP391_Project/web/view/ExamminationResult.jsp</file>
         </group>
     </open-files>
 </project-private>
