@@ -224,11 +224,14 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            
-                                            <a href="AddExaminationResult?appId=${infor.id}" class="btn btn-info">Save</a>
+                                            <label for="fileName">File Name:</label>
+                                            <input type="file" id="fileName" name="fileName" class="form-control" placeholder="Enter file name">
                                         </div>
 
-                                        
+
+                                        <button class="mb-3" type="submit">
+                                            Save
+                                        </button>
 
                                     </form>
                                     <div class="col-md-4">
