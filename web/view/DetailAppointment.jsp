@@ -265,9 +265,9 @@
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <c:if test="${appDetails.status eq 'Not started'}">
+                                        <c:if test="${appDetails.status != 'Cancelled' || appDetails.status != 'Completed'}">
                                             <div class="col-sm-12">
-                                                <a class="btn btn-info "  href="AddExaminationResult?appId=${appDetails.id}">Edit</a>
+                                                <a class="btn btn-info "  href="view/FindFile.jsp">Edit</a>
                                             </div>
                                             <div class="row" style="margin-top: 10px">
                                             <div class="col-sm-12">

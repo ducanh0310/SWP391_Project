@@ -156,66 +156,66 @@
                             <div class="card mb-3">
                                 <div class="card-body">
 
-                                    <form action="AddExaminationResult" method="post">
+                                    <form action="EditExaminationResultController" method="post">
 
                                         <div class="mb-3">
                                             <label for="idInput" class="form-label">ID</label>
-                                            <input type="text" id="idInput" name="id" value="${infor.id}" class="form-control" readonly>
+                                            <input type="text" id="idInput" name="id" value="${infor.id}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="patientIdInput" class="form-label">Patient ID</label>
-                                            <input type="text" id="patientIdInput" name="patientId" value="${infor.patientId}" class="form-control" readonly>
+                                            <input type="text" id="patientIdInput" name="patientId" value="${infor.patientId}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="patientNameInput" class="form-label">Patient Name</label>
-                                            <input type="text" id="patientNameInput" name="patientName" value="${infor.patientName}" class="form-control" readonly>
+                                            <input type="text" id="patientNameInput" name="patientName" value="${infor.patientName}" class="form-control">
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="serviceInput" class="form-label">Service</label>
-                                            <input type="text" id="serviceInput" name="service" value="${infor.service}" class="form-control" readonly>
+                                            <input type="text" id="serviceInput" name="service" value="${infor.service}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="priceInput" class="form-label">Price</label>
-                                            <input type="text" id="priceInput" name="price" value="${infor.price}" class="form-control" readonly>
+                                            <input type="text" id="priceInput" name="price" value="${infor.price}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="doctorInput" class="form-label">Doctor</label>
-                                            <input type="text" id="doctorInput" name="doctor" value="${infor.doctor}" class="form-control" readonly>
+                                            <input type="text" id="doctorInput" name="doctor" value="${infor.doctor}" class="form-control">
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="bookingDateInput" class="form-label">Booking Date</label>
-                                            <input type="text" id="bookingDateInput" name="bookingDate" value="${infor.bookingDate}" class="form-control" readonly>
+                                            <input type="text" id="bookingDateInput" name="bookingDate" value="${infor.bookingDate}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="startTimeInput" class="form-label">Start Time</label>
-                                            <input type="text" id="startTimeInput" name="startTime" value="${infor.startTime}" class="form-control" readonly>
+                                            <input type="text" id="startTimeInput" name="startTime" value="${infor.startTime}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="endTimeInput" class="form-label">End Time</label>
-                                            <input type="text" id="endTimeInput" name="endTime" value="${infor.endTime}" class="form-control" readonly>
+                                            <input type="text" id="endTimeInput" name="endTime" value="${infor.endTime}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="roomInput" class="form-label">Room</label>
-                                            <input type="text" id="roomInput" name="room" value="${infor.room}" class="form-control" readonly>
+                                            <input type="text" id="roomInput" name="room" value="${infor.room}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="statusInput" class="form-label">Status</label>
-                                            <input type="text" id="statusInput" name="status" value="${infor.status}" class="form-control" readonly>
+                                            <input type="text" id="statusInput" name="status" value="${infor.status}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="payStatusInput" class="form-label">Pay Status</label>
-                                            <input type="text" id="payStatusInput" name="payRevervationStatus" value="${infor.payRevervationStatus}" class="form-control" readonly>
+                                            <input type="text" id="payStatusInput" name="payRevervationStatus" value="${infor.payRevervationStatus}" class="form-control" >
                                         </div>
 
                                         <div class="mb-3">
@@ -223,13 +223,8 @@
                                             <textarea id="descriptionInput" name="description" class="form-control" placeholder="Enter description"></textarea>
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label for="fileName">File Name:</label>
-                                            <input type="file" id="fileName" name="fileName" class="form-control" placeholder="Enter file name">
-                                        </div>
                                         <button class="mb-3" type="submit">Save</button>
                                     </form>
-                                   
                                     <div class="col-md-4">
                                         <div id="draftsList"></div>
                                     </div>
@@ -275,6 +270,43 @@
 
             <!-- Template Javascript -->
             <script src="../../js/main.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Sự kiện khi người dùng chọn file
+                    $('#fileName').on('change', function (e) {
+                        var file = e.target.files[0];
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            var content = e.target.result;
+                            fillFormFields(content); // Gọi hàm để điền dữ liệu vào form
+                        };
+
+                        reader.readAsText(file); // Đọc file dưới dạng văn bản
+                    });
+
+                    // Hàm để điền dữ liệu vào các trường input trong form
+                    function fillFormFields(content) {
+                        var data = JSON.parse(content); // Giả sử dữ liệu trong file là JSON
+
+                        // Điền dữ liệu từ object vào các trường input
+                        $('#idInput').val(data.id);
+                        $('#patientIdInput').val(data.patientId);
+                        $('#patientNameInput').val(data.patientName);
+                        $('#serviceInput').val(data.service);
+                        $('#priceInput').val(data.price);
+                        $('#doctorInput').val(data.doctor);
+                        $('#bookingDateInput').val(data.bookingDate);
+                        $('#startTimeInput').val(data.startTime);
+                        $('#endTimeInput').val(data.endTime);
+                        $('#roomInput').val(data.room);
+                        $('#statusInput').val(data.status);
+                        $('#payStatusInput').val(data.payRevervationStatus);
+                        $('#descriptionInput').val(data.description);
+                    }
+                });
+
+            </script>
     </body>
 
 </html> 

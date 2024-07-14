@@ -17,13 +17,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.AppointmentDTO;
+import model.ExaminationResult;
 
 /**
  *
@@ -107,6 +110,25 @@ public class AddExaminationResult extends HttpServlet {
     String status = request.getParameter("status");
     String payStatus = request.getParameter("payRevervationStatus");
     String description = request.getParameter("description");
+    
+    
+    //set to session
+    HttpSession session = request.getSession();
+    ExaminationResult exam = new ExaminationResult();
+    exam.setId(Integer.parseInt(id));
+    exam.setPatientId(Integer.parseInt(patientId));
+    exam.setPatientName(patientName);
+    exam.setService(service);
+    exam.setPrice(Integer.parseInt(price));
+    exam.setDoctor(doctor);
+    exam.setBookingDate(Date.valueOf(bookingDate)); 
+    exam.setStartTime(startTime);
+    exam.setEndTime(endTime);
+    exam.setRoom(Integer.parseInt(room));
+    exam.setStatus(status);
+    exam.setDescription(description);
+    session.setAttribute(id, exam);
+    
     String fileName = request.getParameter("fileName");
 
     // Define the directory and file path

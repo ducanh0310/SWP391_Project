@@ -127,7 +127,7 @@ public class LoginServlet extends HttpServlet {
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
                             session.setAttribute("nurse", emp);
                             session.setAttribute("userRole", "nurse");
-                            request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
+                            request.getRequestDispatcher("view/employee/Nurse/home.jsp").forward(request, response);
                         } else {
                             session.setAttribute("receptionist", emp);
                             session.setAttribute("userRole", "receptionist");

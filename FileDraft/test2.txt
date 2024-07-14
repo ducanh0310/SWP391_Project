@@ -1,0 +1,13 @@
+ID: 6
+Patient ID: 2
+Patient Name: Stephie McRandom
+Service: Teeth Cleanings
+Price: 75
+Doctor: Céline Wan
+Booking Date: 2024-06-15
+Start Time: 08:00:00.0000000
+End Time: 08:30:00.0000000
+Room: 101
+Status: Not started
+Pay Status: Not pay
+Description: qýerqwe
