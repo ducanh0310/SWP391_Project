@@ -180,7 +180,7 @@
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Welcome, admin</h5>
-                                <a href="AddEmployee" class="btn btn-primary btn-sm">Add New Employee</a>
+                               
                             </div>
 
 
