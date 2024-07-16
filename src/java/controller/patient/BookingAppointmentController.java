@@ -54,44 +54,59 @@ public class BookingAppointmentController extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             // Take parameters from the request
-            Date dateBook = Date.valueOf(request.getParameter("date"));            
-            String service = request.getParameter("service");
-            String serviceName = request.getParameter("serviceName");
+            Date dateBook = Date.valueOf(request.getParameter("date"));
+//            String service = request.getParameter("service");
+            String[] serviceIds = request.getParameterValues("service");
+            //String serviceName = request.getParameter("serviceName");
 
             DBBookingMedicalAppointment db = new DBBookingMedicalAppointment();
-            ArrayList<Slot> arrAllSlot = db.getAllSlot(service);
-            ArrayList<Slot> arrExitSlot = db.getExistSlot(service, dateBook);
+
             ArrayList<Slot> arrRestSlot = new ArrayList<>();
 
             // Get the current time
             LocalTime now = LocalTime.now();
             LocalDate today = LocalDate.now();
-            
-            for (Slot slotAll : arrAllSlot) {
-                boolean isExist = false;
-                for (Slot slotExist : arrExitSlot) {
-                    //Slots are not booked by patient 
-                    if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
-                            && slotExist.getStatusBook().getId() != 4 && slotExist.getStatusBook().getId() != 1) {
-                        isExist = true;
-                        break;
+            for (String serviceId : serviceIds) {
+                ArrayList<Slot> arrAllSlot = db.getAllSlot(serviceId);
+                ArrayList<Slot> arrExitSlot = db.getExistSlot(serviceId, dateBook);
+                for (Slot slotAll : arrAllSlot) {
+                    boolean isExist = false;
+                    for (Slot slotExist : arrExitSlot) {
+                        //Slots are not booked by patient 
+                        if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
+                                && slotExist.getStatusBook().getId() != 4 && slotExist.getStatusBook().getId() != 1) {
+                            isExist = true;
+                            break;
+                        }
+                        if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
+                                && slotExist.getStatusBook().getId() == 1 && slotExist.getBookingAppointment().getReservationStatus().equals("Pay reser")) {
+                            isExist = true;
+                            break;
+                        }
                     }
-                    if (slotAll.getId() == slotExist.getId() && slotAll.getDoctor().getId() == slotExist.getDoctor().getId() && slotAll.getRoom().getId() == slotExist.getRoom().getId()
-                             && slotExist.getStatusBook().getId() == 1 && slotExist.getBookingAppointment().getReservationStatus().equals("Pay reser")) {
-                        isExist = true;
-                        break;
+
+                    // Check if the slot's start time is after the current time
+                    LocalDate slotDate = dateBook.toLocalDate();
+                    LocalTime slotStartTime = slotAll.getStartedTime();
+
+                    if (!isExist && (slotDate.isAfter(today) || (slotDate.isEqual(today) && slotStartTime.isAfter(now)))) {
+                        arrRestSlot.add(slotAll);
                     }
-                }
-                
-                // Check if the slot's start time is after the current time
-                LocalDate slotDate = dateBook.toLocalDate(); 
-                LocalTime slotStartTime = slotAll.getStartedTime();
-                
-                if (!isExist && (slotDate.isAfter(today) || (slotDate.isEqual(today) && slotStartTime.isAfter(now)))) {
-                    arrRestSlot.add(slotAll);
                 }
             }
-
+//            for (Slot slot : arrRestSlot) {
+//                out.println(slot.getRoom().getName());
+//                out.println(slot.getDoctor().getName());
+//                out.println(slot.getStartedTime());
+//                out.println(slot.getEndTime());
+//                out.println(slot.getId());
+//                out.println(slot.getDoctor().getId());
+//                out.println(dateBook);
+//                out.println(slot.getService().getId());
+//                out.println(slot.getService().getName());
+//                out.println(slot.getRoom().getId());
+//            }
+            
             if (arrRestSlot.isEmpty()) {
                 out.print("{\"success\": false, \"message\": \"No available slots.\"}");
             } else {
@@ -106,8 +121,8 @@ public class BookingAppointmentController extends HttpServlet {
                             .append("\"idSlot\": \"").append(slot.getId()).append("\",")
                             .append("\"idDoctor\": \"").append(slot.getDoctor().getId()).append("\",")
                             .append("\"date\": \"").append(dateBook).append("\",")
-                            .append("\"idService\": \"").append(service).append("\",")
-                            .append("\"serviceName\": \"").append(serviceName).append("\",")
+                            .append("\"idService\": \"").append(slot.getService().getId()).append("\",")
+                            .append("\"serviceName\": \"").append(slot.getService().getName()).append("\",")
                             .append("\"idRoom\": \"").append(slot.getRoom().getId()).append("\"")
                             .append("},");
                 }

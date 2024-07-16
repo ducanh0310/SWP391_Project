@@ -207,11 +207,7 @@
                 padding: 5px 5px;
                 height: 35px;
             }
-            /*            .mb-0{
-                            font-weight:500;
-                            font-size:26px;
-                            padding-left:20px;
-                        }*/
+
             /* DataTable Customization */
             .dataTables_wrapper .dataTables_paginate {
                 display: flex;
@@ -467,12 +463,14 @@
                 <ul>
                     <li>- You must pay a reservation fee before we can confirm your appointment.</li>
                     <li>- If you cancel your appointment, your paying reservation fee does not refund.</li>
+                    <li>- If you do not come to the examination, your appointment will be automatically canceled at the end of the day.</li>
                     <li>- If your appointment are confirmed, please wait a minute.</li>
-                    <li>- If you have paid the reservation fee and your appointment has not been confirmed, we sincerely apologize and you can edit another slot or you can contact to us by the information in the end page.<b style="color: red">(rare occur)</b></li>
+                    <li>- If you have paid the reservation fee and your appointment has not been confirmed, we sincerely apologize and you can edit another slot or you can contact to us by the information in the upper right corner.<b style="color: red">(rare occur)</b></li>
+
                 </ul>
             </div>
         </main>
-        
+
         <!--View Medical Appointment History Start-->
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">                   
@@ -481,6 +479,99 @@
                         <h5 class="mb-0">Medical Appointment History</h5>
                     </div>
                     <div style="color: red; margin-left: 10px">${payNotification}</div>
+                    <!-- Filter Dropdown -->
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filters
+                        </button>
+                        <form method="POST">
+                            <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterService" value="true"> Service:
+                                        <select name="service">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrService}" var="bAH">
+                                                <option value="${bAH.service.name}">${bAH.service.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterDoctor" value="true"> Doctor:
+                                        <select name="doctor">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrDoctor}" var="bAH">
+                                                <option value="${bAH.doctor.name}">${bAH.doctor.name}</option>                                                  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterPrice" value="true"> Price of Service:
+                                        <select name="price">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrPrice}" var="bAH">
+                                                <option value="${bAH.service.price}">${bAH.service.price}$</option>                                                  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterPayment" value="true"> Payment:
+                                        <select name="payment">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrPay}" var="bAH">
+                                                <option value="${bAH.reservationStatus}">${bAH.reservationStatus}</option>                                                  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterTime" value="true"> Examination Time:
+                                        <select name="time">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrDate}" var="bAH">
+                                                <option value="${bAH.date}">${bAH.date}</option>                                                  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterRoom" value="true"> Room:
+                                        <select name="room">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrRoom}" var="bAH">
+                                                <option value="${bAH.room.name}">${bAH.room.name}</option>                                                  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="filterStatus" value="true"> Status:
+                                        <select name="status">
+                                            <option value="">Select</option>
+                                            <c:forEach items="${requestScope.arrStatus}" var="bAH">
+                                                <option value="${bAH.statusBook.name}">${bAH.statusBook.name}</option>                                                  
+                                            </c:forEach>
+                                        </select>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <button class="btn btn-primary" type="submit">Apply</button>
+                                </li>
+                            </ul>
+                    </div>
+                    </form>
+
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap" id="myTable">
                             <thead class="thead-light">
@@ -490,8 +581,7 @@
                                     <th scope="col">Price of Service <i class="fas fa-sort"></th>
                                     <th scope="col">Payment <i class="fas fa-sort"></th>
                                     <th scope="col">Doctor <i class="fas fa-sort"></th>
-                                    <th scope="col">Examination Time <i class="fas fa-sort"></th>
-                                    
+                                    <th scope="col">Examination Time <i class="fas fa-sort"></th>                                   
                                     <th scope="col">Room <i class="fas fa-sort"></th>
                                     <th scope="col">Status <i class="fas fa-sort"></th>
                                     <th></th>
@@ -512,13 +602,13 @@
                                         <td>
                                             <span>
                                                 <c:if test="${bAH.reservationStatus =='Not pay'}">
-                                                    Don't pay reservation fee.
+                                                    Don't pay reservation fee(Not pay).
                                                 </c:if>
                                                 <c:if test="${bAH.reservationStatus =='Pay reser'}">
-                                                    50$ (Reservation fee)
+                                                    50$ (Reservation fee/Pay reser)
                                                 </c:if>
                                                 <c:if test="${bAH.reservationStatus =='Pay ser'}">
-                                                    Paid service
+                                                    Paid service(Pay ser)
                                                 </c:if>
                                             </span>
                                         </td>
@@ -529,7 +619,7 @@
                                             <span>${bAH.date}</span><br>
                                             <span>${bAH.slot.startedTime}-${bAH.slot.endTime}</span>
                                         </td>
-                                      
+
                                         <td>
                                             <span>${bAH.room.name}</span>
                                         </td>
@@ -693,7 +783,7 @@
                                                                     "info": "Showing _START_ to _END_ of _TOTAL_ entries",
                                                                     "infoEmpty": "Showing 0 to 0 of 0 entries",
                                                                     "infoFiltered": "(filtered from _MAX_ total entries)",
-                                                                    "search": "Search:",
+
                                                                     "paginate": {
                                                                         "first": "First",
                                                                         "last": "Last",
@@ -703,6 +793,7 @@
                                                                 },
                                                                 "dom": '<"header_wrap"lf>t<"footer_wrap"ip>',
                                                                 "pagingType": "full_numbers",
+                                                                "searching": false,
                                                                 "pageLength": 10
 
                                                             });
@@ -710,17 +801,17 @@
 
 
 
-
-                                                        function searchServices(event) {
-                                                            var keyword = event.target.value.toLowerCase();
-                                                            var rows = document.querySelectorAll("#appointmentHistoryBody tr");
-
-                                                            rows.forEach(function (row) {
-                                                                var text = row.textContent.toLowerCase();
-                                                                var displayStyle = text.includes(keyword) ? "table-row" : "none";
-                                                                row.style.display = displayStyle;
-                                                            });
-                                                        }
+//
+//                                                        function searchServices(event) {
+//                                                            var keyword = event.target.value.toLowerCase();
+//                                                            var rows = document.querySelectorAll("#appointmentHistoryBody tr");
+//
+//                                                            rows.forEach(function (row) {
+//                                                                var text = row.textContent.toLowerCase();
+//                                                                var displayStyle = text.includes(keyword) ? "table-row" : "none";
+//                                                                row.style.display = displayStyle;
+//                                                            });
+//                                                        }
 
 
 

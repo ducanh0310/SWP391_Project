@@ -34,7 +34,7 @@ public class DBBookingMedicalAppointment extends DBContext {
         ArrayList<Slot> arrSlot = new ArrayList<>();
         try {
             String sql = """
-                                     select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime,  s.id, e.employee_id from Room r
+                                     select r.name as room,r.id as rId, e.name as doctor, s.startedTime, s.endTime,  s.id, e.employee_id, pc.procedure_id, pc.procedure_name from Room r
                                      join Procedure_codes pc on pc.procedure_id = r.idService
                                      join Employee e on e.employee_id = pc.doctor_id
                                      join Slot s on pc.procedure_id = s.idService
@@ -57,6 +57,11 @@ public class DBBookingMedicalAppointment extends DBContext {
                 //Time slot
                 slot.setStartedTime(rs.getTimestamp("startedTime").toLocalDateTime().toLocalTime());
                 slot.setEndTime(rs.getTimestamp("endTime").toLocalDateTime().toLocalTime());
+                //service
+                Service service = new Service();
+                service.setId(rs.getInt("procedure_id"));
+                service.setName(rs.getString("procedure_name"));
+                slot.setService(service);
                 //ID slot
                 slot.setId(rs.getInt("id"));
 
@@ -204,6 +209,119 @@ public class DBBookingMedicalAppointment extends DBContext {
                 Room room = new Room();
                 room.setName(rs.getString("room"));
                 bah.setRoom(room);
+                //Status
+                StatusBook statusBook = new StatusBook();
+                statusBook.setName(rs.getString("status"));
+                statusBook.setId(rs.getInt("idStatus"));
+                bah.setStatusBook(statusBook);
+                // Reservation fee status
+                bah.setReservationStatus(rs.getString("payReservationStatus"));
+                //add arrayList
+                arrBookHistory.add(bah);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrBookHistory;
+    }
+
+    public ArrayList<BookingAppointmentHistory> showBookHistoryFilter(int patientId, String filterService, String filterDoctor, String filterPrice, String filterPayment, String filterTime, String filterRoom, String filterStatus, String service, String doctor, String price, String payment, String time, String room, String status) {
+        ArrayList<BookingAppointmentHistory> arrBookHistory = new ArrayList<>();
+        try {
+            StringBuilder sql = new StringBuilder(
+                    "SELECT ba.id, ba.patient_id, pc.procedure_name AS service, pc.price, e.name AS doctor, ba.booking_date, s.startedTime, s.endTime, r.name AS room, sb.id AS idStatus, sb.name AS status, ba.payReservationStatus "
+                    + "FROM Booking_Appointment ba "
+                    + "JOIN Procedure_codes pc ON pc.procedure_id = ba.service_id "
+                    + "JOIN Employee e ON e.employee_id = ba.doctor_id "
+                    + "JOIN Slot s ON s.id = ba.slot_id "
+                    + "JOIN Room r ON r.id = ba.room_id "
+                    + "JOIN Status_Book sb ON sb.id = ba.status_id "
+                    + "JOIN Patient p ON p.Patient_id = ba.patient_id "
+                    + "WHERE ba.patient_id = ? ");
+
+            if (filterService != null && "true".equals(filterService)) {
+                sql.append("AND pc.procedure_name = ? ");
+            }
+
+            if (filterDoctor != null && "true".equals(filterDoctor)) {
+                sql.append("AND e.name = ? ");
+            }
+
+            if (filterPrice != null && "true".equals(filterPrice)) {
+                sql.append("AND pc.price = ? ");
+            }
+
+            if (filterPayment != null && "true".equals(filterPayment)) {
+                sql.append("AND ba.payReservationStatus = ? ");
+            }
+
+            if (filterTime != null && "true".equals(filterTime)) {
+                sql.append("AND ba.booking_date =? ");
+            }
+
+            if (filterRoom != null && "true".equals(filterRoom)) {
+                sql.append("AND r.name = ? ");
+            }
+
+            if (filterStatus != null && "true".equals(filterStatus)) {
+                sql.append("AND sb.name = ? ");
+            }
+
+            PreparedStatement stm = connection.prepareStatement(sql.toString());
+            stm.setInt(1, patientId);
+              int index = 2;
+            if (filterService != null && "true".equals(filterService)) {
+                stm.setString(index++, service);
+            }
+            if (filterDoctor != null && "true".equals(filterDoctor)) {
+                stm.setString(index++, doctor);
+            }
+            if (filterPrice != null && "true".equals(filterPrice)) {
+                stm.setString(index++, price);
+            }
+            if (filterPayment != null && "true".equals(filterPayment)) {
+                stm.setString(index++, payment);
+            }
+            if (filterTime != null && "true".equals(filterTime)) {
+                stm.setString(index++, time);
+            }
+            if (filterRoom != null && "true".equals(filterRoom)) {
+                stm.setString(index++, room);
+            }
+            if (filterStatus != null && "true".equals(filterStatus)) {
+                stm.setString(index, status);
+            }
+            stm.setInt(1, patientId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                BookingAppointmentHistory bah = new BookingAppointmentHistory();
+                bah.setID(rs.getInt("id"));
+                //Patient
+                Patient patient = new Patient();
+                patient.setId(rs.getInt("patient_id"));
+                bah.setPatient(patient);
+                //Service
+                Service service1 = new Service();
+                service1.setName(rs.getString("service"));
+                service1.setPrice(rs.getString("price"));
+                bah.setService(service1);
+                //Doctor
+                Employee doctor1 = new Employee();
+                doctor1.setName(rs.getString("doctor"));
+                bah.setDoctor(doctor1);
+                //Date
+                bah.setDate(rs.getDate("booking_date"));
+                //Slot
+                Slot slot = new Slot();
+                slot.setStartedTime(rs.getTimestamp("startedTime").toLocalDateTime().toLocalTime());
+                slot.setEndTime(rs.getTimestamp("endTime").toLocalDateTime().toLocalTime());
+
+                bah.setSlot(slot);
+                //Room
+                Room room1 = new Room();
+                room1.setName(rs.getString("room"));
+                bah.setRoom(room1);
                 //Status
                 StatusBook statusBook = new StatusBook();
                 statusBook.setName(rs.getString("status"));

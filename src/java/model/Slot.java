@@ -14,7 +14,7 @@ public class Slot {
     private int id;
     private LocalTime startedTime;
     private LocalTime endTime;
-    private int idService;
+    private Service service;
     private Room room;
     private Employee doctor; 
     private StatusBook statusBook;
@@ -80,12 +80,14 @@ public class Slot {
         this.endTime = endTime;
     }
 
-    public int getIdService() {
-        return idService;
+    public Service getService() {
+        return service;
     }
 
-    public void setIdService(int idService) {
-        this.idService = idService;
+    public void setService(Service service) {
+        this.service = service;
     }
+
+
         
 }

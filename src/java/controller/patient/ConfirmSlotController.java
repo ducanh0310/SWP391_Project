@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.patient;
 
 import dao1.DBBookingMedicalAppointment;
@@ -26,9 +25,8 @@ import model.User;
  *
  * @author Vu Minh Quan
  */
-@WebServlet(name="ConfirmSlotController", urlPatterns={"/patient/confirmSlot"})
+@WebServlet(name = "ConfirmSlotController", urlPatterns = {"/patient/confirmSlot"})
 public class ConfirmSlotController extends HttpServlet {
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,38 +39,58 @@ public class ConfirmSlotController extends HttpServlet {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
         try {
-            //Get parameter from server
-            String date = request.getParameter("date");
-            String service = request.getParameter("serviceId");
-            String doctorId = request.getParameter("doctorId");
-            String slotId = request.getParameter("slotId");
-            String roomId = request.getParameter("roomId");
+            // Assuming maximum 10 slots to simplify. Adjust as needed.
+            int maxSlots = 10;
+            ArrayList<BookingAppointment> appointments = new ArrayList<>();
+            
+            for (int i = 0; i < maxSlots; i++) {
+                String slotIdParam = "slots[" + i + "][slotId]";
+                String doctorIdParam = "slots[" + i + "][doctorId]";
+                String roomIdParam = "slots[" + i + "][roomId]";
+                String dateParam = "slots[" + i + "][date]";
+                String serviceIdParam = "slots[" + i + "][serviceId]";
 
-            
-            //Insert database
-            BookingAppointment ba = new BookingAppointment();
-            ba.setBookingDate(Date.valueOf(date));
-            ba.setServiceId(Integer.parseInt(service));
-            ba.setRoomId(Integer.parseInt(roomId));
-            ba.setDoctorId(Integer.parseInt(doctorId));
-            ba.setPatiendId(Integer.parseInt(currentUser.getPatient_Id()));
-            ba.setSlotId(Integer.parseInt(slotId));
-            ba.setStatusId(1);           
+                String slotId = request.getParameter(slotIdParam);
+                String doctorId = request.getParameter(doctorIdParam);
+                String roomId = request.getParameter(roomIdParam);
+                String date = request.getParameter(dateParam);
+                String serviceId = request.getParameter(serviceIdParam);
+
+                // Check if slotId is null to determine if there are no more slots
+                if (slotId == null) {
+                    break;
+                }
+
+                // Create and populate BookingAppointment object
+                BookingAppointment ba = new BookingAppointment();
+                ba.setSlotId(Integer.parseInt(slotId));
+                ba.setDoctorId(Integer.parseInt(doctorId));
+                ba.setRoomId(Integer.parseInt(roomId));
+                ba.setBookingDate(Date.valueOf(date));
+                ba.setServiceId(Integer.parseInt(serviceId));
+                ba.setPatiendId(Integer.parseInt(currentUser.getPatient_Id()));
+                ba.setStatusId(1); // Assuming 1 represents some kind of default status
+
+                appointments.add(ba);
+            }
+
+            // Insert each appointment into the database
             DBBookingMedicalAppointment dbBookingMedicalAppointment = new DBBookingMedicalAppointment();
-            dbBookingMedicalAppointment.insertSlot(ba);
-            
-            // Xóa tất cả các thuộc tính trong session
+            for (BookingAppointment appointment : appointments) {
+                dbBookingMedicalAppointment.insertSlot(appointment);
+            }
+
+            // Clear session attributes except 'currentUser'
             Enumeration<String> attributeNames = session.getAttributeNames();
             while (attributeNames.hasMoreElements()) {
-                
                 String attributeName = attributeNames.nextElement();
-                if(!attributeName.equals("currentUser")){
+                if (!attributeName.equals("currentUser")) {
                     session.removeAttribute(attributeName);
                 }
-                
             }
-            session.setAttribute("payNotification", "***Your appointment are verified when you pay reservation fee by clicking on 'Pay' button.***");
-            session.setAttribute("bookSuccess", "Appointment booked successfully");
+
+            session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
+            session.setAttribute("bookSuccess", "Appointments booked successfully");
             response.sendRedirect("viewAppointmentHistory");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,6 +109,3 @@ public class ConfirmSlotController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-
