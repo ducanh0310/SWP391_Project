@@ -80,10 +80,10 @@ public class searchExam extends HttpServlet {
             request.setAttribute("id", patientId);
             if(patients !=null){
                 request.setAttribute("patients", patients);
-                request.getRequestDispatcher("searchExamPatient.jsp").forward(request, response);
+                request.getRequestDispatcher("prescription.jsp").forward(request, response);
             }else{
                 request.setAttribute("errorMessage", "Cant't not found patient");
-                request.getRequestDispatcher("prescription.jsp").forward(request, response);
+                request.getRequestDispatcher("searchExamPatient.jsp").forward(request, response);
             }
             
         } catch (Exception e) {

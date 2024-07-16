@@ -80,38 +80,36 @@ public class DoctorDB extends DBContext {
         return null; // Replace with actual connection code
     }
 
-    public PatientExamResult getPatientExamResult(int pid) {
-        try {
-            String sql = "SELECT [exam_id]\n"
-                    + "      ,[pid]\n"
-                    + "      ,[exam_date]\n"
-                    + "      ,[diagnosis]\n"
-                    + "      ,[symptoms]\n"
-                    + "      ,[test_result]\n"
-                    + "  FROM [dbo].[PatientExamResult]"
-                    + "WHERE [pid]=?";
-
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, pid);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                PatientExamResult p=new PatientExamResult();
-                Patient pa = new Patient();
-                p.setExam_id(rs.getInt("exam_id"));
-                pa.setId(rs.getInt("pid"));
-                p.setPid(pa);
-                p.setExam_date(rs.getDate("exam__date"));
-                p.setDiagnosis(rs.getString("diagnosis"));
-                p.setSymptoms(rs.getString("symptoms"));
-                p.setTest_result(rs.getString("test__result"));
-                return p;
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, null, ex);
+   public PatientExamResult getPatientExamResult(int pid) {
+    PatientExamResult p = null;
+    try {
+        String sql = "SELECT [exam_id], [pid], [exam_date], [diagnosis], [symptoms], [test_result] " +
+                     "FROM [dbo].[PatientExamResult] " +
+                     "WHERE [pid] = ?";
+        
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setInt(1, pid);
+        ResultSet rs = stm.executeQuery();
+        
+        if (rs.next()) {
+            p = new PatientExamResult();
+            Patient pa = new Patient();
+            p.setExam_id(rs.getInt("exam_id"));
+            pa.setId(rs.getInt("pid"));
+            p.setPid(pa);
+            p.setExam_date(rs.getDate("exam_date"));
+            p.setDiagnosis(rs.getString("diagnosis"));
+            p.setSymptoms(rs.getString("symptoms"));
+            p.setTest_result(rs.getString("test_result"));
         }
-        return null;
+        
+        rs.close();
+        stm.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, "Error retrieving PatientExamResult", ex);
     }
+    return p;
+}
 
     public static void main(String[] args) {
         DoctorDB d = new DoctorDB();

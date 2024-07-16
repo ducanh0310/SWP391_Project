@@ -686,7 +686,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="searchExamPatient.jsp">
+                    <a href="searchExam">
                         <svg>
                         <use xlink:href="#capsule-symbol"></use>
                         </svg>
