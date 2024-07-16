@@ -90,8 +90,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
+                                <a class="nav-link" href="Test.jsp">
+                                    <i class="bi bi-clipboard-check"></i> Profile
                                 </a>
                             </li>
                             <li class="nav-item">

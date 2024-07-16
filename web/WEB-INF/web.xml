@@ -36,6 +36,10 @@
         <servlet-name>DoctorController</servlet-name>
         <servlet-class>controller.employee.DoctorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddPrescription</servlet-name>
+        <servlet-class>controller.employee.AddPrescription</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/view</url-pattern>
@@ -71,5 +75,9 @@
     <servlet-mapping>
         <servlet-name>DoctorController</servlet-name>
         <url-pattern>/prescription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPrescription</servlet-name>
+        <url-pattern>/addPrescription</url-pattern>
     </servlet-mapping>
 </web-app>

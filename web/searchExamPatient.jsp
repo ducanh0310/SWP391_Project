@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
     <head>
@@ -12,6 +13,8 @@
         <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js' rel='stylesheet' type='text/css'>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
     </head>
     <style>
         /* RESET RULES
@@ -640,7 +643,7 @@
             line-height: 1.42857143;
             vertical-align: top;
             border-top: 1px solid #ddd;
-            font-size: medium;
+            font-size: small;
         }
         .text-primary {
             --x-text-opacity: 1;
@@ -652,6 +655,116 @@
         body{
             background: #f7f7ff;
             margin-top:0px;
+        }
+
+        .col-md-7 {
+            width: 100%;
+        }
+        .col-md-offset-1 {
+            margin-left: 0;
+        }
+        body {
+            background-color: #fbfbfb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .subscribe_now {
+            h4 {
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #34495e;
+                font-weight: 800;
+                text-align: center;
+            }
+            p {
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: 2px;
+                color: #34495e;
+                text-align: center;
+            }
+        }
+
+        .subscribe_form {
+            max-width: 470px;
+            width: 100%;
+            margin: 0 auto;
+            box-shadow: 0px 2px 5px 0px rgba(10, 6, 20, 0.24);
+            &:focus {
+                outline: none;
+            }
+            .form-control {
+                border: none;
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+            input {
+                height: 44px;
+            }
+            button {
+                border: none;
+                height: 44px;
+                background-color: #0ed085;
+                color: #fff;
+                margin: -1px;
+                border-radius: 0;
+                width: 135px;
+                text-transform: uppercase;
+                position: relative;
+                transition: all ease 0.3s;
+                -webkit-transition: all ease 0.3s;
+                -moz-transition: all ease 0.3s;
+                -o-transition: all ease 0.3s;
+                -ms-transition: all ease 0.3s;
+                &:hover, &:focus, &:active, &:visited {
+                    color: #fff;
+                    background-color: rgba(14, 208, 133, 0.77);
+                    outline: none;
+                    transition: all ease 0.3s;
+                    -webkit-transition: all ease 0.3s;
+                    -moz-transition: all ease 0.3s;
+                    -o-transition: all ease 0.3s;
+                    -ms-transition: all ease 0.3s;
+                    &:before {
+                        background-color: rgba(14, 208, 133, 0.77);
+                        transition: all ease 0.3s;
+                        -webkit-transition: all ease 0.3s;
+                        -moz-transition: all ease 0.3s;
+                        -o-transition: all ease 0.3s;
+                        -ms-transition: all ease 0.3s;
+                    }
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    height: 1px;
+                    background-color: #0ed085;
+                    width: 100%;
+                    transition: all ease 0.3s;
+                    -webkit-transition: all ease 0.3s;
+                    -moz-transition: all ease 0.3s;
+                    -o-transition: all ease 0.3s;
+                    -ms-transition: all ease 0.3s;
+                }
+            }
+            .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+                z-index: 2;
+                margin-left: 0px;
+            }
+        }
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: -300px;
+            margin-left: auto;
         }
     </style>
     <body>
@@ -675,7 +788,7 @@
             </button>
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Admin</h3>
+                    <h3>Doctor/Nurse</h3>
                 </li>
                 <li>
                     <a href="doctorAndNurse.jsp">
@@ -686,7 +799,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="searchExamPatient.jsp">
+                    <a href="prescription">
                         <svg>
                         <use xlink:href="#capsule-symbol"></use>
                         </svg>
@@ -704,24 +817,44 @@
                             <span>Dark</span>
                         </label>
                     </div>
-                    <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-                        <svg aria-hidden="true">
-                        <use xlink:href="#collapse"></use>
-                        </svg>
-                        <span>Collapse</span>
-                    </button>
+
                 </li>
             </ul>
         </nav>
     </header>
-    <section class="page-content">
-
-        <section class="grid">
+    <main >
 
 
-        </section>
 
-    </section>
+        <div id="subscription_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="subscribe_now">
+                            <h4>Prescription</h4>
+                            <p>Input you ExamID</p>
+                            <form class="subscribe_form" action="searchExam" method="post">
+                                
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter your ExamID" required="">
+                                    <span class="input-group-btn">
+                                        <input class="btn btn-default" type="submit" value="Ok">
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+</section>
+
 </body>
+<script>
 
+</script>
 </html>

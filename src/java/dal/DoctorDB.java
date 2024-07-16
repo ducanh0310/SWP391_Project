@@ -4,6 +4,7 @@
  */
 package dal;
 
+import com.sun.jdi.connect.spi.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ import model.Prescription;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import model.Patient;
+import model.PatientExamResult;
 
 /**
  *
@@ -49,10 +52,72 @@ public class DoctorDB extends DBContext {
         }
         return prescription;
     }
-    
-      public static void main(String[] args) {
-        DoctorDB d=new DoctorDB();
-        System.out.println(d.getPrescription());
+
+    public boolean addPrescription(Prescription p) {
+        String insertPrescription = "INSERT INTO [dbo].[Prescription] "
+                + "([patient_idmedication], [dosage], [duration], [notes]) "
+                + "VALUES (?,?, ?, ?)";
+
+        try {
+            PreparedStatement prescriptionStatement = connection.prepareStatement(insertPrescription);
+            prescriptionStatement.setString(1, p.getMedication());
+            prescriptionStatement.setString(2, p.getDosage());
+            prescriptionStatement.setString(3, p.getDuration());
+            prescriptionStatement.setString(4, p.getNotes());
+
+            prescriptionStatement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    private Connection getConnection() throws SQLException {
+        // Implement this method to return a valid database connection
+        // For example:
+        // return DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        return null; // Replace with actual connection code
+    }
+
+    public PatientExamResult getPatientExamResult(int pid) {
+        try {
+            String sql = "SELECT [exam_id]\n"
+                    + "      ,[pid]\n"
+                    + "      ,[exam_date]\n"
+                    + "      ,[diagnosis]\n"
+                    + "      ,[symptoms]\n"
+                    + "      ,[test_result]\n"
+                    + "  FROM [dbo].[PatientExamResult]"
+                    + "WHERE [pid]=?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                PatientExamResult p=new PatientExamResult();
+                Patient pa = new Patient();
+                p.setExam_id(rs.getInt("exam_id"));
+                pa.setId(rs.getInt("pid"));
+                p.setPid(pa);
+                p.setExam_date(rs.getDate("exam__date"));
+                p.setDiagnosis(rs.getString("diagnosis"));
+                p.setSymptoms(rs.getString("symptoms"));
+                p.setTest_result(rs.getString("test__result"));
+                return p;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        DoctorDB d = new DoctorDB();
+        PatientExamResult pa=new  PatientExamResult();
+        Prescription p = new Prescription();
+        System.out.println(d.getPatientExamResult(1));
 
     }
 }

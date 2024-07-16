@@ -22,6 +22,24 @@ public class Patient {
     private String insurance;
     private int rep_id;
 
+    
+
+    public Patient(int id, String sin, String address, String name, String gender, String email, String phone, Date dob, String insurance, int rep_id) {
+        this.id = id;
+        this.sin = sin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.dob = dob;
+        this.insurance = insurance;
+        this.rep_id = rep_id;
+    }
+
+    public Patient() {
+    }
+
     public int getId() {
         return id;
     }
