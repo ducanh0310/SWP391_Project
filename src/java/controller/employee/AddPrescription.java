@@ -40,7 +40,7 @@ public class AddPrescription extends HttpServlet {
         p.setNotes(request.getParameter("notes"));
         
         db.addPrescription(p);
-         response.sendRedirect("addPrescription.jsp");
+         response.sendRedirect("employee/addPrescription.jsp");
         
     }
 

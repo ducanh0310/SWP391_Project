@@ -663,7 +663,109 @@
         .col-md-offset-1 {
             margin-left: 0;
         }
+        body {
+            background-color: #fbfbfb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
+        .subscribe_now {
+            h4 {
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #34495e;
+                font-weight: 800;
+                text-align: center;
+            }
+            p {
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: 2px;
+                color: #34495e;
+                text-align: center;
+            }
+        }
+
+        .subscribe_form {
+            max-width: 470px;
+            width: 100%;
+            margin: 0 auto;
+            box-shadow: 0px 2px 5px 0px rgba(10, 6, 20, 0.24);
+            &:focus {
+                outline: none;
+            }
+            .form-control {
+                border: none;
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+            input {
+                height: 44px;
+            }
+            button {
+                border: none;
+                height: 44px;
+                background-color: #0ed085;
+                color: #fff;
+                margin: -1px;
+                border-radius: 0;
+                width: 135px;
+                text-transform: uppercase;
+                position: relative;
+                transition: all ease 0.3s;
+                -webkit-transition: all ease 0.3s;
+                -moz-transition: all ease 0.3s;
+                -o-transition: all ease 0.3s;
+                -ms-transition: all ease 0.3s;
+                &:hover, &:focus, &:active, &:visited {
+                    color: #fff;
+                    background-color: rgba(14, 208, 133, 0.77);
+                    outline: none;
+                    transition: all ease 0.3s;
+                    -webkit-transition: all ease 0.3s;
+                    -moz-transition: all ease 0.3s;
+                    -o-transition: all ease 0.3s;
+                    -ms-transition: all ease 0.3s;
+                    &:before {
+                        background-color: rgba(14, 208, 133, 0.77);
+                        transition: all ease 0.3s;
+                        -webkit-transition: all ease 0.3s;
+                        -moz-transition: all ease 0.3s;
+                        -o-transition: all ease 0.3s;
+                        -ms-transition: all ease 0.3s;
+                    }
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    height: 1px;
+                    background-color: #0ed085;
+                    width: 100%;
+                    transition: all ease 0.3s;
+                    -webkit-transition: all ease 0.3s;
+                    -moz-transition: all ease 0.3s;
+                    -o-transition: all ease 0.3s;
+                    -ms-transition: all ease 0.3s;
+                }
+            }
+            .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+                z-index: 2;
+                margin-left: 0px;
+            }
+        }
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: -300px;
+            margin-left: auto;
+        }
     </style>
     <body>
         <svg style="display:none;">
@@ -697,7 +799,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="prescription">
+                    <a href="searchExam">
                         <svg>
                         <use xlink:href="#capsule-symbol"></use>
                         </svg>
@@ -720,353 +822,35 @@
             </ul>
         </nav>
     </header>
-    <section class="page-content">
-
-        <section class="grid">
-            <article>
-                <div ng-app="contactList" ng-controller="nameAdderController as nameAdder">
-                    <div class="container">
-                        <div class="row">
-                            <header class="col-md-offset-1 col-md-10">
-                                <h1>Prescription List</h1>
-                                <hr>
-                            </header>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-3 module contact-builder">
-
-                                <form class="form" ng-submit="addContact()" ng-hide="editing">
-                                    <h4>New Prescription</h4>
-                                    <div class="form-group">
-                                        <input type="text" id="name" class="form-control" placeholder="Name" ng-model="nameBox" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="type" id="phone" class="form-control" placeholder="Phone" ng-model="phoneBox">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="notes" class="form-control" placeholder="Notes" ng-model="notesBox" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add Prescription</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
-                                    </div>
-                                </form>
-
-                                <form ng-submit="editContact()" ng-show="editing" class="animated flipInY">
-                                    <h4>Edit Prescription</h4>
-                                    <div class="form-group">
-                                        <input type="text" id="name" class="form-control" placeholder="Name" ng-model="nameBox" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="type" id="phone" class="form-control" placeholder="Phone" ng-model="phoneBox">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="duration" class="form-control" placeholder="Duration" ng-model="durationBox">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="type" id="notes" class="form-control" placeholder="Notes" ng-model="notesBox">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-default">Edit Prescription</button>
-                                        <button ng-click="openEdit()" class="btn btn-default">Cancel</button>
-                                    </div>
-                                </form>
-
+    <main>
+    <div id="subscription_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="subscribe_now">
+                        <h4>Prescription</h4>
+                        <p>Input your ExamID</p>
+                        <form class="subscribe_form" action="searchExam" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter your ExamID" required>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">Ok</button>
+                                </span>
                             </div>
-                            <div class="col-md-7 module contact-list">
-                                <form>
-                                    <div class="form-group">
-                                        <input placeholder="Search Names" class="form-control" ng-model="filters.name"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="checkbox" ng-model="exactMatch"> Exact Match</input>
-                                    </div>
-                                    <div class="form-group pull-right">
-                                        <button type="button" class="btn btn-danger" ng-click="deleteAll()"><i class="glyphicon glyphicon-trash"></i> Delete All Contacts</button>
-                                    </div>
-                                </form>
-                                <div class="table-wrap clearfix">
-                                    <table class="table table-hover table-striped table-responsive">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th ng-click="nameSorter()">Name</th>      
-                                                <th>Phone</th>
-                                                <th>Medication</th>
-                                                <th>Dosage</th>
-                                                <th>Duration</th>
-                                                <th>Notes</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="obj in nameList| filter:filters:exactMatch | filter:filterFavs track by $index" class="{{obj.favorite}} animated fadeIn">
-                                                <td>{{$index + 1}}</td>
-                                                <td>{{obj.name}}</td>
-                                                <td>{{obj.phone}}</td>
-                                                <td>{{obj.medication}}</td>
-                                                <td>{{obj.dosage}}</td>
-                                                <td>{{obj.duration}}</td>
-                                                <td>{{obj.notes}}</td>
-                                                <td class="text-right">
-                                                    <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <a href="#" ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- Pagination -->
-                                    <!-- ... -->
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <!-- Save Draft and Submit buttons -->
-                                    <button type="button" class="btn btn-default" ng-click="saveDraft()">Save Draft</button>
-                                    <button type="button" class="btn btn-primary" ng-click="submitForm()">Submit</button>
-                                </div>
-                            </div>
-
-                        </div>
+                        </form>
+                        ${errorMessage}
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-            </article>
 
-        </section>
-
-    </section>
+</section>
 
 </body>
 <script>
-    angular.module("contactList", [])
-            .controller("nameAdderController", function ($scope) {
-
-                // Set temp initial values for testing
-                $scope.nameBox = "";
-                $scope.phoneBox = "";
-                $scope.emailBox = "";
-                $scope.medicationBox = "";
-                $scope.dosageBox = "";
-                $scope.durationBox = "";
-                $scope.notesBox = "";
-                //
-
-                var nameList = [{name: "Elmo",
-                        favorite: "",
-                        phone: "6664206967",
-                        email: "",
-                        medication: "Amoxicillin",
-                        dosage: "500mg",
-                        duration: "7 days",
-                        notes: "Take with food"
-                    },
-                    {
-                        name: "Stephie McRandom",
-                        favorite: "",
-                        phone: "1231231234",
-                        email: "",
-                        medication: "Lisinopril",
-                        dosage: "10mg",
-                        duration: "2 weeks",
-                        notes: "Avoid alcohol"
-                    },
-                    {
-                        name: "Paul McRandomee",
-                        favorite: "",
-                        phone: "5551231234",
-                        email: "",
-                        medication: "Ibuprofen",
-                        dosage: "200mg",
-                        duration: "1 month",
-                        notes: "Take twice daily"
-                    },
-                    {
-                        name: "Brooke Lay",
-                        favorite: "",
-                        phone: "3436589636",
-                        email: "",
-                        medication: "Metformin",
-                        dosage: "1000mg",
-                        duration: "3 days",
-                        notes: "Store in a cool, dry place"
-                    },
-                    {
-                        name: "John Li",
-                        favorite: "",
-                        phone: "3437826548",
-                        email: "",
-                        medication: "Simvastatin",
-                        dosage: "20mg",
-                        duration: "10 days",
-                        notes: "Take before bedtime"
-                    },
-                    {
-                        name: "Elmo",
-                        favorite: "",
-                        phone: "6664206967",
-                        email: "",
-                        medication: "Levothyroxine",
-                        dosage: "50mcg",
-                        duration: "4 weeks",
-                        notes: "Avoid grapefruit juice"
-                    },
-                    {
-                        name: "Paul McRandomee",
-                        favorite: "",
-                        phone: "5551231234",
-                        email: "",
-                        medication: "Omeprazole",
-                        dosage: "40mg",
-                        duration: "5 days",
-                        notes: "Take on an empty stomach"
-                    },
-                    {
-                        name: "Stephie McRandom",
-                        favorite: "",
-                        phone: "1231231234",
-                        email: "",
-                        medication: "Prednisone",
-                        dosage: "5mg",
-                        duration: "2 weeks",
-                        notes: "Do not crush or chew tablets"
-                    },
-                    {
-                        name: "John Li",
-                        favorite: "",
-                        phone: "3437826548",
-                        email: "",
-                        medication: "Warfarin",
-                        dosage: "2.5mg",
-                        duration: "1 month",
-                        notes: "Take with plenty of water"
-                    },
-                    {
-                        name: "Brooke Lay",
-                        favorite: "",
-                        phone: "3436589636",
-                        email: "",
-                        medication: "Aspirin",
-                        dosage: "325mg",
-                        duration: "3 days",
-                        notes: "Follow up after 2 weeks"
-                    }];
-                $scope.nameList = nameList;
-                $scope.selectedIndex = -1;
-
-                $scope.openEdit = function ($index) {
-                    if (!$scope.editing) {
-                        // Edit contact is open
-                        $scope.editing = true;
-                        $scope.selectedIndex = $index;
-                        $scope.nameBox = $scope.nameList[$index].name;
-                        $scope.phoneBox = $scope.nameList[$index].phone;
-                        $scope.medicationBox = $scope.nameList[$index].medication;
-                        $scope.dosageBox = $scope.nameList[$index].dosage;
-                        $scope.durationBox = $scope.nameList[$index].duration;
-                        $scope.notesBox = $scope.nameList[$index].notes;
-                    } else {
-                        $scope.cancelEdit();
-                    }
-                };
-
-                $scope.editContact = function () {
-                    // Update existing contact
-                    if ($scope.selectedIndex !== -1) {
-                        $scope.nameList[$scope.selectedIndex].name = $scope.nameBox;
-                        $scope.nameList[$scope.selectedIndex].phone = $scope.phoneBox;
-                        $scope.nameList[$scope.selectedIndex].medication = $scope.medicationBox;
-                        $scope.nameList[$scope.selectedIndex].dosage = $scope.dosageBox;
-                        $scope.nameList[$scope.selectedIndex].duration = $scope.durationBox;
-                        $scope.nameList[$scope.selectedIndex].notes = $scope.notesBox;
-                        $scope.cancelEdit();
-                    }
-                };
-
-                $scope.cancelEdit = function () {
-                    $scope.editing = false;
-                    $scope.selectedIndex = -1;
-                    $scope.nameBox = "";
-                    $scope.phoneBox = "";
-                    $scope.medicationBox = "";
-                    $scope.dosageBox = "";
-                    $scope.durationBox = "";
-                    $scope.notesBox = "";
-                };
-                $scope.nameSorter = function () {
-                    // Sort by name
-                    $scope.nameList.sort(function (a, b) {
-                        var x = a.name.toLowerCase();
-                        var y = b.name.toLowerCase();
-                        return x < y ? -1 : x > y ? 1 : 0;
-                    });
-                };
-                // Sort onload
-                $scope.nameSorter();
-                $scope.addContact = function () {
-                    // Add new contact
-                    $scope.nameList.push({
-                        name: $scope.nameBox,
-                        phone: $scope.phoneBox || "",
-                        email: $scope.emailBox || "",
-                        medication: $scope.medicationBox || "",
-                        dosage: $scope.dosageBox || "",
-                        duration: $scope.durationBox || "",
-                        notes: $scope.notesBox || ""
-                    });
-                    $scope.nameSorter();
-                    $scope.emailBox = "";
-                    $scope.nameBox = "";
-                    $scope.phoneBox = "";
-                    $scope.medicationBox = "";
-                    $scope.dosageBox = "";
-                    $scope.durationBox = "";
-                    $scope.notesBox = "";
-                };
-                $scope.removeName = function ($index) {
-                    // Remove contact
-                    var curName = $scope.nameList[$index].name;
-                    $scope.nameList.splice($index, 1);
-                    console.log(curName + " removed");
-                };
-                $scope.deleteAll = function () {
-                    // Delete all contacts
-                    $scope.nameList = [];
-                };
-                $scope.favSort = false;
-                $scope.favToggle = function () {
-                    // Toggle favorite sorting
-                    $scope.favSort = !$scope.favSort;
-                    console.log($scope.favSort);
-                };
-                $scope.filterFavs = function (obj) {
-                    // Filter favorite contacts
-                    return !$scope.favSort || obj.favorite === "favorite";
-                };
-            });
 
 </script>
 </html>

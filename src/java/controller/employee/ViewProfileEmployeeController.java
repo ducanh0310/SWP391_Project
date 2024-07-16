@@ -35,7 +35,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
             
             request.setAttribute("emInfo", emInfo);
             request.setAttribute("username", "bobmley1");
-            request.getRequestDispatcher("../../view/employee/viewProfileEmployee.jsp").forward(request, response);
+            request.getRequestDispatcher("viewProfileEmployee.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }

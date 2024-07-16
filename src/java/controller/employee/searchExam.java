@@ -12,7 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import model.PatientExamResult;
+import model.Prescription;
 
 /**
  *
@@ -38,7 +40,7 @@ public class searchExam extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet searchExam</title>");            
+            out.println("<title>Servlet searchExam</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet searchExam at " + request.getContextPath() + "</h1>");
@@ -58,9 +60,29 @@ public class searchExam extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException {
+    try {
+        int patientId = Integer.parseInt(request.getParameter("pid"));
+        DoctorDB db = new DoctorDB();
+        PatientExamResult patientResult = db.getPatientExamResult(patientId);
+        ArrayList<Prescription> doctors = db.getPrescription();
+        if (patientResult != null) {
+            request.setAttribute("patientResult", patientResult);
+            request.setAttribute("doctors", doctors);
+            request.getRequestDispatcher("/prescription.jsp").forward(request, response);
+        } else {
+            request.setAttribute("errorMessage", "Patient not found");
+            request.getRequestDispatcher("/searchExamPatient.jsp").forward(request, response);
+        }
+        
+    } catch (NumberFormatException e) {
+        request.setAttribute("errorMessage", "Invalid patient ID format");
+        request.getRequestDispatcher("/searchExamPatient.jsp").forward(request, response);
+        
+    } catch (Exception e) {
+        request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
     }
+}
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -72,24 +94,9 @@ public class searchExam extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            int patientId = Integer.parseInt(request.getParameter("pid"));
-            DoctorDB db=new DoctorDB();
-            PatientExamResult patients = db.getPatientExamResult(patientId);
-            request.setAttribute("id", patientId);
-            if(patients !=null){
-                request.setAttribute("patients", patients);
-                request.getRequestDispatcher("prescription.jsp").forward(request, response);
-            }else{
-                request.setAttribute("errorMessage", "Cant't not found patient");
-                request.getRequestDispatcher("searchExamPatient.jsp").forward(request, response);
-            }
-            
-        } catch (Exception e) {
-            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
-        }
-    }
+        throws ServletException, IOException {
+  
+}
 
     /**
      * Returns a short description of the servlet.

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
     <head>
@@ -12,6 +13,8 @@
         <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js' rel='stylesheet' type='text/css'>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
     </head>
     <style>
         /* RESET RULES
@@ -640,7 +643,7 @@
             line-height: 1.42857143;
             vertical-align: top;
             border-top: 1px solid #ddd;
-            font-size: medium;
+            font-size: small;
         }
         .text-primary {
             --x-text-opacity: 1;
@@ -653,6 +656,14 @@
             background: #f7f7ff;
             margin-top:0px;
         }
+
+        .col-md-7 {
+            width: 75%;
+        }
+        .col-md-offset-1 {
+            margin-left: 0;
+        }
+
     </style>
     <body>
         <svg style="display:none;">
@@ -675,7 +686,7 @@
             </button>
             <ul class="admin-menu">
                 <li class="menu-heading">
-                    <h3>Admin</h3>
+                    <h3>Doctor/Nurse</h3>
                 </li>
                 <li>
                     <a href="doctorAndNurse.jsp">
@@ -686,7 +697,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="searchExam">
+                    <a href="searchExamPatient.jsp">
                         <svg>
                         <use xlink:href="#capsule-symbol"></use>
                         </svg>
@@ -704,12 +715,7 @@
                             <span>Dark</span>
                         </label>
                     </div>
-                    <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-                        <svg aria-hidden="true">
-                        <use xlink:href="#collapse"></use>
-                        </svg>
-                        <span>Collapse</span>
-                    </button>
+
                 </li>
             </ul>
         </nav>
@@ -717,11 +723,287 @@
     <section class="page-content">
 
         <section class="grid">
+            <article>
+                <div ng-app="contactList" ng-controller="nameAdderController as nameAdder">
+                    <div class="container">
+                        <div class="row">
+                            <header class="col-md-offset-1 col-md-10">
+                                <h1>Prescription List</h1>
+                                <hr>
+                            </header>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-3 module contact-builder">
+
+                                <form class="form" ng-submit="addContact()" ng-hide="editing">
+                                    <h4>New Prescription</h4>
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" id="name" class="form-control" value="${patientResult.pid.name}" readonly ng-model="nameBox">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exam_date">Exam Date:</label>
+                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                         <label for="duration">Duration:</label>
+                                        <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                         <label for="symptoms">Symptoms:</label>
+                                        <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="test_result">Test Result:</label>
+                                        <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly>
+                                    </div>                           
+                                    <div class="form-group">
+                                        <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="type" id="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="type" id="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="type" id="notes" class="form-control" placeholder="Notes" ng-model="notesBox" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add Prescription</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </form>
+
+                                <form ng-submit="editContact()" ng-show="editing" class="animated flipInY">
+                                    <h4>Edit Prescription</h4>
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.pid.name}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exam_date">Exam Date:</label>
+                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" >
+                                    </div>
+                                    <div class="form-group">
+                                         <label for="duration">Duration:</label>
+                                        <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" >
+                                    </div>
+                                    <div class="form-group">
+                                         <label for="symptoms">Symptoms:</label>
+                                        <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="test_result">Test Result:</label>
+                                        <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" >
+                                    </div>                                                              
+                                    <div class="form-group">
+                                        <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="type" id="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="type" id="duration" class="form-control" placeholder="Duration" ng-model="durationBox">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="type" id="notes" class="form-control" placeholder="Notes" ng-model="notesBox">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-default">Edit Prescription</button>
+                                        <button ng-click="openEdit()" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-md-7 module contact-list">
+                                <form>
+                                    <div class="form-group">
+                                        <input placeholder="Search Names" class="form-control" ng-model="filters.name"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" ng-model="exactMatch"> Exact Match</input>
+                                    </div>
+                                    <div class="form-group pull-right">
+                                        <button type="button" class="btn btn-danger" ng-click="deleteAll()"><i class="glyphicon glyphicon-trash"></i> Delete All Contacts</button>
+                                    </div>
+                                </form>
+                                <div class="table-wrap clearfix">
+                                    <table class="table table-hover table-striped table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th ng-click="nameSorter()">Name</th>      
+                                                <th>Phone</th>
+                                                <th>Medication</th>
+                                                <th>Dosage</th>
+                                                <th>Duration</th>
+                                                <th>Notes</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="obj in nameList| filter:filters:exactMatch | filter:filterFavs track by $index" class="{{obj.favorite}} animated fadeIn">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{obj.name}}</td>
+                                                <td>{{obj.phone}}</td>
+                                                <td>{{obj.medication}}</td>
+                                                <td>{{obj.dosage}}</td>
+                                                <td>{{obj.duration}}</td>
+                                                <td>{{obj.notes}}</td>
+                                                <td class="text-right">
+                                                    <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                    <a href="#" ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Pagination -->
+                                    <!-- ... -->
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <!-- Save Draft and Submit buttons -->
+                                    <button type="button" class="btn btn-default" ng-click="saveDraft()">Save Draft</button>
+                                    <button type="button" class="btn btn-primary" ng-click="submitForm()">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+            </article>
 
         </section>
 
     </section>
-</body>
 
+</body>
+<script>
+    angular.module("contactList", [])
+            .controller("nameAdderController", function ($scope) {
+
+                // Set temp initial values for testing
+                $scope.nameBox = "${patientResult.pid.name}";
+                $scope.phoneBox = "";
+                $scope.emailBox = "";
+                $scope.medicationBox = "";
+                $scope.dosageBox = "";
+                $scope.durationBox = "";
+                $scope.notesBox = "";
+                //
+
+                var nameList = [{name: "${patientResult.pid.name}",
+                        favorite: "",
+                        phone: "6664206967",
+                        email: "",
+                        medication: "Amoxicillin",
+                        dosage: "500mg",
+                        duration: "7 days",
+                        notes: "Take with food"
+                    }];
+                $scope.nameList = nameList;
+                $scope.selectedIndex = -1;
+
+                $scope.openEdit = function ($index) {
+                    if (!$scope.editing) {
+                        // Edit contact is open
+                        $scope.editing = true;
+                        $scope.selectedIndex = $index;
+                        $scope.nameBox = $scope.nameList[$index].name;
+                        $scope.phoneBox = $scope.nameList[$index].phone;
+                        $scope.medicationBox = $scope.nameList[$index].medication;
+                        $scope.dosageBox = $scope.nameList[$index].dosage;
+                        $scope.durationBox = $scope.nameList[$index].duration;
+                        $scope.notesBox = $scope.nameList[$index].notes;
+                    } else {
+                        $scope.cancelEdit();
+                    }
+                };
+
+                $scope.editContact = function () {
+                    // Update existing contact
+                    if ($scope.selectedIndex !== -1) {
+                        $scope.nameList[$scope.selectedIndex].name = $scope.nameBox;
+                        $scope.nameList[$scope.selectedIndex].phone = $scope.phoneBox;
+                        $scope.nameList[$scope.selectedIndex].medication = $scope.medicationBox;
+                        $scope.nameList[$scope.selectedIndex].dosage = $scope.dosageBox;
+                        $scope.nameList[$scope.selectedIndex].duration = $scope.durationBox;
+                        $scope.nameList[$scope.selectedIndex].notes = $scope.notesBox;
+                        $scope.cancelEdit();
+                    }
+                };
+
+                $scope.cancelEdit = function () {
+                    $scope.editing = false;
+                    $scope.selectedIndex = -1;
+                    $scope.nameBox = "${patientResult.pid.name}";
+                    $scope.phoneBox = "";
+                    $scope.medicationBox = "";
+                    $scope.dosageBox = "";
+                    $scope.durationBox = "";
+                    $scope.notesBox = "";
+                };
+                $scope.nameSorter = function () {
+                    // Sort by name
+                    $scope.nameList.sort(function (a, b) {
+                        var x = a.name.toLowerCase();
+                        var y = b.name.toLowerCase();
+                        return x < y ? -1 : x > y ? 1 : 0;
+                    });
+                };
+                // Sort onload
+                $scope.nameSorter();
+                $scope.addContact = function () {
+                    // Add new contact
+                    $scope.nameList.push({
+                        name: $scope.nameBox,
+                        phone: $scope.phoneBox || "",
+                        email: $scope.emailBox || "",
+                        medication: $scope.medicationBox || "",
+                        dosage: $scope.dosageBox || "",
+                        duration: $scope.durationBox || "",
+                        notes: $scope.notesBox || ""
+                    });
+                    $scope.nameSorter();
+                    $scope.emailBox = "";
+                    $scope.nameBox = "${patientResult.pid.name}";
+                    $scope.phoneBox = "";
+                    $scope.medicationBox = "";
+                    $scope.dosageBox = "";
+                    $scope.durationBox = "";
+                    $scope.notesBox = "";
+                };
+                $scope.removeName = function ($index) {
+                    // Remove contact
+                    var curName = $scope.nameList[$index].name;
+                    $scope.nameList.splice($index, 1);
+                    console.log(curName + " removed");
+                };
+                $scope.deleteAll = function () {
+                    // Delete all contacts
+                    $scope.nameList = [];
+                };
+                $scope.favSort = false;
+                $scope.favToggle = function () {
+                    // Toggle favorite sorting
+                    $scope.favSort = !$scope.favSort;
+                    console.log($scope.favSort);
+                };
+                $scope.filterFavs = function (obj) {
+                    // Filter favorite contacts
+                    return !$scope.favSort || obj.favorite === "favorite";
+                };
+            });
+
+</script>
 </html>

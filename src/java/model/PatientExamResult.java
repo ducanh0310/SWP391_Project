@@ -13,6 +13,7 @@ import java.util.Date;
 public class PatientExamResult {
     int exam_id;
     Patient pid;
+    Patient name;
     Date exam_date;
     String diagnosis;
     String symptoms;
@@ -21,14 +22,25 @@ public class PatientExamResult {
     public PatientExamResult() {
     }
 
-    public PatientExamResult(int exam_id, Patient pid, Date exam_date, String diagnosis, String symptoms, String test_result) {
+    public PatientExamResult(int exam_id, Patient pid, Patient name, Date exam_date, String diagnosis, String symptoms, String test_result) {
         this.exam_id = exam_id;
         this.pid = pid;
+        this.name = name;
         this.exam_date = exam_date;
         this.diagnosis = diagnosis;
         this.symptoms = symptoms;
         this.test_result = test_result;
     }
+
+    public Patient getName() {
+        return name;
+    }
+
+    public void setName(Patient name) {
+        this.name = name;
+    }
+
+    
 
     public int getExam_id() {
         return exam_id;
