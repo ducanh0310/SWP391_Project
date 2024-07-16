@@ -134,17 +134,12 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
-                                    <i class="bi bi-person"></i> Patient
+                                    <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">
                                     <i class="bi bi-people"></i></i> Employee
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="appointmentList">
-                                    <i class="bi bi-list-task"></i></i> Appointment
                                 </a>
                             </li>
                         </ul>
@@ -180,7 +175,7 @@
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Welcome, admin</h5>
-                               
+                                <a href="AddEmployee" class="btn btn-primary btn-sm">Add New Employee</a>
                             </div>
 
 
@@ -198,40 +193,58 @@
                             </form>
 
                             <div id="employeeTable" class="table-responsive">
+                                <label style="color: red">${error}</label>
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col" style="font-size: 20px">Examination ID</th>
-                                            <th scope="col" style="font-size: 20px">Patient Name </th>
-                                            <th scope="col" style="font-size: 20px">Service</th>
+                                            <th scope="col" style="font-size: 20px">No</th>
+                                            <th scope="col" style="font-size: 20px">Patient</th>
                                             <th scope="col" style="font-size: 20px">Doctor</th>
-                                            <th scope="col" style="font-size: 20px">Status</th>
+                                            <th scope="col" style="font-size: 20px"></th>
+                                            
+                                            <th scope="col" style="font-size: 20px">Phone Number</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
-                                    <!--Display List of -->
+                                    <!--Display employee information-->
                                     <tbody  id="employeeTableBody">
-                                        <c:forEach items="${appList}" var="app">
-                                            <tr>
-                                                <td>${app.id}</td>
-                                                <td>${app.patientName}</td>
-                                                <td>${app.service}</td>
-                                                <td>${app.doctor}</td>
-                                                <td>${app.status}</td>
-                                                <td class="text-end">
-                                                    <a href="ViewDetailAppointment?appId=${app.id}" class="btn btn-sm btn-neutral">View</a>
-                                                </td>
-                                                <td class="text-end">
-                                                    <form action="DeleteEmployee?appId=${app.id}"
-                                                          method="get">
-
-                                                        <button type="submit"
-                                                                class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <c:forEach items="${EmployeeList}" var="emp">
+                                            <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
+                                                <tr>
+                                                    <td>${emp.id}</td>
+                                                    <td>${emp.name}</td>
+                                                    <td>${emp.employeeSin}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${emp.employeeType == 'r'}">Receptionist
+                                                            </c:when>
+                                                            <c:when test="${emp.employeeType == 'd'}">Doctor
+                                                            </c:when>
+                                                            <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
+                                                            <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>${emp.phoneNumber}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${emp.gender == 'M'}">Male</c:when>
+                                                            <c:when test="${emp.gender == 'F'}">Female</c:when>
+                                                            <c:otherwise>Other</c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <form action="DeleteEmployee?employeeId=${emp.id}"
+                                                              method="POST">
+                                                            <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
+                                                               class="btn btn-sm btn-neutral">View</a>
+                                                            <button type="submit"
+                                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                         </c:forEach>
 
                                     </tbody>
@@ -355,7 +368,43 @@
                 displayRows(currentPage);
                 updatePagination();
             </script>
+            <script>
+                // fill by gender
+                document.getElementById("filterGender").addEventListener("change", function () {
+                    const selectedGender = this.value;
 
+                    for (let i = 0; i < totalRows; i++) {
+                        const genderCell = rows[i].getElementsByTagName("td")[5]; // Cột giới tính là cột thứ 6 trong table
+                        const gender = genderCell.textContent.trim();
+
+                        if (selectedGender === "all" || gender === selectedGender) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                });
+            </script>
+            <script>
+                // fill by employee role
+                document.getElementById("filterEmployeeType").addEventListener("change", function () {
+                    const selectedEmployeeType = this.value;
+
+                    for (let i = 0; i < totalRows; i++) {
+                        const employeeTypeCell = rows[i].getElementsByTagName("td")[3]; // Cột vai trò nhân viên là cột thứ 4 trong table
+                        const employeeType = employeeTypeCell.textContent.trim();
+
+                        if (selectedEmployeeType === "all" || employeeType === selectedEmployeeType) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+
+                });
+
+
+            </script>
 
     </body>
 

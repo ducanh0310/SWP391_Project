@@ -153,85 +153,74 @@
 
                         <div class="col-md-8">
                             <div style="text-align: center; font-size:25px">Appointment Details</div>
-                            <div class="card mb-3">
+                            <div class="card mb-3" style="width: 800px">
                                 <div class="card-body">
 
-                                    <form action="AddExaminationResult" method="post">
-
-                                        <div class="mb-3">
-                                            <label for="idInput" class="form-label">ID</label>
-                                            <input type="text" id="idInput" name="id" value="${infor.id}" class="form-control" readonly>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6" style="width: 30%">
+                                            <label class="labels">ID</label>
+                                            <input type="text" id="appID" name="appID" class="form-control" placeholder="" value="${appDetails.id}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="patientIdInput" class="form-label">Patient ID</label>
-                                            <input type="text" id="patientIdInput" name="patientId" value="${infor.patientId}" class="form-control" readonly>
+                                        <div class="col-md-6" style="width: 30%">
+                                            <label class="labels">Patient ID</label>
+                                            <input type="text" id="patientID" name="patientID" class="form-control" placeholder=" " value="${appDetails.patientId}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="patientNameInput" class="form-label">Patient Name</label>
-                                            <input type="text" id="patientNameInput" name="patientName" value="${infor.patientName}" class="form-control" readonly>
+                                        <div class="col-md-6" style="width: 40%">
+                                            <label class="labels">Patient Name</label>
+                                            <input type="text" id="patientName" name="patientName" class="form-control" placeholder="" value="${appDetails.patientName}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="serviceInput" class="form-label">Service</label>
-                                            <input type="text" id="serviceInput" name="service" value="${infor.service}" class="form-control" readonly>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label class="labels">Service</label>
+                                            <input type="text" id="service" name="service" class="form-control" placeholder=" " value="${appDetails.service}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="priceInput" class="form-label">Price</label>
-                                            <input type="text" id="priceInput" name="price" value="${infor.price}" class="form-control" readonly>
+                                        <div class="col-md-6">
+                                            <label class="labels">Price</label>
+                                            <input type="text" id="price" name="price" class="form-control" placeholder="" value="${appDetails.price}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="doctorInput" class="form-label">Doctor</label>
-                                            <input type="text" id="doctorInput" name="doctor" value="${infor.doctor}" class="form-control" readonly>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label class="labels">Doctor</label>
+                                            <input type="text" id="doctor" name="doctor" class="form-control" placeholder=" " value="${appDetails.doctor}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="bookingDateInput" class="form-label">Booking Date</label>
-                                            <input type="text" id="bookingDateInput" name="bookingDate" value="${infor.bookingDate}" class="form-control" readonly>
+                                        <div class="col-md-6">
+                                            <label class="labels">Room</label>
+                                            <input type="text" id="room" name="room" class="form-control" placeholder=" " value="${appDetails.room}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="startTimeInput" class="form-label">Start Time</label>
-                                            <input type="text" id="startTimeInput" name="startTime" value="${infor.startTime}" class="form-control" readonly>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label class="labels">Status</label>
+                                            <input type="text" id="appointmentStatus" name="appointmentStatus" class="form-control" placeholder=" " value="${appDetails.status}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="endTimeInput" class="form-label">End Time</label>
-                                            <input type="text" id="endTimeInput" name="endTime" value="${infor.endTime}" class="form-control" readonly>
+                                        <div class="col-md-6">
+                                            <label class="labels">Pay status</label>
+                                            <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${appDetails.room}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="roomInput" class="form-label">Room</label>
-                                            <input type="text" id="roomInput" name="room" value="${infor.room}" class="form-control" readonly>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6" style="width: 25%">
+                                            <label class="labels" >Booking Date</label>
+                                            <input type="text" id="bookingDate" name="bookingDate" class="form-control" placeholder="" value="${appDetails.bookingDate}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="statusInput" class="form-label">Status</label>
-                                            <input type="text" id="statusInput" name="status" value="${infor.status}" class="form-control" readonly>
+                                        <div class="col-md-6" style="width: 25%">
+                                            <label class="labels">Start time</label>
+                                            <input type="text" id="startTime" name="startTime" class="form-control" placeholder=" " value="${appDetails.startTime}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="payStatusInput" class="form-label">Pay Status</label>
-                                            <input type="text" id="payStatusInput" name="payRevervationStatus" value="${infor.payRevervationStatus}" class="form-control" readonly>
+                                        <div class="col-md-6" style="width: 25%">
+                                            <label class="labels">End time</label>
+                                            <input type="text" id="endTime" name="endTime" class="form-control" placeholder=" " value="${appDetails.endTime}" readonly>
                                         </div>
-
-                                        <div class="mb-3">
-                                            <label for="descriptionInput" class="form-label">Description</label>
-                                            <textarea id="descriptionInput" name="description" class="form-control" placeholder="Enter description"></textarea>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="fileName">File Name:</label>
-                                            <input type="file" id="fileName" name="fileName" class="form-control" placeholder="Enter file name">
-                                        </div>
-                                        <button class="mb-3" type="submit">Save</button>
-                                    </form>
-                                   
-                                    <div class="col-md-4">
-                                        <div id="draftsList"></div>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px;">
+                                        <c:if test="${appDetails.status != 'Cancelled' || appDetails.status != 'Completed'}">
+                                            <div class="col-sm-12" >
+                                                <a class="btn btn-info "  href="view/FindFile.jsp">Edit</a>
+                                                <a class="btn btn-info "  href="AddExaminationResult?appId=${appDetails.id}">Add Examination Result</a>
+                                            </div>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -275,6 +264,24 @@
 
             <!-- Template Javascript -->
             <script src="../../js/main.js"></script>
+
+            <script>
+                // Function to format time
+                function formatTime(timeString) {
+                    if (timeString) {
+                        return timeString.split('.')[0]; // Split by '.' and take the first part
+                    }
+                    return timeString;
+                }
+
+                // Get the elements
+                const startTimeInput = document.getElementById('startTime');
+                const endTimeInput = document.getElementById('endTime');
+
+                // Format the values
+                startTimeInput.value = formatTime(startTimeInput.value);
+                endTimeInput.value = formatTime(endTimeInput.value);
+            </script>
     </body>
 
 </html> 

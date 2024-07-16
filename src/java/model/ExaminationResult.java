@@ -12,10 +12,12 @@ import java.sql.Date;
  */
 public class ExaminationResult {
     private int id;
+    private int appointmentId;
     private int patientId;
     private String patientName;
     private String service;
     private int price;
+    private String examinationStatus;
     private String doctor;
     private Date bookingDate;
     private String startTime;
@@ -29,12 +31,14 @@ public class ExaminationResult {
     public ExaminationResult() {
     }
 
-    public ExaminationResult(int id, int patientId, String patientName, String service, int price, String doctor, Date bookingDate, String startTime, String endTime, int room, int idStatus, String status, String payRevervationStatus, String description) {
+    public ExaminationResult(int id,int appointmentId, int patientId, String patientName, String service, int price, String examinationStatus, String doctor, Date bookingDate, String startTime, String endTime, int room, int idStatus, String status, String payRevervationStatus, String description) {
         this.id = id;
+        this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.patientName = patientName;
         this.service = service;
         this.price = price;
+        this.examinationStatus = examinationStatus;
         this.doctor = doctor;
         this.bookingDate = bookingDate;
         this.startTime = startTime;
@@ -52,6 +56,14 @@ public class ExaminationResult {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public int getPatientId() {
@@ -84,6 +96,14 @@ public class ExaminationResult {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getExaminationStatus() {
+        return examinationStatus;
+    }
+
+    public void setExaminationStatus(String examinationStatus) {
+        this.examinationStatus = examinationStatus;
     }
 
     public String getDoctor() {

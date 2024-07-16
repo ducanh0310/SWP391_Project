@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.appointment;
+package controller.examination;
 
-import dao.AppointmentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,17 +11,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import dao.AppointmentDAO;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import model.AppointmentDTO;
+import model.User;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "ViewDetailAppointment", urlPatterns = {"/ViewDetailAppointment"})
-public class ViewDetailAppointment extends HttpServlet {
+@WebServlet(name = "AppointmentList", urlPatterns = {"/appointmentList"})
+public class AppointmentList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ViewDetailAppointment extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewDetailAppointment</title>");
+            out.println("<title>Servlet AppointmentList</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewDetailAppointment at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AppointmentList at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,15 +62,22 @@ public class ViewDetailAppointment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String appIdParam = request.getParameter("appId");
-            int appId = Integer.parseInt(appIdParam);
-            AppointmentDAO appointment = new AppointmentDAO();
-            AppointmentDTO app = appointment.getAppointmentDTOById(appId);
-            request.setAttribute("appDetails", app);
-            request.getRequestDispatcher("view/DetailAppointment.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewDetailAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        String userRole = (String) session.getAttribute("userRole");
+        if (currentUser == null) {
+            request.setAttribute("error", "You are not permission!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else {
+            if( !userRole.equals("doctor") && !userRole.equals("nurse")){
+                request.setAttribute("error", "You are not permission!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            }else{
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            ArrayList<AppointmentDTO> appointmentList = appointmentDAO.getAppointment();
+            request.setAttribute("appList", appointmentList);
+            request.getRequestDispatcher("view/examination/AppointmentList.jsp").forward(request, response);
+            } 
         }
     }
 

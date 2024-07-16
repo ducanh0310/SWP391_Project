@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.appointment;
+package controller.examination;
 
 import dao.ExaminationDAO;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public class SubmitExaminationResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("view/EditExaminationResult.jsp");
+        response.sendRedirect("view/examination/EditExaminationResult.jsp");
     } 
 
     /** 

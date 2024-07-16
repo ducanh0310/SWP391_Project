@@ -153,21 +153,85 @@
 
                         <div class="col-md-8">
                             <div style="text-align: center; font-size:25px">Appointment Details</div>
-                            <div class="card mb-3">
+                            <div class="card mb-3" style="width: 800px">
+                                <form action="AddExaminationResult" method="post">
                                 <div class="card-body">
 
-                                    <form action="EditExaminationResultController" method="get">
-                                        <div class="mb-3">
-                                            <label for="fileName">File Name:</label>
-                                            <input type="file" id="fileName" name="fileName" class="form-control" placeholder="Enter file name">
+                                    <div class="row mt-3">
+                                        <div class="col-md-6" style="width: 30%">
+                                            <label class="labels">ID</label>
+                                            <input type="text" id="appID" name="appID" class="form-control" placeholder="" value="${infor.id}" readonly>
                                         </div>
-
-                                        <button class="mb-3" type="submit">Continue</button>
-                                    </form>
-                                    <div class="col-md-4">
-                                        <div id="draftsList"></div>
+                                        <div class="col-md-6" style="width: 30%">
+                                            <label class="labels">Patient ID</label>
+                                            <input type="text" id="patientID" name="patientID" class="form-control" placeholder=" " value="${infor.patientId}" readonly>
+                                        </div>
+                                        <div class="col-md-6" style="width: 40%">
+                                            <label class="labels">Patient Name</label>
+                                            <input type="text" id="patientName" name="patientName" class="form-control" placeholder="" value="${infor.patientName}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label class="labels">Service</label>
+                                            <input type="text" id="service" name="service" class="form-control" placeholder=" " value="${infor.service}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="labels">Price</label>
+                                            <input type="text" id="price" name="price" class="form-control" placeholder="" value="${infor.price}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label class="labels">Doctor</label>
+                                            <input type="text" id="doctor" name="doctor" class="form-control" placeholder=" " value="${infor.doctor}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="labels">Room</label>
+                                            <input type="text" id="room" name="room" class="form-control" placeholder=" " value="${infor.room}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label class="labels">Status</label>
+                                            <input type="text" id="appointmentStatus" name="appointmentStatus" class="form-control" placeholder=" " value="${infor.status}" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="labels">Pay status</label>
+                                            <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${infor.room}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6" style="width: 25%">
+                                            <label class="labels" >Booking Date</label>
+                                            <input type="text" id="bookingDate" name="bookingDate" class="form-control" placeholder="" value="${infor.bookingDate}" readonly>
+                                        </div>
+                                        <div class="col-md-6" style="width: 25%">
+                                            <label class="labels">Start time</label>
+                                            <input type="text" id="startTime" name="startTime" class="form-control" placeholder=" " value="${infor.startTime}" readonly>
+                                        </div>
+                                        <div class="col-md-6" style="width: 25%">
+                                            <label class="labels">End time</label>
+                                            <input type="text" id="endTime" name="endTime" class="form-control" placeholder=" " value="${infor.endTime}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3" >
+                                        <div class="col-md-6" >
+                                            <label class="labels" >Description</label>
+                                            <textarea style="width: 205%" id="description" 
+                                                      name="description" class="form-control" style="border-radius: 1px;"
+                                                      placeholder="Enter description here" oninput="autoResize(this)"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px;">
+                                        <c:if test="${appDetails.status != 'Cancelled' || appDetails.status != 'Completed'}">
+                                            <div class="col-sm-12" >
+                                                <a class="btn btn-info "  href="AddExaminationResult?appId=${appDetails.id}">Add Examination Result</a>
+                                            </div>
+                                        </c:if>
                                     </div>
                                 </div>
+                                        </form>
                             </div>
                         </div>
                     </div>
@@ -209,7 +273,31 @@
 
             <!-- Template Javascript -->
             <script src="../../js/main.js"></script>
-     
+
+            <script>
+                function autoResize(textarea) {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                }
+            </script>
+            <script>
+    // Function to format time
+    function formatTime(timeString) {
+        if (timeString) {
+            return timeString.split('.')[0]; // Split by '.' and take the first part
+        }
+        return timeString;
+    }
+
+    // Get the elements
+    const startTimeInput = document.getElementById('startTime');
+    const endTimeInput = document.getElementById('endTime');
+
+    // Format the values
+    startTimeInput.value = formatTime(startTimeInput.value);
+    endTimeInput.value = formatTime(endTimeInput.value);
+</script>
+
     </body>
 
 </html> 

@@ -17,40 +17,28 @@ import java.util.logging.Logger;
  */
 public class ExaminationDAO extends DBContext{
     public boolean addExaminationResult(int id, int patientId, String patientName, String service, int price, String doctor
-            , Date bookingDate, String startTime, String endTime, int room, int idStatus, String status, String payRevervationStatus, String description) throws SQLException{
-        String query = "INSERT INTO [dbo].[ExaminationResult]\n" +
-"           ([patientId]\n" +
-"           ,[patientName]\n" +
-"           ,[service]\n" +
-"           ,[price]\n" +
-"           ,[doctor]\n" +
-"           ,[bookingDate]\n" +
-"           ,[startTime]\n" +
-"           ,[endTime]\n" +
-"           ,[room]\n" +
-"           ,[idStatus]\n" +
-"           ,[status]\n" +
-"           ,[payReservationStatus]\n" +
-"           ,[description])\n" +
-"     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            , Date bookingDate, String startTime, String endTime, int room, String status, String payRevervationStatus,String examinationStatus, String description) throws SQLException{
+        String query = "INSERT INTO [dbo].[ExaminationResult]([appointmentId], [patientId],[patientName],[service]\n" +
+            ",[price],[doctor],[bookingDate],[startTime],[endTime],[room],[status],[payReservationStatus],[examination_status],[description]) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         java.sql.Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
-            statement.setInt(1, patientId);
-            statement.setString(2, patientName);
-            statement.setString(3, service);
-            statement.setInt(4, price);
-            statement.setString(5, doctor);
-            statement.setDate(6, bookingDate);
-            statement.setString(7, startTime);
-            statement.setString(8, endTime);
-            statement.setInt(9, room);
-            statement.setInt(10, idStatus);
+            statement.setInt(1, id);
+            statement.setInt(2, patientId);
+            statement.setString(3, patientName);
+            statement.setString(4, service);
+            statement.setInt(5, price);
+            statement.setString(6, doctor);
+            statement.setDate(7, bookingDate);
+            statement.setString(8, startTime);
+            statement.setString(9, endTime);
+            statement.setInt(10, room);
             statement.setString(11, status);
             statement.setString(12, payRevervationStatus);
-            statement.setString(13, description);
+            statement.setString(13, examinationStatus);
+            statement.setString(14, description);
             statement.executeUpdate();
             return true;
         } catch (SQLException ex) {

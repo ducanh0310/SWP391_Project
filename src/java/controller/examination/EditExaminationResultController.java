@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.appointment;
+package controller.examination;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -63,30 +63,7 @@ public class EditExaminationResultController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String fileName = request.getParameter("fileName");
-        String directoryPath = "D:\\FPT\\5_SU24\\SWP391\\SWP391_Project\\FileDraft";
-        String filePath = Paths.get(directoryPath, fileName).toString();
-        Map<String, String> examResults = new HashMap<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(":", 2); // Split each line by first colon
-                if (parts.length == 2) {
-                    examResults.put(parts[0].trim(), parts[1].trim());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();  // Handle file IO exception properly
-        }
-
-        // Convert map to JSON
-        String json = new Gson().toJson(examResults);
-
-        // Set content type and write JSON to response
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+         
     } 
 
     /** 
@@ -140,7 +117,7 @@ public class EditExaminationResultController extends HttpServlet {
             e.printStackTrace();  // Handle file IO exception properly
         }
 
-        request.getRequestDispatcher("view/AppointmentList.jsp").forward(request, response);
+        request.getRequestDispatcher("view/examination/AppointmentList.jsp").forward(request, response);
     }
 
     /** 
