@@ -91,6 +91,7 @@ public class ExaminationDAO extends DBContext{
     }
     
     public ArrayList<ExaminationResult> getAllExaminationResult() throws SQLException{
+        ExaminationResult exam = new  ExaminationResult();
         String query = "select * from ExaminationResult";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -98,10 +99,8 @@ public class ExaminationDAO extends DBContext{
         try{
             connection = getConnection();
             statement = connection.prepareStatement(query);
-            
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-                ExaminationResult exam = new  ExaminationResult();
                 exam.setAppointmentId(rs.getInt("appointmentId"));
                 exam.setPatientId(rs.getInt("patientId"));
                 exam.setPatientName(rs.getString("patientName"));
@@ -117,7 +116,7 @@ public class ExaminationDAO extends DBContext{
                 exam.setExaminationStatus(rs.getString("examination_status"));
                 exam.setDescription(rs.getString("description"));
                 examList.add(exam);
-                return examList;
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,6 +124,14 @@ public class ExaminationDAO extends DBContext{
             closePreparedStatement(statement);
             closeConnection(connection);
         }
-        return null;
+        return examList;
+    }
+    
+    
+    
+    public static void main(String[] args) {
+        ExaminationDAO dao = new ExaminationDAO();
+        ArrayList<ExaminationResult> exam = new ArrayList<>();
+        System.out.println(exam);
     }
 }

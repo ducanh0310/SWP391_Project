@@ -108,7 +108,7 @@ public class AddExaminationResult extends HttpServlet {
                     request.setAttribute("error", "Add failed!");
                 }
                 ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
-                //request.setAttribute("examList", examList);
+                request.setAttribute("examList", examList);
                 //request.setAttribute("size", examList.size());
                 request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
             } catch (SQLException ex) {

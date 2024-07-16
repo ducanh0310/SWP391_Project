@@ -208,42 +208,27 @@
                                     <!--Display employee information-->
                                     <tbody  id="employeeTableBody">
                                         <c:forEach items="${examList}" var="exam">
-                                            <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
-                                                <tr>
-                                                    
-                                                    <td>${emp.name}</td>
-                                                    <td>${emp.employeeSin}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${emp.employeeType == 'r'}">Receptionist
-                                                            </c:when>
-                                                            <c:when test="${emp.employeeType == 'd'}">Doctor
-                                                            </c:when>
-                                                            <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
-                                                            <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td>${emp.phoneNumber}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${emp.gender == 'M'}">Male</c:when>
-                                                            <c:when test="${emp.gender == 'F'}">Female</c:when>
-                                                            <c:otherwise>Other</c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <form action="DeleteEmployee?employeeId=${emp.id}"
-                                                              method="POST">
-                                                            <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
-                                                               class="btn btn-sm btn-neutral">View</a>
-                                                            <button type="submit"
-                                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            </c:if>
+                                            <tr>
+                                                <!--<c:forEach items="${size}" var="size">
+                                                <td>${size}</td>
+                                                </c:forEach> -->
+                                                <td>${exam.patientName}</td>
+                                                <td>${exam.doctor}</td>
+                                                <td>${exam.bookingDate}</td>
+                                                <td>${exam.examinationStatus}</td>
+                                                <td></td>
+                                                <td class="text-end">
+                                                    <form action="DeleteEmployee?employeeId=${emp.id}"
+                                                          method="POST">
+                                                        <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
+                                                           class="btn btn-sm btn-neutral">View</a>
+                                                        <button type="submit"
+                                                                class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         </c:forEach>
 
                                     </tbody>
