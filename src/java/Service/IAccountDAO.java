@@ -22,7 +22,7 @@ public interface IAccountDAO {
 
     public boolean addAccount(String username, String password, int patientId, int type_id) throws SQLException;
 
-    public boolean checkAccount(String username) throws SQLException;
+    public String checkAccount(String username) throws SQLException;
 
     public boolean checkEmail(String email) throws SQLException;
 

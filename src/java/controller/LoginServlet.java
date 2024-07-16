@@ -113,7 +113,7 @@ public class LoginServlet extends HttpServlet {
                         if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
                             session.setAttribute("admin", emp);
                             session.setAttribute("userRole", "admin");
-                            request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
+                            response.sendRedirect("appointment/viewAppointmentHistory");
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
                             session.setAttribute("userRole", "doctor");

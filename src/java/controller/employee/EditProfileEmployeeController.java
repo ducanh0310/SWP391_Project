@@ -14,6 +14,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -49,9 +50,7 @@ public class EditProfileEmployeeController extends HttpServlet {
             } else if ("b".equals(emInfo.getEmployeeType())) {
                 request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -66,13 +65,27 @@ public class EditProfileEmployeeController extends HttpServlet {
             DBEmployeeProfile db = new DBEmployeeProfile();
             //Validation data
             Employee emInfo = getEmployeeFromRequest(request, errorMsg);
+            handleCertifications(request, currentUser, db, errorMsg);
             if (!errorMsg.isEmpty()) {
                 //Announce error into jsp
                 handleErrors(request, response, currentUser, errorMsg);
             } else {
                 db.editInfoEmployee(emInfo);
                 // submit certification for doctor 
-                handleCertifications(request, currentUser, db, errorMsg);
+                //handleCertifications(request, currentUser, db, errorMsg);
+
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+
+                }
+
+                session.setAttribute("EditSuccess", "Editing profile successfully");
+
                 response.sendRedirect("view");
             }
         } catch (ClassNotFoundException ex) {
@@ -134,33 +147,32 @@ public class EditProfileEmployeeController extends HttpServlet {
 
     //Announce error into jsp
     private void handleErrors(HttpServletRequest request, HttpServletResponse response, User currentUser, Map<String, String> errorMsg)
-            throws ServletException, IOException, ClassNotFoundException {
-        try {
-            DBEmployeeProfile dbEm = new DBEmployeeProfile();
-            Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
-            DBAccount dbA = new DBAccount();
-            Account acc = dbA.showAccountInfo(currentUser.getName());
-            
-            request.setAttribute("errorMsg", errorMsg);
-            request.setAttribute("image", acc.getImage());
-            request.setAttribute("emInfo", emInfo);
-            request.setAttribute("username", currentUser.getName());
-            
-            if ("d".equals(emInfo.getEmployeeType())) {
-                ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
-                request.setAttribute("arrayCerti", arrayCerti);
-                request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
-            } else if ("b".equals(emInfo.getEmployeeType())) {
-                request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        DBEmployeeProfile dbEm = new DBEmployeeProfile();
+        Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
+        DBAccount dbA = new DBAccount();
+        Account acc = dbA.showAccountInfo(currentUser.getName());
+
+        request.setAttribute("errorMsg", errorMsg);
+        request.setAttribute("image", acc.getImage());
+        request.setAttribute("emInfo", emInfo);
+        request.setAttribute("username", currentUser.getName());
+
+        if ("d".equals(emInfo.getEmployeeType())) {
+            ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
+            request.setAttribute("arrayCerti", arrayCerti);
+
+            request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
+        } else if ("b".equals(emInfo.getEmployeeType())) {
+
+            request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
         }
     }
 
     // submit certification for doctor 
     private void handleCertifications(HttpServletRequest request, User currentUser, DBEmployeeProfile db, Map<String, String> errorMsg)
             throws ClassNotFoundException {
+        
         try {
             Employee emInfo = db.getInfoEmployee(currentUser.getName());
             if ("d".equals(emInfo.getEmployeeType())) {
@@ -179,14 +191,17 @@ public class EditProfileEmployeeController extends HttpServlet {
                         String imageName = imageNames[i];
                         int imageId = idImage[i];
                         
-                        if (isValidURL(imageLink)) {
+                        Validation valid = new Validation();
+                        boolean cerName = valid.isAddress(imageName);
+                        
+                        if (isValidURL(imageLink) && (cerName == true)) {
                             if (imageId != 0) {
                                 db.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);
                             } else {
                                 db.insertCertification(imageName, imageLink, emInfo.getId());
                             }
                         } else {
-                            errorMsg.put("link", "Invalid link form");
+                            errorMsg.put("link", "Invalid link form or Certification'name must 2-1000 characters");
                         }
                     }
                 }

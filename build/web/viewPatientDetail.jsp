@@ -77,8 +77,16 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                    <i class="bi bi-clock"></i> Appointment
+                                </a>
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
                         </ul>
@@ -96,7 +104,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -179,7 +187,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9">
-                                           ${patients.email}
+                                            ${patients.email}
                                         </div>
                                     </div>
                                     <hr>

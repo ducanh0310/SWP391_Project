@@ -16,6 +16,7 @@ import java.util.List;
 import model.DoctorCertification;
 import model.Employee;
 import model.EmployeeDTO;
+import model.Employees;
 import model.Patient;
 import model.User;
 
@@ -28,7 +29,8 @@ public class EmployeeDAO extends DBContext {
     public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
-        String query = "select * from Employee where employee_id = ?";
+        String query = "SELECT e.*, dc.url, dc.name_cetification FROM Employee e LEFT JOIN Doctor_Certification dc "
+                + "ON e.employee_id = dc.id_doctor WHERE e.employee_id = ?";
         Employee emp = new Employee();
         try {
             connection = getConnection();
@@ -43,6 +45,12 @@ public class EmployeeDAO extends DBContext {
                 emp.setAddress(rs.getString("address"));
                 emp.setAnnualSalary(rs.getFloat("annual_salary"));
                 emp.setBranchId(rs.getInt("branch_id"));
+                emp.setEmail(rs.getString("email"));
+                emp.setDob(rs.getDate("dob"));
+                emp.setGender(rs.getString("gender"));
+                emp.setPhoneNumber(rs.getString("phone"));
+                emp.setUrl(rs.getString("url"));
+                emp.setCertificationName(rs.getString("name_cetification"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,6 +60,7 @@ public class EmployeeDAO extends DBContext {
         }
         return emp;
     }
+
     public Employee getEmployeeByEmployeeId(int employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -166,11 +175,12 @@ public class EmployeeDAO extends DBContext {
                     generatedKeys.close();
                 }
                 if (insertEmployeeStmt != null) {
-                    insertEmployeeStmt .close();
+                    insertEmployeeStmt.close();
                 }
                 if (insertUserAccountStmt != null) {
                     insertUserAccountStmt.close();
-                } if (insertCertificationStmt != null) {
+                }
+                if (insertCertificationStmt != null) {
                     insertCertificationStmt.close();
                 }
                 if (connection != null) {
@@ -182,6 +192,97 @@ public class EmployeeDAO extends DBContext {
         }
     }
 
+    public ArrayList<Employees> getEmployees() throws SQLException {
+        Employee employeeInfo = new Employee();
+        ArrayList<Employees> employeeList = new ArrayList<>();
+        String sql = "select * from Employee";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Employees e = new Employees(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getDate(10),
+                        rs.getString(11));
+                employeeList.add(e);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return employeeList;
+    }
+
+
+    public void deleteEmployee(String key) throws SQLException {
+        String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, key);
+            statement.executeUpdate();  // Corrected to executeUpdate
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;  // Rethrow the exception to inform the caller
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+    }
+    //get all employee when have username
+    public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
+        ArrayList<Employees> employeeList = new ArrayList<>();
+        String sql = "SELECT * FROM Employee WHERE LOWER(name) LIKE ? OR LOWER(employee_id) LIKE ? OR LOWER(employee_sin) LIKE ? OR LOWER(employee_type) LIKE ? OR LOWER(phone) LIKE ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
+            String searchKey = "%" + key.toLowerCase() + "%";
+            statement.setString(1, searchKey);
+            statement.setString(2, searchKey);
+            statement.setString(3, searchKey);
+            statement.setString(4, searchKey);
+            statement.setString(5, searchKey);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Employees e = new Employees(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getDate(10),
+                        rs.getString(11));
+                employeeList.add(e);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return employeeList;
+    }
+
     public static void main(String[] args) {
         Employee employee = new Employee("11111", "d", "test dc", "hahah", (float) 10.5, 1, "0123456789", "a.bc@new.b", Date.valueOf("2003-05-02"), "X");
         EmployeeDAO dao = new EmployeeDAO();
@@ -190,6 +291,7 @@ public class EmployeeDAO extends DBContext {
         dc.setUrl("b");
         ArrayList<DoctorCertification> dcArr = new ArrayList<>();
         dcArr.add(dc);
-        dao.addEmployeeAccount(employee, "a.bc", "vailonluonaothaatday", dcArr);
+        boolean isAdded = dao.addEmployeeAccount(employee, "a.bc", "vailonluonaothaatday", dcArr);
+        System.out.println(isAdded);
     }
 }

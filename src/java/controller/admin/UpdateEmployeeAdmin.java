@@ -21,6 +21,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -105,7 +106,7 @@ public class UpdateEmployeeAdmin extends HttpServlet {
 //            }
             int eId = Integer.parseInt(request.getParameter("eId"));
             session.setAttribute("eId", eId);
-            User employeeUser = new UserDAO().getUserByEmployeeId((int) eId);
+            User employeeUser = new UserDAO().getUserByEmployeeId(eId);
             try {
                 DBEmployeeProfile dbEm = new DBEmployeeProfile();
                 Employee emInfo = dbEm.getInfoEmployee(employeeUser.getName());
@@ -115,14 +116,15 @@ public class UpdateEmployeeAdmin extends HttpServlet {
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", employeeUser.getName());
-
-                if ("d".equals(emInfo.getEmployeeType())) {
-                    ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(employeeUser.getName());
-                    request.setAttribute("arrayCerti", arrayCerti);
-                    request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
-                } else if ("b".equals(emInfo.getEmployeeType())) {
-                    request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
-                }
+                ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(employeeUser.getName());
+                request.setAttribute("arrayCerti", arrayCerti);
+//                if ("d".equals(emInfo.getEmployeeType())) {
+//                    ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(employeeUser.getName());
+//                    request.setAttribute("arrayCerti", arrayCerti);
+//                    request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
+//                } else if ("b".equals(emInfo.getEmployeeType())) {
+//                    request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
+//                }
                 request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(UpdateEmployeeAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,8 +168,15 @@ public class UpdateEmployeeAdmin extends HttpServlet {
 
                 // submit certification for doctor 
                 handleCertifications(request, employeeUser, db, errorMsg);
-                PrintWriter out = response.getWriter();
-                out.print("update successfully");
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+                }
+                session.setAttribute("EditSuccessEmployeeForAdmin", "Editing profile successfully");
+                response.sendRedirect("ViewEmployeeDetailsServlet?employeeId=" + emInfo.getId());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateEmployeeAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -241,9 +250,6 @@ public class UpdateEmployeeAdmin extends HttpServlet {
             if ("d".equals(emInfo.getEmployeeType())) {
                 ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
                 request.setAttribute("arrayCerti", arrayCerti);
-//                response.sendRedirect("UpdateEmployee?eId=" + emInfo.getId());
-                request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
-            } else if ("b".equals(emInfo.getEmployeeType())) {
 //                response.sendRedirect("UpdateEmployee?eId=" + emInfo.getId());
                 request.getRequestDispatcher("view/employee/admin/updateEmployeeAdmin.jsp").forward(request, response);
             }

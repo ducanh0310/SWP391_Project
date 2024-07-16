@@ -24,6 +24,7 @@ import java.security.SecureRandom;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import model.Branch;
@@ -119,7 +120,7 @@ public class AddEmployeeController extends HttpServlet {
         employee.setAddress(request.getParameter("address").trim());
         String dobStr = request.getParameter("dob");
         if (!valid.isDateOfBirth(dobStr)) {
-            errorMsg.put("dob", "Use invalid.");
+            errorMsg.put("dob", "DOB invalid.");
         } else {
             Date dob = Date.valueOf(dobStr);
             if (!valid.isDistantDOB(dob)) {
@@ -141,6 +142,9 @@ public class AddEmployeeController extends HttpServlet {
         if (!valid.isAddress(employee.getAddress())) {
             errorMsg.put("address", "Address must be from 2 to 100 characters.");
         }
+        if (!valid.isEmail(employee.getEmail())) {
+            errorMsg.put("email", "Email invalid.");
+        }
         EmployeeDAO employeeDAO = new EmployeeDAO();
         if (!errorMsg.isEmpty()) {
             handleErrors(request, response, errorMsg);
@@ -160,8 +164,25 @@ public class AddEmployeeController extends HttpServlet {
                 }
             }
             String password = generateNewPassword();
-            employeeDAO.addEmployeeAccount(employee, extractUsername(employee.getEmail()), password, certificates);
+            boolean isAdded = employeeDAO.addEmployeeAccount(employee, extractUsername(employee.getEmail()), password, certificates);
             Email.sendNewAccount(employee.getEmail(), extractUsername(employee.getEmail()), password);
+            if (isAdded) {
+                // Set success message
+                HttpSession session = request.getSession();
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+                }
+                session.setAttribute("successAddEmployee", "Employee added successfully.");
+            } else {
+                // Set error message
+                request.setAttribute("errorMessage", "Employee added fail!!!");
+            }
             request.getRequestDispatcher("view/employee/admin/addEmployee.jsp").forward(request, response);
         }
     }

@@ -18,14 +18,14 @@ public class Validation {
 
     public static boolean isValidPassword(String password) {
         // Check if the password is at least 8 characters long
-        if (password.length() < 8) {
+        if (password.length() < 8 ||  password.length() > 128) {
             return false;
         }
 
         boolean hasLowerCase = false;
         boolean hasUpperCase = false;
         boolean hasDigit = false;
-
+        boolean hasSpace = false;
         // Iterate through each character of the password
         for (char ch : password.toCharArray()) {
             if (Character.isLowerCase(ch)) {
@@ -34,10 +34,12 @@ public class Validation {
                 hasUpperCase = true;
             } else if (Character.isDigit(ch)) {
                 hasDigit = true;
+            } else if (Character.isSpaceChar(ch)) {
+                hasSpace = true;
             }
 
             // Check if all requirements are met
-            if (hasLowerCase && hasUpperCase && hasDigit) {
+            if (!hasSpace && hasLowerCase && hasUpperCase && hasDigit) {
                 return true;
             }
         }
@@ -125,8 +127,8 @@ public class Validation {
         String[] usernames = {"user_1", "user!23", "usa", "valid username", "12345", "''''"};
 
         for (String username : usernames) {
-            boolean isValid = isValidUsername(username);
-            System.out.println("Username: " + username + " is valid: " + isValid);
+            boolean isValid = isValidPassword("Nam 020503");
+            System.out.println(isValid);
         }
     }
 

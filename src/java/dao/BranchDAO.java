@@ -47,7 +47,7 @@ public class BranchDAO extends DBContext {
     public static void main(String[] args) {
         try {
             ArrayList<Branch> b = new BranchDAO().getAllBranch();
-            System.out.println(b);
+            System.out.println(b.get(0).getCity());
         } catch (SQLException ex) {
             Logger.getLogger(BranchDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

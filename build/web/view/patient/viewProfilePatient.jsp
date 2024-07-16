@@ -185,6 +185,17 @@
         <!-- Topbar End -->
 
         <!-- Navbar Start -->
+        <!-- Edit Success Notification start-->
+        <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${EditSuccess}
+                <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Success Notification end-->
         <!-- Navbar End -->
         <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
@@ -389,26 +400,29 @@
         <script src="../../js/main.js"></script>
 
         <script>
-            function confirmDeletion(certId) {
-                if (confirm("Are you sure you want to delete this certification?")) {
-                    // Create a form element
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = 'view';
+            function showEditSuccessNotification() {
+                $('#editSuccessNotification').show();
+                let progressBar = $('#editSuccessProgressBar');
+                let width = 0;
+                let interval = setInterval(function () {
+                    width++;
+                    progressBar.css('width', width + '%');
+                    if (width === 200) {
+                        clearInterval(interval);
+                        $('#editSuccessNotification').fadeOut();
+                    }
+                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+            }
 
-                    // Create a hidden input element to hold the certification ID
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'deleteCert';
-                    input.value = certId;
+            // Close notification button handler
+            $('#closeEditNotificationButton').click(function () {
+                $('#editSuccessNotification').hide();
+            });
 
-                    // Append the hidden input to the form
-                    form.appendChild(input);
-
-                    // Append the form to the body and submit it
-                    document.body.appendChild(form);
-                    form.submit();
-                }
+            // Check for success message from the server
+            let successMessage = '${sessionScope.EditSuccess}';
+            if (successMessage) {
+                showEditSuccessNotification();
             }
         </script>
     </body>

@@ -123,6 +123,7 @@ public class DBEmployeeProfile extends DBContext {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
+            statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 DoctorCertification dc = new DoctorCertification();
@@ -214,8 +215,8 @@ public class DBEmployeeProfile extends DBContext {
     public static void main(String[] args) {
         try {
             DBEmployeeProfile dao = new DBEmployeeProfile();
-            Employee e = dao.getInfoEmployee("johnli255a");
-            System.out.println(e.getEmail() + " " + e.getName() );
+            ArrayList<DoctorCertification> e = dao.getCertification("johnli255a");
+            System.out.println(e);
         } catch (SQLException ex) {
             Logger.getLogger(DBEmployeeProfile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
