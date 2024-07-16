@@ -116,7 +116,6 @@ public class ExaminationDAO extends DBContext{
                 exam.setExaminationStatus(rs.getString("examination_status"));
                 exam.setDescription(rs.getString("description"));
                 examList.add(exam);
-                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,9 +125,7 @@ public class ExaminationDAO extends DBContext{
         }
         return examList;
     }
-    
-    
-    
+
     public static void main(String[] args) {
         ExaminationDAO dao = new ExaminationDAO();
         ArrayList<ExaminationResult> exam = new ArrayList<>();
