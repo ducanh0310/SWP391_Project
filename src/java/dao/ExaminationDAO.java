@@ -112,7 +112,7 @@ public class ExaminationDAO extends DBContext{
                 exam.setEndTime(rs.getString("endTime"));
                 exam.setRoom(rs.getInt("room"));
                 exam.setStatus(rs.getString("status"));
-                exam.setPayRevervationStatus(rs.getString("payRevervationStatus"));
+                exam.setPayRevervationStatus(rs.getString("payReservationStatus"));
                 exam.setExaminationStatus(rs.getString("examination_status"));
                 exam.setDescription(rs.getString("description"));
                 examList.add(exam);

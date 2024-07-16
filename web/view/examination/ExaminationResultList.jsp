@@ -197,11 +197,11 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col" style="font-size: 20px">No</th>
-                                            <th scope="col" style="font-size: 20px">Patient</th>
-                                            <th scope="col" style="font-size: 20px">Doctor</th>
-                                            <th scope="col" style="font-size: 20px">Booking Date</th>
-                                            <th scope="col" style="font-size: 20px">Examination Status</th>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Patient</th>
+                                            <th scope="col">Doctor</th>
+                                            <th scope="col">Booking Date</th>
+                                            <th scope="col">Examination Status</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
