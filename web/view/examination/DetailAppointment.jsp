@@ -217,7 +217,6 @@
                                     <div class="row" style="margin-top: 15px;">
                                         <c:if test="${appDetails.status != 'Cancelled' || appDetails.status != 'Completed'}">
                                             <div class="col-sm-12" >
-                                                <a class="btn btn-info "  href="view/FindFile.jsp">Edit</a>
                                                 <a class="btn btn-info "  href="AddExaminationResult?appId=${appDetails.id}">Add Examination Result</a>
                                             </div>
                                         </c:if>
