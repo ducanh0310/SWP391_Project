@@ -658,10 +658,16 @@
         }
 
         .col-md-7 {
-            width: 75%;
+            width: 100%;
         }
         .col-md-offset-1 {
             margin-left: 0;
+        }
+        .col-md-offset-1 {
+            margin-left: 300px;
+        }
+        .col-md-3 {
+            width: 50%;
         }
 
     </style>
@@ -747,11 +753,11 @@
                                         <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" readonly>
                                     </div>
                                     <div class="form-group">
-                                         <label for="duration">Duration:</label>
+                                        <label for="duration">Duration:</label>
                                         <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" readonly>
                                     </div>
                                     <div class="form-group">
-                                         <label for="symptoms">Symptoms:</label>
+                                        <label for="symptoms">Symptoms:</label>
                                         <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" readonly>
                                     </div>
                                     <div class="form-group">
@@ -787,11 +793,11 @@
                                         <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" >
                                     </div>
                                     <div class="form-group">
-                                         <label for="duration">Duration:</label>
+                                        <label for="duration">Duration:</label>
                                         <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" >
                                     </div>
                                     <div class="form-group">
-                                         <label for="symptoms">Symptoms:</label>
+                                        <label for="symptoms">Symptoms:</label>
                                         <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" >
                                     </div>
                                     <div class="form-group">
