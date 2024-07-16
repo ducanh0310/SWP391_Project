@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import model.AppointmentDTO;
 import model.ExaminationResult;
 import dao.ExaminationDAO;
+import java.util.ArrayList;
 /**
  *
  * @author trung
@@ -78,8 +79,8 @@ public class AddExaminationResult extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
     // Get form data
-    int id = Integer.parseInt(request.getParameter("id"));
-    int patientId = Integer.parseInt(request.getParameter("patientId"));
+    int id = Integer.parseInt(request.getParameter("appID"));
+    int patientId = Integer.parseInt(request.getParameter("patientID"));
     String patientName = request.getParameter("patientName");
     String service = request.getParameter("service");
     int price = Integer.parseInt(request.getParameter("price"));
@@ -88,17 +89,31 @@ public class AddExaminationResult extends HttpServlet {
     String startTime = request.getParameter("startTime");
     String endTime = request.getParameter("endTime");
     int room = Integer.parseInt(request.getParameter("room"));
-    String status = request.getParameter("status");
+    String status = request.getParameter("appointmentStatus");
     String examStatus = "inactive";
-    String payStatus = request.getParameter("payRevervationStatus");
+    String payStatus = request.getParameter("payStatus");
     String description = request.getParameter("description");
     
     if(description.contains("!@#$%^&*")){
          request.setAttribute("error", "Description just accept letter and character");
          request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
     }else{
-        ExaminationDAO dao = new ExaminationDAO();
-        boolean exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime, endTime, room, status, payStatus,examStatus, description);
+            try {
+                ExaminationDAO dao = new ExaminationDAO();
+                boolean exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime
+                        , endTime, room, status, payStatus,examStatus, description);
+                if(exam == true){
+                    request.setAttribute("mess", "Add successfully!");
+                }else{
+                    request.setAttribute("error", "Add failed!");
+                }
+                ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
+                //request.setAttribute("examList", examList);
+                //request.setAttribute("size", examList.size());
+                request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(AddExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
 }

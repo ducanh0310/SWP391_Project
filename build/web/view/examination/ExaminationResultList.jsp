@@ -200,18 +200,17 @@
                                             <th scope="col" style="font-size: 20px">No</th>
                                             <th scope="col" style="font-size: 20px">Patient</th>
                                             <th scope="col" style="font-size: 20px">Doctor</th>
-                                            <th scope="col" style="font-size: 20px"></th>
-                                            
-                                            <th scope="col" style="font-size: 20px">Phone Number</th>
+                                            <th scope="col" style="font-size: 20px">Booking Date</th>
+                                            <th scope="col" style="font-size: 20px">Examination Status</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <!--Display employee information-->
                                     <tbody  id="employeeTableBody">
-                                        <c:forEach items="${EmployeeList}" var="emp">
+                                        <c:forEach items="${examList}" var="exam">
                                             <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
                                                 <tr>
-                                                    <td>${emp.id}</td>
+                                                    
                                                     <td>${emp.name}</td>
                                                     <td>${emp.employeeSin}</td>
                                                     <td>
