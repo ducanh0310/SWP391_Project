@@ -3,7 +3,9 @@ package validation;
 import jakarta.servlet.http.HttpSession;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Date;
+
+import java.sql.*;
+import java.time.LocalTime;
 import java.util.Iterator;
 import java.util.Properties;
 
@@ -91,6 +93,16 @@ public class Email {
         return sendTo(to, SUBJECTNEWUSERNAME, NEWACCOUNT + username + ".\n "
                 + "Your password is: " + password + ".\nUse this username and password to login your account. Please do not share this username with anyone.");
     }
+    public static boolean sendBookingAppointment(String to, String username, Date date, String service, String room, LocalTime startTime, LocalTime endTime) {
+        String code = generateRandomCode(6);
+        return sendTo(to, "Booking Appointment - [" + code + "]", "Dear " + username + "\n We are pleased to confirm your booking. Below are the details of your appointment:\n\n"
+                                                                                 + "Order Code: " + code + "\n"
+                                                                                 + "Date: " + date + " " + startTime + "-" + endTime + "\n"
+                                                                                 + "Service: " + service + "\n"
+                                                                                 + "Room: " + room + "\n\n"
+                                                                                 + "Should you need to make any changes to your appointment or have any questions, please do not hesitate to contact us.\n"
+                                                                                 + "Thank you for choosing our services. We look forward to serving you.\n\n"  + "Best regards,\n" + "DentCare Team.");
+    }
     public static String extractUsername(String email) {
         String[] parts = email.split("@");
         if (parts.length == 2) {
@@ -107,7 +119,20 @@ public class Email {
         }
         return String.valueOf(code);
     }
-    public static void main(String[] args) {
-        System.out.println(generateVerificationCode());
+        public static String generateRandomCode(int length) {
+        // Define the characters to use (lowercase letters and numbers)
+        String characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+        // Create a secure random number generator
+        SecureRandom random = new SecureRandom();
+
+        // Generate the random code
+        StringBuilder code = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            code.append(characters.charAt(index));
+        }
+
+        return code.toString();
     }
 }

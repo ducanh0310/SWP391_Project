@@ -133,12 +133,17 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                    <i class="bi bi-clock"></i> Appointment
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
+                                <a class="nav-link" href="../ViewEmployeeList">
                                     <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
@@ -166,15 +171,17 @@
                     </div>
                 </div>
             </nav>
+
+
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-
+                
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Welcome, admin</h5>
+                                <h5 class="mb-0">Welcome, ${username}</h5>
                                 <a href="AddEmployee" class="btn btn-primary btn-sm">Add New Employee</a>
                             </div>
 
@@ -196,33 +203,18 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col" style="font-size: 20px">Employee ID</th>
-                                            <th scope="col" style="font-size: 20px">Employee Name</th>
-                                            <th scope="col" style="font-size: 20px">Employee Sin</th>
-                                            <th scope="col">
-                                                <select id="filterEmployeeType" class="form-select" >
-                                                    <option value="all">Employee Type</option>
-                                                    <option value="Receptionist">Receptionist</option>
-                                                    <option value="Doctor">Doctor</option>
-                                                    <option value="Nurse">Nurse</option>
-                                                </select>
-                                            </th>
-                                            <th scope="col" style="font-size: 20px">Phone Number</th>
-                                            <th scope="col">
-                                                <select id="filterGender" class="form-select">
-                                                    <option value="all">Genders</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </th>
+                                            <th scope="col">Employee ID</th>
+                                            <th scope="col">Employee Name</th>
+                                            <th scope="col">Employee Sin</th>
+                                            <th scope="col">Employee Type</th>
+                                            <th scope="col">Phone Number</th>
+                                            <th scope="col">Gender</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
-                                    <!--Display employee information-->
                                     <tbody  id="employeeTableBody">
                                         <c:forEach items="${EmployeeList}" var="emp">
-                                            <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
+                                            <c:if test="${emp.employeeType != 'I'}">
                                                 <tr>
                                                     <td>${emp.id}</td>
                                                     <td>${emp.name}</td>
@@ -276,148 +268,112 @@
                     </div>
                 </main>
             </div>
+        </div>
 
 
 
-            <!-- JavaScript Libraries -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/wow/wow.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-            <script src="lib/tempusdominus/js/moment.min.js"></script>
-            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script src="lib/twentytwenty/jquery.event.move.js"></script>
-            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-            <!-- Template Javascript -->
-            <script src="js/main.js"></script>
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
 
-            <!-- JS libraries -->
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- JS libraries -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-            <script src="../../../lib/wow/wow.min.js"></script>
-            <script src="../../../libeasing/easing.min.js"></script>
-            <script src="../../../libwaypoints/waypoints.min.js"></script>
-            <script src="../../../libowlcarousel/owl.carousel.min.js"></script>
-            <script src="../../../libtempusdominus/js/moment.min.js"></script>
-            <script src="../../../libtempusdominus/js/moment-timezone.min.js"></script>
-            <script src="../../../libtempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-            <script src="../../../libtwentytwenty/jquery.event.move.js"></script>
-            <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
+        <script src="../../../lib/wow/wow.min.js"></script>
+        <script src="../../../libeasing/easing.min.js"></script>
+        <script src="../../../libwaypoints/waypoints.min.js"></script>
+        <script src="../../../libowlcarousel/owl.carousel.min.js"></script>
+        <script src="../../../libtempusdominus/js/moment.min.js"></script>
+        <script src="../../../libtempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../../../libtempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../../../libtwentytwenty/jquery.event.move.js"></script>
+        <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
 
-            <script src="../../../js/main.js"></script>
+        <script src="../../../js/main.js"></script>
 
-            <script>
-                const rowsPerPage = 8;
-                let currentPage = 1;
-                const table = document.getElementById("employeeTableBody");
-                const rows = table.getElementsByTagName("tr");
-                const totalRows = rows.length;
-                const totalPages = Math.ceil(totalRows / rowsPerPage);
+        <script>
+            const rowsPerPage = 10;
+            let currentPage = 1;
+            const table = document.getElementById("employeeTableBody");
+            const rows = table.getElementsByTagName("tr");
+            const totalRows = rows.length;
+            const totalPages = Math.ceil(totalRows / rowsPerPage);
 
-                function displayRows(page) {
-                    const start = (page - 1) * rowsPerPage;
-                    const end = start + rowsPerPage;
+            function displayRows(page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
 
-                    for (let i = 0; i < totalRows; i++) {
-                        rows[i].style.display = (i >= start && i < end) ? "" : "none";
-                    }
+                for (let i = 0; i < totalRows; i++) {
+                    rows[i].style.display = (i >= start && i < end) ? "" : "none";
+                }
+            }
+
+            function updatePagination() {
+                const pagination = document.getElementById("pagination");
+                const prevPage = document.getElementById("prevPage");
+                const nextPage = document.getElementById("nextPage");
+
+                // Clear existing page numbers
+                while (pagination.children.length > 2) {
+                    pagination.removeChild(pagination.children[1]);
                 }
 
-                function updatePagination() {
-                    const pagination = document.getElementById("pagination");
-                    const prevPage = document.getElementById("prevPage");
-                    const nextPage = document.getElementById("nextPage");
-
-                    // Clear existing page numbers
-                    while (pagination.children.length > 2) {
-                        pagination.removeChild(pagination.children[1]);
-                    }
-
-                    // Add page numbers
-                    for (let i = 1; i <= totalPages; i++) {
-                        const li = document.createElement("li");
-                        li.className = "page-item" + (i === currentPage ? " active" : "");
-                        const a = document.createElement("a");
-                        a.className = "page-link";
-                        a.href = "javascript:void(0)";
-                        a.textContent = i;
-                        a.addEventListener("click", function () {
-                            currentPage = i;
-                            displayRows(currentPage);
-                            updatePagination();
-                        });
-                        li.appendChild(a);
-                        pagination.insertBefore(li, nextPage);
-                    }
-
-                    // Disable previous/next buttons if on first/last page
-                    prevPage.classList.toggle("disabled", currentPage === 1);
-                    nextPage.classList.toggle("disabled", currentPage === totalPages);
+                // Add page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    const li = document.createElement("li");
+                    li.className = "page-item" + (i === currentPage ? " active" : "");
+                    const a = document.createElement("a");
+                    a.className = "page-link";
+                    a.href = "javascript:void(0)";
+                    a.textContent = i;
+                    a.addEventListener("click", function () {
+                        currentPage = i;
+                        displayRows(currentPage);
+                        updatePagination();
+                    });
+                    li.appendChild(a);
+                    pagination.insertBefore(li, nextPage);
                 }
 
-                document.getElementById("prevPage").addEventListener("click", function () {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        displayRows(currentPage);
-                        updatePagination();
-                    }
-                });
+                // Disable previous/next buttons if on first/last page
+                prevPage.classList.toggle("disabled", currentPage === 1);
+                nextPage.classList.toggle("disabled", currentPage === totalPages);
+            }
 
-                document.getElementById("nextPage").addEventListener("click", function () {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        displayRows(currentPage);
-                        updatePagination();
-                    }
-                });
+            document.getElementById("prevPage").addEventListener("click", function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayRows(currentPage);
+                    updatePagination();
+                }
+            });
 
-                // Initialize the table
-                displayRows(currentPage);
-                updatePagination();
-            </script>
-            <script>
-                // fill by gender
-                document.getElementById("filterGender").addEventListener("change", function () {
-                    const selectedGender = this.value;
+            document.getElementById("nextPage").addEventListener("click", function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayRows(currentPage);
+                    updatePagination();
+                }
+            });
 
-                    for (let i = 0; i < totalRows; i++) {
-                        const genderCell = rows[i].getElementsByTagName("td")[5]; // Cột giới tính là cột thứ 6 trong table
-                        const gender = genderCell.textContent.trim();
-
-                        if (selectedGender === "all" || gender === selectedGender) {
-                            rows[i].style.display = "";
-                        } else {
-                            rows[i].style.display = "none";
-                        }
-                    }
-                });
-            </script>
-            <script>
-                // fill by employee role
-                document.getElementById("filterEmployeeType").addEventListener("change", function () {
-                    const selectedEmployeeType = this.value;
-
-                    for (let i = 0; i < totalRows; i++) {
-                        const employeeTypeCell = rows[i].getElementsByTagName("td")[3]; // Cột vai trò nhân viên là cột thứ 4 trong table
-                        const employeeType = employeeTypeCell.textContent.trim();
-
-                        if (selectedEmployeeType === "all" || employeeType === selectedEmployeeType) {
-                            rows[i].style.display = "";
-                        } else {
-                            rows[i].style.display = "none";
-                        }
-                    }
-
-                });
-
-
-            </script>
+            // Initialize the table
+            displayRows(currentPage);
+            updatePagination();
+        </script>
 
     </body>
 

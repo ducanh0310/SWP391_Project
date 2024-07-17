@@ -6,7 +6,6 @@ package Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Appointment;
 import model.Employee;
 import model.Employees;
 
@@ -19,5 +18,4 @@ public interface IEmployeeDAO {
     public ArrayList<Employees> getEmployees() throws SQLException;
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException;
     public void deleteEmployee(String key) throws SQLException;
-    public ArrayList<Appointment> getAppointmentByDentisId(String DentistId) throws SQLException;
 }

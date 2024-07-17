@@ -209,24 +209,18 @@
                                     <tbody  id="employeeTableBody">
                                         <c:forEach items="${examList}" var="exam">
                                             <tr>
-                                                <!--<c:forEach items="${size}" var="size">
-                                                <td>${size}</td>
-                                                </c:forEach> -->
+                                                <td>${exam.id}</td>    
                                                 <td>${exam.patientName}</td>
                                                 <td>${exam.doctor}</td>
                                                 <td>${exam.bookingDate}</td>
                                                 <td>${exam.examinationStatus}</td>
+                                                <td>${exam.description}</td>
                                                 <td></td>
                                                 <td class="text-end">
-                                                    <form action="DeleteEmployee?employeeId=${emp.id}"
-                                                          method="POST">
-                                                        <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
-                                                           class="btn btn-sm btn-neutral">View</a>
-                                                        <button type="submit"
-                                                                class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <a href="EditExaminationResultController?AppID=${exam.id}"
+                                                       class="btn btn-sm btn-neutral">View</a>
+                                                    <a href="EditExaminationResultController?AppID=${exam.id}"
+                                                       class="btn btn-sm btn-neutral">Submit</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -351,43 +345,6 @@
                 // Initialize the table
                 displayRows(currentPage);
                 updatePagination();
-            </script>
-            <script>
-                // fill by gender
-                document.getElementById("filterGender").addEventListener("change", function () {
-                    const selectedGender = this.value;
-
-                    for (let i = 0; i < totalRows; i++) {
-                        const genderCell = rows[i].getElementsByTagName("td")[5]; // Cột giới tính là cột thứ 6 trong table
-                        const gender = genderCell.textContent.trim();
-
-                        if (selectedGender === "all" || gender === selectedGender) {
-                            rows[i].style.display = "";
-                        } else {
-                            rows[i].style.display = "none";
-                        }
-                    }
-                });
-            </script>
-            <script>
-                // fill by employee role
-                document.getElementById("filterEmployeeType").addEventListener("change", function () {
-                    const selectedEmployeeType = this.value;
-
-                    for (let i = 0; i < totalRows; i++) {
-                        const employeeTypeCell = rows[i].getElementsByTagName("td")[3]; // Cột vai trò nhân viên là cột thứ 4 trong table
-                        const employeeType = employeeTypeCell.textContent.trim();
-
-                        if (selectedEmployeeType === "all" || employeeType === selectedEmployeeType) {
-                            rows[i].style.display = "";
-                        } else {
-                            rows[i].style.display = "none";
-                        }
-                    }
-
-                });
-
-
             </script>
 
     </body>

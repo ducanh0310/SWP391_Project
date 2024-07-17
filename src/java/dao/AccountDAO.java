@@ -104,7 +104,7 @@ public class AccountDAO extends DBContext implements IAccountDAO {
     }
 
     @Override
-    public boolean checkAccount(String username) throws SQLException {
+    public String checkAccount(String username) throws SQLException {
         String query = "SELECT username FROM User_account WHERE username = ?";
         Connection connection = null;
         PreparedStatement statement = null;
@@ -112,10 +112,10 @@ public class AccountDAO extends DBContext implements IAccountDAO {
             connection = getConnection();
             statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
-            return rs.next();
+            return username;
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName());
-            return false;
+            return username;
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);

@@ -101,7 +101,7 @@ public class registeraccountcontroller extends HttpServlet {
             }
             //check if username is existed
             IAccountDAO accountDAO = new AccountDAO();
-            if (accountDAO.checkAccount(username)) {
+            if (accountDAO.checkAccount(username).contains(username)) {
                 request.setAttribute("error", "Username is existed!");
                 request.getRequestDispatcher("view/authen/registeraccount.jsp").forward(request, response);
                 return;

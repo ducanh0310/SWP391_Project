@@ -6,6 +6,7 @@
 package controller.examination;
 
 import com.google.gson.Gson;
+import dao.ExaminationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,8 +19,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.ExaminationResult;
 
 /**
  *
@@ -63,7 +68,16 @@ public class EditExaminationResultController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         
+        try {
+            String get = request.getParameter("AppID");
+            int id = Integer.parseInt(get);
+            ExaminationDAO dao = new ExaminationDAO();
+            ExaminationResult editExam = dao.checkExaminationResultExist(id );
+            request.setAttribute("edit", editExam);
+            request.getRequestDispatcher("view/examination/EditExaminationResult.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditExaminationResultController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
 
     /** 
@@ -76,48 +90,7 @@ public class EditExaminationResultController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String fileName = request.getParameter("fileName");
-        String directoryPath = "D:\\FPT\\5_SU24\\SWP391\\SWP391_Project\\FileDraft";
-        String filePath = Paths.get(directoryPath, fileName).toString();
-
-        // Extract data from request
-        String id = request.getParameter("id");
-        String patientId = request.getParameter("patientId");
-        String patientName = request.getParameter("patientName");
-        String service = request.getParameter("service");
-        String price = request.getParameter("price");
-        String doctor = request.getParameter("doctor");
-        String bookingDate = request.getParameter("bookingDate");
-        String startTime = request.getParameter("startTime");
-        String endTime = request.getParameter("endTime");
-        String room = request.getParameter("room");
-        String status = request.getParameter("status");
-        String payRevervationStatus = request.getParameter("payRevervationStatus");
-        String description = request.getParameter("description");
-
-        // Construct the data to save
-        String dataToSave = "id:" + id + "\n"
-                          + "patientId:" + patientId + "\n"
-                          + "patientName:" + patientName + "\n"
-                          + "service:" + service + "\n"
-                          + "price:" + price + "\n"
-                          + "doctor:" + doctor + "\n"
-                          + "bookingDate:" + bookingDate + "\n"
-                          + "startTime:" + startTime + "\n"
-                          + "endTime:" + endTime + "\n"
-                          + "room:" + room + "\n"
-                          + "status:" + status + "\n"
-                          + "payRevervationStatus:" + payRevervationStatus + "\n"
-                          + "description:" + description;
-
-        // Save data to file
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
-            writer.println(dataToSave);
-        } catch (IOException e) {
-            e.printStackTrace();  // Handle file IO exception properly
-        }
-
-        request.getRequestDispatcher("view/examination/AppointmentList.jsp").forward(request, response);
+        
     }
 
     /** 

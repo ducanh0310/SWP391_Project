@@ -11,7 +11,8 @@ import java.sql.*;
  * @author Gia Huy
  */
 public class Patient {
-
+    
+    private int id;
     private String sin;
     private String address;
     private String name;
@@ -69,6 +70,15 @@ public class Patient {
         this.phone = phone;
         this.dob = dob;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
 
     public String getAddress() {

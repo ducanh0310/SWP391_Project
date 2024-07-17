@@ -13,9 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Appointment;
 import model.DoctorCertification;
 import model.Employee;
 import model.EmployeeDTO;
@@ -29,7 +26,6 @@ import model.User;
  */
 public class EmployeeDAO extends DBContext {
 
-    //get employee and docter_certification
     public Employee getEmployeeByEmployeeId(String employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -50,8 +46,8 @@ public class EmployeeDAO extends DBContext {
                 emp.setAnnualSalary(rs.getFloat("annual_salary"));
                 emp.setBranchId(rs.getInt("branch_id"));
                 emp.setEmail(rs.getString("email"));
-                emp.setGender(rs.getString("gender"));
                 emp.setDob(rs.getDate("dob"));
+                emp.setGender(rs.getString("gender"));
                 emp.setPhoneNumber(rs.getString("phone"));
                 emp.setUrl(rs.getString("url"));
                 emp.setCertificationName(rs.getString("name_cetification"));
@@ -65,7 +61,6 @@ public class EmployeeDAO extends DBContext {
         return emp;
     }
 
-    //get employee information by employee id
     public Employee getEmployeeByEmployeeId(int employeeId) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -77,7 +72,6 @@ public class EmployeeDAO extends DBContext {
             statement.setInt(1, employeeId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                // set employee object
                 emp.setId(rs.getInt("employee_id"));
                 emp.setEmployeeSin(rs.getString("employee_sin"));
                 emp.setEmployeeType(rs.getString("employee_type"));
@@ -198,7 +192,6 @@ public class EmployeeDAO extends DBContext {
         }
     }
 
-    //get list employee
     public ArrayList<Employees> getEmployees() throws SQLException {
         Employee employeeInfo = new Employee();
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -210,7 +203,6 @@ public class EmployeeDAO extends DBContext {
             statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                //get each employee
                 Employees e = new Employees(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -222,7 +214,6 @@ public class EmployeeDAO extends DBContext {
                         rs.getString(9),
                         rs.getDate(10),
                         rs.getString(11));
-                //add employee to list
                 employeeList.add(e);
             }
         } catch (SQLException e) {
@@ -233,6 +224,7 @@ public class EmployeeDAO extends DBContext {
         }
         return employeeList;
     }
+
 
     public void deleteEmployee(String key) throws SQLException {
         String sql = "UPDATE Employee SET employee_type = 'I' WHERE employee_id = ?;";
@@ -251,7 +243,6 @@ public class EmployeeDAO extends DBContext {
             closeConnection(connection);
         }
     }
-
     //get all employee when have username
     public ArrayList<Employees> getEmployeeByName(String key) throws SQLException {
         ArrayList<Employees> employeeList = new ArrayList<>();
@@ -261,7 +252,7 @@ public class EmployeeDAO extends DBContext {
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            // convert key to lower case
+            // Chuyển đổi key thành chữ thường và thêm ký tự wildcard cho câu truy vấn LIKE
             String searchKey = "%" + key.toLowerCase() + "%";
             statement.setString(1, searchKey);
             statement.setString(2, searchKey);
@@ -292,60 +283,15 @@ public class EmployeeDAO extends DBContext {
         return employeeList;
     }
 
-    //get appoitment by employee id = dentis id
-    public ArrayList<Appointment> getAppointmentByDentisId(String DentistId) throws SQLException {
-        ArrayList<Appointment> appointmentList = new ArrayList<>();
-        String query = "select * from Appointment where dentist_id = ?";
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement(query);
-            statement.setString(1, DentistId);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                //get appointment to list
-                Appointment appointment = new Appointment();
-                appointment.setAppointment_Id(rs.getInt("appointment_id"));
-                appointment.setPatient_Id(rs.getInt("patient_id"));
-                appointment.setDentist_Id(rs.getString("dentist_id"));
-                appointment.setDate_of_Appointment(rs.getDate("date_of_appointment"));
-                appointment.setStart_Time(rs.getString("start_time"));
-                appointment.setEnd_Time(rs.getString("end_time"));
-                appointment.setAppointment_Type(rs.getString("appointment_type"));
-                appointment.setAppointment_Status(rs.getString("appointment_status"));
-                appointment.setRoom(rs.getString("room"));
-                appointmentList.add(appointment);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePreparedStatement(statement);
-            closeConnection(connection);
-        }
-        return appointmentList;
-    }
-
-//    public static void main(String[] args) {
-//        Employee employee = new Employee("11111", "d", "test dc", "hahah", (float) 10.5, 1, "0123456789", "a.bc@new.b", Date.valueOf("2003-05-02"), "X");
-//        EmployeeDAO dao = new EmployeeDAO();
-//        DoctorCertification dc = new DoctorCertification();
-//        dc.setName("a");
-//        dc.setUrl("b");
-//        ArrayList<DoctorCertification> dcArr = new ArrayList<>();
-//        dcArr.add(dc);
-//        boolean isAdded = dao.addEmployeeAccount(employee, "a.bc", "vailonluonaothaatday", dcArr);
-//        System.out.println(isAdded);
-//    }
     public static void main(String[] args) {
-        try {
-            Appointment app = new Appointment();
-            EmployeeDAO emp = new EmployeeDAO();
-            ArrayList<Appointment> appoi = new ArrayList<>();
-            appoi = emp.getAppointmentByDentisId("2");
-            System.out.println(appoi);
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Employee employee = new Employee("11111", "d", "test dc", "hahah", (float) 10.5, 1, "0123456789", "a.bc@new.b", Date.valueOf("2003-05-02"), "X");
+        EmployeeDAO dao = new EmployeeDAO();
+        DoctorCertification dc = new DoctorCertification();
+        dc.setName("a");
+        dc.setUrl("b");
+        ArrayList<DoctorCertification> dcArr = new ArrayList<>();
+        dcArr.add(dc);
+        boolean isAdded = dao.addEmployeeAccount(employee, "a.bc", "vailonluonaothaatday", dcArr);
+        System.out.println(isAdded);
     }
 }

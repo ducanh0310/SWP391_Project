@@ -24,6 +24,7 @@ import java.security.SecureRandom;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import model.Branch;
@@ -119,7 +120,7 @@ public class AddEmployeeController extends HttpServlet {
         employee.setAddress(request.getParameter("address").trim());
         String dobStr = request.getParameter("dob");
         if (!valid.isDateOfBirth(dobStr)) {
-            errorMsg.put("dob", "Use invalid.");
+            errorMsg.put("dob", "DOB invalid.");
         } else {
             Date dob = Date.valueOf(dobStr);
             if (!valid.isDistantDOB(dob)) {
@@ -167,7 +168,17 @@ public class AddEmployeeController extends HttpServlet {
             Email.sendNewAccount(employee.getEmail(), extractUsername(employee.getEmail()), password);
             if (isAdded) {
                 // Set success message
-                request.setAttribute("successMessage", "Employee added successfully.");
+                HttpSession session = request.getSession();
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+                }
+                session.setAttribute("successAddEmployee", "Employee added successfully.");
             } else {
                 // Set error message
                 request.setAttribute("errorMessage", "Employee added fail!!!");

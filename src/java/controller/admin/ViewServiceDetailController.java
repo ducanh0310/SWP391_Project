@@ -27,7 +27,7 @@ public class ViewServiceDetailController extends HttpServlet {
             ServiceDB service = new ServiceDB();
             ArrayList<ProcedureCodes> services = service.getService();
             request.setAttribute("services", services);
-            request.getRequestDispatcher("view/employee/admin/viewServiceDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("viewServiceDetail.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("errorPage.jsp").forward(request, response);
         }

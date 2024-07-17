@@ -4,7 +4,6 @@
  */
 package dao;
 
-
 import dal.DBContext;
 import java.sql.*;
 
@@ -20,16 +19,14 @@ import model.Account;
  */
 public class DBAccount extends DBContext {
 
-    public Account showAccountInfo(String username) throws SQLException{
+    public Account showAccountInfo(String username) throws SQLException {
         Account acc = new Account();
+        String sql = "Select username, password, type_id, patient_id, employee_id, image  from User_account where username=?";
         Connection connection = null;
         PreparedStatement statement = null;
-        String sql = "Select username, password, type_id, patient_id, employee_id, image  from User_account where username=?";
-
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -46,7 +43,7 @@ public class DBAccount extends DBContext {
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
-        } 
+        }
 
         return acc;
     }

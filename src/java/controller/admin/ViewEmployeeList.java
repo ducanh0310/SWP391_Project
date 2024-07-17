@@ -83,6 +83,7 @@ public class ViewEmployeeList extends HttpServlet {
 
                     ArrayList<Employees> empList = employeeDAO.getEmployees();
                     request.setAttribute("EmployeeList", empList);
+                    request.setAttribute("username", currentUser.getName());
                     request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
                 }
             }

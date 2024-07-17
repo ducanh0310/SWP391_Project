@@ -99,12 +99,6 @@ public class LoginServlet extends HttpServlet {
                 User user = userDAO.checkUser(userName);
                 if (user != null && user.getPassword().equals(passWord)) {
                     session.setAttribute("currentUser", user);
-
-                    // Tạo cookie và thêm vào response
-                    Cookie userCookie = new Cookie("username", userName);
-                    userCookie.setMaxAge(24 * 60 * 60); // Cookie có thời hạn 1 ngày
-                    response.addCookie(userCookie);
-
                     Authorization author = new Authorization();
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();
@@ -119,7 +113,7 @@ public class LoginServlet extends HttpServlet {
                         if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
                             session.setAttribute("admin", emp);
                             session.setAttribute("userRole", "admin");
-                            request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
+                            response.sendRedirect("appointment/viewAppointmentHistory");
                         } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
                             session.setAttribute("doctor", emp);
                             session.setAttribute("userRole", "doctor");

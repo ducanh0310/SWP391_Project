@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -35,29 +36,21 @@ public class ViewProfileEmployeeController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
-        String userRole = (String) session.getAttribute("userRole");
-        if (userRole.equals("patient")) {
-            request.getSession(false);
-            session.invalidate();
-            response.sendRedirect("index.jsp");
-        }
         try {
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
             //johnli255a
-            if (userRole.contains("doctor")) {
+            if ("d".equals(emInfo.getEmployeeType())) {
                 ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
                 DBAccount db = new DBAccount();
                 Account acc = db.showAccountInfo(currentUser.getName());
                 request.setAttribute("image", acc.getImage());
                 request.setAttribute("arrayCerti", arrayCerti);
+//                PrintWriter out = response.getWriter();
+//                out.print(arrayCerti + " " + currentUser.getName());
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", currentUser.getName());
-                PrintWriter out = response.getWriter();
-                out.print(userRole);
-                out.print(acc.getUsername() + emInfo);
                 request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
-                return;
             }
             //kdo2342
             if ("b".equals(emInfo.getEmployeeType())) {
@@ -68,10 +61,8 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             java.util.logging.Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -79,7 +70,8 @@ public class ViewProfileEmployeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
         String deleteCert = request.getParameter("deleteCert");
 
         if (deleteCert != null) {
@@ -88,12 +80,21 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 int certId = Integer.parseInt(deleteCert);
                 DBEmployeeProfile db = new DBEmployeeProfile();
                 db.deleteCertification(certId);
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+
+                }
+
+                session.setAttribute("DeleteCertificationSuccess", "Deleting profile successfully");
                 response.sendRedirect("view");
                 return;
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

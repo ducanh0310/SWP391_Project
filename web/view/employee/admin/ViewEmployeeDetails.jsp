@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,6 +78,158 @@
                 background: #f7f7ff;
                 margin-top:0px;
             }
+            /*Editing announcement successfully*/
+            #editSuccessNotification {
+                display: none;
+            }
+
+            /* Style for the progress bar */
+            .progress-bar {
+                transition: width 5s linear;
+            }
+
+            /* Position notification at top right */
+            #notificationContainer {
+                display: none; /* Hide by default */
+            }
+
+            /* Style for the progress bar */
+            body {
+                /*background: rgb(99, 39, 120)*/
+            }
+
+
+            .form-control:focus {
+                box-shadow: none;
+                border-color: #BA68C8
+            }
+
+            .profile-button {
+                background: rgb(99, 39, 120);
+                box-shadow: none;
+                border: none
+            }
+
+            .profile-button:hover {
+                background: #682773
+            }
+
+            .profile-button:focus {
+                background: #682773;
+                box-shadow: none
+            }
+
+            .profile-button:active {
+                background: #682773;
+                box-shadow: none
+            }
+
+            .back:hover {
+                color: #682773;
+                cursor: pointer
+            }
+
+            .labels {
+                font-size: 11px
+            }
+
+            .add-experience:hover {
+                background: #BA68C8;
+                color: #fff;
+                cursor: pointer;
+                border: solid 1px #BA68C8
+            }
+
+            .profile_button{
+                margin: 5px;
+                width: 85%;
+            }
+
+            .container-box {
+                margin-bottom: 120px; /* Khoảng cách giữa các box dưới cùng */
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Điều chỉnh giá trị để thay đổi độ đậm nhạt của box shadow */
+            }
+
+
+
+            .certification-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                padding: 10px;
+                border: 1px solid #ced4da;
+                border-radius: 5px;
+                background-color: #fff;
+                width: 100%;
+            }
+
+            .certification-item a {
+                flex-grow: 1;
+                margin-right: 10px;
+                color: #495057;
+                text-decoration: none;
+            }
+
+            .certification-item button {
+                background-color: #06A3DA;
+                border: none;
+                padding: 5px 10px;
+                color: #fff;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .certification-item button:hover {
+                background-color: #06A3DA;
+            }
+
+            .link-as-input {
+                display: inline-block;
+                padding: .375rem .75rem;
+                margin-bottom: 0;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            }
+
+            .rounded-circle {
+                border-radius: 50% !important;
+                width: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+                height: 150px; /* Đảm bảo rằng width và height có giá trị bằng nhau */
+                object-fit: cover; /* Đảm bảo hình ảnh được cắt gọn vừa với hình tròn */
+            }
+            #editSuccessNotification #deleteSuccessNotification{
+                display: none;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1060;
+            }
+
+
+            .status-verify {
+                color: blue;
+            }
+            .status-done {
+                color: green;
+            }
+            .status-cancel {
+                color: red;
+            }
+            .status-not-started {
+                color: black;
+            }
+
+            #deleteSuccessNotification {
+                display: none;
+            }
         </style>
 
     </head>
@@ -104,6 +255,11 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                        <i class="bi bi-clock"></i> Appointment
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="PatientController">
                                         <i class="bi bi-list-task"></i> Patient
@@ -141,6 +297,17 @@
             <!-- Main content -->
             <div class="container">
                 <div class="main-body">
+                    <!-- Edit Success Notification start-->
+                    <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+                        <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                            ${EditSuccessEmployeeForAdmin}
+                            <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                            <div class="progress mt-2" style="height: 4px;">
+                                <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Success Notification end-->
                     <!-- Breadcrumb -->
                     <nav aria-label="breadcrumb" class="main-breadcrumb">
                         <ol class="breadcrumb">
@@ -150,7 +317,6 @@
                     <!-- /Breadcrumb -->
 
                     <div class="row gutters-sm">
-                        <div style="text-align: center; font-size:25px">Employee Infomation</div>
                         <div class="col-md-4 mb-3">
                             <div class="card">
                                 <div class="card-body">
@@ -288,6 +454,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <a class="btn btn-info "  href="UpdateEmployee?eId=${employee.id}">Edit</a>
+                                            <a class="btn btn-info "  href="editPatientDetail.jsp">Move out</a>
                                         </div>
                                     </div>
 
@@ -295,45 +462,7 @@
                             </div>
                         </div>
                     </div>
-                    <c:if test="${!appointment.isEmpty()}" >
-                        <div id="employeeTable" class="table-responsive">
-                            <div style="text-align: center; font-size: 25px">Appointment</div>
-                            <table class="table table-hover table-nowrap">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Appointment ID</th>
-                                        <th scope="col">Patient ID</th>
-                                        <th scope="col">Dentist ID</th>
-                                        <th scope="col">Date of Appointment</th>
-                                        <th scope="col">Start Time</th>
-                                        <th scope="col">End Time</th>
-                                        <th scope="col">Appointment Type</th>
-                                        <th scope="col">Appointment Status</th>
-                                        <th scope="col">Room</th>
-                                    </tr>
-                                </thead>
-                                <tbody  id="appointmentTableBody">
-                                    <c:forEach items="${appointment}" var="appointment">
 
-                                        <tr>
-                                            <td>${appointment.appointment_Id}</td>
-                                            <td>${appointment.patient_Id}</td>
-                                            <td>${appointment.dentist_Id}</td>
-                                            <td>${appointment.date_of_Appointment}</td>
-                                            <td>${appointment.start_Time}</td>
-                                            <td>${appointment.end_Time}</td>
-                                            <td>${appointment.appointment_Type}</td>
-                                            <td>${appointment.appointment_Status}</td>
-                                            <td>${appointment.room}</td>
-                                        </tr>
-
-                                    </c:forEach>
-
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </c:if>
                 </div>
             </div>
 
@@ -371,7 +500,58 @@
 
             <!-- Template Javascript -->
             <script src="../../js/main.js"></script>
+            <script>
+                function showEditSuccessNotification() {
+                    $('#editSuccessNotification').show();
+                    let progressBar = $('#editSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#editSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
 
+                // Close notification button handler
+                $('#closeEditNotificationButton').click(function () {
+                    $('#editSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let successMessage = '${sessionScope.EditSuccessEmployeeForAdmin}';
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
+
+                // Handle notification display for delete success
+                function showDeleteSuccessNotification() {
+                    $('#deleteSuccessNotification').show();
+                    let progressBar = $('#deleteSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#deleteSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
+
+                // Close notification button handler
+                $('#closeNotificationButton').click(function () {
+                    $('#deleteSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let deleteSuccess = '${sessionScope.DeleteCertificationSuccess}';
+                if (deleteSuccess) {
+                    showDeleteSuccessNotification();
+                }
+            </script>
     </body>
 
 </html> 

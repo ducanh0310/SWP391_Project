@@ -14,10 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Appointment;
 import model.Employee;
 import model.Employees;
 
@@ -65,22 +63,17 @@ public class ViewEmployeeDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String employeeId = request.getParameter("employeeId");
-        String dentistId = request.getParameter("employeeId");
         if (employeeId != null) {
             try {
                 EmployeeDAO empDAO = new EmployeeDAO();
-                //get each employee information
                 Employee emp = empDAO.getEmployeeByEmployeeId(employeeId);
-                //get all appointment if dentist id is not empty
-                ArrayList<Appointment> appointment = empDAO.getAppointmentByDentisId(employeeId);
-                request.setAttribute("appointment", appointment);
                 request.setAttribute("employee", emp);
                 request.getRequestDispatcher("view/employee/admin/ViewEmployeeDetails.jsp").forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(ViewEmployeeDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

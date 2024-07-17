@@ -73,8 +73,8 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -85,11 +85,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -185,6 +180,7 @@
                     </div>
                 </main>
             </div>
+        </div>
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>

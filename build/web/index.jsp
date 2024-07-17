@@ -32,6 +32,65 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+        <!-- BoxIcons v2.1.2 -->
+        <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+
+        <!-- Roboto Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+        <!-- CSS File -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- comment -->
+
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        <!-- Libraries Stylesheet -->
+        <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="../../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="../../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="../../css/style.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -113,7 +172,7 @@
                 </c:choose>
                 <a href="appointment.jsp" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
                 <!--                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>-->
-                <a href="appointmentList" class="btn btn-primary py-2 px-4 ms-3">Appointment List</a>
+                <a href="ViewEmployeeList" class="btn btn-primary py-2 px-4 ms-3">Employee List</a>
             </div>
         </nav>
         <!-- Navbar End -->
@@ -691,7 +750,6 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -704,9 +762,24 @@
         <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
         <script src="lib/twentytwenty/jquery.event.move.js"></script>
         <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <script src="js/main.js"></script>
+        <!-- Template Javascript -->
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../../lib/wow/wow.min.js"></script>
+        <script src="../../lib/easing/easing.min.js"></script>
+        <script src="../../lib/waypoints/waypoints.min.js"></script>
+        <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../../lib/tempusdominus/js/moment.min.js"></script>
+        <script src="../../lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../../lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="../../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="../../js/main.js"></script>
     </body>
 
 </html>

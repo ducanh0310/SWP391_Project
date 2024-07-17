@@ -235,16 +235,21 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
-                                    <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="ViewEmployeeList">
-                                    <i class="bi bi-people"></i></i> Employee
-                                </a>
-                            </li>
+                               <li class="nav-item">
+                                    <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                        <i class="bi bi-clock"></i> Appointment
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="PatientController">
+                                        <i class="bi bi-list-task"></i> Patient
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="ViewEmployeeList">
+                                        <i class="bi bi-people"></i></i> Employee
+                                    </a>
+                                </li>
                         </ul>
                         </ul>
                         <!-- Divider -->
@@ -261,7 +266,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../logout">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -519,7 +524,6 @@
         </script>
 
         <script>
-
             // Show modal when clicking the upload image button
             document.getElementById('uploadImageButton').addEventListener('click', function () {
                 $('#uploadModal').modal('show');
@@ -539,10 +543,11 @@
                     success: function (response) {
                         if (response.success) {
                             $('#uploadModal').modal('hide'); // Hide modal
-                            alert('Image uploaded successfully');
+                            //alert('Image uploaded successfully');
                             document.getElementById('profile-pic').src = response.imageUrl; // Update image
                         } else {
-                            alert('Message: ' + response.message);
+                            //alert('Message: ' + response.message);
+                            document.getElementById('errorURL').value = response.message;
                         }
                     },
                     error: function (xhr, status, error) {
@@ -556,8 +561,6 @@
                     }
                 });
             });
-
-
 
         </script>
     </body>

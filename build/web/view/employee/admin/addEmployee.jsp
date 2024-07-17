@@ -399,17 +399,19 @@
 
                                         </div>
                                     </form>
-                                    <c:if test="${not empty successMessage}">
-                                        <div class="success-message">
-                                            ${successMessage}
-                                        </div>
-                                    </c:if>
 
-                                    <c:if test="${not empty errorMessage}">
-                                        <div class="error-message">
-                                            ${errorMessage}
+                                    <!-- Edit Success Notification start-->
+                                    <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+                                        <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                                            ${successAddEmployee}
+                                            <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                                            <div class="progress mt-2" style="height: 4px;">
+                                                <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
-                                    </c:if>
+                                    </div>
+                                    <!-- Edit Success Notification end-->
+
                                 </div>  
                             </div>            
                         </div>
@@ -524,6 +526,58 @@
                     }
                 });
             });
+        </script>
+        <script>
+                           function showEditSuccessNotification() {
+                    $('#editSuccessNotification').show();
+                    let progressBar = $('#editSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#editSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
+
+                // Close notification button handler
+                $('#closeEditNotificationButton').click(function () {
+                    $('#editSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let successMessage = '${sessionScope.successAddEmployee}';
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
+
+                // Handle notification display for delete success
+                function showDeleteSuccessNotification() {
+                    $('#deleteSuccessNotification').show();
+                    let progressBar = $('#deleteSuccessProgressBar');
+                    let width = 0;
+                    let interval = setInterval(function () {
+                        width++;
+                        progressBar.css('width', width + '%');
+                        if (width === 200) {
+                            clearInterval(interval);
+                            $('#deleteSuccessNotification').fadeOut();
+                        }
+                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                }
+
+                // Close notification button handler
+                $('#closeNotificationButton').click(function () {
+                    $('#deleteSuccessNotification').hide();
+                });
+
+                // Check for success message from the server
+                let deleteSuccess = '${sessionScope.DeleteCertificationSuccess}';
+                if (deleteSuccess) {
+                    showDeleteSuccessNotification();
+                }
         </script>
     </body>
 </html>

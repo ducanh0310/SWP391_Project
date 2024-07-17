@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import model.AppointmentDTO;
 import model.ExaminationResult;
 import dao.ExaminationDAO;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import model.User;
 
@@ -64,7 +65,7 @@ public class AddExaminationResult extends HttpServlet {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                if (userRole != "nurse" &&  userRole != "doctor") {
+                if (userRole.contains("patient")) {
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
@@ -115,12 +116,12 @@ public class AddExaminationResult extends HttpServlet {
         } else {
             try {
                 ExaminationDAO dao = new ExaminationDAO();
-                boolean exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime,
+                String exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime,
                          endTime, room, status, payStatus, examStatus, description);
-                if (exam == true) {
+                if ("True".equals(exam)) {
                     request.setAttribute("mess", "Add successfully!");
                 } else {
-                    request.setAttribute("error", "Add failed!");
+                    request.setAttribute("error", exam);
                 }
                 ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
                 request.setAttribute("examList", examList);
