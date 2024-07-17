@@ -203,7 +203,7 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">Employee ID</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Employee Name</th>
                                             <th scope="col">Employee Sin</th>
                                             <th scope="col">Employee Type</th>
@@ -214,9 +214,9 @@
                                     </thead>
                                     <tbody  id="employeeTableBody">
                                         <c:forEach items="${EmployeeList}" var="emp">
-                                            <c:if test="${emp.employeeType != 'I'}">
+                                            <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
                                                 <tr>
-                                                    <td>${emp.id}</td>
+                                                    <td>${status.index + 1}</td>
                                                     <td>${emp.name}</td>
                                                     <td>${emp.employeeSin}</td>
                                                     <td>
