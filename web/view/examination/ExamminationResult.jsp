@@ -178,7 +178,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="labels">Price</label>
-                                                <input type="text" id="price" name="price" class="form-control" placeholder="" value="${infor.price}" readonly>
+                                                <input type="text" id="price" name="price" class="form-control" placeholder="" value="${infor.price}">
                                             </div>
                                         </div>
                                         <div class="row mt-3">
@@ -198,7 +198,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="labels">Pay status</label>
-                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${infor.room}" readonly>
+                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${infor.payRevervationStatus}" readonly>
                                             </div>
                                         </div>
                                         <div class="row mt-3">

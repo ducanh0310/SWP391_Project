@@ -213,7 +213,7 @@
                                         </tr>
                                     </thead>
                                     <tbody  id="employeeTableBody">
-                                        <c:forEach items="${EmployeeList}" var="emp">
+                                        <c:forEach items="${EmployeeList}" var="emp" varStatus="status">
                                             <c:if test="${emp.employeeType != 'I' && emp.employeeType != 'b'}">
                                                 <tr>
                                                     <td>${status.index + 1}</td>
