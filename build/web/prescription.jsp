@@ -750,19 +750,19 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exam_date">Exam Date:</label>
-                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" readonly>
+                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" readonly ng-model="exam_dateBox">
                                     </div>
                                     <div class="form-group">
-                                        <label for="duration">Duration:</label>
-                                        <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" readonly>
+                                        <label for="diagnosis">Diagnosis:</label>
+                                        <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" readonly ng-model="diagnosisBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="symptoms">Symptoms:</label>
-                                        <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" readonly>
+                                        <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" readonly ng-model="symptomsBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="test_result">Test Result:</label>
-                                        <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly>
+                                        <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly ng-model="test_resultBox">
                                     </div>                           
                                     <div class="form-group">
                                         <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
@@ -786,24 +786,20 @@
                                     <h4>Edit Prescription</h4>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
-                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.pid.name}" >
+                                        <input type="text" id="name" class="form-control" value="${patientResult.pid.name}" readonly ng-model="nameBox">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exam_date">Exam Date:</label>
-                                        <input type="text" id="exam_date" class="form-control" value="${patientResult.exam_date}" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="duration">Duration:</label>
-                                        <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" >
+                                        <label for="diagnosis">Diagnosis:</label>
+                                        <input type="text" id="diagnosis" class="form-control" value="${patientResult.diagnosis}" readonly ng-model="diagnosisBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="symptoms">Symptoms:</label>
-                                        <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" >
+                                        <input type="text" id="symptoms" class="form-control" value="${patientResult.symptoms}" readonly ng-model="symptomsBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="test_result">Test Result:</label>
-                                        <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" >
-                                    </div>                                                              
+                                        <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly ng-model="test_resultBox">
+                                    </div>
                                     <div class="form-group">
                                         <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox">
                                     </div>
@@ -842,20 +838,24 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th ng-click="nameSorter()">Name</th>      
-                                                <th>Phone</th>
+                                                <th>Diagnosis</th>
+                                                <th>Symptoms</th>
+                                                <th>Test Result</th>
                                                 <th>Medication</th>
                                                 <th>Dosage</th>
                                                 <th>Duration</th>
                                                 <th>Notes</th>
                                                 <th></th>
-                                                <th></th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="obj in nameList| filter:filters:exactMatch | filter:filterFavs track by $index" class="{{obj.favorite}} animated fadeIn">
                                                 <td>{{$index + 1}}</td>
                                                 <td>{{obj.name}}</td>
-                                                <td>{{obj.phone}}</td>
+                                                <td>{{obj.diagnosis}}</td>
+                                                <td>{{obj.symptoms}}</td>
+                                                <td>{{obj.test_result}}</td>
                                                 <td>{{obj.medication}}</td>
                                                 <td>{{obj.dosage}}</td>
                                                 <td>{{obj.duration}}</td>
@@ -900,8 +900,10 @@
 
                 // Set temp initial values for testing
                 $scope.nameBox = "${patientResult.pid.name}";
-                $scope.phoneBox = "";
-                $scope.emailBox = "";
+                $scope.exam_dateBox = "${patientResult.exam_date}";
+                $scope.diagnosisBox = "${patientResult.diagnosis}";
+                $scope.symptomsBox = "${patientResult.symptoms}";
+                $scope.test_resultBox = "${patientResult.test_result}";
                 $scope.medicationBox = "";
                 $scope.dosageBox = "";
                 $scope.durationBox = "";
@@ -909,9 +911,9 @@
                 //
 
                 var nameList = [{name: "${patientResult.pid.name}",
-                        favorite: "",
-                        phone: "6664206967",
-                        email: "",
+                        diagnosis: "${patientResult.diagnosis}",
+                        symptoms: "${patientResult.symptoms}",
+                        test_result: "${patientResult.test_result}",
                         medication: "Amoxicillin",
                         dosage: "500mg",
                         duration: "7 days",
@@ -926,7 +928,9 @@
                         $scope.editing = true;
                         $scope.selectedIndex = $index;
                         $scope.nameBox = $scope.nameList[$index].name;
-                        $scope.phoneBox = $scope.nameList[$index].phone;
+                        $scope.diagnosisBox = $scope.nameList[$index].diagnosis;
+                        $scope.symptomsBox = $scope.nameList[$index].symptoms;
+                        $scope.test_resultBox = $scope.nameList[$index].test_result;
                         $scope.medicationBox = $scope.nameList[$index].medication;
                         $scope.dosageBox = $scope.nameList[$index].dosage;
                         $scope.durationBox = $scope.nameList[$index].duration;
@@ -940,7 +944,9 @@
                     // Update existing contact
                     if ($scope.selectedIndex !== -1) {
                         $scope.nameList[$scope.selectedIndex].name = $scope.nameBox;
-                        $scope.nameList[$scope.selectedIndex].phone = $scope.phoneBox;
+                        $scope.nameList[$scope.selectedIndex].phone = $scope.diagnosisBox;
+                        $scope.nameList[$scope.selectedIndex].phone = $scope.symptomsBox;
+                        $scope.nameList[$scope.selectedIndex].phone = $scope.test_resultBox;
                         $scope.nameList[$scope.selectedIndex].medication = $scope.medicationBox;
                         $scope.nameList[$scope.selectedIndex].dosage = $scope.dosageBox;
                         $scope.nameList[$scope.selectedIndex].duration = $scope.durationBox;
@@ -953,7 +959,9 @@
                     $scope.editing = false;
                     $scope.selectedIndex = -1;
                     $scope.nameBox = "${patientResult.pid.name}";
-                    $scope.phoneBox = "";
+                    $scope.diagnosisBox = "${patientResult.diagnosis}";
+                    $scope.symptomsBox = "${patientResult.symptoms}";
+                    $scope.test_resultBox = "${patientResult.test_result}";
                     $scope.medicationBox = "";
                     $scope.dosageBox = "";
                     $scope.durationBox = "";
@@ -973,17 +981,20 @@
                     // Add new contact
                     $scope.nameList.push({
                         name: $scope.nameBox,
-                        phone: $scope.phoneBox || "",
-                        email: $scope.emailBox || "",
+                        diagnosis: $scope.diagnosisBox || "${patientResult.diagnosis}",
+                        symptoms: $scope.symptomsBox || "${patientResult.symptoms}",
+                        test_result: $scope.test_resultBox || "${patientResult.test_result}",
                         medication: $scope.medicationBox || "",
                         dosage: $scope.dosageBox || "",
                         duration: $scope.durationBox || "",
                         notes: $scope.notesBox || ""
                     });
                     $scope.nameSorter();
-                    $scope.emailBox = "";
+
                     $scope.nameBox = "${patientResult.pid.name}";
-                    $scope.phoneBox = "";
+                    $scope.diagnosisBox = "${patientResult.diagnosis}";
+                    $scope.symptomsBox = "${patientResult.symptoms}";
+                    $scope.test_resultBox = "${patientResult.test_result}";
                     $scope.medicationBox = "";
                     $scope.dosageBox = "";
                     $scope.durationBox = "";

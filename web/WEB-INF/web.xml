@@ -44,6 +44,10 @@
         <servlet-name>searchExam</servlet-name>
         <servlet-class>controller.employee.searchExam</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceDetail</servlet-name>
+        <servlet-class>controller.admin.ServiceDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/view</url-pattern>
@@ -87,5 +91,9 @@
     <servlet-mapping>
         <servlet-name>searchExam</servlet-name>
         <url-pattern>/searchExam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceDetail</servlet-name>
+        <url-pattern>/viewService</url-pattern>
     </servlet-mapping>
 </web-app>

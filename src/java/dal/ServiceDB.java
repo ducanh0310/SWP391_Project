@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ProcedureCodes;
+import org.eclipse.jdt.internal.compiler.lookup.ProblemBinding;
 
 /**
  *
  * @author Gia Huy
  */
 public class ServiceDB extends DBContext {
-    
+
     public ArrayList<ProcedureCodes> getService() {
         ArrayList<ProcedureCodes> service = new ArrayList<>();
         try {
@@ -37,15 +38,15 @@ public class ServiceDB extends DBContext {
         }
         return service;
     }
-    
-    public void deleteService(int serviceId){
+
+    public void deleteService(int serviceId) {
         try {
             //ProcedureCodes deletedService = null;
-            String sql="""
+            String sql = """
                                UPDATE [dbo].[Procedure_codes]
                                   SET [type] = ?
                                 WHERE [Procedure_codes].procedure_id=?""";
-            
+
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, "i");
             statement.setInt(2, serviceId);
@@ -54,7 +55,41 @@ public class ServiceDB extends DBContext {
             Logger.getLogger(ServiceDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public ProcedureCodes getProcedureCodesDetail(int pid) {
+        try {
+            String sql = """
+                         SELECT [procedure_id]
+                               ,[procedure_name]
+                               ,[price]
+                               ,[doctor_id]
+                               ,[type]
+                               ,[description]
+                               ,[procedure], [procedure2],[procedure3],[procedure4],[procedure5]
+                           FROM [dbo].[Procedure_codes]WHERE [procedure_id]=?""";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                ProcedureCodes p=new ProcedureCodes();
+                p.setProcedure_id(rs.getInt("procedure_id"));
+                p.setProcedure_name(rs.getString("procedure_name"));
+                p.setPrice(rs.getString("price"));
+                p.setDescription(rs.getString("description"));
+                p.setProcedure(rs.getString("procedure"));
+                p.setProcedure2(rs.getString("procedure2"));
+                p.setProcedure3(rs.getString("procedure3"));
+                p.setProcedure4(rs.getString("procedure4"));
+                p.setProcedure5(rs.getString("procedure5"));
+                return p;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 //    public Ar deleteService(int serviceId) {
 //        ProcedureCodes deletedService = null;
 //        try {
@@ -84,9 +119,10 @@ public class ServiceDB extends DBContext {
 //        }
 //        return deletedService;
 //    }
-    
-//    public static void main(String[] args) {
-//        ServiceDB sv = new ServiceDB();
-//        System.out.println(sv.deleteService(1));
-//    }
+
+    public static void main(String[] args) {
+        ServiceDB sv = new ServiceDB();
+        
+        System.out.println(sv.getProcedureCodesDetail(1));
+    }
 }

@@ -86,7 +86,7 @@ public class DoctorDB extends DBContext {
             String sql = "SELECT p.exam_id, p.pid, p.exam_date, p.diagnosis, p.symptoms, p.test_result, t.name "
                     + "FROM dbo.PatientExamResult p "
                     + "JOIN dbo.Patient t ON p.pid = t.Patient_id "
-                    + "WHERE p.pid = ?";
+                    + "WHERE p.exam_id = ?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, pid);

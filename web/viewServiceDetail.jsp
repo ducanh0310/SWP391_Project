@@ -327,7 +327,7 @@
                                                 <tbody>
                                                     <c:forEach items="${services}" var="service">
                                                         <tr id="service${service.procedure_id}">
-                                                            <td><a class="text-heading font-semibold" href="patientDetail?pid=${service.procedure_id}"> ${service.procedure_name}</a>
+                                                            <td><a class="text-heading font-semibold" href="viewService?pid=${service.procedure_id}"> ${service.procedure_name}</a>
                                                             </td>
                                                             <td>${'$'}${service.price}</td>
                                                             <td>
