@@ -72,7 +72,7 @@ public class EditExaminationResultController extends HttpServlet {
             String get = request.getParameter("AppID");
             int id = Integer.parseInt(get);
             ExaminationDAO dao = new ExaminationDAO();
-            ExaminationResult editExam = dao.checkExaminationResultExist(id );
+            ExaminationResult editExam = dao.FindExaminationResultByID(id );
             request.setAttribute("edit", editExam);
             request.getRequestDispatcher("view/examination/EditExaminationResult.jsp").forward(request, response);
         } catch (SQLException ex) {

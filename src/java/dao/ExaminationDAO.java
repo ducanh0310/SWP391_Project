@@ -52,6 +52,43 @@ public class ExaminationDAO extends DBContext {
         }
     }
 
+    public ExaminationResult FindExaminationResultByID(int appID) throws SQLException {
+    String query = "select * from ExaminationResult where id = ?";
+    Connection connection = null;
+    PreparedStatement statement = null;
+    try {
+        connection = getConnection();
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, appID);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            ExaminationResult exam = new ExaminationResult();
+            exam.setId(rs.getInt("id"));
+            exam.setAppointmentId(rs.getInt("appointmentId"));
+            exam.setPatientId(rs.getInt("patientId"));
+            exam.setPatientName(rs.getString("patientName"));
+            exam.setService(rs.getString("service"));
+            exam.setPrice(rs.getInt("price"));
+            exam.setDoctor(rs.getString("doctor"));
+            exam.setBookingDate(rs.getDate("bookingDate"));
+            exam.setStartTime(rs.getString("startTime"));
+            exam.setEndTime(rs.getString("endTime"));
+            exam.setRoom(rs.getInt("room"));
+            exam.setStatus(rs.getString("status"));
+            exam.setPayRevervationStatus(rs.getString("payReservationStatus")); // Đã cập nhật tên cột ở đây
+            exam.setExaminationStatus(rs.getString("examination_status"));
+            exam.setDescription(rs.getString("description"));
+            return exam;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        closePreparedStatement(statement);
+        closeConnection(connection);
+    }
+    return null;
+}
+    
     public ExaminationResult checkExaminationResultExist(int appID) throws SQLException {
     String query = "select * from ExaminationResult where appointmentId = ?";
     Connection connection = null;
@@ -63,6 +100,7 @@ public class ExaminationDAO extends DBContext {
         ResultSet rs = statement.executeQuery();
         if (rs.next()) {
             ExaminationResult exam = new ExaminationResult();
+            exam.setId(rs.getInt("id"));
             exam.setAppointmentId(rs.getInt("appointmentId"));
             exam.setPatientId(rs.getInt("patientId"));
             exam.setPatientName(rs.getString("patientName"));
@@ -101,6 +139,7 @@ public class ExaminationDAO extends DBContext {
         while (rs.next()) {
             ExaminationResult exam = new ExaminationResult(); // Tạo đối tượng mới cho mỗi lần lặp
             exam.setAppointmentId(rs.getInt("appointmentId"));
+            exam.setId(rs.getInt("id"));
             exam.setPatientId(rs.getInt("patientId"));
             exam.setPatientName(rs.getString("patientName"));
             exam.setService(rs.getString("service"));
@@ -126,13 +165,14 @@ public class ExaminationDAO extends DBContext {
 }
 
 
-    public void submitExamination() throws SQLException {
-        String query = "UPDATE [dbo].[ExaminationResult] SET [examination_status] = 'active' WHERE [id] = 1";
+    public void submitExamination(int id) throws SQLException {
+        String query = "UPDATE [dbo].[ExaminationResult] SET [examination_status] = 'active' WHERE [id] = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             
         } catch (SQLException e) {

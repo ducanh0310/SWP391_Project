@@ -207,9 +207,9 @@
                                     </thead>
                                     <!--Display employee information-->
                                     <tbody  id="employeeTableBody">
-                                        <c:forEach items="${examList}" var="exam">
+                                        <c:forEach items="${examList}" var="exam" varStatus="status">
                                             <tr>
-                                                <td>${exam.id}</td>    
+                                                <td>${status.index + 1}</td>    
                                                 <td>${exam.patientName}</td>
                                                 <td>${exam.doctor}</td>
                                                 <td>${exam.bookingDate}</td>
