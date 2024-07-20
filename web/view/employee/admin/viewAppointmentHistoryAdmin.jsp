@@ -416,6 +416,11 @@
                                     <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../ExaminationResultListController">
+                                    <i class="bi bi-people"></i></i> Examination Result List
+                                </a>
+                            </li>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -554,9 +559,9 @@
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${bAH.statusBook.id == 2}">
-                                                        <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#addExamResult" id="addExamResult"
-                                                                data-id="${bAH.ID}">
-                                                            View
+
+                                                        <button> <a href="../AddExaminationResult?appId=${bAH.ID}"
+                                                                    class="btn btn-sm btn-neutral">View</a>
                                                         </button>
                                                         <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"

@@ -65,6 +65,7 @@ public class SearchEmployeeServlet extends HttpServlet {
             ArrayList<Employees> employees = new ArrayList<>();
             EmployeeDAO empDAO = new EmployeeDAO();
             employees = empDAO.getEmployeeByName(searchKey);
+            request.setAttribute("searchKey", searchKey);
             request.setAttribute("EmployeeList", employees);
             request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
         } catch (SQLException ex) {

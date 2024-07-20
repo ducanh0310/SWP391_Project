@@ -152,14 +152,14 @@
                     <div class="row gutters-sm">
 
                         <div class="col-md-8">
-                            <div style="text-align: center; font-size:25px">Appointment Details</div>
                             <div class="card mb-3" style="width: 800px">
+                                <div style="text-align: center; font-size:25px">Examination Result Details</div>
                                 <form action="EditExaminationResultController" method="post">
                                     <div class="card-body">
 
                                         <div class="row mt-3">
                                             <div class="col-md-6" style="width: 30%">
-                                                <label class="labels">ID</label>
+                                                <label class="labels">Examination Result ID</label>
                                                 <input type="text" id="appID" name="appID" class="form-control" placeholder="" value="${edit.id}" readonly>
                                             </div>
                                             <div class="col-md-6" style="width: 30%">
@@ -174,7 +174,7 @@
                                         <div class="row mt-3">
                                             <div class="col-md-6">
                                                 <label class="labels">Service</label>
-                                                <input type="text" id="service" name="service" class="form-control" placeholder=" " value="${edit.service}">
+                                                <input type="text" id="service" name="service" class="form-control" placeholder=" " value="${edit.service}" readonly>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="labels">Price</label>
@@ -230,9 +230,9 @@
                                                           placeholder="Enter description here" oninput="autoResize(this)">${edit.description}</textarea>
                                             </div>
                                         </div>
-                                        <c:if test="${infor.status != 'Cancelled' && infor.status != 'Completed'}">
-                                            <button class="btn btn-info " type="submit" style="margin-top: 10px">Save changes</button>
-                                        </c:if>
+                                        <button class="btn btn-info " type="submit" style="margin-top: 10px">
+                                            Save Changes
+                                        </button>
                                     </div>
                                 </form>
                             </div>

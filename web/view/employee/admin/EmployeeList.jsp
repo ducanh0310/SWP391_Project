@@ -190,7 +190,7 @@
                                   class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search for..."
-                                           aria-label="Search" aria-describedby="basic-addon2" name="searchKey">
+                                           aria-label="Search" value="${searchKey}" aria-describedby="basic-addon2" name="searchKey">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
@@ -221,11 +221,9 @@
                                                     <td>${emp.employeeSin}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${emp.employeeType == 'r'}">Receptionist
-                                                            </c:when>
                                                             <c:when test="${emp.employeeType == 'd'}">Doctor
                                                             </c:when>
-                                                            <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
+                                                            <c:when test="${emp.employeeType == 'n'}">Nurse</c:when>
                                                             <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
                                                         </c:choose>
                                                     </td>

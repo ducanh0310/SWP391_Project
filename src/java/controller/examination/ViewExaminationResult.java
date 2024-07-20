@@ -5,7 +5,9 @@
 
 package controller.examination;
 
+import dao.EmployeeDAO;
 import dao.ExaminationDAO;
+import dao.ServiceDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,14 +19,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Employees;
 import model.ExaminationResult;
+import model.ProcedureCodes;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="SubmitExaminationResult", urlPatterns={"/SubmitExaminationResult"})
-public class SubmitExaminationResult extends HttpServlet {
+@WebServlet(name="ViewExaminationResult", urlPatterns={"/ViewExaminationResult"})
+public class ViewExaminationResult extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +45,10 @@ public class SubmitExaminationResult extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SubmitExaminationResult</title>");  
+            out.println("<title>Servlet ViewExaminationResult</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SubmitExaminationResult at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewExaminationResult at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +65,16 @@ public class SubmitExaminationResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         doPost(request, response);
+          try {
+            String get = request.getParameter("AppID");
+            int id = Integer.parseInt(get);
+            ExaminationDAO dao = new ExaminationDAO();
+            ExaminationResult editExam = dao.FindExaminationResultByID(id );
+            request.setAttribute("edit", editExam);
+            request.getRequestDispatcher("view/examination/ViewExaminationResult.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditExaminationResultController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
 
     /** 
@@ -74,22 +87,7 @@ public class SubmitExaminationResult extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(request.getParameter("AppID"));
-            ExaminationDAO examDAO = new ExaminationDAO();
-            boolean submit = examDAO.submitExamination(id);
-            ArrayList<ExaminationResult> examList = examDAO.getAllExaminationResult();
-            request.setAttribute("examList", examList);
-            if(submit == true){
-                request.setAttribute("mess", "Submit successfully!");
-            }else{
-                request.setAttribute("error", "Submit failed!");
-            }
-                request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(SubmitExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /** 

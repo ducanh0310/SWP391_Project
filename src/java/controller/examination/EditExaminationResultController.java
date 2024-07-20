@@ -6,7 +6,9 @@
 package controller.examination;
 
 import com.google.gson.Gson;
+import dao.EmployeeDAO;
 import dao.ExaminationDAO;
+import dao.ServiceDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,12 +21,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Employee;
+import model.Employees;
 import model.ExaminationResult;
+import model.ProcedureCodes;
 
 /**
  *
@@ -71,8 +78,14 @@ public class EditExaminationResultController extends HttpServlet {
         try {
             String get = request.getParameter("AppID");
             int id = Integer.parseInt(get);
+            ServiceDAO services = new ServiceDAO();
+            EmployeeDAO empDAO = new EmployeeDAO();
             ExaminationDAO dao = new ExaminationDAO();
             ExaminationResult editExam = dao.FindExaminationResultByID(id );
+            ArrayList<ProcedureCodes> proCode = services.getServicesName();
+            ArrayList<Employees> EmployeeName = empDAO.getEmployees();
+            request.setAttribute("proCode", proCode);
+            request.setAttribute("emp", EmployeeName);
             request.setAttribute("edit", editExam);
             request.getRequestDispatcher("view/examination/EditExaminationResult.jsp").forward(request, response);
         } catch (SQLException ex) {
@@ -90,6 +103,28 @@ public class EditExaminationResultController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("appID"));
+            int price = Integer.parseInt(request.getParameter("price"));
+            String doctor = request.getParameter("doctor");
+            int room = Integer.parseInt(request.getParameter("room"));
+            String status = request.getParameter("appointmentStatus");
+            String description = request.getParameter("description");
+            
+            ExaminationDAO dao = new ExaminationDAO();
+            
+            ExaminationResult check = dao.FindExaminationResultByID(id);
+            if(check != null){
+                boolean update = dao.UpdateExaminationResult(id, price, doctor, room, status, description);
+                request.setAttribute("mess", "Update successfully!");
+                request.getRequestDispatcher("ExaminationResultListController").forward(request, response);
+            }else{
+                request.setAttribute("error", "Update failed!");
+                request.getRequestDispatcher("ExaminationResultListController").forward(request, response);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EditExaminationResultController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

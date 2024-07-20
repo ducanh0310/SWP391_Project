@@ -4,31 +4,28 @@
  */
 package controller.examination;
 
-import dao.AppointmentDAO;
+import dao.ExaminationDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.AppointmentDTO;
 import model.ExaminationResult;
-import dao.ExaminationDAO;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import model.User;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name = "AddExaminationResult", urlPatterns = {"/AddExaminationResult"})
-public class AddExaminationResult extends HttpServlet {
+@WebServlet(name = "ExaminationResultListController", urlPatterns = {"/ExaminationResultListController"})
+public class ExaminationResultListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +39,18 @@ public class AddExaminationResult extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ExaminationResultListController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ExaminationResultListController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,21 +73,20 @@ public class AddExaminationResult extends HttpServlet {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                if (userRole.contains("patient")) {
+                if (userRole.contains("patient") /*|| userRole.contains("admin")*/ ) {
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
-                    String appIdParam = request.getParameter("appId");
-                    int appId = Integer.parseInt(appIdParam);
-                    AppointmentDAO dao = new AppointmentDAO();
-                    AppointmentDTO appInfor = dao.getAppointmentDTOById(appId);
-                    request.setAttribute("infor", appInfor);
-                    request.getRequestDispatcher("view/examination/ExamminationResult.jsp").forward(request, response);
+                    ExaminationDAO dao = new ExaminationDAO();
+                    ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
+                    request.setAttribute("examList", examList);
+                    request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AddExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExaminationResultListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**
@@ -93,50 +100,27 @@ public class AddExaminationResult extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        // Get form data
-        int id = Integer.parseInt(request.getParameter("appID"));
-        int patientId = Integer.parseInt(request.getParameter("patientID"));
-        String patientName = request.getParameter("patientName");
-        String service = request.getParameter("service");
-        int price = Integer.parseInt(request.getParameter("price"));
-        String doctor = request.getParameter("doctor");
-        Date bookingDate = Date.valueOf(request.getParameter("bookingDate"));
-        String startTime = request.getParameter("startTime");
-        String endTime = request.getParameter("endTime");
-        int room = Integer.parseInt(request.getParameter("room"));
-        String status = request.getParameter("appointmentStatus");
-        String examStatus = "inactive";
-        String payStatus = request.getParameter("payStatus");
-        String description = request.getParameter("description");
-
-        if (description.contains("!@#$%^&*")) {
-            request.setAttribute("error", "Description just accept letter and character");
-            request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
-        } else {
-            try {
-                ExaminationDAO dao = new ExaminationDAO();
-                if (dao.checkExaminationResultExist(id) == null) {
-                    String exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime,
-                            endTime, room, status, payStatus, examStatus, description);
-
-                    if ("True".equals(exam)) {
-                        request.setAttribute("mess", "Add successfully!");
-                    }
-                    ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
-                    request.setAttribute("examList", examList);
-                    request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
+       try {
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            String userRole = (String) session.getAttribute("userRole");
+            if (currentUser == null) {
+                request.setAttribute("error", "You are not permission!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                if (userRole.contains("patient") /*|| userRole.contains("admin")*/ ) {
+                    request.setAttribute("error", "You are not permission!");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
+                    ExaminationDAO dao = new ExaminationDAO();
                     ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
                     request.setAttribute("examList", examList);
-                    request.setAttribute("error", "Cannot add a new Examination Result that already exists!");
                     request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(AddExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(ExaminationResultListController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -148,4 +132,5 @@ public class AddExaminationResult extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

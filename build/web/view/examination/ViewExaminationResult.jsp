@@ -152,76 +152,88 @@
                     <div class="row gutters-sm">
 
                         <div class="col-md-8">
-                            <div style="text-align: center; font-size:25px">Appointment Details</div>
                             <div class="card mb-3" style="width: 800px">
-                                <div class="card-body">
+                            <div style="text-align: center; font-size:25px">Examination Result Details</div>
+                                    <div class="card-body">
 
-                                    <div class="row mt-3">
-                                        <div class="col-md-6" style="width: 30%">
-                                            <label class="labels">ID</label>
-                                            <input type="text" id="appID" name="appID" class="form-control" placeholder="" value="${appDetails.id}" readonly>
-                                        </div>
-                                        <div class="col-md-6" style="width: 30%">
-                                            <label class="labels">Patient ID</label>
-                                            <input type="text" id="patientID" name="patientID" class="form-control" placeholder=" " value="${appDetails.patientId}" readonly>
-                                        </div>
-                                        <div class="col-md-6" style="width: 40%">
-                                            <label class="labels">Patient Name</label>
-                                            <input type="text" id="patientName" name="patientName" class="form-control" placeholder="" value="${appDetails.patientName}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-6">
-                                            <label class="labels">Service</label>
-                                            <input type="text" id="service" name="service" class="form-control" placeholder=" " value="${appDetails.service}" readonly>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="labels">Price</label>
-                                            <input type="text" id="price" name="price" class="form-control" placeholder="" value="${appDetails.price}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-6">
-                                            <label class="labels">Doctor</label>
-                                            <input type="text" id="doctor" name="doctor" class="form-control" placeholder=" " value="${appDetails.doctor}" readonly>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="labels">Room</label>
-                                            <input type="text" id="room" name="room" class="form-control" placeholder=" " value="${appDetails.room}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-6">
-                                            <label class="labels">Status</label>
-                                            <input type="text" id="appointmentStatus" name="appointmentStatus" class="form-control" placeholder=" " value="${appDetails.status}" readonly>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="labels">Pay status</label>
-                                            <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${appDetails.room}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-6" style="width: 25%">
-                                            <label class="labels" >Booking Date</label>
-                                            <input type="text" id="bookingDate" name="bookingDate" class="form-control" placeholder="" value="${appDetails.bookingDate}" readonly>
-                                        </div>
-                                        <div class="col-md-6" style="width: 25%">
-                                            <label class="labels">Start time</label>
-                                            <input type="text" id="startTime" name="startTime" class="form-control" placeholder=" " value="${appDetails.startTime}" readonly>
-                                        </div>
-                                        <div class="col-md-6" style="width: 25%">
-                                            <label class="labels">End time</label>
-                                            <input type="text" id="endTime" name="endTime" class="form-control" placeholder=" " value="${appDetails.endTime}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top: 15px;">
-                                        <c:if test="${appDetails.status != 'Cancelled' || appDetails.status != 'Completed'}">
-                                            <div class="col-sm-12" >
-                                                <a class="btn btn-info "  href="AddExaminationResult?appId=${appDetails.id}">Add Examination Result</a>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6" style="width: 30%">
+                                                <label class="labels">Examination Result ID</label>
+                                                <input type="text" id="appID" name="appID" class="form-control" placeholder="" value="${edit.id}" readonly>
                                             </div>
-                                        </c:if>
+                                            <div class="col-md-6" style="width: 30%">
+                                                <label class="labels">Patient ID</label>
+                                                <input type="text" id="patientID" name="patientID" class="form-control" placeholder=" " value="${edit.patientId}" readonly>
+                                            </div>
+                                            <div class="col-md-6" style="width: 40%">
+                                                <label class="labels">Patient Name</label>
+                                                <input type="text" id="patientName" name="patientName" class="form-control" placeholder="" value="${edit.patientName}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Service</label>
+                                                <input type="text" id="service" name="service" class="form-control" placeholder=" " value="${edit.service}" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="labels">Price</label>
+                                                <input type="text" id="price" name="price" class="form-control" placeholder="" value="${edit.price}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Doctor</label>
+                                                <input type="text" id="doctor" name="doctor" class="form-control" placeholder=" " value="${edit.doctor}" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="labels">Room</label>
+                                                <input type="text" id="room" name="room" class="form-control" placeholder=" " value="${edit.room}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Status</label>
+                                                <select id="appointmentStatus" name="appointmentStatus" class="form-control" readonly>
+                                                    <option value="Verifying" ${edit.status == 'Verifying' ? 'selected' : ''}>Verifying</option>
+                                                    <option value="Not started" ${edit.status == 'Not started' ? 'selected' : ''}>Not started</option>
+                                                    <option value="Completed" ${edit.status == 'Completed' ? 'selected' : ''}>Completed</option>
+                                                    <option value="Cancelled" ${edit.status == 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                                                    <option value="Empty" ${edit.status == 'Empty' ? 'selected' : ''}>Empty</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="labels">Pay status</label>
+                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${edit.room}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6" style="width: 25%">
+                                                <label class="labels" >Booking Date</label>
+                                                <input type="text" id="bookingDate" name="bookingDate" class="form-control" placeholder="" value="${edit.bookingDate}" readonly>
+                                            </div>
+                                            <div class="col-md-6" style="width: 25%">
+                                                <label class="labels">Start time</label>
+                                                <input type="text" id="startTime" name="startTime" class="form-control" placeholder=" " value="${edit.startTime}" readonly>
+                                            </div>
+                                            <div class="col-md-6" style="width: 25%">
+                                                <label class="labels">End time</label>
+                                                <input type="text" id="endTime" name="endTime" class="form-control" placeholder=" " value="${edit.endTime}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" >
+                                            <div class="col-md-6" >
+                                                <label class="labels" >Description</label>
+                                                <textarea readonly style="width: 205%" id="description" 
+                                                          name="description" class="form-control" style="border-radius: 1px;"
+                                                          placeholder="Enter description here" oninput="autoResize(this)" >${edit.description}</textarea>
+                                            </div>
+                                        </div>
+                                        
+                                            <button class="btn btn-info " type="submit" style="margin-top: 10px">
+                                                <a href="EditExaminationResultController?AppID=${edit.id}" style="color: black">Edit</a>
+                                            </button>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,6 +277,12 @@
             <script src="../../js/main.js"></script>
 
             <script>
+                function autoResize(textarea) {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                }
+            </script>
+            <script>
                 // Function to format time
                 function formatTime(timeString) {
                     if (timeString) {
@@ -281,6 +299,7 @@
                 startTimeInput.value = formatTime(startTimeInput.value);
                 endTimeInput.value = formatTime(endTimeInput.value);
             </script>
+
     </body>
 
 </html> 

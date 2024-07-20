@@ -5,6 +5,7 @@
 
 package controller.examination;
 
+import dao.AppointmentDAO;
 import dao.ExaminationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,18 +14,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.AppointmentDTO;
 import model.ExaminationResult;
+import model.User;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="SubmitExaminationResult", urlPatterns={"/SubmitExaminationResult"})
-public class SubmitExaminationResult extends HttpServlet {
+@WebServlet(name="SearchExaminationResult", urlPatterns={"/SearchExaminationResult"})
+public class SearchExaminationResult extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +45,10 @@ public class SubmitExaminationResult extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SubmitExaminationResult</title>");  
+            out.println("<title>Servlet SearchExaminationResult</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SubmitExaminationResult at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SearchExaminationResult at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +65,30 @@ public class SubmitExaminationResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         doPost(request, response);
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        String userRole = (String) session.getAttribute("userRole");
+        if (currentUser == null) {
+            request.setAttribute("error", "You are not permission!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else {
+            if (userRole.contains("patient")) {
+                request.setAttribute("error", "You are not permission!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                try {
+                    String key = request.getParameter("searchKey");
+                    ExaminationDAO examDAO = new ExaminationDAO();
+                    ArrayList<ExaminationResult> examList = examDAO.SearchERByKey(key);
+                    request.setAttribute("searchKey", key);
+                    request.setAttribute("examList", examList);
+                    request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     } 
 
     /** 
@@ -74,22 +101,7 @@ public class SubmitExaminationResult extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(request.getParameter("AppID"));
-            ExaminationDAO examDAO = new ExaminationDAO();
-            boolean submit = examDAO.submitExamination(id);
-            ArrayList<ExaminationResult> examList = examDAO.getAllExaminationResult();
-            request.setAttribute("examList", examList);
-            if(submit == true){
-                request.setAttribute("mess", "Submit successfully!");
-            }else{
-                request.setAttribute("error", "Submit failed!");
-            }
-                request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(SubmitExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /** 

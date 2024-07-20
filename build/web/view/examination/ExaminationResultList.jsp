@@ -142,10 +142,15 @@
                                     <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="ExaminationResultListController">
+                                    <i class="bi bi-people"></i></i> Examination Result List
+                                </a>
+                            </li>
                         </ul>
                         </ul>
                         <!-- Divider -->
-                        <hr class="navbar-divider my-5 opacity-20">
+                        <!--                        <hr class="navbar-divider my-5 opacity-20">-->
                         <!-- Navigation -->
 
                         <!-- Push content down -->
@@ -173,11 +178,11 @@
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
-                            <form method="get" action="SearchEmployeeServlet"
+                            <form method="get" action="SearchExaminationResult"
                                   class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search for..."
-                                           aria-label="Search" aria-describedby="basic-addon2" name="searchKey">
+                                           aria-label="Search" value="${searchKey}" aria-describedby="basic-addon2" name="searchKey">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
@@ -188,6 +193,7 @@
 
                             <div id="employeeTable" class="table-responsive">
                                 <label style="color: red">${error}</label>
+                                <label style="color: green">${mess}</label>
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
@@ -196,6 +202,7 @@
                                             <th scope="col">Doctor</th>
                                             <th scope="col">Booking Date</th>
                                             <th scope="col">Examination Status</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -209,12 +216,17 @@
                                                 <td>${exam.bookingDate}</td>
                                                 <td>${exam.examinationStatus}</td>
                                                 <td>${exam.description}</td>
-                                                <td></td>
+                                                
+                                              
                                                 <td class="text-end">
-                                                    <a href="EditExaminationResultController?AppID=${exam.id}"
-                                                       class="btn btn-sm btn-neutral">View</a>
-                                                    <a href="EditExaminationResultController?AppID=${exam.id}"
-                                                       class="btn btn-sm btn-neutral">Submit</a>
+                                                    <button>
+                                                        <a href="ViewExaminationResult?AppID=${exam.id}"
+                                                           class="btn btn-sm btn-neutral">View</a>
+                                                    </button>
+                                                    <button>
+                                                        <a href="SubmitExaminationResult?AppID=${exam.id}"
+                                                           class="btn btn-sm btn-neutral">Submit</a>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
