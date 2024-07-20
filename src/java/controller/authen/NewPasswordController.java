@@ -7,13 +7,16 @@ package controller.authen;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import dao1.AccountDAO;
+import dao.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -84,9 +87,13 @@ public class NewPasswordController extends HttpServlet {
             request.setAttribute("error", "Password and Re-password are not the same!");
         } else {
             AccountDAO dao = new AccountDAO();
-            dao.updatePasswordByEmail(emailFP, password);
+            try {
+                dao.updatePasswordByEmail(emailFP, password);
+            } catch (SQLException ex) {
+                Logger.getLogger(NewPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.setAttribute("succcessAlert", "Change password successfully!");
-            session.removeAttribute("emailFP");
+            session.invalidate();
         }
         request.getRequestDispatcher("view/authen/NewPassword.jsp").forward(request, response);
     }

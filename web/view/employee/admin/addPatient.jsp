@@ -270,38 +270,8 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
                                 </a>
                             </li>
                         </ul>
@@ -314,12 +284,12 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="employee/profile/view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -331,6 +301,22 @@
             <div class="container">
                 <div class="main-body">
                     <div class="row">
+                        <div class="container-fluid mt-2">                   
+                            <div class="card shadow border-0 mb-7">
+                                <div class="card-header">
+                                    <div class="mb-npx">
+                                        <div class="row align-items-center">
+                                            <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                                                <!-- Title -->
+                                                <h1 class="h2 mb-0 ls-tight">Add new patient</h1>
+                                            </div>
+                                            <!-- Actions -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Nav -->
+                            </div>
+                        </div>
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
@@ -348,89 +334,147 @@
                                                 </div>
                                             </div>
                                         </div>
-                                     
+
                                     </div>
                                     <hr class="my-4">
-<!--                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe me-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
-                                            <span class="text-secondary">https://bootdey.com</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github me-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
-                                            <span class="text-secondary">bootdey</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter me-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
-                                            <span class="text-secondary">@bootdey</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram me-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
-                                            <span class="text-secondary">bootdey</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook me-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-                                            <span class="text-secondary">bootdey</span>
-                                        </li>
-                                    </ul>-->
+                                    <!--                                    <ul class="list-group list-group-flush">
+                                                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe me-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                                                                                <span class="text-secondary">https://bootdey.com</span>
+                                                                            </li>
+                                                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github me-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
+                                                                                <span class="text-secondary">bootdey</span>
+                                                                            </li>
+                                                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter me-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
+                                                                                <span class="text-secondary">@bootdey</span>
+                                                                            </li>
+                                                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram me-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
+                                                                                <span class="text-secondary">bootdey</span>
+                                                                            </li>
+                                                                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook me-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                                                                                <span class="text-secondary">bootdey</span>
+                                                                            </li>
+                                                                        </ul>-->
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="addPatient" method="POST">
-<!--                    <input type="hidden" id="id" name="id" value="${paInfo.patientId}">-->
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels">Fullname</label>
-                            <input type="text" id="fullname" name="name" class="form-control" placeholder="" >
-                        </div>        
-                        <div class="col-md-6">
-                            <label class="labels">Phone Number</label>
-                            <input type="text" id="phoneNumber" name="phone" class="form-control" placeholder="" >
-                        </div>
-                    </div>
+                                    <form action="addPatient" method="POST" onsubmit="return validateForm()">
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Fullname***</label>
 
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="" >
-                        </div>
-                        <div class="col-md-6">
-                            <label class="labels">Medicine code</label>
-                            <input type="text" id="medicineCode" name="code" class="form-control" placeholder=" " >
-                        </div>
-                    </div>
+                                                <input type="text" id="fullname" name="name" class="form-control" placeholder="" value="${fullname}" required >
+                                                <c:if test="${not empty errorMsg.fullname}">
+                                                    <span style="color:red">${errorMsg.fullname}</span>
+                                                </c:if>
+                                            </div>        
+                                            <div class="col-md-6">
+                                                <label class="labels">Phone Number</label>
+                                                <input type="text" id="phoneNumber" name="phone" class="form-control" placeholder="" value="${phoneNumber}">
+                                                <c:if test="${not empty errorMsg.phoneNumber}">
+                                                    <span style="color:red">${errorMsg.phoneNumber}</span>
+                                                </c:if>
+                                            </div>
+                                        </div>
 
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels" for="gender">Gender</label>
-                            <select class="form-select" id="gender" name="gender">
-                                <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
-                                <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
-                                <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
-                            </select>
-                        </div>                    
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Email</label>
+                                                <input type="email" id="email" name="email" class="form-control" placeholder="" value="${email}">
+                                                <c:if test="${not empty errorMsg.email}">
+                                                    <span style="color:red">${errorMsg.email}</span>
+                                                </c:if>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="labels">Medicine code</label>
+                                                <input type="text" id="medicineCode" name="code" class="form-control" placeholder=" " value="${medicalCode}">
+                                                <c:if test="${not empty errorMsg.medicalCode}">
+                                                    <span style="color:red">${errorMsg.medicalCode}</span>
+                                                </c:if>
+                                            </div>
+                                        </div>
 
-                        <div class="col-md-6">
-                            <label class="labels" >Date of birth</label>
-                            <input type="date"id="dob" name="dob" class="form-control" placeholder="" >
-                        </div>
-                    </div>
-                    <br>
-                    <div>
-                        <label class="labels">Address</label>
-                        <input type="text" id="address" name="address" class="form-control" placeholder="" >
-                    </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels" for="gender">Gender</label>
+                                                <select class="form-select" id="gender" name="gender">
+                                                    <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
+                                                    <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
+                                                    <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
+                                                    </select>
+                                                </div>                    
 
-                    <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
-                     <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Cancel</button></div>
-                </form>
-                                  
-                              
-                              
-                                    
+                                                <div class="col-md-6">
+                                                    <label class="labels">Date of birth***</label>
+                                                    <input type="date" id="dob" name="dob" class="form-control" placeholder="" onchange="checkAge()" value="${dob}"  required="Please enter date of birth"> 
+                                                </div>
+                                            <c:if test="${not empty errorMsg.dob}">
+                                                <span style="color:red">${errorMsg.dob}</span>
+                                            </c:if>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label class="labels">Address</label>
+                                            <input type="text" id="address" name="address" class="form-control" placeholder="" value="${address}">
+                                            <c:if test="${not empty errorMsg.address}">
+                                                <span style="color:red">${errorMsg.address}</span>
+                                            </c:if>
+                                        </div>
+                                        <br>
+                                        <div id="representativeForm">
+                                            <div class="row mt-3">
+                                                <h3>
+                                                    For customers under 14 years old, we require a guardian.
+                                                </h3>
+                                                <div>
+                                                    <label class="labels">Representative Name</label>
+                                                    <input type="text" id="repName" name="repName" class="form-control" placeholder="Representative Name" value="${repName}">
+                                                    <c:if test="${not empty errorMsg.repName}">
+                                                        <span style="color:red">${errorMsg.repName}</span>
+                                                    </c:if>
+                                                </div>
+
+                                                <div>
+                                                    <label class="labels">Representative Phone number</label>
+                                                    <input type="text" id="repPhone" name="repPhone" class="form-control" placeholder="Representative Phone" value="${repPhone}">
+                                                    <c:if test="${not empty errorMsg.repPhone}">
+                                                        <span style="color:red">${errorMsg.repPhone}</span>
+                                                    </c:if>
+                                                </div>
+
+                                                <div>
+                                                    <label class="labels">Representative Email</label>
+                                                    <input type="email" id="repEmail" name="repEmail" class="form-control" placeholder="Representative Email" value="${reqEmail}">
+                                                    <c:if test="${not empty errorMsg.reqEmail}">
+                                                        <span style="color:red">${errorMsg.reqEmail}</span>
+                                                    </c:if>
+                                                </div>
+
+                                                <div>
+                                                    <label class="labels">Relationship</label>
+                                                    <input type="text" id="relationship" name="relationship" class="form-control" placeholder="Relationship" value="${relationship}">
+                                                    <c:if test="${not empty errorMsg.relationship}">
+                                                        <span style="color:red">${errorMsg.relationship}</span>
+                                                    </c:if>
+                                                </div>
+
+                                            </div>
+                                        </div>    
+
+                                        <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save</button></div>
+                                        <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3">Cancel</button></div>
+                                    </form>
+
+
+
+
                                     <div id="result" class="main-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; ">
                                         <div class="check-container">
                                             <div class="check-background">
@@ -444,36 +488,26 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<!--                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="d-flex align-items-center mb-3">Project Status</h5>
-                                            <p>Web Design</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p>Website Markup</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p>One Page</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p>Mobile Template</p>
-                                            <div class="progress mb-3" style="height: 5px">
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p>Backend API</p>
-                                            <div class="progress" style="height: 5px">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+            <!-- Modal -->
+            <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="validationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="validationModalLabel">Validation Error</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Please fill out Representative Name, Representative Phone number, Relationship fields in the representative form.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -499,27 +533,96 @@
             <script src="js/main.js"></script>
     </body>
     <script>
-                                                function readURL(input) {
-                                                    if (input.files && input.files[0]) {
-                                                        var reader = new FileReader();
-                                                        reader.onload = function (e) {
-                                                            $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                                                            $('#imagePreview').hide();
-                                                            $('#imagePreview').fadeIn(650);
-                                                        }
-                                                        reader.readAsDataURL(input.files[0]);
-                                                    }
-                                                }
-                                                $("#imageUpload").change(function () {
-                                                    readURL(this);
-                                                });
-                                                function showCodeAndRedirect() {
-                                                    var resultDiv = document.getElementById("result");
-                                                    resultDiv.style.display = "flex";
 
-                                                    setTimeout(function () {
-                                                        window.location.href = "viewPatientDetail.jsp";
-                                                    }, 2000);
-                                                }
+                                                        document.addEventListener('DOMContentLoaded', (event) => {
+                                                            // Get today's date in YYYY-MM-DD format
+                                                            const today = new Date().toISOString().split('T')[0];
+                                                            // Set the max attribute of the date input to today's date
+                                                            document.getElementById('dob').setAttribute('max', today);
+                                                        });
+                                                        function readURL(input) {
+                                                            if (input.files && input.files[0]) {
+                                                                var reader = new FileReader();
+                                                                reader.onload = function (e) {
+                                                                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                                                                    $('#imagePreview').hide();
+                                                                    $('#imagePreview').fadeIn(650);
+                                                                };
+                                                                reader.readAsDataURL(input.files[0]);
+                                                            }
+                                                        }
+                                                        $("#imageUpload").change(function () {
+                                                            readURL(this);
+                                                        });
+                                                        function showCodeAndRedirect() {
+                                                            var resultDiv = document.getElementById("result");
+                                                            resultDiv.style.display = "flex";
+
+                                                            setTimeout(function () {
+                                                                window.location.href = "viewPatientDetail.jsp";
+                                                            }, 2000);
+                                                        }
     </script>
+    <script>
+        function checkAge() {
+            const dob = document.getElementById('dob').value;
+            if (dob) {
+                const dobDate = new Date(dob);
+                const today = new Date();
+                let age = today.getFullYear() - dobDate.getFullYear();
+                const monthDifference = today.getMonth() - dobDate.getMonth();
+
+                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+                    age--;
+                }
+
+                if (age < 14) {
+                    document.getElementById('representativeForm').style.display = 'block';
+                } else {
+                    document.getElementById('representativeForm').style.display = 'none';
+                }
+            }
+        }
+
+        function validateForm() {
+            var dob = document.getElementById("dob").value;
+            var birthDate = new Date(dob);
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var month = today.getMonth() - birthDate.getMonth();
+
+            if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            if (age < 14) {
+                var repName = document.getElementById("repName").value;
+                var repPhone = document.getElementById("repPhone").value;
+                var relationship = document.getElementById("relationship").value;
+
+                if (!repName || !repPhone || !relationship) {
+                    $('#validationModal').modal('show');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        
+        // Function to close the modal
+function closeModal() {
+    var modal = bootstrap.Modal.getInstance(document.getElementById('validationModal'));
+    if (modal) {
+        modal.hide();
+    }
+}
+
+// Event listener for the close button (x)
+document.querySelector('#validationModal .close').addEventListener('click', closeModal);
+
+// Event listener for the cancel button
+document.querySelector('#validationModal .btn-secondary').addEventListener('click', closeModal);
+
+    </script>
+
 </html> 

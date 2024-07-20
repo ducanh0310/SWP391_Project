@@ -5,8 +5,8 @@
 package controller.patient;
 
 import com.google.gson.Gson;
-import dao1.DBBookingMedicalAppointment;
-import dao1.DBService;
+import dao.DBBookingMedicalAppointment;
+import dao.DBService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -41,6 +41,8 @@ public class BookingAppointmentController extends HttpServlet {
             request.setAttribute("arrService", arrService);
             request.getRequestDispatcher("../view/patient/bookAppointment.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -94,19 +96,6 @@ public class BookingAppointmentController extends HttpServlet {
                     }
                 }
             }
-//            for (Slot slot : arrRestSlot) {
-//                out.println(slot.getRoom().getName());
-//                out.println(slot.getDoctor().getName());
-//                out.println(slot.getStartedTime());
-//                out.println(slot.getEndTime());
-//                out.println(slot.getId());
-//                out.println(slot.getDoctor().getId());
-//                out.println(dateBook);
-//                out.println(slot.getService().getId());
-//                out.println(slot.getService().getName());
-//                out.println(slot.getRoom().getId());
-//            }
-            
             if (arrRestSlot.isEmpty()) {
                 out.print("{\"success\": false, \"message\": \"No available slots.\"}");
             } else {
@@ -131,15 +120,14 @@ public class BookingAppointmentController extends HttpServlet {
                 jsonResponse.append("]}");
                 out.print(jsonResponse.toString());
             }
-        } catch (ClassNotFoundException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

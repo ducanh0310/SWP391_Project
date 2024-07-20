@@ -4,8 +4,8 @@
  */
 package controller.patient;
 
-import dao1.DBBookingMedicalAppointment;
-import dao1.DBService;
+import dao.DBBookingMedicalAppointment;
+import dao.DBService;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,7 +46,7 @@ public class EditAppointmentController extends HttpServlet {
             ArrayList<Slot> arrAllSlot = db.getAllSlot(String.valueOf(idService));
             ArrayList<Slot> arrExitSlot = db.getExistSlot(String.valueOf(idService), date);
             ArrayList<Slot> arrRestSlot = new ArrayList<>();
-            boolean flag = false;
+            int flag = 0;
             for (Slot slotAll : arrAllSlot) {
                 boolean isExist = false;
                 for (Slot slotExist : arrExitSlot) {
@@ -55,13 +55,12 @@ public class EditAppointmentController extends HttpServlet {
                         isExist = true;
                         break;
                     }
-                    if (bAH.getStatusBook().getId()==4) {
-                        flag = true;
+                    if (slotExist.getStatusBook().getId() == 4) {
+                        flag = 1;
                     }
+
                 }
-
                 if (!isExist) {
-
                     arrRestSlot.add(slotAll);
                 }
             }
@@ -75,11 +74,11 @@ public class EditAppointmentController extends HttpServlet {
             request.setAttribute("arrService", arrService);
             request.setAttribute("DateServiceAppointment", bAH);
             request.setAttribute("arrRestSlot", arrRestSlot);
-            if (flag) {
+            if (flag == 1) {
                 request.getRequestDispatcher("../view/patient/notificationEdit.jsp").forward(request, response);
             }
             request.getRequestDispatcher("../view/patient/editAppointment.jsp").forward(request, response);
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(EditAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -148,8 +147,8 @@ public class EditAppointmentController extends HttpServlet {
                 jsonResponse.append("]}");
                 out.print(jsonResponse.toString());
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

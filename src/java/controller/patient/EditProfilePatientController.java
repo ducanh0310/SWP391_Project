@@ -5,8 +5,8 @@
 
 package controller.patient;
 
-import dao1.DBAccount;
-import dao1.DBPatientProfile;
+import dao.DBAccount;
+import dao.DBPatientProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.PatientInfo;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,8 @@ public class EditProfilePatientController extends HttpServlet {
             request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
 
@@ -133,7 +136,7 @@ public class EditProfilePatientController extends HttpServlet {
             //fullname.trim();
             PatientInfo paInfo = new PatientInfo();
             paInfo.setPatientId(patientId);
-            paInfo.setPatientSin(medicalCode);
+            paInfo.setPatientSin(String.valueOf(medicalCode));
             paInfo.setName(fullname);
             paInfo.setPhoneNumber(phoneNumber);
             paInfo.setEmail(email);
@@ -172,7 +175,9 @@ public class EditProfilePatientController extends HttpServlet {
         Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
         request.setAttribute("errorMsg", "An error occurred while updating the profile.");
         request.getRequestDispatcher("../../view/patient/editProfilePatient.jsp").forward(request, response);
-    }
+    }   catch (SQLException ex) {
+            Logger.getLogger(EditProfilePatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
     }
 

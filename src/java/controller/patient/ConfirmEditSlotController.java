@@ -4,7 +4,7 @@
  */
 package controller.patient;
 
-import dao1.DBBookingMedicalAppointment;
+import dao.DBBookingMedicalAppointment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
@@ -75,8 +76,8 @@ public class ConfirmEditSlotController extends HttpServlet {
             //Move view appointment history
             session.setAttribute("success", "Edit appointment successfully");
             response.sendRedirect("viewAppointmentHistory");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConfirmEditSlotController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

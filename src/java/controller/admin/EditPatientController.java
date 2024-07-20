@@ -5,7 +5,7 @@
 
 package controller.admin;
 
-import dao1.PatientDAO;
+import dao.PatientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +14,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
@@ -22,7 +26,6 @@ import model.Patient;
  */
 @WebServlet(name="EditPatientController", urlPatterns={"/editpatient"})
 public class EditPatientController extends HttpServlet {
-   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -58,12 +61,16 @@ public class EditPatientController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("id") ;
-        PatientDAO pa = new PatientDAO();
-        Patient p = pa.getPatientById(id);
-        request.setAttribute("patient", p);
-        request.getRequestDispatcher("editPatient.jsp").forward(request, response);
-        processRequest(request, response);
+        try {
+            String id = request.getParameter("id") ;
+            PatientDAO pa = new PatientDAO();
+            PatientGetByIdDTO p = pa.getPatientById(id);
+            request.setAttribute("patient", p);
+            request.getRequestDispatcher("view/employee/admin/editPatientDetail.jsp").forward(request, response);
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
 
     /** 
@@ -76,21 +83,26 @@ public class EditPatientController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-          String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        int code = Integer.parseInt(request.getParameter("code"));
-        String gender = request.getParameter("gender");
-        Date dob = Date.valueOf(request.getParameter("dob"));
-        String address = request.getParameter("address");
-        Patient p = new Patient(code, address, name, gender, email, phone, dob, "abc", 1);
-        PatientDAO pa = new PatientDAO();
-        if(pa.updatePatient(p)) {
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        } else {
-            
+        try {
+            String sin = request.getParameter("sin");
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            int code = Integer.parseInt(request.getParameter("code"));
+            String gender = request.getParameter("gender");
+            Date dob = Date.valueOf(request.getParameter("dob"));
+            String address = request.getParameter("address");
+            String insurance = request.getParameter("insurance");
+            int repId = Integer.parseInt("repId");
+            PatientGetByIdDTO p = new PatientGetByIdDTO(sin, address, name, gender, email, phone, dob, insurance, repId);
+            PatientDAO pa = new PatientDAO();
+            if(pa.updatePatient(p)) {
+                request.getRequestDispatcher("home.jsp").forward(request, response);
+            }
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditPatientController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        processRequest(request, response);
     }
 
     /** 

@@ -4,7 +4,12 @@
  */
 package controller.payment;
 
-import dao1.PaymentDAO;
+import dao.DBBookingMedicalAppointment;
+import dao.PatientDAO;
+import dao.PaymentDAO;
+import dao.RoomDAO;
+import dao.ServiceDAO;
+import dao.SlotDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,11 +19,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.BookingAppointment;
+import model.BookingAppointmentHistory;
+import model.PatientGetByIdDTO;
+import model.ProcedureCodes;
+import model.Slot;
+import model.User;
+import validation.Email;
 
 /**
  *
@@ -47,7 +61,7 @@ public class PaymentController extends HttpServlet {
         if (fields.containsKey("vnp_SecureHash")) {
             fields.remove("vnp_SecureHash");
         }
-        
+
         String signValue = Config.hashAllFields(fields);
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
@@ -57,23 +71,32 @@ public class PaymentController extends HttpServlet {
                     PaymentDAO paymentDAO = new PaymentDAO();
                     String idAppointment = (String) session.getAttribute("idAppointment");
                     int check = paymentDAO.insertPayment(Integer.parseInt(idAppointment), String.valueOf(money / 100));
-                    if (check == 1) {
-                        // Xóa tất cả các thuộc tính trong session
-                        Enumeration<String> attributeNames = session.getAttributeNames();
-                        while (attributeNames.hasMoreElements()) {
+//                    if (check == 1) {
+//                        // Xóa tất cả các thuộc tính trong session
+//                        Enumeration<String> attributeNames = session.getAttributeNames();
+//                        while (attributeNames.hasMoreElements()) {
+//
+//                            String attributeName = attributeNames.nextElement();
+//                            if (!attributeName.equals("currentUser") && !s) {
+//                                session.removeAttribute(attributeName);
+//                            }
+//
+//                        }
+//
+//                    }
 
-                            String attributeName = attributeNames.nextElement();
-                            if (!attributeName.equals("currentUser")) {
-                                session.removeAttribute(attributeName);
-                            }
-
-                        }
-
-                    }
-                    
                     session.setAttribute("success", "You pay reservation fee successfully");
+//                    BookingAppointmentHistory ba = (BookingAppointmentHistory) sessioban.getAttribute("patientBooking");
+                    int patientBookingId = (int) session.getAttribute("patientBookingId");
+                    BookingAppointmentHistory ba = new DBBookingMedicalAppointment().getAppointmentEmail(patientBookingId);
+                    PatientGetByIdDTO patient = new PatientDAO().getPatientById(String.valueOf(ba.getPatient()));
+                    Slot slot = new SlotDAO().getSlotByID(ba.getID());
+                    ProcedureCodes serviceName = new ServiceDAO().getServiceById(ba.getService().getId());
+
+                    Email.sendBookingAppointment(ba.getPatient().getEmail(),ba.getPatient().getName() , ba.getDate(), ba.getService().getName(), ba.getRoom().getName(), ba.getSlot().getStartedTime(), ba.getSlot().getEndTime());
+                    session.removeAttribute("patientBooking");
                     response.sendRedirect("patient/viewAppointmentHistory");
-                } catch (ClassNotFoundException ex) {
+                } catch (SQLException ex) {
                     Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {

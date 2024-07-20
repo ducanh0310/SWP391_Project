@@ -5,7 +5,8 @@
 
 package controller.uploadImage;
 
-import dao1.DBImageProfile;
+import dao.DBAccount;
+import dao.DBImageProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,8 +15,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import static java.lang.System.out;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
+import model.Account;
 import model.User;
 
 /**
@@ -58,10 +64,9 @@ public class UploadImageController extends HttpServlet {
         } else {
             out.write("{\"success\": false, \"message\": \"Invalid image link.\"}");
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(UploadImageController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        out.write("{\"success\": false, \"message\": \"Server error.\"}");
-    } finally {
+    }   catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(UploadImageController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } finally {
         if (out != null) {
             out.flush();
             out.close();

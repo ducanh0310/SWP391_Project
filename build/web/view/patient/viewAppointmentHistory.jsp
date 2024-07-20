@@ -207,7 +207,11 @@
                 padding: 5px 5px;
                 height: 35px;
             }
-
+            /*            .mb-0{
+                            font-weight:500;
+                            font-size:26px;
+                            padding-left:20px;
+                        }*/
             /* DataTable Customization */
             .dataTables_wrapper .dataTables_paginate {
                 display: flex;
@@ -776,28 +780,28 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
 
-                                                        $(document).ready(function () {
-                                                            $('#myTable').DataTable({
-                                                                "language": {
-                                                                    "lengthMenu": "Show _MENU_",
-                                                                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                                                                    "infoEmpty": "Showing 0 to 0 of 0 entries",
-                                                                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                                                       $(document).ready(function () {
+                                                           $('#myTable').DataTable({
+                                                               "language": {
+                                                                   "lengthMenu": "Show _MENU_",
+                                                                   "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                                                                   "infoEmpty": "Showing 0 to 0 of 0 entries",
+                                                                   "infoFiltered": "(filtered from _MAX_ total entries)",
 
-                                                                    "paginate": {
-                                                                        "first": "First",
-                                                                        "last": "Last",
-                                                                        "next": "Next",
-                                                                        "previous": "Previous"
-                                                                    }
-                                                                },
-                                                                "dom": '<"header_wrap"lf>t<"footer_wrap"ip>',
-                                                                "pagingType": "full_numbers",
-                                                                "searching": false,
-                                                                "pageLength": 10
+                                                                   "paginate": {
+                                                                       "first": "First",
+                                                                       "last": "Last",
+                                                                       "next": "Next",
+                                                                       "previous": "Previous"
+                                                                   }
+                                                               },
+                                                               "dom": '<"header_wrap"lf>t<"footer_wrap"ip>',
+                                                               "pagingType": "full_numbers",
+                                                               "searching": false,
+                                                               "pageLength": 10
 
-                                                            });
-                                                        });
+                                                           });
+                                                       });
 
 
 
@@ -818,132 +822,132 @@
 
 
 
-                                                        $(document).ready(function () {
-                                                            let editId;
-                                                            let service;
-                                                            let room;
-                                                            let doctor;
-                                                            let date;
-                                                            let time;
-                                                            $('.edit-button').click(function (event) {
-                                                                event.preventDefault(); // Prevent the default anchor behavior
-                                                                editId = $(this).data('id');
-                                                                service = $(this).data('service');
-                                                                room = $(this).data('room');
-                                                                doctor = $(this).data('doctor');
-                                                                date = $(this).data('date');
-                                                                time = $(this).data('time');
+                                                       $(document).ready(function () {
+                                                           let editId;
+                                                           let service;
+                                                           let room;
+                                                           let doctor;
+                                                           let date;
+                                                           let time;
+                                                           $('.edit-button').click(function (event) {
+                                                               event.preventDefault(); // Prevent the default anchor behavior
+                                                               editId = $(this).data('id');
+                                                               service = $(this).data('service');
+                                                               room = $(this).data('room');
+                                                               doctor = $(this).data('doctor');
+                                                               date = $(this).data('date');
+                                                               time = $(this).data('time');
 
-                                                                document.getElementById('serviceName').value = service;
-                                                                document.getElementById('room').value = room;
-                                                                document.getElementById('doctor').value = doctor;
-                                                                document.getElementById('date').value = date;
-                                                                document.getElementById('time').value = time;
-                                                                console.log("Edit ID: " + editId);  // Log the ID for debugging
+                                                               document.getElementById('serviceName').value = service;
+                                                               document.getElementById('room').value = room;
+                                                               document.getElementById('doctor').value = doctor;
+                                                               document.getElementById('date').value = date;
+                                                               document.getElementById('time').value = time;
+                                                               console.log("Edit ID: " + editId);  // Log the ID for debugging
 
-                                                                // Redirect to the edit URL with the captured ID
-                                                                if (editId) {
-                                                                    $('#confirmEditButton').click(function () {
-                                                                        window.location.href = 'editAppointment?id=' + editId;
-                                                                    });
-                                                                }
-                                                            });
+                                                               // Redirect to the edit URL with the captured ID
+                                                               if (editId) {
+                                                                   $('#confirmEditButton').click(function () {
+                                                                       window.location.href = 'editAppointment?id=' + editId;
+                                                                   });
+                                                               }
+                                                           });
 
-                                                            //Edit appointment
-                                                            function showEditSuccessNotification() {
-                                                                $('#editSuccessNotification').show();
-                                                                let progressBar = $('#editSuccessProgressBar');
-                                                                let width = 0;
-                                                                let interval = setInterval(function () {
-                                                                    width++;
-                                                                    progressBar.css('width', width + '%');
-                                                                    if (width === 200) {
-                                                                        clearInterval(interval);
-                                                                        $('#editSuccessNotification').fadeOut();
-                                                                    }
-                                                                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                                                            }
+                                                           //Edit appointment
+                                                           function showEditSuccessNotification() {
+                                                               $('#editSuccessNotification').show();
+                                                               let progressBar = $('#editSuccessProgressBar');
+                                                               let width = 0;
+                                                               let interval = setInterval(function () {
+                                                                   width++;
+                                                                   progressBar.css('width', width + '%');
+                                                                   if (width === 200) {
+                                                                       clearInterval(interval);
+                                                                       $('#editSuccessNotification').fadeOut();
+                                                                   }
+                                                               }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                                           }
 
-                                                            // Close notification button handler
-                                                            $('#closeEditNotificationButton').click(function () {
-                                                                $('#editSuccessNotification').hide();
-                                                            });
+                                                           // Close notification button handler
+                                                           $('#closeEditNotificationButton').click(function () {
+                                                               $('#editSuccessNotification').hide();
+                                                           });
 
-                                                            // Check for success message from the server
-                                                            let successMessage = '${sessionScope.success}';
-                                                            if (successMessage) {
-                                                                showEditSuccessNotification();
-                                                            }
+                                                           // Check for success message from the server
+                                                           let successMessage = '${sessionScope.success}';
+                                                           if (successMessage) {
+                                                               showEditSuccessNotification();
+                                                           }
 
-                                                            //Delete appointment
-                                                            $('.delete-button').click(function (event) {
-                                                                event.preventDefault(); // Prevent the default anchor behavior
-                                                                deleteId = $(this).data('id');
-                                                                service = $(this).data('service');
-                                                                room = $(this).data('room');
-                                                                doctor = $(this).data('doctor');
-                                                                date = $(this).data('date');
-                                                                time = $(this).data('time');
+                                                           //Delete appointment
+                                                           $('.delete-button').click(function (event) {
+                                                               event.preventDefault(); // Prevent the default anchor behavior
+                                                               deleteId = $(this).data('id');
+                                                               service = $(this).data('service');
+                                                               room = $(this).data('room');
+                                                               doctor = $(this).data('doctor');
+                                                               date = $(this).data('date');
+                                                               time = $(this).data('time');
 
-                                                                document.getElementById('serviceDelete').value = service;
-                                                                document.getElementById('roomDelete').value = room;
-                                                                document.getElementById('doctorDelete').value = doctor;
-                                                                document.getElementById('dateDelete').value = date;
-                                                                document.getElementById('timeDelete').value = time;
-                                                                document.getElementById('idDelete').value = deleteId;
-                                                            });
+                                                               document.getElementById('serviceDelete').value = service;
+                                                               document.getElementById('roomDelete').value = room;
+                                                               document.getElementById('doctorDelete').value = doctor;
+                                                               document.getElementById('dateDelete').value = date;
+                                                               document.getElementById('timeDelete').value = time;
+                                                               document.getElementById('idDelete').value = deleteId;
+                                                           });
 
-                                                            // Handle notification display for delete success
-                                                            function showDeleteSuccessNotification() {
-                                                                $('#deleteSuccessNotification').show();
-                                                                let progressBar = $('#deleteSuccessProgressBar');
-                                                                let width = 0;
-                                                                let interval = setInterval(function () {
-                                                                    width++;
-                                                                    progressBar.css('width', width + '%');
-                                                                    if (width === 200) {
-                                                                        clearInterval(interval);
-                                                                        $('#deleteSuccessNotification').fadeOut();
-                                                                    }
-                                                                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                                                            }
+                                                           // Handle notification display for delete success
+                                                           function showDeleteSuccessNotification() {
+                                                               $('#deleteSuccessNotification').show();
+                                                               let progressBar = $('#deleteSuccessProgressBar');
+                                                               let width = 0;
+                                                               let interval = setInterval(function () {
+                                                                   width++;
+                                                                   progressBar.css('width', width + '%');
+                                                                   if (width === 200) {
+                                                                       clearInterval(interval);
+                                                                       $('#deleteSuccessNotification').fadeOut();
+                                                                   }
+                                                               }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                                           }
 
-                                                            // Close notification button handler
-                                                            $('#closeNotificationButton').click(function () {
-                                                                $('#deleteSuccessNotification').hide();
-                                                            });
+                                                           // Close notification button handler
+                                                           $('#closeNotificationButton').click(function () {
+                                                               $('#deleteSuccessNotification').hide();
+                                                           });
 
-                                                            // Check for success message from the server
-                                                            let deleteSuccess = '${sessionScope.deleteSuccess}';
-                                                            if (deleteSuccess) {
-                                                                showDeleteSuccessNotification();
-                                                            }
+                                                           // Check for success message from the server
+                                                           let deleteSuccess = '${sessionScope.deleteSuccess}';
+                                                           if (deleteSuccess) {
+                                                               showDeleteSuccessNotification();
+                                                           }
 
-                                                            function showBookSuccessNotification() {
-                                                                $('#bookSuccessNotification').show();
-                                                                let progressBar = $('#bookSuccessProgressBar');
-                                                                let width = 0;
-                                                                let interval = setInterval(function () {
-                                                                    width++;
-                                                                    progressBar.css('width', width + '%');
-                                                                    if (width === 200) {
-                                                                        clearInterval(interval);
-                                                                        $('#bookSuccessNotification').fadeOut();
-                                                                    }
-                                                                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                                                            }
+                                                           function showBookSuccessNotification() {
+                                                               $('#bookSuccessNotification').show();
+                                                               let progressBar = $('#bookSuccessProgressBar');
+                                                               let width = 0;
+                                                               let interval = setInterval(function () {
+                                                                   width++;
+                                                                   progressBar.css('width', width + '%');
+                                                                   if (width === 200) {
+                                                                       clearInterval(interval);
+                                                                       $('#bookSuccessNotification').fadeOut();
+                                                                   }
+                                                               }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+                                                           }
 
-                                                            // Close notification button handler
-                                                            $('#closeBookNotificationButton').click(function () {
-                                                                $('#bookSuccessNotification').hide();
-                                                            });
+                                                           // Close notification button handler
+                                                           $('#closeBookNotificationButton').click(function () {
+                                                               $('#bookSuccessNotification').hide();
+                                                           });
 
-                                                            // Check for success message from the server
-                                                            let bookSuccess = '${sessionScope.bookSuccess}';
-                                                            if (bookSuccess) {
-                                                                showBookSuccessNotification();
-                                                            }
-                                                        });
+                                                           // Check for success message from the server
+                                                           let bookSuccess = '${sessionScope.bookSuccess}';
+                                                           if (bookSuccess) {
+                                                               showBookSuccessNotification();
+                                                           }
+                                                       });
         </script>
     </body>
 

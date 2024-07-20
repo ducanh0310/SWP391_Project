@@ -4,7 +4,7 @@
  */
 package controller.patient;
 
-import dao1.DBBookingMedicalAppointment;
+import dao.DBBookingMedicalAppointment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +55,7 @@ public class DeleteAppointmentController extends HttpServlet {
 
             session.setAttribute("deleteSuccess", "Appointment cancelled successfully");
             response.sendRedirect("viewAppointmentHistory");
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DeleteAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

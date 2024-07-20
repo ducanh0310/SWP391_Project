@@ -5,7 +5,9 @@
 
 package controller.payment;
 
-import dao1.PaymentDAO;
+
+import dao.DBBookingMedicalAppointment;
+import dao.PaymentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +36,10 @@ public class choosePaymentController extends HttpServlet {
             PaymentDAO db = new PaymentDAO();
             
             String idApppointment = request.getParameter("id");
+//            DBBookingMedicalAppointment dao = new DBBookingMedicalAppointment();
+//            BookingAppointmentHistory bah = dao.getDateAppointment(Integer.parseInt(idApppointment));
+            HttpSession session = request.getSession();
+            session.setAttribute("patientBookingId", Integer.valueOf(idApppointment));
             int id = Integer.parseInt(idApppointment);
             ArrayList<BookingAppointmentHistory> paymentPersonalSlot = db.paymentPersonalSlot(id);
             ArrayList<BookingAppointmentHistory> paymentAllSlot = db.paymentAllSlot(id);
@@ -52,7 +60,7 @@ public class choosePaymentController extends HttpServlet {
             }
             
             request.getRequestDispatcher("view/payment/vnpay_pay.jsp").forward(request, response);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(choosePaymentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 

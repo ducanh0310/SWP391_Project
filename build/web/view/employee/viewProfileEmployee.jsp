@@ -141,7 +141,7 @@
                 <div class="navbar-nav ms-auto py-0">
                     <div class="nav-item nav-link"></div>                     
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+                <a href="../../logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
                 
             </div>
         </nav>
@@ -169,7 +169,7 @@
                 <br>
                 <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
                 <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
-                <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
+                <a href="../../changepass" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
                 
             </div>
         </div>
@@ -235,9 +235,6 @@
                         <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="" readonly="">
                     </div>
                 </div>
-                
-                
-                
                 <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Edit Profile</button></div>
 
             </div>

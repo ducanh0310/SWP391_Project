@@ -158,54 +158,35 @@
                     
                     <!-- Collapse -->
                     <div class="collapse navbar-collapse" id="sidebarCollapse">
-                        <!-- Navigation -->
+                                                <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="viewListPatient.jsp">
-                                    <i class="bi bi-list-task"></i> Patient
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../../appointment/viewAppointmentHistory">
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
+                                <a class="nav-link" href="../../PatientController">
+                                    <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-lock-fill"></i> Change Password
+                                <a class="nav-link" href="../../ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
-                                </a>
-                            </li>
+                        </ul>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
                         <!-- Navigation -->
-                       
+
                         <!-- Push content down -->
-                        <hr style="border: 1px solid black">
+                        <hr>
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
@@ -214,6 +195,7 @@
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
+                        </ul>
                         </ul>
                     </div>
                 </div>

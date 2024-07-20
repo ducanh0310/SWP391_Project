@@ -4,7 +4,11 @@
  */
 package controller.patient;
 
-import dao1.DBBookingMedicalAppointment;
+import dao.DBBookingMedicalAppointment;
+import dao.PatientDAO;
+import dao.RoomDAO;
+import dao.ServiceDAO;
+import dao.SlotDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,12 +18,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BookingAppointment;
+import model.Patient;
+import model.PatientGetByIdDTO;
+import model.ProcedureCodes;
+import model.Slot;
 import model.User;
+import validation.Email;
 
 /**
  *
@@ -42,7 +53,7 @@ public class ConfirmSlotController extends HttpServlet {
             // Assuming maximum 10 slots to simplify. Adjust as needed.
             int maxSlots = 10;
             ArrayList<BookingAppointment> appointments = new ArrayList<>();
-            
+
             for (int i = 0; i < maxSlots; i++) {
                 String slotIdParam = "slots[" + i + "][slotId]";
                 String doctorIdParam = "slots[" + i + "][doctorId]";
@@ -92,10 +103,9 @@ public class ConfirmSlotController extends HttpServlet {
             session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
             session.setAttribute("bookSuccess", "Appointments booked successfully");
             response.sendRedirect("viewAppointmentHistory");
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**

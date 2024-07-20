@@ -12,15 +12,39 @@ import java.sql.*;
  */
 public class PatientInfo {
     private int patientId;
-    private int patientSin;
+    private String patientSin;
     private String address;
     private String name;
     private String gender;
     private String email;
     private Date dob;
     private String phoneNumber;
+    private String type;
 
+    public PatientInfo() {
+    }
 
+    public PatientInfo(int patientId, String patientSin, String address, String name, String gender, String email, Date dob, String phoneNumber) {
+        this.patientId = patientId;
+        this.patientSin = patientSin;
+        this.address = address;
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.dob = dob;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
+    
     public int getPatientId() {
         return patientId;
     }
@@ -29,11 +53,11 @@ public class PatientInfo {
         this.patientId = patientId;
     }
 
-    public int getPatientSin() {
+    public String getPatientSin() {
         return patientSin;
     }
 
-    public void setPatientSin(int patientSin) {
+    public void setPatientSin(String patientSin) {
         this.patientSin = patientSin;
     }
 

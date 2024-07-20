@@ -4,13 +4,13 @@
  */
 package controller;
 
-import dao1.Authorization;
-import dao1.EmployeeDAO;
-import dao1.PatientDAO;
+import dao.Authorization;
+import dao.EmployeeDAO;
+import dao.PatientDAO;
 import dal.DBContext;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonObject;
-import dao1.DBPatientProfile;
+import dao.DBPatientProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,15 +30,16 @@ import model.PatientInfo;
 //import org.apache.http.client.fluent.Request;
 import java.sql.*;
 import model.PatientInfo;
-import dao1.UserDAO;
+import dao.UserDAO;
 import model.Employee;
 import model.Patient;
+import model.PatientGetByIdDTO;
 
 /**
  *
  * @author trung
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 //Login with google:
 //    public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -69,6 +70,11 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser != null) {
+            session.invalidate();
+        }
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
@@ -96,38 +102,39 @@ public class LoginServlet extends HttpServlet {
                     Authorization author = new Authorization();
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();
-                        Patient pat = patientDAO.getPatientById(user.getPatient_Id());
+                        PatientGetByIdDTO pat = patientDAO.getPatientById(user.getPatient_Id());
                         session.setAttribute("patient", pat);
                         session.setAttribute("userRole", "patient");
-                        request.getRequestDispatcher("view/patient/home.jsp").forward(request, response);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                         //request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (user.getType_Id() == 1) {
                         EmployeeDAO empDao = new EmployeeDAO();
                         Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
-                        if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
-                            session.setAttribute("admin", emp);
-                            session.setAttribute("userRole", "admin");
-                            request.getRequestDispatcher("view/employee/admin/home.jsp").forward(request, response);
-                        } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
-                            session.setAttribute("doctor", emp);
-                            session.setAttribute("userRole", "doctor");
-                            request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
-                        } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
-                            session.setAttribute("nurse", emp);
-                            session.setAttribute("userRole",  "nurse");
-                            request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
-                        } else {
-                            session.setAttribute("receptionist", emp);
-                            session.setAttribute("userRole", "receptionist");
-                            request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
+                        switch (author.isEmployee(user.getEmployee_Id())) {
+                            case "b":
+                                session.setAttribute("admin", emp);
+                                session.setAttribute("userRole", "admin");
+                                break;
+                            case "d":
+                                session.setAttribute("doctor", emp);
+                                session.setAttribute("userRole", "doctor");
+                                break;
+                            case "n":
+                                session.setAttribute("nurse", emp);
+                                session.setAttribute("userRole", "nurse");
+                                break;
+                            default:
+                                break;
                         }
+                        response.sendRedirect("appointment/viewAppointmentHistory");
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException e) {
+                System.out.println(e);
+//                response.sendRedirect("index.jsp");
             }
         }
 
@@ -143,7 +150,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException, SQLException {
         UserDAO user = new UserDAO();
         ArrayList<User> userList = user.getAll();
         request.setAttribute("Users", userList);

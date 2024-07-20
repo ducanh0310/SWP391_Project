@@ -40,6 +40,40 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+
+
+
+        <!-- Favicon -->
+
+        <link href="../../../img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="../../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="../../../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="../../../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+        <!-- BoxIcons v2.1.2 -->
+        <link href="../../../https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+
+        <!-- Roboto Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+        <!-- CSS File -->
+        <link rel="stylesheet" href="../../../css/style.css">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="../../../css/style.css" rel="stylesheet">
         <style>
             .text-primary {
                 --x-text-opacity: 1;
@@ -77,38 +111,13 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="admin.jsp">
-                                    <i class="bi bi-house"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clipboard-check"></i> Treatment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-exclamation-square-fill"></i> Report
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear-fill"></i> Setting
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i> Users
+                                <a class="nav-link" href="ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
                         </ul>
@@ -121,12 +130,12 @@
                         <!-- User (md) -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="employee/profile/view">
                                     <i class="bi bi-person-square"></i> Account
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../../logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -142,7 +151,7 @@
                     <div class="container-fluid">                   
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">Applications</h5>
+                                <h5 class="mb-0">Welcome, admin</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
@@ -240,5 +249,17 @@
 
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
+
+            <script src="../../../lib/wow/wow.min.js"></script>
+            <script src="../../../libeasing/easing.min.js"></script>
+            <script src="../../../libwaypoints/waypoints.min.js"></script>
+            <script src="../../../libowlcarousel/owl.carousel.min.js"></script>
+            <script src="../../../libtempusdominus/js/moment.min.js"></script>
+            <script src="../../../libtempusdominus/js/moment-timezone.min.js"></script>
+            <script src="../../../libtempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script src="../../../libtwentytwenty/jquery.event.move.js"></script>
+            <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
+
+            <script src="../../../js/main.js"></script>
     </body>
 </html>

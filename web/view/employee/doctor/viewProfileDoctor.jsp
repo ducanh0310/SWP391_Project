@@ -191,56 +191,15 @@
             .status-not-started {
                 color: black;
             }
-            
+
             #deleteSuccessNotification {
                 display: none;
             }
         </style>
     </head>
     <body>
-        <!-- Confirmation Delete start -->
-        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this certification?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Confirmation Delete End -->
 
-        <!-- Edit Success Notification start-->
-        <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
-            <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-                ${EditSuccess}
-                <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
-                <div class="progress mt-2" style="height: 4px;">
-                    <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Edit Success Notification end-->
-        
-         <!-- Deleted Success Notification start-->
-        <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
-            <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                ${DeleteCertificationSuccess}
-                <button type="button" class="btn-close" id="closeNotificationButton" aria-label="Close"></button>
-                <div class="progress mt-2" style="height: 4px;">
-                    <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Deleted Success Notification end-->
+
         <!-- Topbar Start -->
         <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
             <div class="row gx-0">
@@ -267,195 +226,237 @@
         <!-- Topbar End -->
 
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-
-                <div class="navbar-nav ms-auto py-0">
-                    <div class="nav-item nav-link"></div>                     
-                </div>
-                <a href="" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
-
-            </div>
-        </nav>
         <!-- Navbar End -->
-
-
-        <div class="container-fluid bg-primary py-5 hero-header mb-5">
-            <div class="row py-3">
-                <div class="col-12 text-center">
-                    <h1 class="display-3 text-white animated zoomIn">Personal information</h1>
-
+        <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+            <!-- Confirmation Delete start -->
+            <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this certification?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!--profile-->
-
-        <div class="row justify-content-center " >
-
-            <div class="col-md-3 container-box">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
-
-                    <span class="font-weight-bold">${username}</span>
-                    <span class="text-black-50">${emInfo.email}</span>
-                    <br>
-                    <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">My account</a>
-                    <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
-                    <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
-
+            <!-- Confirmation Delete End -->
+            <!-- Edit Success Notification start-->
+            <div id="editSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+                <div id="editSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                    ${EditSuccess}
+                    <button type="button" class="btn-close" id="closeEditNotificationButton" aria-label="Close"></button>
+                    <div class="progress mt-2" style="height: 4px;">
+                        <div id="editSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-1"></div>
-            <div class="col-md-5 container-box">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">My account</h4>
+            <!-- Edit Success Notification end-->
+            <!-- Deleted Success Notification start-->
+            <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+                <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                    ${DeleteCertificationSuccess}
+                    <button type="button" class="btn-close" id="closeNotificationButton" aria-label="Close"></button>
+                    <div class="progress mt-2" style="height: 4px;">
+                        <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <hr>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels">Fullname</label>
-                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${emInfo.name}" readonly="">
-                        </div>        
-                        <div class="col-md-6">
-                            <label class="labels">Phone Number</label>
-                            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${emInfo.phoneNumber}" readonly="">
-                        </div>
+                </div>
+            </div>
+            <!-- Deleted Success Notification end-->
+
+            <!-- Vertical Navbar -->
+            <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
+                 id="navbarVertical">
+                <div class="container-fluid">
+                    <!-- Toggler -->
+                    <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Brand -->
+                    <a href="index.jsp" class="navbar-brand p-0">
+                        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Collapse -->
+                    <div class="collapse navbar-collapse" id="sidebarCollapse">
+                        <!-- Navigation -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-clock"></i> Appointment
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../PatientController">
+                                    <i class="bi bi-list-task"></i> Patient
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Divider -->
+                        <hr class="navbar-divider my-5 opacity-20">
+                        <!-- Navigation -->
+
+                        <!-- Push content down -->
+                        <hr>
+                        <!-- User (md) -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-person-square"></i> Account
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../logout">
+                                    <i class="bi bi-box-arrow-left"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
                     </div>
+                </div>
+            </nav>
+            <!-- Main content -->
+            <div class="h-screen flex-grow-1 overflow-y-lg-auto">
 
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}" readonly="">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="labels">Medicine code</label>
-                            <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${emInfo.employeeSin}" readonly="">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels" for="gender">Gender</label>
-                            <label class="labels" for="gender">Gender</label>
-                            <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder="" 
-                                   <c:if test="${emInfo.gender == 'M'}">
-                                       value="Male"
-                                   </c:if>
-                                   <c:if test="${emInfo.gender == 'F'}">
-                                       value="Female"
-                                   </c:if>
-                                   <c:if test="${emInfo.gender == 'X'}">
-                                       value="Other"
-                                   </c:if>
-                                   >
-                        </div>                    
-
-                        <div class="col-md-6">
-                            <label class="labels">Date of birth</label>
-                            <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}" readonly="">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels">Role</label>
-                            <input type="text" id="role" name="role" class="form-control" placeholder=""  readonly=""
-                                   <c:if test="${emInfo.employeeType == 'r'}">value="Receptionist"</c:if>
-                                   <c:if test="${emInfo.employeeType == 'd'}">value="Doctor"</c:if>
-                                   <c:if test="${emInfo.employeeType == 'h'}">value="Nurse"</c:if>
-                                   <c:if test="${emInfo.employeeType == 'b'}">value="Branch Manage"</c:if>
-                                       >
+                <!-- Main -->
+                <main class="py-6 bg-surface-secondary">
+                    <div class="container-fluid">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header">
+                                <h5 class="mb-0">Welcome, doctor</h5>
                             </div>
-                            <div class="col-md-6">
-                                <label class="labels">Salary / year</label>
-                                <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="${emInfo.annualSalary}" readonly="">
-                        </div>
-                    </div>
+                            <div class="row justify-content-center " >
 
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <label class="labels">Address</label>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="" value="${emInfo.address}" readonly="">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="labels">Working Branch</label>
-                            <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
-                        </div>
-                    </div>
+                                <div class="col-md-3 container-box">
+                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                        <img class="rounded-circle mt-5 profile-pic"  src="${image != null ? image : '../../img/profile/no_image_profile.png'}" id="profile-pic" name="profile-pic" alt="personal image">
 
+                                        <span class="font-weight-bold">${username}</span>
+                                        <span class="text-black-50">${emInfo.email}</span>
+                                        <br>
+                                        <!--<a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Medical appointment history</a>-->
+                                        <a href="" class="btn btn-primary py-2 px-4 ms-3 profile_button">Change password</a>
 
-                    <form action="view" method="POST">
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">Certification</label>
-                                <c:forEach items="${requestScope.arrayCerti}" var="cer">
-                                    <div class="certification-item d-flex align-items-center mb-2">
-                                        <a href="${cer.url}" target="_blank" class="link-as-input">${cer.name}</a>
-                                        <button type="button" class="btn btn-gray btn-sm" onclick="confirmDeletion(${cer.id})">Delete</button>
                                     </div>
-                                </c:forEach>
-                            </div>
+                                </div>
+
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 container-box">
+                                    <div class="p-3 py-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-right">My account</h4>
+                                        </div>
+                                        <hr>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Fullname</label>
+                                                <input type="text" id="fullname" name="fullname" class="form-control" placeholder="" value="${emInfo.name}" readonly="">
+                                            </div>        
+                                            <div class="col-md-6">
+                                                <label class="labels">Phone Number</label>
+                                                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="${emInfo.phoneNumber}" readonly="">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Email</label>
+                                                <input type="text" id="email" name="email" class="form-control" placeholder="" value="${emInfo.email}" readonly="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="labels">Medicine code</label>
+                                                <input type="text" id="medicineCode" name="medicineCode" class="form-control" placeholder=" " value="${emInfo.employeeSin}" readonly="">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels" for="gender">Gender</label>
+                                                <input type="text" id="gender" name="gender" class="form-control" readonly="" placeholder="" 
+                                                       <c:if test="${emInfo.gender == 'M'}">
+                                                           value="Male"
+                                                       </c:if>
+                                                       <c:if test="${emInfo.gender == 'F'}">
+                                                           value="Female"
+                                                       </c:if>
+                                                       <c:if test="${emInfo.gender == 'X'}">
+                                                           value="Other"
+                                                       </c:if>
+                                                       >
+                                            </div>                    
+
+                                            <div class="col-md-6">
+                                                <label class="labels">Date of birth</label>
+                                                <input type="date" id="dob" name="dob" class="form-control" placeholder="" value="${emInfo.dob}" readonly="">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Role</label>
+                                                <input type="text" id="role" name="role" class="form-control" placeholder=""  readonly=""
+                                                       <c:if test="${emInfo.employeeType == 'r'}">value="Receptionist"</c:if>
+                                                       <c:if test="${emInfo.employeeType == 'd'}">value="Doctor"</c:if>
+                                                       <c:if test="${emInfo.employeeType == 'h'}">value="Nurse"</c:if>
+                                                       <c:if test="${emInfo.employeeType == 'b'}">value="Branch Manage"</c:if>
+                                                           >
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="labels">Salary / year</label>
+                                                    <input type="text" id="salary" name="salary" class="form-control" placeholder="" value="${emInfo.annualSalary}" readonly="">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <label class="labels">Address</label>
+                                                <input type="text" id="address" name="address" class="form-control" placeholder="" value="${emInfo.address}" readonly="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="labels">Working Branch</label>
+                                                <input type="text" id="branch" name="branch" class="form-control" placeholder="" value="${emInfo.branch.city}" readonly="">
+                                            </div>
+                                        </div>
+
+
+                                        <form action="view" method="POST">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <label class="labels">Certification</label>
+                                                    <c:forEach items="${requestScope.arrayCerti}" var="cer">
+                                                        <div class="certification-item d-flex align-items-center mb-2">
+                                                            <a href="${cer.url}" target="_blank" class="link-as-input">${cer.name}</a>
+                                                            <button type="button" class="btn btn-gray btn-sm" onclick="confirmDeletion(${cer.id})">Delete</button>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <div class="mt-5 text-center">
+                                            <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
+                                        </div>
+                                    </div>
+                                </div>    
+
+                            </div>            
                         </div>
-                    </form>
-
-                    <div class="mt-5 text-center">
-                        <a href="edit" class=" btn btn-primary py-2 px-4 ms-3 ">Edit Profile</a>
                     </div>
-                </div>
-            </div>    
-
-        </div>
-
-
-
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
-            <div class="container pt-5">
-                <div class="row g-5 pt-4 justify-content-center">
-                    <div class="col-lg-3 col-md-6 mx-auto">
-                        <a href="index.html" class="navbar-brand p-0 d-block mx-auto text-start">
-                            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
-                        </a>
-                        <br>
-                        <p class="mb-2 text-start"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                        <p class="mb-2 text-start"><i class="bi bi-envelope-open text-primary me-2"></i>dentcare23@medical.com</p>
-                        <p class="mb-0 text-start"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mx-auto">
-                        <h3 class="text-white mb-4 text-start">Popular Links</h3>
-                        <div class="d-flex flex-column justify-content-start text-start">
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                            <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mx-auto">
-                        <h3 class="text-white mb-4 text-start">Follow Us</h3>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="https://www.facebook.com/groups/490263423665224" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                    </div>
-                </div>
+                </main>
             </div>
         </div>
 
-        <!-- Footer End -->
 
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
         <!-- JavaScript Libraries -->
@@ -475,33 +476,31 @@
         <script src="../../js/main.js"></script>
 
         <script>
-                                            function confirmDeletion(certId) {
-                                                // Show the confirmation modal
-                                                $('#confirmationModal').modal('show');
+                                                                function confirmDeletion(certId) {
+                                                                    // Show the confirmation modal
+                                                                    $('#confirmationModal').modal('show');
 
-                                                // Attach click event to the confirm button
-                                                $('#confirmDeleteButton').off('click').on('click', function () {
-                                                    // Create a form element
-                                                    const form = document.createElement('form');
-                                                    form.method = 'POST';
-                                                    form.action = 'view';
+                                                                    // Attach click event to the confirm button
+                                                                    $('#confirmDeleteButton').off('click').on('click', function () {
+                                                                        // Create a form element
+                                                                        const form = document.createElement('form');
+                                                                        form.method = 'POST';
+                                                                        form.action = 'view';
 
-                                                    // Create a hidden input element to hold the certification ID
-                                                    const input = document.createElement('input');
-                                                    input.type = 'hidden';
-                                                    input.name = 'deleteCert';
-                                                    input.value = certId;
+                                                                        // Create a hidden input element to hold the certification ID
+                                                                        const input = document.createElement('input');
+                                                                        input.type = 'hidden';
+                                                                        input.name = 'deleteCert';
+                                                                        input.value = certId;
 
-                                                    // Append the hidden input to the form
-                                                    form.appendChild(input);
+                                                                        // Append the hidden input to the form
+                                                                        form.appendChild(input);
 
-                                                    // Append the form to the body and submit it
-                                                    document.body.appendChild(form);
-                                                    form.submit();
-                                                });
-                                            }
-
-
+                                                                        // Append the form to the body and submit it
+                                                                        document.body.appendChild(form);
+                                                                        form.submit();
+                                                                    });
+                                                                }
         </script>
         <script>
             function showEditSuccessNotification() {
@@ -528,32 +527,32 @@
             if (successMessage) {
                 showEditSuccessNotification();
             }
-            
+
             // Handle notification display for delete success
-                function showDeleteSuccessNotification() {
-                    $('#deleteSuccessNotification').show();
-                    let progressBar = $('#deleteSuccessProgressBar');
-                    let width = 0;
-                    let interval = setInterval(function () {
-                        width++;
-                        progressBar.css('width', width + '%');
-                        if (width === 200) {
-                            clearInterval(interval);
-                            $('#deleteSuccessNotification').fadeOut();
-                        }
-                    }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
-                }
+            function showDeleteSuccessNotification() {
+                $('#deleteSuccessNotification').show();
+                let progressBar = $('#deleteSuccessProgressBar');
+                let width = 0;
+                let interval = setInterval(function () {
+                    width++;
+                    progressBar.css('width', width + '%');
+                    if (width === 200) {
+                        clearInterval(interval);
+                        $('#deleteSuccessNotification').fadeOut();
+                    }
+                }, 40); // Tốc độ giảm thanh tiến độ (milliseconds)
+            }
 
-                // Close notification button handler
-                $('#closeNotificationButton').click(function () {
-                    $('#deleteSuccessNotification').hide();
-                });
+            // Close notification button handler
+            $('#closeNotificationButton').click(function () {
+                $('#deleteSuccessNotification').hide();
+            });
 
-                // Check for success message from the server
-                let deleteSuccess = '${sessionScope.DeleteCertificationSuccess}';
-                if (deleteSuccess) {
-                    showDeleteSuccessNotification();
-                }
+            // Check for success message from the server
+            let deleteSuccess = '${sessionScope.DeleteCertificationSuccess}';
+            if (deleteSuccess) {
+                showDeleteSuccessNotification();
+            }
         </script>
     </body>
 </html>

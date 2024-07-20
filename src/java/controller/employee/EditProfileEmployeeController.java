@@ -1,7 +1,7 @@
 package controller.employee;
 
-import dao1.DBAccount;
-import dao1.DBEmployeeProfile;
+import dao.DBAccount;
+import dao.DBEmployeeProfile;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -32,6 +33,15 @@ public class EditProfileEmployeeController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            session.invalidate();
+            response.sendRedirect("../../index.jsp");
+            return;
+        } else if (currentUser.getPatient_Id() != null) {
+            request.getRequestDispatcher("../../accessDenied.jsp").forward(request, response);
+            session.invalidate();
+            return;
+        }
         try {
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
@@ -41,15 +51,16 @@ public class EditProfileEmployeeController extends HttpServlet {
             request.setAttribute("image", acc.getImage());
             request.setAttribute("emInfo", emInfo);
             request.setAttribute("username", currentUser.getName());
-
+            ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
+            request.setAttribute("arrayCerti", arrayCerti);
             if ("d".equals(emInfo.getEmployeeType())) {
-                ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
-                request.setAttribute("arrayCerti", arrayCerti);
                 request.getRequestDispatcher("../../view/employee/doctor/editProfileDoctor.jsp").forward(request, response);
             } else if ("b".equals(emInfo.getEmployeeType())) {
                 request.getRequestDispatcher("../../view/employee/admin/editProfileAdmin.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("../../view/employee/nurse/editProfileNurse.jsp").forward(request, response);
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -57,9 +68,18 @@ public class EditProfileEmployeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            session.invalidate();
+            response.sendRedirect("../../index.jsp");
+            return;
+        } else if (currentUser.getPatient_Id() != null) {
+            request.getRequestDispatcher("../../accessDenied.jsp").forward(request, response);
+            session.invalidate();
+            return;
+        }
         try {
-            HttpSession session = request.getSession();
-            User currentUser = (User) session.getAttribute("currentUser");
             Map<String, String> errorMsg = new HashMap<>();
             DBEmployeeProfile db = new DBEmployeeProfile();
             //Validation data
@@ -74,14 +94,14 @@ public class EditProfileEmployeeController extends HttpServlet {
                 //handleCertifications(request, currentUser, db, errorMsg);
 
                 // Xóa tất cả các thuộc tính trong session
-                Enumeration<String> attributeNames = session.getAttributeNames();
-                while (attributeNames.hasMoreElements()) {
-                    String attributeName = attributeNames.nextElement();
-                    if (!attributeName.equals("currentUser")) {
-                        session.removeAttribute(attributeName);
-                    }
-
-                }
+//                Enumeration<String> attributeNames = session.getAttributeNames();
+//                while (attributeNames.hasMoreElements()) {
+//                    String attributeName = attributeNames.nextElement();
+//                    if (!attributeName.equals("currentUser")) {
+//                        session.removeAttribute(attributeName);
+//                    }
+//
+//                }
 
                 session.setAttribute("EditSuccess", "Editing profile successfully");
 
@@ -89,6 +109,8 @@ public class EditProfileEmployeeController extends HttpServlet {
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -144,7 +166,7 @@ public class EditProfileEmployeeController extends HttpServlet {
 
     //Announce error into jsp
     private void handleErrors(HttpServletRequest request, HttpServletResponse response, User currentUser, Map<String, String> errorMsg)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         DBEmployeeProfile dbEm = new DBEmployeeProfile();
         Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
         DBAccount dbA = new DBAccount();
@@ -169,38 +191,43 @@ public class EditProfileEmployeeController extends HttpServlet {
     // submit certification for doctor 
     private void handleCertifications(HttpServletRequest request, User currentUser, DBEmployeeProfile db, Map<String, String> errorMsg)
             throws ClassNotFoundException {
-        
-        Employee emInfo = db.getInfoEmployee(currentUser.getName());
-        if ("d".equals(emInfo.getEmployeeType())) {
+
+        try {
+            Employee emInfo = db.getInfoEmployee(currentUser.getName());
+
             String[] imageLinks = request.getParameterValues("imageLink");
             String[] imageNames = request.getParameterValues("imageName");
             String[] idStrings = request.getParameterValues("idCer");
             int[] idImage = new int[100];
+            if (idStrings.length > 0 || imageLinks.length > 0) {
+                for (int i = 0; i < idStrings.length; i++) {
+                    idImage[i] = idStrings[i] == null || idStrings[i].isEmpty() ? 0 : Integer.parseInt(idStrings[i]);
+                }
 
-            for (int i = 0; i < idStrings.length; i++) {
-                idImage[i] = idStrings[i] == null || idStrings[i].isEmpty() ? 0 : Integer.parseInt(idStrings[i]);
-            }
+                if (imageLinks != null && imageNames != null && imageLinks.length == imageNames.length) {
+                    for (int i = 0; i < imageLinks.length; i++) {
+                        String imageLink = imageLinks[i];
+                        String imageName = imageNames[i];
+                        int imageId = idImage[i];
 
-            if (imageLinks != null && imageNames != null && imageLinks.length == imageNames.length) {
-                for (int i = 0; i < imageLinks.length; i++) {
-                    String imageLink = imageLinks[i];
-                    String imageName = imageNames[i];
-                    int imageId = idImage[i];
+                        Validation valid = new Validation();
+                        boolean cerName = valid.isAddress(imageName);
 
-                    Validation valid = new Validation();
-                    boolean cerName = valid.isAddress(imageName);
-                    
-                    if (isValidURL(imageLink) && (cerName == true)) {
-                        if (imageId != 0) {
-                            db.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);
+                        if (isValidURL(imageLink) && (cerName == true)) {
+                            if (imageId != 0) {
+                                db.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);
+                            } else {
+                                db.insertCertification(imageName, imageLink, emInfo.getId());
+                            }
                         } else {
-                            db.insertCertification(imageName, imageLink, emInfo.getId());
+                            errorMsg.put("link", "Invalid link form or Certification'name must 2-1000 characters");
                         }
-                    } else {
-                        errorMsg.put("link", "Invalid link form or Certification'name must 2-1000 characters");
                     }
                 }
             }
+            return;
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -210,7 +237,7 @@ public class EditProfileEmployeeController extends HttpServlet {
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
             huc.setRequestMethod("HEAD");
             return huc.getResponseCode() == HttpURLConnection.HTTP_OK;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return false;
         }
     }

@@ -4,8 +4,8 @@
  */
 package controller.employee;
 
-import dao1.DBAccount;
-import dao1.DBEmployeeProfile;
+import dao.DBAccount;
+import dao.DBEmployeeProfile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
@@ -34,30 +36,37 @@ public class ViewProfileEmployeeController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            session.invalidate();
+            response.sendRedirect("../../index.jsp");
+            return;
+        } else if (currentUser.getPatient_Id() != null) {
+            request.getRequestDispatcher("../../accessDenied.jsp").forward(request, response);
+            session.invalidate();
+            return;
+        }
         try {
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
+            DBAccount db = new DBAccount();
+            Account acc = db.showAccountInfo(currentUser.getName());
+            ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
+            request.setAttribute("arrayCerti", arrayCerti);
+            request.setAttribute("image", acc.getImage());
+            request.setAttribute("emInfo", emInfo);
+            request.setAttribute("username", currentUser.getName());
             //johnli255a
             if ("d".equals(emInfo.getEmployeeType())) {
-                ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
-                DBAccount db = new DBAccount();
-                Account acc = db.showAccountInfo(currentUser.getName());
-                request.setAttribute("image", acc.getImage());
-                request.setAttribute("arrayCerti", arrayCerti);
-                request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
             }
             //kdo2342
             if ("b".equals(emInfo.getEmployeeType())) {
-                DBAccount db = new DBAccount();
-                Account acc = db.showAccountInfo(currentUser.getName());
-                request.setAttribute("image", acc.getImage());
-                request.setAttribute("emInfo", emInfo);
-                request.setAttribute("username", currentUser.getName());
                 request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
             }
-        } catch (ClassNotFoundException ex) {
+            if ("n".equals(emInfo.getEmployeeType())) {
+                request.getRequestDispatcher("../../view/employee/nurse/viewProfileNurse.jsp").forward(request, response);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
             java.util.logging.Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -89,7 +98,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 session.setAttribute("DeleteCertificationSuccess", "Deleting profile successfully");
                 response.sendRedirect("view");
                 return;
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

@@ -11,14 +11,16 @@ import java.time.LocalTime;
  * @author Vu Minh Quan
  */
 public class Slot {
+
     private int id;
     private LocalTime startedTime;
     private LocalTime endTime;
     private Service service;
     private Room room;
-    private Employee doctor; 
+    private Employee doctor;
     private StatusBook statusBook;
     private BookingAppointment bookingAppointment;
+    private Patient patient;
 
     public BookingAppointment getBookingAppointment() {
         return bookingAppointment;
@@ -27,8 +29,6 @@ public class Slot {
     public void setBookingAppointment(BookingAppointment bookingAppointment) {
         this.bookingAppointment = bookingAppointment;
     }
-
-
 
     public StatusBook getStatusBook() {
         return statusBook;
@@ -53,9 +53,7 @@ public class Slot {
     public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
-    
-    
-    
+
     public int getId() {
         return id;
     }
@@ -88,6 +86,12 @@ public class Slot {
         this.service = service;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
 
-        
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
 }

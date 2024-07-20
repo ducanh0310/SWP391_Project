@@ -7,6 +7,8 @@ package validation;
 import java.time.Period;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -16,14 +18,14 @@ public class Validation {
 
     public static boolean isValidPassword(String password) {
         // Check if the password is at least 8 characters long
-        if (password.length() < 8) {
+        if (password.length() < 8 ||  password.length() > 128) {
             return false;
         }
 
         boolean hasLowerCase = false;
         boolean hasUpperCase = false;
         boolean hasDigit = false;
-
+        boolean hasSpace = false;
         // Iterate through each character of the password
         for (char ch : password.toCharArray()) {
             if (Character.isLowerCase(ch)) {
@@ -32,10 +34,12 @@ public class Validation {
                 hasUpperCase = true;
             } else if (Character.isDigit(ch)) {
                 hasDigit = true;
+            } else if (Character.isSpaceChar(ch)) {
+                hasSpace = true;
             }
 
             // Check if all requirements are met
-            if (hasLowerCase && hasUpperCase && hasDigit) {
+            if (!hasSpace && hasLowerCase && hasUpperCase && hasDigit) {
                 return true;
             }
         }
@@ -105,20 +109,27 @@ public class Validation {
         return address.length() >= 2 && address.length() <= 1000;
 
     }
+    private static final String USERNAME_PATTERN = "^(?=.*[a-zA-Z])[a-zA-Z0-9!@._-]{3,15}$";
 
-    //Date in booking appointment
-    public boolean isDateBook(String date) {
-        LocalDate selectedDate = LocalDate.parse(date); // Ngày được chọn
-        LocalDate currentDate = LocalDate.now(); // Thời gian hiện tại
-        return selectedDate.isAfter(currentDate);
+    public static boolean isValidUsername(String username) {
+        // Compile the regular expression
+        Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+
+        // Match the username against the pattern
+        Matcher matcher = pattern.matcher(username);
+
+        // Return whether the username matches the pattern
+        return matcher.matches();
     }
-    
-    //Select service
-    public boolean isService(String service){
-        if(service !=null && !(service.isEmpty())){
-            return true;
-        }else{
-            return false;
+
+    public static void main(String[] args) {
+        // Test usernames
+        String[] usernames = {"user_1", "user!23", "usa", "valid username", "12345", "''''"};
+
+        for (String username : usernames) {
+            boolean isValid = isValidPassword("Nam 020503");
+            System.out.println(isValid);
         }
     }
-}
+
+    }
