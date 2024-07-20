@@ -183,7 +183,7 @@ public class AddPatientController extends HttpServlet {
             request.setAttribute("dob", dob);
         }
         
-        if(valid.isDistantDOB14(Date.valueOf(dob)) && (repName != null || !repName.isEmpty() || repPhone!=null || !repPhone.isEmpty() || reqEmail != null || !reqEmail.isEmpty() || !relationship.isEmpty() || relationship != null)){
+        if(valid.isDistantDOB14(Date.valueOf(dob)) && (!repName.isEmpty() || !repPhone.isEmpty()  || !reqEmail.isEmpty() || !relationship.isEmpty())){
             errorMsg.put("date", "Patient must under 14, you can enter information representative");
         }
 
