@@ -1110,7 +1110,7 @@
                         <div class="panel">
                             <div class="user-heading round">
                                 <a href="#">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                                    <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="">
                                 </a>
                                 <h1>${pa.name}</h1>
                                 <p>${pa.email}</p>
