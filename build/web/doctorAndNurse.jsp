@@ -662,6 +662,9 @@
     <symbol id="capsule-symbol" viewBox="0 0 16 16">
         <path d="M13.5,2.5a4,4,0,0,0-5.66,0l-5,5a4,4,0,1,0,5.66,5.66l5-5A4,4,0,0,0,13.5,2.5Zm-5,10a2,2,0,1,1,0-2.83A2,2,0,0,1,8.5,12.5Z" />
     </symbol>
+    <symbol id="list-symbol" viewBox="0 0 16 16">
+        <path d="M2 2h12v2H2zM2 6h12v2H2zM2 10h12v2H2zM2 14h12v2H2z"/>
+    </symbol>
     </svg>
     <header class="page-header">
         <nav>
@@ -694,6 +697,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="viewPrescription">
+                        <svg>
+                        <use xlink:href="#list-symbol"></use>
+                        </svg>
+                        <span>View Prescription</span>
+                    </a>
                 </li>
 
                 <li>
@@ -704,12 +714,7 @@
                             <span>Dark</span>
                         </label>
                     </div>
-                    <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-                        <svg aria-hidden="true">
-                        <use xlink:href="#collapse"></use>
-                        </svg>
-                        <span>Collapse</span>
-                    </button>
+                    
                 </li>
             </ul>
         </nav>

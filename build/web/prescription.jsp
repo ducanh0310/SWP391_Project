@@ -679,6 +679,9 @@
     <symbol id="capsule-symbol" viewBox="0 0 16 16">
         <path d="M13.5,2.5a4,4,0,0,0-5.66,0l-5,5a4,4,0,1,0,5.66,5.66l5-5A4,4,0,0,0,13.5,2.5Zm-5,10a2,2,0,1,1,0-2.83A2,2,0,0,1,8.5,12.5Z" />
     </symbol>
+    <symbol id="list-symbol" viewBox="0 0 16 16">
+        <path d="M2 2h12v2H2zM2 6h12v2H2zM2 10h12v2H2zM2 14h12v2H2z"/>
+    </symbol>
     </svg>
     <header class="page-header">
         <nav>
@@ -711,6 +714,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="viewPrescription">
+                        <svg>
+                        <use xlink:href="#list-symbol"></use>
+                        </svg>
+                        <span>View Prescription</span>
+                    </a>
                 </li>
 
                 <li>
@@ -742,11 +752,12 @@
                         <div class="row">
                             <div class="col-md-offset-1 col-md-3 module contact-builder">
 
-                                <form class="form" ng-submit="addContact()" ng-hide="editing">
+                                <form  action ="addPrescriptions?examIdStr=${patientResult.exam_id}" method="POST">
+                                   
                                     <h4>New Prescription</h4>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
-                                        <input type="text" id="name" class="form-control" value="${patientResult.pid.name}" readonly ng-model="nameBox">
+                                        <input type="text" id="name" class="form-control" value="${patientResult.patient.name}" readonly ng-model="nameBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="exam_date">Exam Date:</label>
@@ -765,16 +776,16 @@
                                         <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly ng-model="test_resultBox">
                                     </div>                           
                                     <div class="form-group">
-                                        <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
+                                        <input type="type" id="medication" name="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
+                                        <input type="type" id="dosage" name="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
+                                        <input type="type" id="duration" name="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="notes" class="form-control" placeholder="Notes" ng-model="notesBox" required>
+                                        <input type="type" id="notes" name="notes"class="form-control" placeholder="Notes" ng-model="notesBox" required>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add Prescription</button>
@@ -786,7 +797,7 @@
                                     <h4>Edit Prescription</h4>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
-                                        <input type="text" id="name" class="form-control" value="${patientResult.pid.name}" readonly ng-model="nameBox">
+                                        <input type="text" id="name" class="form-control" value="${patientResult.patient.name}" readonly ng-model="nameBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis">Diagnosis:</label>
@@ -829,7 +840,7 @@
                                         <input type="checkbox" ng-model="exactMatch"> Exact Match</input>
                                     </div>
                                     <div class="form-group pull-right">
-                                        <button type="button" class="btn btn-danger" ng-click="deleteAll()"><i class="glyphicon glyphicon-trash"></i> Delete All Contacts</button>
+                                        <button type="button" class="btn btn-danger" ng-click="deleteAll()"><i class="glyphicon glyphicon-trash"></i> Delete All</button>
                                     </div>
                                 </form>
                                 <div class="table-wrap clearfix">
@@ -862,7 +873,7 @@
                                                 <td>{{obj.notes}}</td>
                                                 <td class="text-right">
                                                     <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <a href="#" ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
+                                                    <a ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -899,7 +910,7 @@
             .controller("nameAdderController", function ($scope) {
 
                 // Set temp initial values for testing
-                $scope.nameBox = "${patientResult.pid.name}";
+                $scope.nameBox = "${patientResult.patient.name}";
                 $scope.exam_dateBox = "${patientResult.exam_date}";
                 $scope.diagnosisBox = "${patientResult.diagnosis}";
                 $scope.symptomsBox = "${patientResult.symptoms}";
@@ -910,7 +921,7 @@
                 $scope.notesBox = "";
                 //
 
-                var nameList = [{name: "${patientResult.pid.name}",
+                var nameList = [{name: "${patientResult.patient.name}",
                         diagnosis: "${patientResult.diagnosis}",
                         symptoms: "${patientResult.symptoms}",
                         test_result: "${patientResult.test_result}",
@@ -958,7 +969,7 @@
                 $scope.cancelEdit = function () {
                     $scope.editing = false;
                     $scope.selectedIndex = -1;
-                    $scope.nameBox = "${patientResult.pid.name}";
+                    $scope.nameBox = "${patientResult.patient.name}";
                     $scope.diagnosisBox = "${patientResult.diagnosis}";
                     $scope.symptomsBox = "${patientResult.symptoms}";
                     $scope.test_resultBox = "${patientResult.test_result}";
@@ -991,7 +1002,7 @@
                     });
                     $scope.nameSorter();
 
-                    $scope.nameBox = "${patientResult.pid.name}";
+                    $scope.nameBox = "${patientResult.patient.name}";
                     $scope.diagnosisBox = "${patientResult.diagnosis}";
                     $scope.symptomsBox = "${patientResult.symptoms}";
                     $scope.test_resultBox = "${patientResult.test_result}";

@@ -4,52 +4,86 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Gia Huy
  */
 public class Prescription {
 
-    Patient pid;
-    Patient name;
-    Patient phone;
+//    Patient pid;
+//    Patient name;
+//    Patient phone;
+    Patient patient;
     String medication;
     String dosage;
     String duration;
     String notes;
+    Date prescription_date;
+    PatientExamResult patientExamResult;
 
     public Prescription() {
     }
 
-    public Prescription(Patient pid, Patient name, Patient phone, String medication, String dosage, String duration, String notes) {
-        this.pid = pid;
-        this.name = name;
-        this.phone = phone;
+    public Prescription(Patient patient, String medication, String dosage, String duration, String notes, Date prescription_date, PatientExamResult patientExamResult) {
+        this.patient = patient;
         this.medication = medication;
         this.dosage = dosage;
         this.duration = duration;
         this.notes = notes;
+        this.prescription_date = prescription_date;
+        this.patientExamResult = patientExamResult;
     }
 
-    public Patient getName() {
-        return name;
+    public Date getPrescription_date() {
+        return prescription_date;
     }
 
-    public Patient getPhone() {
-        return phone;
+    public void setPrescription_date(Date prescription_date) {
+        this.prescription_date = prescription_date;
     }
 
-    public void setName(Patient name) {
-        this.name = name;
+    
+    
+
+    public PatientExamResult getPatientExamResult() {
+        return patientExamResult;
     }
 
-    public void setPhone(Patient phone) {
-        this.phone = phone;
+    public void setPatientExamResult(PatientExamResult patientExamResult) {
+        this.patientExamResult = patientExamResult;
     }
 
-    public Patient getPid() {
-        return pid;
+   
+
+    public Patient getPatient() {
+        return patient;
     }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+//    public Patient getName() {
+//        return name;
+//    }
+//
+//    public Patient getPhone() {
+//        return phone;
+//    }
+//
+//    public void setName(Patient name) {
+//        this.name = name;
+//    }
+//
+//    public void setPhone(Patient phone) {
+//        this.phone = phone;
+//    }
+//
+//    public Patient getPid() {
+//        return pid;
+//    }
 
     public String getMedication() {
         return medication;
@@ -67,9 +101,9 @@ public class Prescription {
         return notes;
     }
 
-    public void setPid(Patient pid) {
-        this.pid = pid;
-    }
+//    public void setPid(Patient pid) {
+//        this.pid = pid;
+//    }
 
     public void setMedication(String medication) {
         this.medication = medication;

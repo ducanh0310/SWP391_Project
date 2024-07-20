@@ -775,6 +775,9 @@
     <symbol id="capsule-symbol" viewBox="0 0 16 16">
         <path d="M13.5,2.5a4,4,0,0,0-5.66,0l-5,5a4,4,0,1,0,5.66,5.66l5-5A4,4,0,0,0,13.5,2.5Zm-5,10a2,2,0,1,1,0-2.83A2,2,0,0,1,8.5,12.5Z" />
     </symbol>
+    <symbol id="list-symbol" viewBox="0 0 16 16">
+        <path d="M2 2h12v2H2zM2 6h12v2H2zM2 10h12v2H2zM2 14h12v2H2z"/>
+    </symbol>
     </svg>
     <header class="page-header">
         <nav>
@@ -807,6 +810,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="viewPrescription">
+                        <svg>
+                        <use xlink:href="#list-symbol"></use>
+                        </svg>
+                        <span>View Prescription</span>
+                    </a>
                 </li>
 
                 <li>
@@ -823,7 +833,7 @@
         </nav>
     </header>
     <main>
-    <div id="subscription_area">
+         <div id="subscription_area">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -832,19 +842,21 @@
                         <p>Input your ExamID</p>
                         <form class="subscribe_form" action="searchExam" method="GET">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter your ExamID" required>
+                                <input type="text" class="form-control" id="eid" name="eid" placeholder="Enter your ExamID" required>
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn btn-default">Ok</button>
                                 </span>
                             </div>
                         </form>
-                        ${errorMessage}
+                        <c:if test="${not empty errorMessage}">
+                            <p style="color: red;">${errorMessage}</p>
+                        </c:if>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+    </main>
 
 
 </section>

@@ -48,6 +48,14 @@
         <servlet-name>ServiceDetail</servlet-name>
         <servlet-class>controller.admin.ServiceDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewPrescriptionDetail</servlet-name>
+        <servlet-class>controller.employee.ViewListPrescription</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPrescriptionDetai</servlet-name>
+        <servlet-class>controller.employee.ViewPrescriptionDetai</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewProfilePatientController</servlet-name>
         <url-pattern>/patient/profile/view</url-pattern>
@@ -85,15 +93,23 @@
         <url-pattern>/prescription</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddPrescription</servlet-name>
-        <url-pattern>/addPrescription</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>searchExam</servlet-name>
         <url-pattern>/searchExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceDetail</servlet-name>
         <url-pattern>/viewService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPrescriptionDetail</servlet-name>
+        <url-pattern>/viewPrescription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPrescriptionDetai</servlet-name>
+        <url-pattern>/viewPrescriptionDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPrescription</servlet-name>
+        <url-pattern>/addPrescriptions</url-pattern>
     </servlet-mapping>
 </web-app>

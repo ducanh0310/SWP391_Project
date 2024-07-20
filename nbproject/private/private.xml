@@ -5,25 +5,18 @@
         <group>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/PatientExamResult.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewListPatient.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/ProcedureCodes.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ViewPatientDetailController.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/PatientInfo.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/addPrescription.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/prescription.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/DeleteServiceController.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/editPatientDetail.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/employee/ViewListPrescription.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientList.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/employee/searchExam.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ViewServiceDetailController.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/index.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/employee/DoctorController.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewPrescriptionDetail.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewPrescription.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/doctorAndNurse.jsp</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/DoctorDB.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/admin/ServiceDetail.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/PatientViewDB.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/viewServiceDetail.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/serviceDetail.jsp</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/employee/AddPrescription.java</file>
             <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/web/searchExamPatient.jsp</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/model/Patient.java</file>
-            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/dal/ServiceDB.java</file>
+            <file>file:/C:/Users/Gia%20Huy/Documents/GitHub/SWP391_Project/src/java/controller/employee/ViewPrescriptionDetai.java</file>
         </group>
     </open-files>
 </project-private>
