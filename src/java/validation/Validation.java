@@ -101,6 +101,27 @@ public class Validation {
         }
         return true;
     }
+    
+    public boolean isDistantDOB14(Date dob) {
+        LocalDate birthDate = dob.toLocalDate();
+        LocalDate today = LocalDate.now();
+
+        // Check if the birth date is in the future
+        if (birthDate.isAfter(today)) {
+            return false;
+        }
+
+        // Check if the birth date is too far in the past (e.g., more than 150 years ago)
+        if (birthDate.isBefore(today.minusYears(150))) {
+            return false;
+        }
+
+        // Check if the age is at least 18 years
+        if (Period.between(birthDate, today).getYears() < 14) {
+            return false;
+        }
+        return true;
+    }
 
     //Address
     public boolean isAddress(String place) {

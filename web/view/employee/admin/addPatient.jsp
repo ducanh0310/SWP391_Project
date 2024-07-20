@@ -414,7 +414,7 @@
                                                 <div class="col-md-6">
                                                     <label class="labels">Date of birth***</label>
                                                     <input type="date" id="dob" name="dob" class="form-control" placeholder="" onchange="checkAge()" value="${dob}"  required="Please enter date of birth"> 
-                                                </div>
+                                            </div>
                                             <c:if test="${not empty errorMsg.dob}">
                                                 <span style="color:red">${errorMsg.dob}</span>
                                             </c:if>
@@ -430,6 +430,9 @@
                                         <br>
                                         <div id="representativeForm">
                                             <div class="row mt-3">
+                                                <c:if test="${not empty errorMsg.date}">
+                                                    <span style="color:red">${errorMsg.date}</span>
+                                                </c:if>
                                                 <h3>
                                                     For customers under 14 years old, we require a guardian.
                                                 </h3>
@@ -564,25 +567,25 @@
                                                         }
     </script>
     <script>
-        function checkAge() {
-            const dob = document.getElementById('dob').value;
-            if (dob) {
-                const dobDate = new Date(dob);
-                const today = new Date();
-                let age = today.getFullYear() - dobDate.getFullYear();
-                const monthDifference = today.getMonth() - dobDate.getMonth();
-
-                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
-                    age--;
-                }
-
-                if (age < 14) {
-                    document.getElementById('representativeForm').style.display = 'block';
-                } else {
-                    document.getElementById('representativeForm').style.display = 'none';
-                }
-            }
-        }
+//        function checkAge() {
+//            const dob = document.getElementById('dob').value;
+//            if (dob) {
+//                const dobDate = new Date(dob);
+//                const today = new Date();
+//                let age = today.getFullYear() - dobDate.getFullYear();
+//                const monthDifference = today.getMonth() - dobDate.getMonth();
+//
+//                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+//                    age--;
+//                }
+//
+//                if (age < 14) {
+//                    document.getElementById('representativeForm').style.display = 'block';
+//                } else {
+//                    document.getElementById('representativeForm').style.display = 'none';
+//                }
+//            }
+//        }
 
         function validateForm() {
             var dob = document.getElementById("dob").value;
@@ -608,20 +611,20 @@
 
             return true;
         }
-        
+
         // Function to close the modal
-function closeModal() {
-    var modal = bootstrap.Modal.getInstance(document.getElementById('validationModal'));
-    if (modal) {
-        modal.hide();
-    }
-}
+        function closeModal() {
+            var modal = bootstrap.Modal.getInstance(document.getElementById('validationModal'));
+            if (modal) {
+                modal.hide();
+            }
+        }
 
 // Event listener for the close button (x)
-document.querySelector('#validationModal .close').addEventListener('click', closeModal);
+        document.querySelector('#validationModal .close').addEventListener('click', closeModal);
 
 // Event listener for the cancel button
-document.querySelector('#validationModal .btn-secondary').addEventListener('click', closeModal);
+        document.querySelector('#validationModal .btn-secondary').addEventListener('click', closeModal);
 
     </script>
 

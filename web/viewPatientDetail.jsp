@@ -137,7 +137,9 @@
                 </div>
             </nav>
             <!-- Main content -->
+            
             <div class="container">
+                <br>
                 <div class="main-body">
                     <div class="row gutters-sm">
                         <div class="col-md-4 mb-3">
@@ -154,29 +156,22 @@
                             <div class="card mt-3">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Date</h6>
-                                        <span id="dateSpan"></span>
+                                        <h6 class="mb-0">Representative name</h6>
+                                        <span>${representative.name}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Description</h6>
-                                        <span id="dateSpan2"></span>
+                                        <h6 class="mb-0">Relationship with patient</h6>
+                                        <span>${representative.relationship}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Detail</h6>
-                                        <span> ${history.patient_details.patient_details}</span>
+                                        <h6 class="mb-0">Representative phone</h6>
+                                        <span> ${representative.phone}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Patient Charge</h6>
-                                        <span>${history.patient_charge}</span>
+                                        <h6 class="mb-0">Representative email</h6>
+                                        <span>${representative.email}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Insurance charge</h6>
-                                        <span>${history.insurance_charge}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Total charge</h6>
-                                        <span>${history.total_charge}</span>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>

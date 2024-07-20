@@ -305,6 +305,37 @@ public class PatientDAO extends DBContext {
         }
         return null;
     }
+    
+    public Representative getRepresentative(int pid) throws SQLException {
+        ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = """
+                       Select rep.name, rep.relationship, rep.phone, rep.email from Patient p
+                       join Representative rep on rep.type = p.type
+                       where p.Patient_id = ?""";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, pid);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Representative rep = new Representative();
+                rep.setName(rs.getString("name"));
+                rep.setRelationship(rs.getString("relationship"));
+                rep.setPhone(rs.getString("phone"));
+                rep.setEmail(rs.getString("email"));
+                return rep;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return null;
+    }
 
     public boolean updatePatient(PatientGetByIdDTO paInfo) throws SQLException {
         String query = """
@@ -366,7 +397,7 @@ public class PatientDAO extends DBContext {
             paInfo.setPhoneNumber("");
             paInfo.setEmail(null);
             paInfo.setGender("M");
-            paInfo.setDob(Date.valueOf("2010-02-10"));
+            paInfo.setDob(Date.valueOf("2012-02-10"));
             paInfo.setAddress("223 Sesame Street, Ottawa, ON, Canada");
             paInfo.setType(null);
             pa.addPatient(paInfo);
