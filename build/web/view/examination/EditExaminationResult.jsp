@@ -227,11 +227,11 @@
                                                 <label class="labels" >Description</label>
                                                 <textarea style="width: 205%" id="description" 
                                                           name="description" class="form-control" style="border-radius: 1px;"
-                                                          placeholder="Enter description here" oninput="autoResize(this)"></textarea>
+                                                          placeholder="Enter description here" oninput="autoResize(this)">${edit.description}</textarea>
                                             </div>
                                         </div>
                                         <c:if test="${infor.status != 'Cancelled' && infor.status != 'Completed'}">
-                                            <button class="btn btn-info " type="submit" style="margin-top: 10px">Add Examination Result</button>
+                                            <button class="btn btn-info " type="submit" style="margin-top: 10px">Save changes</button>
                                         </c:if>
                                     </div>
                                 </form>

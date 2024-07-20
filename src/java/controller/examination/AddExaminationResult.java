@@ -116,17 +116,22 @@ public class AddExaminationResult extends HttpServlet {
         } else {
             try {
                 ExaminationDAO dao = new ExaminationDAO();
-                String exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime,
-                         endTime, room, status, payStatus, examStatus, description);
+                if(dao.checkExaminationResultExist(id) == null){
+                   String exam = dao.addExaminationResult(id, patientId, patientName, service, price, doctor, bookingDate, startTime,
+                         endTime, room, status, payStatus, examStatus, description); 
+                
                 if ("True".equals(exam)) {
                     request.setAttribute("mess", "Add successfully!");
-                } else {
-                    request.setAttribute("error", exam);
                 }
                 ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
                 request.setAttribute("examList", examList);
-                //request.setAttribute("size", examList.size());
                 request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
+                }else {
+                    ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
+                request.setAttribute("examList", examList);
+                    request.setAttribute("error", "Cannot add a new Examination Result that already exists!");
+                    request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(AddExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
             }

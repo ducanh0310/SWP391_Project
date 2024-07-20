@@ -128,7 +128,7 @@ public class ExaminationDAO extends DBContext {
 
 
     public ArrayList<ExaminationResult> getAllExaminationResult() throws SQLException {
-    String query = "SELECT * FROM ExaminationResult";
+    String query = "SELECT * FROM ExaminationResult where examination_status = 'inactive'";
     Connection connection = null;
     PreparedStatement statement = null;
     ArrayList<ExaminationResult> examList = new ArrayList<>();

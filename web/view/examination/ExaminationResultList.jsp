@@ -173,12 +173,6 @@
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Welcome, admin</h5>
-                                <a href="AddEmployee" class="btn btn-primary btn-sm">Add New Employee</a>
-                            </div>
-
-
                             <form method="get" action="SearchEmployeeServlet"
                                   class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                 <div class="input-group">
