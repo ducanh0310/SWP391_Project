@@ -66,11 +66,20 @@ public class ViewExaminationResult extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
           try {
+              // Retrieve appointment ID from the request
             String get = request.getParameter("AppID");
             int id = Integer.parseInt(get);
+            
+            // Create an instance of ExaminationDAO to interact with the database
             ExaminationDAO dao = new ExaminationDAO();
+            
+            // Find the examination result by ID
             ExaminationResult editExam = dao.FindExaminationResultByID(id );
+            
+            // Set the retrieved examination result as a request attribute
             request.setAttribute("edit", editExam);
+            
+            // Forward the request to the JSP page for displaying the examination result
             request.getRequestDispatcher("view/examination/ViewExaminationResult.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(EditExaminationResultController.class.getName()).log(Level.SEVERE, null, ex);

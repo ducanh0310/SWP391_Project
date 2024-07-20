@@ -76,17 +76,20 @@ public class EditExaminationResultController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
+             // Retrieve the examination result ID from the request
             String get = request.getParameter("AppID");
             int id = Integer.parseInt(get);
+            
+              // Retrieve necessary data for editing
             ServiceDAO services = new ServiceDAO();
             EmployeeDAO empDAO = new EmployeeDAO();
             ExaminationDAO dao = new ExaminationDAO();
             ExaminationResult editExam = dao.FindExaminationResultByID(id );
-            ArrayList<ProcedureCodes> proCode = services.getServicesName();
-            ArrayList<Employees> EmployeeName = empDAO.getEmployees();
-            request.setAttribute("proCode", proCode);
-            request.setAttribute("emp", EmployeeName);
+            
+              // Set attributes for the request
             request.setAttribute("edit", editExam);
+            
+            // Forward the request to the JSP page for editing
             request.getRequestDispatcher("view/examination/EditExaminationResult.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(EditExaminationResultController.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,6 +107,7 @@ public class EditExaminationResultController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
+               // Retrieve form data from the request
             int id = Integer.parseInt(request.getParameter("appID"));
             int price = Integer.parseInt(request.getParameter("price"));
             String doctor = request.getParameter("doctor");
@@ -113,8 +117,10 @@ public class EditExaminationResultController extends HttpServlet {
             
             ExaminationDAO dao = new ExaminationDAO();
             
+            // Check if the examination result exists
             ExaminationResult check = dao.FindExaminationResultByID(id);
             if(check != null){
+                  // Update the examination result
                 boolean update = dao.UpdateExaminationResult(id, price, doctor, room, status, description);
                 request.setAttribute("mess", "Update successfully!");
                 request.getRequestDispatcher("ExaminationResultListController").forward(request, response);

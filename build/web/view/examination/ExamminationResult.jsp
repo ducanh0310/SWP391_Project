@@ -152,7 +152,7 @@
                     <div class="row gutters-sm">
 
                         <div class="col-md-8">
-                            <div style="text-align: center; font-size:25px">Appointment Details</div>
+                            <div style="text-align: center; font-size:25px">Examination Details</div>
                             <div class="card mb-3" style="width: 800px">
                                 <form action="AddExaminationResult" method="post">
                                     <div class="card-body">
@@ -178,7 +178,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="labels">Price</label>
-                                                <input type="text" id="price" name="price" class="form-control" placeholder="" value="${infor.price}">
+                                                <input type="text" id="price" name="price" class="form-control" placeholder="" value="${infor.price}" readonly>
                                             </div>
                                         </div>
                                         <div class="row mt-3">

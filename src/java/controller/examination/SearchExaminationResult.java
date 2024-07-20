@@ -68,20 +68,27 @@ public class SearchExaminationResult extends HttpServlet {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
         String userRole = (String) session.getAttribute("userRole");
+         // Check if the user is logged in and has the appropriate role
         if (currentUser == null) {
             request.setAttribute("error", "You are not permission!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
-            if (userRole.contains("patient")) {
+            if (userRole.contains("patient") || userRole.contains("admin") ) {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 try {
+                    // Retrieve the search key from the request
                     String key = request.getParameter("searchKey");
+                    
+                    // Perform the search operation
                     ExaminationDAO examDAO = new ExaminationDAO();
                     ArrayList<ExaminationResult> examList = examDAO.SearchERByKey(key);
+                    // Set the search key and examination result list as request attributes
                     request.setAttribute("searchKey", key);
                     request.setAttribute("examList", examList);
+                    
+                    // Forward to the JSP page for displaying the search results
                     request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
                     
                 } catch (SQLException ex) {

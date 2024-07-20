@@ -66,20 +66,25 @@ public class ExaminationResultListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+             // Retrieve the current session
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("currentUser");
             String userRole = (String) session.getAttribute("userRole");
+             // Check if the user is logged in and has the appropriate role
             if (currentUser == null) {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                if (userRole.contains("patient") /*|| userRole.contains("admin")*/ ) {
+                if (userRole.contains("patient") || userRole.contains("admin") ) {
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
+                      // Retrieve the list of examination results from the database
                     ExaminationDAO dao = new ExaminationDAO();
                     ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
+                     // Set the list of examination results as a request attribute
                     request.setAttribute("examList", examList);
+                    // Forward to the JSP page for displaying the examination results
                     request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
                 }
             }
@@ -101,20 +106,25 @@ public class ExaminationResultListController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        try {
+            // Retrieve the current session
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("currentUser");
             String userRole = (String) session.getAttribute("userRole");
+             // Check if the user is logged in and has the appropriate role
             if (currentUser == null) {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                if (userRole.contains("patient") /*|| userRole.contains("admin")*/ ) {
+                if (userRole.contains("patient") || userRole.contains("admin") ) {
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
+                    // Retrieve the list of examination results from the database
                     ExaminationDAO dao = new ExaminationDAO();
                     ArrayList<ExaminationResult> examList = dao.getAllExaminationResult();
+                     // Set the list of examination results as a request attribute
                     request.setAttribute("examList", examList);
+                     // Forward to the JSP page for displaying the examination results
                     request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
                 }
             }

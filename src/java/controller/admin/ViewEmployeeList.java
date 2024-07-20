@@ -68,22 +68,37 @@ public class ViewEmployeeList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // Retrieve the current session
             HttpSession session = request.getSession();
+
+            // Get the current user and their role from the session
             User currentUser = (User) session.getAttribute("currentUser");
             String userRole = (String) session.getAttribute("userRole");
+
+            // Check if the user is not logged in
             if (currentUser == null) {
+                // Set an error message and redirect to the home page
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
+                // Check if the user role is not "admin"
+                // Note: Use .equals() method for string comparison to avoid issues with string literals
                 if (userRole != "admin") {
+                    // Set an error message and redirect to the home page
                     request.setAttribute("error", "You are not permission!");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } else {
+                    // Create an instance of EmployeeDAO to interact with the database
                     EmployeeDAO employeeDAO = new EmployeeDAO();
 
+                    // Retrieve the list of employees from the database
                     ArrayList<Employees> empList = employeeDAO.getEmployees();
+
+                    // Set the employee list and username as request attributes
                     request.setAttribute("EmployeeList", empList);
                     request.setAttribute("username", currentUser.getName());
+                    
+                    // Forward the request to the JSP page for displaying the employee list
                     request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
                 }
             }
