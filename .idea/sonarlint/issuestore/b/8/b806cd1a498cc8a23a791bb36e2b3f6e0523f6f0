@@ -1,0 +1,15 @@
+
+‡
+java:S1192F"FDefine a constant instead of duplicating this literal "UTF-8" 4 times.(áò‰øÿÿÿÿJ$2a5b3cb0-287b-4ed9-bf4a-61c0e56768c9
+†
+java:S1192N"JDefine a constant instead of duplicating this literal "login.jsp" 4 times.(°°‘ûJ$20021084-4467-47b1-9d19-6b098a0cfaec
+…
+java:S1192k"IDefine a constant instead of duplicating this literal "userRole" 5 times.(–­³–J$5c070a99-3db5-4c33-83f8-8859c503fed4
+w	java:S125"<This block of commented-out lines of code should be removed.(ºÙßÅJ$8335eef6-902c-438c-ab8e-618674452af9
+|	java:S125"<This block of commented-out lines of code should be removed.(¨Æ½øşÿÿÿÿJ$a9baf4bc-5ac1-4bf9-8d3d-07a80160928d
+m
+java:S1144"+Remove this unused private "logout" method.(àı¼÷şÿÿÿÿJ$7daf727e-692f-4f4d-9c76-5cc843e39ea9
+|	java:S125-"<This block of commented-out lines of code should be removed.(°ÙŠÕûÿÿÿÿJ$8210b5ef-ebd2-4e69-88f8-7c5e835e5020
+“
+java:S3776R"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ş³‚”ûÿÿÿÿJ$ba0d7501-9c31-4e05-8c6c-5501adaf0f9d
+|	java:S125m"<This block of commented-out lines of code should be removed.(êõïüÿÿÿÿJ$96444983-162e-4108-ae7a-6634e32a8e92

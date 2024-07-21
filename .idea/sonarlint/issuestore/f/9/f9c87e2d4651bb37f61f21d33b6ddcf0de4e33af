@@ -1,0 +1,10 @@
+
+b
+java:S1192&"LDefine a constant instead of duplicating this literal "currentUser" 3 times.(øÔ³ô
+V	java:S1251"<This block of commented-out lines of code should be removed.(‰¦—äúÿÿÿÿ
+U
+java:S1854J"?Remove this useless assignment to local variable "currentUser".(øÔ³ô
+1
+java:S3626_"Remove this redundant jump.(ûÁİ…
+F
+java:S1481J"0Remove this unused "currentUser" local variable.(øÔ³ô

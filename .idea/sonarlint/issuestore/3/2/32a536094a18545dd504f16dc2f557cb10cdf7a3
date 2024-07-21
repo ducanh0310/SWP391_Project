@@ -1,0 +1,15 @@
+
+}
+java:S1141m"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ÉİÉº„2J$185e5abf-be19-48f2-8cb1-7e2e0bcfa59c
+´
+java:S1192z"lDefine a constant instead of duplicating this literal "view/employee/admin/updateEmployeeAdmin.jsp" 5 times.(àìêâúÿÿÿÿ8ËİÉº„2J$82a9cc9a-6c5e-4561-a4a7-1dbf699a0087
+u
+java:S11356"2Complete the task associated to this TODO comment.(¢§‰8ĞİÉº„2J$f17e1c5d-7528-47a1-ad71-9343bf6137d7
+ƒ	java:S125P"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ8ÓİÉº„2J$b30b7f4c-73bf-4589-ab19-b7475862ecc9
+ƒ	java:S125d"<This block of commented-out lines of code should be removed.(ÿÛËÍûÿÿÿÿ8ÓİÉº„2J$72bb12ac-c8f0-4359-b202-205cc9f38be7
+‰
+java:S2147"ECombine this catch with the one at line 127, which has the same body.(Ö¨š•8ÔİÉº„2J$a405607b-b4cf-451e-acf7-92dbe9ff71c0
+„	java:S125–"<This block of commented-out lines of code should be removed.(‰¦—äúÿÿÿÿ8ÙİÉº„2J$aba3b465-7090-44b7-9c96-a0d7403361aa
+	java:S125ô"<This block of commented-out lines of code should be removed.(İªğì8ÜÆæº„2J$85791931-79b8-4640-a868-aee3bca73a2e
+–
+java:S3776ş"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(Øô›8âİÉº„2J$c039d824-7bf2-49d4-9421-83f92206489e
