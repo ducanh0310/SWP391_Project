@@ -175,7 +175,7 @@
 
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-                
+
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
@@ -236,7 +236,7 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="text-end">
-                                                        <form action="DeleteEmployee?employeeId=${emp.id}"
+                                                        <form id="deleteForm${emp.id}" action="DeleteEmployee?employeeId=${emp.id}"
                                                               method="POST">
                                                             <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
                                                                class="btn btn-sm btn-neutral">View</a>
@@ -304,6 +304,20 @@
         <script src="../../../js/main.js"></script>
 
         <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const forms = document.querySelectorAll('form[id^="deleteForm"]');
+
+                forms.forEach(form => {
+                    form.addEventListener("submit", function (event) {
+                        const userConfirmed = confirm("Are you sure you want to delete this employee?");
+                        if (!userConfirmed) {
+                            event.preventDefault();
+                        }
+                    });
+                });
+            });
+
             const rowsPerPage = 10;
             let currentPage = 1;
             const table = document.getElementById("employeeTableBody");
