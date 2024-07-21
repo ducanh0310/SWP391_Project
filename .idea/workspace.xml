@@ -5,54 +5,143 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6045067-40f7-479b-9e5e-1ab77f451790" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/a/7a4fbc231f1e3250db3a2ef5b29c8fcd16ab5fc9" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/view/payment/assets/bootstrap.min.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9f198ed450f32e45b10ec3c2b1406e609b4a96cd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/f/9f198ed450f32e45b10ec3c2b1406e609b4a96cd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/a/7a4fbc231f1e3250db3a2ef5b29c8fcd16ab5fc9" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EditPatientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EditPatientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/home.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/UserDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/Filter/AccessFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/Service/IAccountDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/ChangePasswordServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/LoginServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/LogoutServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/AddEmployeeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/AddPatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/EditPatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/PatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/UpdateEmployeeAdmin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/admin/ViewPatientDetailController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/ConfirmEmailForgotPwController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/ConfirmPassword.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/ForgotPasswordController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/NewPasswordController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/PatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/RegisterController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/confirmemailregister.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/registeraccountcontroller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/authen/resendCodeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/employee/EditProfileEmployeeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/employee/ViewProfileEmployeeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/patient/EditProfilePatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/patient/ViewProfilePatientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/patient/home.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/controller/uploadImage/UploadImageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dal/DBContext.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/AccountDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/Authorization.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/BranchDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBEmployeeProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBImageProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/DBPatientProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/EmployeeDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/PatientDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/dao/UserDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Account.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Branch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/DoctorCertification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Employee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/EmployeeDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/Patient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/PatientGetByIdDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/PatientInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/PatientRegisterDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Email$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Email.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/validation/Validation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/accessDenied.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/accessDenied.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/addPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/addPatient.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/editPatient.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/addEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/addEmployee.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/editPatientDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/editPatientDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/editProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/editProfileAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/updateEmployeeAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/updateEmployeeAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/viewListPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/viewListPatient.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfileAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/admin/viewProfilePatient.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/employee/doctor/editProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/doctor/editProfileDoctor.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/employee/doctor/viewProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/doctor/viewProfileDoctor.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/view/employee/viewProfileEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/employee/viewProfileEmployee.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/patient/editProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/patient/editProfilePatient.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/view/patient/home.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/view/patient/viewListPatient.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/view/patient/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/view/patient/viewProfilePatient.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/viewListPatientAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/viewListPatientAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/web/viewPatientDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/viewPatientDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EditPatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/admin/EditPatientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/patient/home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dao/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Filter/AccessFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Service/IAccountDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/ChangePasswordServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/Constants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/LoginServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/LogoutServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/AddEmployeeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/AddPatientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/EditPatientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/PatientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/UpdateEmployeeAdmin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/admin/ViewPatientDetailController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/ConfirmEmailForgotPwController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/ConfirmPassword.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/ForgotPasswordController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/NewPasswordController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/PatientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/RegisterController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/confirmemailregister.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/registeraccountcontroller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/authen/resendCodeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/employee/EditProfileEmployeeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/employee/ViewProfileEmployeeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/patient/EditProfilePatientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/patient/ViewProfilePatientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/patient/home.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/controller/uploadImage/UploadImageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/DBContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/PatientList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/AccountDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/Authorization.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/BranchDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/DBAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/DBEmployeeProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/DBImageProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/DBPatientProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/EmployeeDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/PatientDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dao/UserDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Branch.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/DoctorCertification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/EmployeeDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Patient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/PatientGetByIdDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/PatientInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/PatientRegisterDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/validation/Email.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/validation/Validation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/accessDenied.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/accessDenied.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/addPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/addPatient.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/editPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/editPatientDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/addEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/addEmployee.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/editPatientDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/editPatientDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/employee/admin/editProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/editProfileAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/employee/admin/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/updateEmployeeAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/updateEmployeeAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/employee/admin/viewListPatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/viewListPatient.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/employee/admin/viewProfileAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/viewProfileAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/employee/admin/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/admin/viewProfilePatient.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/employee/doctor/editProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/doctor/editProfileDoctor.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/employee/doctor/viewProfileDoctor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/doctor/viewProfileDoctor.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/employee/viewProfileEmployee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/employee/viewProfileEmployee.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/patient/editProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/patient/editProfilePatient.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/patient/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/patient/appointment.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/view/patient/viewListPatient.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/view/patient/viewProfilePatient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/view/patient/viewProfilePatient.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/viewListPatientAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/viewListPatientAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/viewPatientDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/viewPatientDetail.jsp" afterDir="false" />
@@ -99,57 +188,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.AccountDAO.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DBContext.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;masteryi&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/SWP391_Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.file-colors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.AccountDAO.executor": "Run",
+    "Application.DBContext.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "masteryi",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/FPT.SE/5.Summer2024.Semester5/SWP391/Project/Backup/SWP391_Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "com.poratu.idea.plugins.tomcat.setting.TomcatServersConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Application.AccountDAO">
-    <configuration name="AccountDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DAO.AccountDAO" />
-      <module name="SWP391_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="DAO.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DBContext" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="dal.DBContext" />
-      <module name="SWP391_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dal.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.DBContext" />
-        <item itemvalue="Application.AccountDAO" />
-      </list>
-    </recent_temporary>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\FPT.SE\5.Summer2024.Semester5\SWP391\Project\SWP391_Project\.idea" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -187,6 +250,8 @@
       <workItem from="1718933736401" duration="1082000" />
       <workItem from="1718943993214" duration="592000" />
       <workItem from="1719164244686" duration="8477000" />
+      <workItem from="1720976354850" duration="11033000" />
+      <workItem from="1721328619904" duration="799000" />
     </task>
     <servers />
   </component>

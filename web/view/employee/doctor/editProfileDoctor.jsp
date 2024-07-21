@@ -274,6 +274,7 @@
                                                             <div class="mb-3" style="">
                                                                 <label for="imageUrl" class="form-label">Image URL</label>
                                                                 <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+                                                                <input type="text" id="errorURL" readonly="" style="color: red">
                                                             </div>
                                                             <button type="submit" class="btn btn-primary">Submit</button>
                                                         </form>
@@ -384,6 +385,10 @@
 
                                             <br>
                                             <label class="labels">Certification</label>
+                                            <br>
+                                            <c:if test="${not empty errorMsg.link}">
+                                                <span style="color:red">${errorMsg.link}</span>
+                                            </c:if>
                                             <div id="certificateContainer">
                                                 <c:forEach items="${requestScope.arrayCerti}" var="cer">
                                                     <div class="row mt-3">
@@ -400,9 +405,7 @@
                                                         </div>
                                                     </div>
                                                 </c:forEach>
-                                                <c:if test="${not empty errorMsg.link}">
-                                                    <span style="color:red">${errorMsg.link}</span>
-                                                </c:if>
+
                                             </div>
                                             <br>
                                             <button type="button" class="btn btn-secondary" onclick="addCertificateForm()">Add Certificate</button>
@@ -429,9 +432,6 @@
 
         <!-- Footer End -->
 
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
         <!-- JavaScript Libraries -->
@@ -490,10 +490,11 @@
                     success: function (response) {
                         if (response.success) {
                             $('#uploadModal').modal('hide'); // Hide modal
-                            alert('Image uploaded successfully');
+                            //alert('Image uploaded successfully');
                             document.getElementById('profile-pic').src = response.imageUrl; // Update image
                         } else {
-                            alert('Message: ' + response.message);
+                            //alert('Message: ' + response.message);
+                            document.getElementById('errorURL').value = response.message;
                         }
                     },
                     error: function (xhr, status, error) {

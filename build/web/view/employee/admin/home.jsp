@@ -116,8 +116,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="bi bi-people"></i> Employee
+                                <a class="nav-link" href="ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
                         </ul>

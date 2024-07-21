@@ -93,8 +93,18 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                    <i class="bi bi-clock"></i> Appointment
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
                         </ul>
@@ -122,7 +132,34 @@
             </nav>
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-
+                <div class="row gx-0">
+                    <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                        <div class="d-inline-flex align-items-center">
+                            <small class="py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${emInfo.branch.city}</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center text-lg-end">
+                        <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                            <div class="me-3 pe-3 border-end py-2">
+                                <c:if test="${emInfo.employeeType=='r'}">
+                                    <p class="m-0">Receptionist</p>
+                                </c:if>
+                                <c:if test="${emInfo.employeeType=='d'}">
+                                    <p class="m-0">Doctor</p>
+                                </c:if>
+                                <c:if test="${emInfo.employeeType=='h'}">
+                                    <p class="m-0">Nurse</p>
+                                </c:if>
+                                <c:if test="${emInfo.employeeType=='b'}">
+                                    <p class="m-0">Branch Manager</p>
+                                </c:if>
+                            </div>
+                            <div class="py-2">
+                                <p class="m-0"><a href="" style="color: #ffffff">${username}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
