@@ -139,13 +139,6 @@
                             <div class="mb-3" style="text-align: center">
                                 <label class="form-label">Or</label>
                             </div>
-                            <div class="mb-3" >
-                                <img src="https://www.bing.com/th/id/OIP.Fll7WPtNT6jrz1oBP8GbCgHaHj?w=161&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" style="width: 28px; height: 27px; border-radius: 25px"></img>
-                                <button style="background-color: white; padding-left: 0px; border-radius: 10px">
-                                    <a style="color: Black; padding-left: 5px" href="https://accounts.google.com/o/oauth2/auth?scope=profile&redirect_uri=http://localhost:8080/SWP391_Project/login&response_type=code&client_id=225163769427-foise0kenm4atamnh5c6f7ri5tub60n3.apps.googleusercontent.com&approval_prompt=force">Google</a>
-                                </button>
-                            </div>
-
                             <div>
                                 <a>Don't have an account?</a>
                                 <a href="register">Register now!</a> 

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="pageSize" value="9" />
 <!DOCTYPE html>
@@ -12,13 +12,35 @@
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
+        <link href="../img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="../css/style.css" rel="stylesheet">
+
+
+        <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
 
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -29,16 +51,6 @@
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
         <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
-        <!-- BoxIcons v2.1.2 -->
-        <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
-
-        <!-- Roboto Font -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
-            rel="stylesheet">
-
-        <!-- CSS File -->
-        <link rel="stylesheet" href="css/style.css">
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -47,49 +59,6 @@
         <link href="css/style.css" rel="stylesheet">
 
 
-
-        <!-- Favicon -->
-
-        <link href="../../../img/favicon.ico" rel="icon">
-
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
-            rel="stylesheet">
-
-        <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-        <!-- Libraries Stylesheet -->
-        <link href="../../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="../../../lib/animate/animate.min.css" rel="stylesheet">
-        <link href="../../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-        <link href="../../../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
-        <!-- BoxIcons v2.1.2 -->
-        <link href="../../../https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
-
-        <!-- Roboto Font -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
-            rel="stylesheet">
-
-        <!-- CSS File -->
-        <link rel="stylesheet" href="../../../css/style.css">
-
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Template Stylesheet -->
-        <link href="../../../css/style.css" rel="stylesheet">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <!-- Bootstrap JS and dependencies -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
             .text-primary {
                 --x-text-opacity: 1;
@@ -104,11 +73,41 @@
                 background: #f7f7ff;
                 margin-top: 0px;
             }
+            .pagination .page-item.active .page-link {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: #fff;
+            }
         </style>
 
     </head>
 
     <body>
+        <!-- Confirm Delete Modal -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this employee?<br>
+                        - ID: <span id="empIdDelete"></span><br>
+                        - Name: <span id="empNameDelete"></span><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="DeleteEmployee" method="POST">
+                            <input type="hidden" id="empIdDeleteInput" name="employeeId">
+                            <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
             <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
@@ -143,12 +142,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../ViewEmployeeList">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="viewservices">
+                                    <i class="bi bi-person-lines-fill"></i> Service
+                                </a>
+                            </li>
                         </ul>
-                        </ul>
+
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
                         <!-- Navigation -->
@@ -163,7 +167,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -175,13 +179,13 @@
 
             <!-- Main content -->
             <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-                
+
                 <!-- Main -->
                 <main class="py-6 bg-surface-secondary">
                     <div class="container-fluid">
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Welcome, ${username}</h5>
+                                <h5 class="mb-0">Welcome, ${currentUser.getName()}</h5>
                                 <a href="AddEmployee" class="btn btn-primary btn-sm">Add New Employee</a>
                             </div>
 
@@ -203,7 +207,7 @@
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">Employee ID</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Employee Name</th>
                                             <th scope="col">Employee Sin</th>
                                             <th scope="col">Employee Type</th>
@@ -213,20 +217,18 @@
                                         </tr>
                                     </thead>
                                     <tbody  id="employeeTableBody">
-                                        <c:forEach items="${EmployeeList}" var="emp">
+                                        <c:forEach items="${EmployeeList}" var="emp" varStatus="status">
                                             <c:if test="${emp.employeeType != 'I'}">
                                                 <tr>
-                                                    <td>${emp.id}</td>
+                                                    <td>${status.index + 1}</td> <!-- Display index (1-based) -->
                                                     <td>${emp.name}</td>
                                                     <td>${emp.employeeSin}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${emp.employeeType == 'r'}">Receptionist
-                                                            </c:when>
                                                             <c:when test="${emp.employeeType == 'd'}">Doctor
                                                             </c:when>
-                                                            <c:when test="${emp.employeeType == 'h'}">Nurse</c:when>
-                                                            <c:when test="${emp.employeeType == 'b'}">Admin</c:when>
+                                                            <c:when test="${emp.employeeType == 'n'}">Nurse</c:when>
+                                                            <c:when test="${emp.employeeType == 'b'}">Branch Manager</c:when>
                                                         </c:choose>
                                                     </td>
                                                     <td>${emp.phoneNumber}</td>
@@ -238,14 +240,13 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="text-end">
-                                                        <form action="DeleteEmployee?employeeId=${emp.id}"
-                                                              method="POST">
-                                                            <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
-                                                               class="btn btn-sm btn-neutral">View</a>
-                                                            <button type="submit"
-                                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
+                                                        <form action="DeleteEmployee?employeeId=${emp.id}" method="POST" onsubmit="return confirmDelete();">
+                                                            <c:if test="${emp.id != currentUser.getEmployee_Id()}">
+                                                                <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}" class="btn btn-sm btn-neutral">View</a>
+                                                                <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" onclick="showDeleteModal('${emp.id}', '${emp.name}')">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </c:if>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -271,7 +272,6 @@
         </div>
 
 
-
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -285,27 +285,32 @@
         <script src="lib/twentytwenty/jquery.event.move.js"></script>
         <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-
-        <!-- JS libraries -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-        <script src="../../../lib/wow/wow.min.js"></script>
-        <script src="../../../libeasing/easing.min.js"></script>
-        <script src="../../../libwaypoints/waypoints.min.js"></script>
-        <script src="../../../libowlcarousel/owl.carousel.min.js"></script>
-        <script src="../../../libtempusdominus/js/moment.min.js"></script>
-        <script src="../../../libtempusdominus/js/moment-timezone.min.js"></script>
-        <script src="../../../libtempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="../../../libtwentytwenty/jquery.event.move.js"></script>
-        <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
-
+        <!-- JavaScript Libraries -->
+        <script src="../lib/wow/wow.min.js"></script>
+        <script src="../lib/easing/easing.min.js"></script>
+        <script src="../lib/waypoints/waypoints.min.js"></script>
+        <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="../lib/tempusdominus/js/moment.min.js"></script>
+        <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="../lib/twentytwenty/jquery.event.move.js"></script>
+        <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
+        <script src="../js/main.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="../../../js/main.js"></script>
+        <script>
+                                                                    function showDeleteModal(empId, empName) {
+                                                                        document.getElementById('empIdDelete').innerText = empId;
+                                                                        document.getElementById('empNameDelete').innerText = empName;
+                                                                        document.getElementById('empIdDeleteInput').value = empId;
+                                                                        var deleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+                                                                        deleteModal.show();
+                                                                    }
+        </script>
+
 
         <script>
+
             const rowsPerPage = 10;
             let currentPage = 1;
             const table = document.getElementById("employeeTableBody");

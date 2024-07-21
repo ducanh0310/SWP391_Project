@@ -74,23 +74,16 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-<<<<<<< HEAD
                                 <a class="nav-link" href="admin.jsp">
                                     <i class="bi bi-house"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-=======
-                                <a class="nav-link" href="appointment/viewAppointmentHistory">
-                                    <i class="bi bi-clock"></i> Appointment
-                                </a>
->>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
-<<<<<<< HEAD
                                 <a class="nav-link" href="serviceDetail">
                                     <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
@@ -118,10 +111,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-people"></i> Users
-=======
-                                <a class="nav-link" href="ViewEmployeeList">
-                                    <i class="bi bi-people"></i></i> Employee
->>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                 </a>
                             </li>
                         </ul>
@@ -139,7 +128,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -148,7 +137,9 @@
                 </div>
             </nav>
             <!-- Main content -->
+            
             <div class="container">
+                <br>
                 <div class="main-body">
                     <div class="row gutters-sm">
                         <div class="col-md-4 mb-3">
@@ -165,29 +156,22 @@
                             <div class="card mt-3">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Date</h6>
-                                        <span id="dateSpan"></span>
+                                        <h6 class="mb-0">Representative name</h6>
+                                        <span>${representative.name}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Description</h6>
-                                        <span id="dateSpan2"></span>
+                                        <h6 class="mb-0">Relationship with patient</h6>
+                                        <span>${representative.relationship}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Detail</h6>
-                                        <span> ${history.patient_details.patient_details}</span>
+                                        <h6 class="mb-0">Representative phone</h6>
+                                        <span> ${representative.phone}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Patient Charge</h6>
-                                        <span>${history.patient_charge}</span>
+                                        <h6 class="mb-0">Representative email</h6>
+                                        <span>${representative.email}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Insurance charge</h6>
-                                        <span>${history.insurance_charge}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0">Total charge</h6>
-                                        <span>${history.total_charge}</span>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -217,11 +201,7 @@
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Email</h6>
                                         </div>
-<<<<<<< HEAD
                                         <div class="col-sm-9 ">
-=======
-                                        <div class="col-sm-9">
->>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                             ${patients.email}
                                         </div>
                                     </div>
@@ -268,7 +248,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <a class="btn btn-info "  href="editPatient?pid=${id}">Edit</a>
+                                            <a class="btn btn-info "  href="editpatient?pid=${patients.id}">Edit</a>
                                         </div>
                                     </div>
 

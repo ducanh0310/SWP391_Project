@@ -200,6 +200,14 @@
                                     <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../viewservices">
+                                    <i class="bi bi-person-lines-fill"></i> Service
+                                </a>
+                            </li>
+                        </ul>
+                            
+                            
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -214,7 +222,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../../logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>

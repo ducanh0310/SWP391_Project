@@ -411,11 +411,6 @@
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../ViewEmployeeList">
-                                    <i class="bi bi-people"></i></i> Employee
-                                </a>
-                            </li>
                         </ul>
                         <!-- Divider -->
                         <hr class="navbar-divider my-5 opacity-20">
@@ -450,13 +445,10 @@
                         <div class="col-md-6 text-center text-lg-end">
                             <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                                 <div class="me-3 pe-3 border-end py-2">
-                                    <c:if test="${emInfo.employeeType=='r'}">
-                                        <p class="m-0">Receptionist</p>
-                                    </c:if>
                                     <c:if test="${emInfo.employeeType=='d'}">
                                         <p class="m-0">Doctor</p>
                                     </c:if>
-                                    <c:if test="${emInfo.employeeType=='h'}">
+                                    <c:if test="${emInfo.employeeType=='n'}">
                                         <p class="m-0">Nurse</p>
                                     </c:if>
                                     <c:if test="${emInfo.employeeType=='b'}">

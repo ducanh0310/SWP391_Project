@@ -39,11 +39,11 @@
         <!-- Template Stylesheet -->
         <link href="../css/style.css" rel="stylesheet">
         <style>
-            .hidden {
+          .hidden {
                 display: none;
             }
             .table-container {
-                max-height: 200px; /* Adjust as needed */
+                /*                max-height: 200px;  Adjust as needed */
                 overflow-y: auto;
             }
             .table {
@@ -179,6 +179,10 @@
                 line-height: 40px;
                 cursor: pointer;
                 color: #aaa;
+            }
+
+            .service-list {
+                display: none;
             }
         </style>
     </head>

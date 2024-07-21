@@ -345,7 +345,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <form action="deleteAppointment" method="POST">
+                        <form action="/appointment/cancel" method="POST">
                             <input type="hidden" id="idDelete" name="idDelete">
                             <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Confirm</button>
                         </form>
@@ -412,8 +412,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../ViewEmployeeList">
-                                    <i class="bi bi-people"></i></i> Employee
+                                <a class="nav-link" href="../ExaminationResultListController">
+                                    <i class="bi bi-clipboard-check"></i></i> Examination Result List
                                 </a>
                             </li>
                         </ul>
@@ -554,9 +554,8 @@
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${bAH.statusBook.id == 2}">
-                                                        <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#addExamResult" id="addExamResult"
-                                                                data-id="${bAH.ID}">
-                                                            View
+                                                        <button> <a href="../AddExaminationResult?appId=${bAH.ID}"
+                                                                    class="btn btn-sm btn-neutral">View</a>
                                                         </button>
                                                         <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"

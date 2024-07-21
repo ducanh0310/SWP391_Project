@@ -147,16 +147,6 @@ public class EditProfilePatientController extends HttpServlet {
             DBPatientProfile db = new DBPatientProfile();
             db.editInfoPatient(paInfo);
             
-            // Xóa tất cả các thuộc tính trong session
-            Enumeration<String> attributeNames = session.getAttributeNames();
-            while (attributeNames.hasMoreElements()) {
-                
-                String attributeName = attributeNames.nextElement();
-                if(!attributeName.equals("currentUser")){
-                    session.removeAttribute(attributeName);
-                }
-                
-            }
             
             session.setAttribute("EditSuccess", "Editing profile successfully");
             response.sendRedirect("view");

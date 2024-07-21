@@ -365,27 +365,39 @@
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="addPatient" method="POST">
-<!--                    <input type="hidden" id="id" name="id" value="${paInfo.patientId}">-->
+                                    <form action="addPatient" method="POST" onsubmit="return validateForm()">
                                         <div class="row mt-3">
                                             <div class="col-md-6">
-                                                <label class="labels">Fullname</label>
-                                                <input type="text" id="fullname" name="name" class="form-control" placeholder="" >
+                                                <label class="labels">Fullname***</label>
+
+                                                <input type="text" id="fullname" name="name" class="form-control" placeholder="" value="${fullname}" required >
+                                                <c:if test="${not empty errorMsg.fullname}">
+                                                    <span style="color:red">${errorMsg.fullname}</span>
+                                                </c:if>
                                             </div>        
                                             <div class="col-md-6">
                                                 <label class="labels">Phone Number</label>
-                                                <input type="text" id="phoneNumber" name="phone" class="form-control" placeholder="" >
+                                                <input type="text" id="phoneNumber" name="phone" class="form-control" placeholder="" value="${phoneNumber}">
+                                                <c:if test="${not empty errorMsg.phoneNumber}">
+                                                    <span style="color:red">${errorMsg.phoneNumber}</span>
+                                                </c:if>
                                             </div>
                                         </div>
 
                                         <div class="row mt-3">
                                             <div class="col-md-6">
                                                 <label class="labels">Email</label>
-                                                <input type="text" id="email" name="email" class="form-control" placeholder="" >
+                                                <input type="email" id="email" name="email" class="form-control" placeholder="" value="${email}">
+                                                <c:if test="${not empty errorMsg.email}">
+                                                    <span style="color:red">${errorMsg.email}</span>
+                                                </c:if>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="labels">Medicine code</label>
-                                                <input type="text" id="medicineCode" name="code" class="form-control" placeholder=" " >
+                                                <input type="text" id="medicineCode" name="code" class="form-control" placeholder=" " value="${medicalCode}">
+                                                <c:if test="${not empty errorMsg.medicalCode}">
+                                                    <span style="color:red">${errorMsg.medicalCode}</span>
+                                                </c:if>
                                             </div>
                                         </div>
 
@@ -396,42 +408,71 @@
                                                     <option value="M" <c:if test="${paInfo.gender == 'M'}">selected</c:if>>Male</option>
                                                     <option value="F" <c:if test="${paInfo.gender == 'F'}">selected</c:if>>Female</option>
                                                     <option value="X" <c:if test="${paInfo.gender == 'X'}">selected</c:if>>Other</option>
-                                                </select>
-                                            </div>                    
+                                                    </select>
+                                                </div>                    
 
-                                            <div class="col-md-6">
-                                                <label class="labels">Date of birth</label>
-                                                <input type="date" id="dob" name="dob" class="form-control" placeholder="" onchange="checkAge()">
+                                                <div class="col-md-6">
+                                                    <label class="labels">Date of birth***</label>
+                                                    <input type="date" id="dob" name="dob" class="form-control" placeholder="" onchange="checkAge()" value="${dob}"  required="Please enter date of birth"> 
                                             </div>
-                                            
+                                            <c:if test="${not empty errorMsg.dob}">
+                                                <span style="color:red">${errorMsg.dob}</span>
+                                            </c:if>
                                         </div>
                                         <br>
                                         <div>
                                             <label class="labels">Address</label>
-                                            <input type="text" id="address" name="address" class="form-control" placeholder="" >
+                                            <input type="text" id="address" name="address" class="form-control" placeholder="" value="${address}">
+                                            <c:if test="${not empty errorMsg.address}">
+                                                <span style="color:red">${errorMsg.address}</span>
+                                            </c:if>
                                         </div>
                                         <br>
                                         <div id="representativeForm" style="display: none;">
                                             <div class="row mt-3">
+                                                <c:if test="${not empty errorMsg.date}">
+                                                    <span style="color:red">${errorMsg.date}</span>
+                                                </c:if>
                                                 <h3>
                                                     For customers under 14 years old, we require a guardian.
                                                 </h3>
-                                                <label class="labels">Representative Name</label>
-                                                <input type="text" id="repName" name="repName" class="form-control" placeholder="Representative Name" required>
+                                                <div>
+                                                    <label class="labels">Representative Name</label>
+                                                    <input type="text" id="repName" name="repName" class="form-control" placeholder="Representative Name" value="${repName}">
+                                                    <c:if test="${not empty errorMsg.repName}">
+                                                        <span style="color:red">${errorMsg.repName}</span>
+                                                    </c:if>
+                                                </div>
 
-                                                <label class="labels">Representative Phone</label>
-                                                <input type="text" id="repPhone" name="repPhone" class="form-control" placeholder="Representative Phone">
+                                                <div>
+                                                    <label class="labels">Representative Phone number</label>
+                                                    <input type="text" id="repPhone" name="repPhone" class="form-control" placeholder="Representative Phone" value="${repPhone}">
+                                                    <c:if test="${not empty errorMsg.repPhone}">
+                                                        <span style="color:red">${errorMsg.repPhone}</span>
+                                                    </c:if>
+                                                </div>
 
-                                                <label class="labels">Representative Email</label>
-                                                <input type="email" id="repEmail" name="repEmail" class="form-control" placeholder="Representative Email">
+                                                <div>
+                                                    <label class="labels">Representative Email</label>
+                                                    <input type="email" id="repEmail" name="repEmail" class="form-control" placeholder="Representative Email" value="${reqEmail}">
+                                                    <c:if test="${not empty errorMsg.reqEmail}">
+                                                        <span style="color:red">${errorMsg.reqEmail}</span>
+                                                    </c:if>
+                                                </div>
 
-                                                <label class="labels">Relationship</label>
-                                                <input type="text" id="relationship" name="relationship" class="form-control" placeholder="Relationship" required>
-                                            
+                                                <div>
+                                                    <label class="labels">Relationship</label>
+                                                    <input type="text" id="relationship" name="relationship" class="form-control" placeholder="Relationship" value="${relationship}">
+                                                    <c:if test="${not empty errorMsg.relationship}">
+                                                        <span style="color:red">${errorMsg.relationship}</span>
+                                                    </c:if>
+                                                </div>
+
                                             </div>
+                                        </div>    
 
-                                        <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save Profile</button></div>
-                                        <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Cancel</button></div>
+                                        <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3" type="submit">Save</button></div>
+                                        <div class="mt-5 text-center"><button class="btn btn-primary py-2 px-4 ms-3">Cancel</button></div>
                                     </form>
 
 
@@ -450,36 +491,26 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <!--                            <div class="row">
-                                                            <div class="col-sm-12">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h5 class="d-flex align-items-center mb-3">Project Status</h5>
-                                                                        <p>Web Design</p>
-                                                                        <div class="progress mb-3" style="height: 5px">
-                                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                        </div>
-                                                                        <p>Website Markup</p>
-                                                                        <div class="progress mb-3" style="height: 5px">
-                                                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                        </div>
-                                                                        <p>One Page</p>
-                                                                        <div class="progress mb-3" style="height: 5px">
-                                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                        </div>
-                                                                        <p>Mobile Template</p>
-                                                                        <div class="progress mb-3" style="height: 5px">
-                                                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                        </div>
-                                                                        <p>Backend API</p>
-                                                                        <div class="progress" style="height: 5px">
-                                                                            <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
+            <!-- Modal -->
+            <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="validationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="validationModalLabel">Validation Error</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Please fill out Representative Name, Representative Phone number, Relationship fields in the representative form.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -505,49 +536,123 @@
             <script src="js/main.js"></script>
     </body>
     <script>
-                                                    function readURL(input) {
-                                                        if (input.files && input.files[0]) {
-                                                            var reader = new FileReader();
-                                                            reader.onload = function (e) {
-                                                                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                                                                $('#imagePreview').hide();
-                                                                $('#imagePreview').fadeIn(650);
-                                                            }
-                                                            reader.readAsDataURL(input.files[0]);
-                                                        }
-                                                    }
-                                                    $("#imageUpload").change(function () {
-                                                        readURL(this);
-                                                    });
-                                                    function showCodeAndRedirect() {
-                                                        var resultDiv = document.getElementById("result");
-                                                        resultDiv.style.display = "flex";
+                                                        function checkAge() {
+                                                            const dob = document.getElementById('dob').value;
+                                                            const representativeForm = document.getElementById('representativeForm');
 
-                                                        setTimeout(function () {
-                                                            window.location.href = "viewPatientDetail.jsp";
-                                                        }, 2000);
-                                                    }
+                                                            if (dob) {
+                                                                const dobDate = new Date(dob);
+                                                                const today = new Date();
+                                                                let age = today.getFullYear() - dobDate.getFullYear();
+                                                                const monthDifference = today.getMonth() - dobDate.getMonth();
+
+                                                                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+                                                                    age--;
+                                                                }
+
+                                                                if (age < 14) {
+                                                                    representativeForm.style.display = 'block';
+                                                                } else {
+                                                                    representativeForm.style.display = 'none';
+                                                                }
+                                                            } else {
+                                                                representativeForm.style.display = 'none';
+                                                            }
+                                                        }
+
+
     </script>
     <script>
-    function checkAge() {
-        const dob = document.getElementById('dob').value;
-        if (dob) {
-            const dobDate = new Date(dob);
-            const today = new Date();
-            let age = today.getFullYear() - dobDate.getFullYear();
-            const monthDifference = today.getMonth() - dobDate.getMonth();
 
-            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Get today's date in YYYY-MM-DD format
+            const today = new Date().toISOString().split('T')[0];
+            // Set the max attribute of the date input to today's date
+            document.getElementById('dob').setAttribute('max', today);
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+        function showCodeAndRedirect() {
+            var resultDiv = document.getElementById("result");
+            resultDiv.style.display = "flex";
+
+            setTimeout(function () {
+                window.location.href = "viewPatientDetail.jsp";
+            }, 2000);
+        }
+    </script>
+    <script>
+//        function checkAge() {
+//            const dob = document.getElementById('dob').value;
+//            if (dob) {
+//                const dobDate = new Date(dob);
+//                const today = new Date();
+//                let age = today.getFullYear() - dobDate.getFullYear();
+//                const monthDifference = today.getMonth() - dobDate.getMonth();
+//
+//                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+//                    age--;
+//                }
+//
+//                if (age < 14) {
+//                    document.getElementById('representativeForm').style.display = 'block';
+//                } else {
+//                    document.getElementById('representativeForm').style.display = 'none';
+//                }
+//            }
+//        }
+
+        function validateForm() {
+            var dob = document.getElementById("dob").value;
+            var birthDate = new Date(dob);
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var month = today.getMonth() - birthDate.getMonth();
+
+            if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }
 
             if (age < 14) {
-                document.getElementById('representativeForm').style.display = 'block';
-            } else {
-                document.getElementById('representativeForm').style.display = 'none';
+                var repName = document.getElementById("repName").value;
+                var repPhone = document.getElementById("repPhone").value;
+                var relationship = document.getElementById("relationship").value;
+
+                if (!repName || !repPhone || !relationship) {
+                    $('#validationModal').modal('show');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            var modal = bootstrap.Modal.getInstance(document.getElementById('validationModal'));
+            if (modal) {
+                modal.hide();
             }
         }
-    }
-</script>
+
+// Event listener for the close button (x)
+        document.querySelector('#validationModal .close').addEventListener('click', closeModal);
+
+// Event listener for the cancel button
+        document.querySelector('#validationModal .btn-secondary').addEventListener('click', closeModal);
+
+    </script>
 
 </html> 
