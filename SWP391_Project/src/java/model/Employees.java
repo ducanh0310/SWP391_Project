@@ -11,7 +11,11 @@ import java.sql.Date;
  * @author trung
  */
 public class Employees {
+<<<<<<< HEAD:SWP391_Project/src/java/model/Employees.java
     private int id;
+=======
+     private int id;
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/Employees.java
     private String employeeSin;
     private String employeeType;
     private String name;

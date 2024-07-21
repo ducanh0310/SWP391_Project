@@ -74,16 +74,23 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
+<<<<<<< HEAD
                                 <a class="nav-link" href="admin.jsp">
                                     <i class="bi bi-house"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
+=======
+                                <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                    <i class="bi bi-clock"></i> Appointment
+                                </a>
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
+<<<<<<< HEAD
                                 <a class="nav-link" href="serviceDetail">
                                     <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
@@ -111,6 +118,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="bi bi-people"></i> Users
+=======
+                                <a class="nav-link" href="ViewEmployeeList">
+                                    <i class="bi bi-people"></i></i> Employee
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                 </a>
                             </li>
                         </ul>
@@ -128,7 +139,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -206,7 +217,11 @@
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Email</h6>
                                         </div>
+<<<<<<< HEAD
                                         <div class="col-sm-9 ">
+=======
+                                        <div class="col-sm-9">
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                             ${patients.email}
                                         </div>
                                     </div>

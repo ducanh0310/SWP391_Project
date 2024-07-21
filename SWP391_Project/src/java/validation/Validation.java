@@ -18,7 +18,11 @@ public class Validation {
 
     public static boolean isValidPassword(String password) {
         // Check if the password is at least 8 characters long
+<<<<<<< HEAD:SWP391_Project/src/java/validation/Validation.java
         if (password.length() < 8 || password.length() > 128) {
+=======
+        if (password.length() < 8 ||  password.length() > 128) {
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/validation/Validation.java
             return false;
         }
 

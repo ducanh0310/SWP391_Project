@@ -483,12 +483,19 @@
                                 <table class="table table-hover table-nowrap" id="myTable">
                                     <thead class="thead-light">
                                         <tr>
+<<<<<<< HEAD
                                             <th scope="col">No <i class="fas fa-sort"></th>
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                             <th scope="col">Patient Name <i class="fas fa-sort"></th>
                                             <th scope="col">Service<i class="fas fa-sort"></th>
                                             <th scope="col">Payment <i class="fas fa-sort"></th>
                                             <th scope="col">Doctor <i class="fas fa-sort"></th>
                                             <th scope="col">Examination Time <i class="fas fa-sort"></th>
+<<<<<<< HEAD
+=======
+                                            <th scope="col">Room <i class="fas fa-sort"></th>
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                             <th scope="col">Status <i class="fas fa-sort"></th>
                                             <th></th>
                                         </tr>
@@ -497,9 +504,12 @@
                                         <c:forEach items="${requestScope.bookingAppointmentHistory}" var="bAH" varStatus="status">
                                             <tr>
                                                 <td>
+<<<<<<< HEAD
                                                     <span>${status.index + 1}</span>
                                                 </td>
                                                 <td>
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                                     <span>${bAH.patient.name}</span>
                                                 </td>
                                                 <td>
@@ -525,6 +535,13 @@
                                                     <span>${bAH.date}</span><br>
                                                     <span>${bAH.slot.startedTime}-${bAH.slot.endTime}</span>
                                                 </td>
+<<<<<<< HEAD
+=======
+
+                                                <td>
+                                                    <span>${bAH.room.name}</span>
+                                                </td>
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${bAH.statusBook.id == 1}">
@@ -554,10 +571,13 @@
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${bAH.statusBook.id == 2}">
+<<<<<<< HEAD
                                                         <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#addExamResult" id="addExamResult"
                                                                 data-id="${bAH.ID}">
                                                             View
                                                         </button>
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
                                                         <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
                                                                 data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
@@ -805,11 +825,14 @@
                 }
             });
         </script>
+<<<<<<< HEAD
         <script>
             document.getElementById('addExamResult').addEventListener('click', function () {
                 var examId = this.getAttribute('data-id');
                 window.location.href = '../AddExaminationResult?appId=' + examId;
             });
         </script>
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
     </body>
 </html>

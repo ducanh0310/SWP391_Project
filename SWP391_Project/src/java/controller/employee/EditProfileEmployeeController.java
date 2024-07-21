@@ -93,6 +93,19 @@ public class EditProfileEmployeeController extends HttpServlet {
                 // submit certification for doctor 
                 //handleCertifications(request, currentUser, db, errorMsg);
 
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/EditProfileEmployeeController.java
+=======
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+
+                }
+
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/EditProfileEmployeeController.java
                 session.setAttribute("EditSuccess", "Editing profile successfully");
 
                 response.sendRedirect("view");
@@ -181,7 +194,11 @@ public class EditProfileEmployeeController extends HttpServlet {
     // submit certification for doctor 
     private void handleCertifications(HttpServletRequest request, User currentUser, DBEmployeeProfile db, Map<String, String> errorMsg)
             throws ClassNotFoundException {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/EditProfileEmployeeController.java
 
+=======
+        
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/EditProfileEmployeeController.java
         try {
             Employee emInfo = db.getInfoEmployee(currentUser.getName());
 
@@ -199,10 +216,17 @@ public class EditProfileEmployeeController extends HttpServlet {
                         String imageLink = imageLinks[i];
                         String imageName = imageNames[i];
                         int imageId = idImage[i];
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/EditProfileEmployeeController.java
 
                         Validation valid = new Validation();
                         boolean cerName = valid.isAddress(imageName);
 
+=======
+                        
+                        Validation valid = new Validation();
+                        boolean cerName = valid.isAddress(imageName);
+                        
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/EditProfileEmployeeController.java
                         if (isValidURL(imageLink) && (cerName == true)) {
                             if (imageId != 0) {
                                 db.updateCertificate(currentUser.getName(), imageName, imageLink, imageId);

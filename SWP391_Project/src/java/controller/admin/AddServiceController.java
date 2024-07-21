@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.*;
 import dao.*;
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/AddServiceController.java
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Timer;
@@ -20,6 +21,8 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import validation.Validation;
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/AddServiceController.java
 
 /**
  *
@@ -66,6 +69,7 @@ public class AddServiceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/AddServiceController.java
         // Retrieve the current session
         HttpSession session = request.getSession();
         String userRole = (String) session.getAttribute("userRole");
@@ -76,6 +80,11 @@ public class AddServiceController extends HttpServlet {
             return;
         }
         request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
+=======
+        request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
+
+        processRequest(request, response);
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/AddServiceController.java
     }
 
     /**
@@ -89,6 +98,7 @@ public class AddServiceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/AddServiceController.java
 
         try {
             String service = request.getParameter("service");
@@ -144,6 +154,22 @@ public class AddServiceController extends HttpServlet {
             request.setAttribute("errorMessage", "Database error: " + ex.getMessage());
             request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
         }
+=======
+        try {
+            String service = request.getParameter("service");
+            String price = request.getParameter("price");
+            ProcedureCodes p = new ProcedureCodes(service, price);
+            ServiceDAO s = new ServiceDAO();
+            if(s.addService(p) == true) {
+                request.getRequestDispatcher("view/admin/viewServiceDetail.jsp");
+            } else {
+                
+            }
+        } catch (Exception e) {
+
+        }
+        processRequest(request, response);
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/AddServiceController.java
     }
 
     /**
@@ -156,4 +182,8 @@ public class AddServiceController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/AddServiceController.java
 }
+=======
+}
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/AddServiceController.java

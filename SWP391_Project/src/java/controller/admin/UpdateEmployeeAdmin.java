@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -166,6 +167,16 @@ public class UpdateEmployeeAdmin extends HttpServlet {
 
                 // submit certification for doctor 
                 handleCertifications(request, employeeUser, db, errorMsg);
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/UpdateEmployeeAdmin.java
+=======
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+                }
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/UpdateEmployeeAdmin.java
                 session.setAttribute("EditSuccessEmployeeForAdmin", "Editing profile successfully");
                 response.sendRedirect("ViewEmployeeDetailsServlet?employeeId=" + emInfo.getId());
             }

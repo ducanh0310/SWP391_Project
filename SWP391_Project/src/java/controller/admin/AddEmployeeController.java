@@ -21,6 +21,7 @@ import java.security.SecureRandom;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import model.Branch;
@@ -161,10 +162,26 @@ public class AddEmployeeController extends HttpServlet {
             }
             String password = generateNewPassword();
             boolean isAdded = employeeDAO.addEmployeeAccount(employee, extractUsername(employee.getEmail()), password, certificates);
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/AddEmployeeController.java
             if (isAdded) {
                 // Set success message
                 HttpSession session = request.getSession();
                 Email.sendNewAccount(employee.getEmail(), extractUsername(employee.getEmail()), password);
+=======
+            Email.sendNewAccount(employee.getEmail(), extractUsername(employee.getEmail()), password);
+            if (isAdded) {
+                // Set success message
+                HttpSession session = request.getSession();
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+                }
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/AddEmployeeController.java
                 session.setAttribute("successAddEmployee", "Employee added successfully.");
             } else {
                 // Set error message

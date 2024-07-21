@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dao.*;
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/EditServiceController.java
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Timer;
@@ -20,6 +21,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
 import validation.Validation;
+=======
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.*;
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/EditServiceController.java
 
 /**
  *
@@ -27,9 +34,13 @@ import validation.Validation;
  */
 @WebServlet(name = "EditServiceController", urlPatterns = {"/editservice"})
 public class EditServiceController extends HttpServlet {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/EditServiceController.java
 
     int id;
 
+=======
+int id;
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/EditServiceController.java
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -68,6 +79,7 @@ public class EditServiceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/EditServiceController.java
         HttpSession session = request.getSession(false); // get existing session if exists
         if (session == null) {
             response.sendRedirect("login");
@@ -88,6 +100,18 @@ public class EditServiceController extends HttpServlet {
             Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", "Database error: " + ex.getMessage());
             request.getRequestDispatcher("viewservices.jsp").forward(request, response);
+=======
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+            ServiceDAO s = new ServiceDAO();
+            ProcedureCodes p = s.getServiceById(id);
+            request.setAttribute("name", p.getProcedure_name());
+            request.setAttribute("price", p.getPrice());
+            request.getRequestDispatcher("view/employee/admin/editService.jsp").forward(request, response);
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/EditServiceController.java
         }
     }
 
@@ -105,6 +129,7 @@ public class EditServiceController extends HttpServlet {
         try {
             String name = request.getParameter("name");
             String price = request.getParameter("price");
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/EditServiceController.java
             String description = request.getParameter("description");
             int id = Integer.parseInt(request.getParameter("id"));
 
@@ -163,6 +188,19 @@ public class EditServiceController extends HttpServlet {
             Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", "Invalid ID format.");
             request.getRequestDispatcher("editservice.jsp").forward(request, response);
+=======
+//            int id = Integer.parseInt(request.getParameter("id"));
+            
+            ServiceDAO s = new ServiceDAO();
+            if(s.updateService(id, name, price) ==  true) {
+                response.sendRedirect("viewservices");
+            } else{
+                
+            }
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/EditServiceController.java
         }
     }
 
@@ -176,4 +214,8 @@ public class EditServiceController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/EditServiceController.java
 }
+=======
+}
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/EditServiceController.java

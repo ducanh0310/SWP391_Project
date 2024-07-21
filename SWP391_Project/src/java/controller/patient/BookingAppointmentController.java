@@ -40,7 +40,13 @@ public class BookingAppointmentController extends HttpServlet {
             ArrayList<Service> arrService = dbService.getService();
             request.setAttribute("arrService", arrService);
             request.getRequestDispatcher("../view/patient/bookAppointment.jsp").forward(request, response);
+<<<<<<< HEAD:SWP391_Project/src/java/controller/patient/BookingAppointmentController.java
         } catch (ClassNotFoundException | SQLException ex) {
+=======
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/patient/BookingAppointmentController.java
             Logger.getLogger(BookingAppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

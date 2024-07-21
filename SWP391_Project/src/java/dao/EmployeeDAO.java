@@ -13,7 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.DoctorCertification;
 import model.Employee;
+<<<<<<< HEAD:SWP391_Project/src/java/dao/EmployeeDAO.java
 import model.Employees;
+=======
+import model.EmployeeDTO;
+import model.Employees;
+import model.Patient;
+import model.User;
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/dao/EmployeeDAO.java
 
 /**
  *
@@ -190,7 +197,11 @@ public class EmployeeDAO extends DBContext {
     public ArrayList<Employees> getEmployees() throws SQLException {
         Employee employeeInfo = new Employee();
         ArrayList<Employees> employeeList = new ArrayList<>();
+<<<<<<< HEAD:SWP391_Project/src/java/dao/EmployeeDAO.java
         String sql = "select * from Employee WHERE employee_type != 'i'";
+=======
+        String sql = "select * from Employee";
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/dao/EmployeeDAO.java
         Connection connection = null;
         PreparedStatement statement = null;
         try {

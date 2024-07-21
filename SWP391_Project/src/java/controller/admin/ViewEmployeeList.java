@@ -17,6 +17,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/ViewEmployeeList.java
+=======
+import model.Employee;
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/ViewEmployeeList.java
 import model.Employees;
 import model.User;
 
@@ -67,6 +71,7 @@ public class ViewEmployeeList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/ViewEmployeeList.java
             // Retrieve the current session
             HttpSession session = request.getSession();
 
@@ -95,6 +100,24 @@ public class ViewEmployeeList extends HttpServlet {
                     request.setAttribute("username", currentUser.getName());
                     
                     // Forward the request to the JSP page for displaying the employee list
+=======
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            String userRole = (String) session.getAttribute("userRole");
+            if (currentUser == null) {
+                request.setAttribute("error", "You are not permission!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                if (userRole != "admin") {
+                    request.setAttribute("error", "You are not permission!");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } else {
+                    EmployeeDAO employeeDAO = new EmployeeDAO();
+
+                    ArrayList<Employees> empList = employeeDAO.getEmployees();
+                    request.setAttribute("EmployeeList", empList);
+                    request.setAttribute("username", currentUser.getName());
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/ViewEmployeeList.java
                     request.getRequestDispatcher("view/employee/admin/EmployeeList.jsp").forward(request, response);
                 }
             }
@@ -127,4 +150,8 @@ public class ViewEmployeeList extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+<<<<<<< HEAD:SWP391_Project/src/java/controller/admin/ViewEmployeeList.java
 }
+=======
+}
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/admin/ViewEmployeeList.java

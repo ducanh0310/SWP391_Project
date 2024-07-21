@@ -110,6 +110,7 @@ public class LoginServlet extends HttpServlet {
                     } else if (user.getType_Id() == 1) {
                         EmployeeDAO empDao = new EmployeeDAO();
                         Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
+<<<<<<< HEAD:SWP391_Project/src/java/controller/LoginServlet.java
                         switch (author.isEmployee(user.getEmployee_Id())) {
                             case "b":
                                 session.setAttribute("admin", emp);
@@ -125,6 +126,24 @@ public class LoginServlet extends HttpServlet {
                                 break;
                             default:
                                 break;
+=======
+                        if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
+                            session.setAttribute("admin", emp);
+                            session.setAttribute("userRole", "admin");
+                            response.sendRedirect("appointment/viewAppointmentHistory");
+                        } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
+                            session.setAttribute("doctor", emp);
+                            session.setAttribute("userRole", "doctor");
+                            request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
+                        } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
+                            session.setAttribute("nurse", emp);
+                            session.setAttribute("userRole", "nurse");
+                            request.getRequestDispatcher("view/employee/nurse/home.jsp").forward(request, response);
+                        } else {
+                            session.setAttribute("receptionist", emp);
+                            session.setAttribute("userRole", "receptionist");
+                            request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/LoginServlet.java
                         }
                         response.sendRedirect("appointment/viewAppointmentHistory");
                     }

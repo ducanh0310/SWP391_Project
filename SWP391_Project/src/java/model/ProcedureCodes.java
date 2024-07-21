@@ -9,16 +9,23 @@ package model;
  * @author Gia Huy
  */
 public class ProcedureCodes {
+<<<<<<< HEAD:SWP391_Project/src/java/model/ProcedureCodes.java
 
     int procedure_id;
     String procedure_name;
     String price;
     String description;
     String type;
+=======
+    int procedure_id;
+    String procedure_name;
+    String price;
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/ProcedureCodes.java
 
     public ProcedureCodes() {
     }
 
+<<<<<<< HEAD:SWP391_Project/src/java/model/ProcedureCodes.java
     public ProcedureCodes(int procedure_id, String procedure_name, String price, String description, String type) {
         this.procedure_id = procedure_id;
         this.procedure_name = procedure_name;
@@ -27,11 +34,20 @@ public class ProcedureCodes {
         this.type = type;
     }
     
+=======
+    public ProcedureCodes(int procedure_id, String procedure_name, String price) {
+        this.procedure_id = procedure_id;
+        this.procedure_name = procedure_name;
+        this.price = price;
+    }
+
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/ProcedureCodes.java
     public ProcedureCodes(String procedure_name, String price) {
         this.procedure_name = procedure_name;
         this.price = price;
     }
 
+<<<<<<< HEAD:SWP391_Project/src/java/model/ProcedureCodes.java
     public ProcedureCodes(String procedure_name, String price, String description) {
         this.procedure_name = procedure_name;
         this.price = price;
@@ -48,6 +64,8 @@ public class ProcedureCodes {
         this.type = type;
     }
 
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/ProcedureCodes.java
     public int getProcedure_id() {
         return procedure_id;
     }
@@ -71,6 +89,7 @@ public class ProcedureCodes {
     public void setPrice(String price) {
         this.price = price;
     }
+<<<<<<< HEAD:SWP391_Project/src/java/model/ProcedureCodes.java
 
     public String getDescription() {
         return description;
@@ -81,4 +100,8 @@ public class ProcedureCodes {
     }
     
 
+=======
+    
+    
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/ProcedureCodes.java
 }

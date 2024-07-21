@@ -63,6 +63,7 @@ public class ConfirmEditSlotController extends HttpServlet {
             DBBookingMedicalAppointment dbBookingMedicalAppointment = new DBBookingMedicalAppointment();
             dbBookingMedicalAppointment.updateAppointment(ba);
 
+<<<<<<< HEAD:SWP391_Project/src/java/controller/patient/ConfirmEditSlotController.java
 //            // Xóa tất cả các thuộc tính trong session
 //            Enumeration<String> attributeNames = session.getAttributeNames();
 //            while (attributeNames.hasMoreElements()) {
@@ -71,6 +72,18 @@ public class ConfirmEditSlotController extends HttpServlet {
 //                    session.removeAttribute(attributeName);
 //                } 
 //            }
+=======
+            // Xóa tất cả các thuộc tính trong session
+            Enumeration<String> attributeNames = session.getAttributeNames();
+            while (attributeNames.hasMoreElements()) {
+                
+                String attributeName = attributeNames.nextElement();
+                if(!attributeName.equals("currentUser")){
+                    session.removeAttribute(attributeName);
+                }
+                
+            }
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/patient/ConfirmEditSlotController.java
             //Move view appointment history
             session.setAttribute("success", "Edit appointment successfully");
             response.sendRedirect("viewAppointmentHistory");

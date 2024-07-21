@@ -36,6 +36,7 @@ public class ViewProfileEmployeeController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java
         if (currentUser == null) {
             session.invalidate();
             response.sendRedirect("../../index.jsp");
@@ -45,6 +46,8 @@ public class ViewProfileEmployeeController extends HttpServlet {
             session.invalidate();
             return;
         }
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/ViewProfileEmployeeController.java
         try {
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
@@ -57,15 +60,30 @@ public class ViewProfileEmployeeController extends HttpServlet {
             request.setAttribute("username", currentUser.getName());
             //johnli255a
             if ("d".equals(emInfo.getEmployeeType())) {
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java
+=======
+                ArrayList<DoctorCertification> arrayCerti = dbEm.getCertification(currentUser.getName());
+                DBAccount db = new DBAccount();
+                Account acc = db.showAccountInfo(currentUser.getName());
+                request.setAttribute("image", acc.getImage());
+                request.setAttribute("arrayCerti", arrayCerti);
+//                PrintWriter out = response.getWriter();
+//                out.print(arrayCerti + " " + currentUser.getName());
+                request.setAttribute("emInfo", emInfo);
+                request.setAttribute("username", currentUser.getName());
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/ViewProfileEmployeeController.java
                 request.getRequestDispatcher("../../view/employee/doctor/viewProfileDoctor.jsp").forward(request, response);
             }
             //kdo2342
             if ("b".equals(emInfo.getEmployeeType())) {
                 request.getRequestDispatcher("../../view/employee/admin/viewProfileAdmin.jsp").forward(request, response);
             }
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java
             if ("n".equals(emInfo.getEmployeeType())) {
                 request.getRequestDispatcher("../../view/employee/nurse/viewProfileNurse.jsp").forward(request, response);
             }
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/ViewProfileEmployeeController.java
         } catch (ClassNotFoundException | SQLException ex) {
             java.util.logging.Logger.getLogger(ViewProfileEmployeeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -85,6 +103,18 @@ public class ViewProfileEmployeeController extends HttpServlet {
                 int certId = Integer.parseInt(deleteCert);
                 DBEmployeeProfile db = new DBEmployeeProfile();
                 db.deleteCertification(certId);
+<<<<<<< HEAD:SWP391_Project/src/java/controller/employee/ViewProfileEmployeeController.java
+=======
+                // Xóa tất cả các thuộc tính trong session
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    if (!attributeName.equals("currentUser")) {
+                        session.removeAttribute(attributeName);
+                    }
+
+                }
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/employee/ViewProfileEmployeeController.java
 
                 session.setAttribute("DeleteCertificationSuccess", "Deleting profile successfully");
                 response.sendRedirect("view");

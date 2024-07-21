@@ -6,7 +6,11 @@ package model;
 
 /**
  *
+<<<<<<< HEAD:SWP391_Project/src/java/model/Representative.java
  * @author Vu Minh Quan
+=======
+ * @author ngphn
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/Representative.java
  */
 public class Representative {
     private int id;
@@ -14,6 +18,7 @@ public class Representative {
     private String phone;
     private String email;
     private String relationship;
+<<<<<<< HEAD:SWP391_Project/src/java/model/Representative.java
     private String type;
 
     public String getType() {
@@ -25,6 +30,26 @@ public class Representative {
     }
     
     
+=======
+
+    public Representative() {
+    }
+
+    public Representative(int id, String name, String phone, String email, String relationship) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.relationship = relationship;
+    }
+
+    public Representative(String name, String phone, String email, String relationship) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.relationship = relationship;
+    }
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/Representative.java
 
     public int getId() {
         return id;
@@ -67,4 +92,8 @@ public class Representative {
     }
     
     
+<<<<<<< HEAD:SWP391_Project/src/java/model/Representative.java
 }
+=======
+}
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/model/Representative.java

@@ -22,8 +22,11 @@ import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
+<<<<<<< HEAD:SWP391_Project/src/java/controller/patient/ConfirmSlotController.java
 import java.util.Timer;
 import java.util.TimerTask;
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/patient/ConfirmSlotController.java
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BookingAppointment;
@@ -93,6 +96,7 @@ public class ConfirmSlotController extends HttpServlet {
                 dbBookingMedicalAppointment.insertSlot(appointment);
             }
 
+<<<<<<< HEAD:SWP391_Project/src/java/controller/patient/ConfirmSlotController.java
             session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
             session.setAttribute("bookSuccess", "Appointments booked successfully");
             // Schedule a task to remove the session attribute after 5 seconds
@@ -103,6 +107,19 @@ public class ConfirmSlotController extends HttpServlet {
                     session.removeAttribute("bookSuccess");
                 }
             }, 5000);
+=======
+            // Clear session attributes except 'currentUser'
+            Enumeration<String> attributeNames = session.getAttributeNames();
+            while (attributeNames.hasMoreElements()) {
+                String attributeName = attributeNames.nextElement();
+                if (!attributeName.equals("currentUser")) {
+                    session.removeAttribute(attributeName);
+                }
+            }
+
+            session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
+            session.setAttribute("bookSuccess", "Appointments booked successfully");
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/controller/patient/ConfirmSlotController.java
             response.sendRedirect("viewAppointmentHistory");
         } catch (SQLException ex) {
             Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);

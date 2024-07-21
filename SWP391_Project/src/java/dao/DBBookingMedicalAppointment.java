@@ -564,6 +564,7 @@ public class DBBookingMedicalAppointment extends DBContext {
         return arrBookHistory;
     }
 
+<<<<<<< HEAD:SWP391_Project/src/java/dao/DBBookingMedicalAppointment.java
     public BookingAppointmentHistory getAppointmentEmail(int id) throws SQLException {
         String sql = """
                             Select p.name, ba.booking_date, pc.procedure_name, r.name as room, s.startedTime, s.endTime from Booking_Appointment ba
@@ -632,4 +633,6 @@ public class DBBookingMedicalAppointment extends DBContext {
         }
     }
 
+=======
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743:src/java/dao/DBBookingMedicalAppointment.java
 }

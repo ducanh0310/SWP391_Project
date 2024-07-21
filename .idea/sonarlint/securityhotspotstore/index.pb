@@ -37,10 +37,22 @@ c
 +web/view/patient/viewAppointmentHistory.jsp,2\0\20cad1dcfb615e7d9f984a2662a0eb4b4dbc47ac
 K
 src/java/model/Patient.java,8\0\8023bae05a36aa9bf121f0a1e65ccb079170de1d
+<<<<<<< HEAD
+=======
+{
+Ksrc/java/controller/admin/ViewBookingAppointmentHistoryAdminController.java,f\2\f20ddffee775693359c7ae12d07d6ff088f5fc51
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
 W
 'web/view/patient/viewProfilePatient.jsp,a\9\a96c584d88035c161644052bde515802c2d7b563
 \
 ,web/view/employee/admin/viewProfileAdmin.jsp,3\9\39e1ebcd3c4a4b1cb21c1d1982e0fdd6d8d77a51
+<<<<<<< HEAD
+=======
+V
+&web/view/employee/admin/backupVAHA.jsp,0\b\0b69d09fd1446140f65bc3aa028cb04aeabbb3ef
+]
+-src/java/dao/DBBookingMedicalAppointment.java,b\f\bf4056521d760b57addbadb46dffc6440b3ae910
+>>>>>>> 74c5e881ba536df6f8e64777e2abcd589ccb9743
 U
 %src/java/controller/LoginServlet.java,b\8\b806cd1a498cc8a23a791bb36e2b3f6e0523f6f0
 o
