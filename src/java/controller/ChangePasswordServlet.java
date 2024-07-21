@@ -65,6 +65,7 @@ public class ChangePasswordServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
+        //check login
         if (currentUser == null) {
             response.sendRedirect("index.jsp");
         }else{
