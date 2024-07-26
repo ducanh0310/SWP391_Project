@@ -97,7 +97,6 @@
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
-                            
                             <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
@@ -106,6 +105,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="ExaminationResultListController">
                                     <i class="bi bi-clipboard-check"></i></i> Examination Result List
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="viewservices">
+                                    <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
                             </li>
                         </ul>
