@@ -93,13 +93,19 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="appointment/viewAppointmentHistory">
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" href="PatientController">
                                     <i class="bi bi-list-task"></i> Patient
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="ExaminationResultListController">
+                                    <i class="bi bi-clipboard-check"></i></i> Examination Result List
                                 </a>
                             </li>
                         </ul>

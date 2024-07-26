@@ -104,11 +104,254 @@
                 background: #f7f7ff;
                 margin-top: 0px;
             }
+              /* Position notification at top right */
+            #deleteSuccessNotification {
+                display: none;
+            }
+
+            #editSuccessNotification {
+                display: none;
+            }
+
+            #bookSuccessNotification {
+                display: none;
+            }
+
+
+
+            /* Style for the progress bar */
+            .progress-bar {
+                transition: width 5s linear;
+            }
+
+            /* Position notification at top right */
+            #notificationContainer {
+                display: none; /* Hide by default */
+            }
+
+            /* Style for the progress bar */
+
+            #editSuccessNotification #deleteSuccessNotification #bookSuccessNotification{
+                display: none;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1060;
+            }
+
+            .status-verify {
+                color: blue;
+            }
+            .status-done {
+                color: green;
+            }
+            .status-cancel {
+                color: red;
+            }
+            .status-not-started {
+                color: black;
+            }
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+
+            ::selection{
+                color: #fff;
+                background: #ff654a;
+            }
+
+            .wrapper{
+                max-width: 450px;
+                margin: 20px auto;
+            }
+
+            .wrapper .search-input{
+                background: #fff;
+                width: 100%;
+                border-radius: 5px;
+                position: relative;
+                box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+            }
+
+            .search-input input{
+                height: 55px;
+                width: 100%;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+                padding: 0 60px 0 20px;
+                font-size: 18px;
+                box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+            }
+
+            .search-input.active input{
+                border-radius: 5px 5px 0 0;
+            }
+
+            .search-input .autocom-box{
+                padding: 0;
+                opacity: 0;
+                pointer-events: none;
+                max-height: 280px;
+                overflow-y: auto;
+            }
+
+            .search-input.active .autocom-box{
+                padding: 10px 8px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .autocom-box li{
+                list-style: none;
+                padding: 8px 12px;
+                display: none;
+                width: 100%;
+                cursor: default;
+                border-radius: 3px;
+            }
+
+            .search-input.active .autocom-box li{
+                display: block;
+            }
+            .autocom-box li:hover{
+                background: #efefef;
+            }
+
+            .search-input .icon{
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                height: 55px;
+                width: 55px;
+                text-align: center;
+                line-height: 55px;
+                font-size: 20px;
+                color: black;
+                cursor: pointer;
+            }
+
+
+            /* DataTable Customization */
+
+
+
+            .text-primary {
+                --x-text-opacity: 1;
+                color: #06a3da !important;
+            }
+            .m-0 {
+                margin-left: 30px !important;
+            }
+            body{
+                background: #f7f7ff;
+                margin-top:0px;
+            }
+            table th , table td{
+                text-align: center;
+            }
+            th {
+                background: #333;
+                color: #fff;
+            }
+            .header_wrap {
+                padding:30px 0;
+            }
+
+
+
+            .dataTables_filter input[type="search"] {
+                border: 2px solid #000;
+                font-weight: bold;
+                border-radius: 10px;
+                padding: 5px 5px;
+                height: 35px;
+            }
+            /*            .mb-0{
+                            font-weight:500;
+                            font-size:26px;
+                            padding-left:20px;
+                        }*/
+            /* DataTable Customization */
+            .dataTables_wrapper .dataTables_paginate {
+                display: flex;
+                justify-content: center; /* Center align pagination */
+                margin-top: 20px; /* Adjust as needed */
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 5px 10px;
+                margin: 0 2px;
+                border-radius: 3px;
+                background-color: #06a3da;
+                color: white !important;
+                cursor: pointer;
+                border: none; /* Remove border */
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: #005f7f;
+                border: 1px solid #005f7f;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+                background-color: #004156;
+                border: 1px solid #004156;
+            }
+
+
+
+            .dataTables_wrapper .dataTables_length{
+                margin-left: 20px;
+                margin-bottom: 20px;
+            }
+            .dataTables_wrapper .dataTables_filter{
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+            .dataTables_wrapper .dataTables_info {
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter
+            {
+                float: right; /* D?ch sang trái */
+                margin-right: 20px;
+            }
+
         </style>
 
     </head>
 
     <body>
+
+        <div class="modal fade" id="confirmSubmitModal" tabindex="-1" aria-labelledby="confirmSubmitModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmSubmitModalLabel">Submit Examination Result</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to submit this examination result?<br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmSubmitButton">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
             <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
@@ -137,14 +380,10 @@
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="bi bi-people"></i></i> Employee
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="ExaminationResultListController">
-                                    <i class="bi bi-people"></i></i> Examination Result List
+                                <a class="nav-link" href="appointment/viewAppointmentHistory">
+                                    <i class="bi bi-people"></i></i> Appointment History
                                 </a>
                             </li>
                         </ul>
@@ -163,7 +402,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="logout">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
@@ -190,18 +429,30 @@
                                     </div>
                                 </div>
                             </form>
+                            <div style="text-align: center; font-size: 30px;">
 
+                                <label style="font-weight: bold">List Examination Result</label>
+                            </div>
                             <div id="employeeTable" class="table-responsive">
                                 <label style="color: red">${error}</label>
                                 <label style="color: green">${mess}</label>
+
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Patient</th>
                                             <th scope="col">Doctor</th>
+                                            <th scope="col">Service</th>
                                             <th scope="col">Booking Date</th>
-                                            <th scope="col">Examination Status</th>
+                                            <!--                                            <th scope="col">Examination Status</th>-->
+                                            <th scope="col">
+                                                <select style="width: 160px; margin-bottom: -10px; margin-top: -10px" id="statusFilter" class="form-control" aria-label="Filter by status">
+                                                    <option value="">Examination Status</option>
+                                                    <option value="active">Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
+                                            </th>
                                             <th scope="col">Description</th>
                                             <th scope="col"></th>
                                         </tr>
@@ -213,20 +464,35 @@
                                                 <td>${status.index + 1}</td>    
                                                 <td>${exam.patientName}</td>
                                                 <td>${exam.doctor}</td>
+                                                <td>${exam.service}</td>
                                                 <td>${exam.bookingDate}</td>
-                                                <td>${exam.examinationStatus}</td>
+<!--                                                <td>${exam.examinationStatus}</td>-->
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${exam.examinationStatus == 'active'}">
+                                                            <span style="color: green;">${exam.examinationStatus}</span>
+                                                        </c:when>
+                                                        <c:when test="${exam.examinationStatus == 'inactive'}">
+                                                            <span style="color: red;">${exam.examinationStatus}</span>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
+
                                                 <td>${exam.description}</td>
-                                                
-                                              
+
+
                                                 <td class="text-end">
-                                                    <button>
+                                                    <button >
                                                         <a href="ViewExaminationResult?AppID=${exam.id}"
                                                            class="btn btn-sm btn-neutral">View</a>
                                                     </button>
-                                                    <button>
-                                                        <a href="SubmitExaminationResult?AppID=${exam.id}"
-                                                           class="btn btn-sm btn-neutral">Submit</a>
-                                                    </button>
+                                                    <c:if test="${exam.examinationStatus == 'inactive'}">
+                                                        <button type="button" class="btn btn-sm btn-neutral submit-button" 
+                                                                data-bs-toggle="modal" data-bs-target="#confirmSubmitModal" 
+                                                                data-id="${exam.id}">
+                                                            Submit
+                                                        </button>
+                                                    </c:if>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -282,6 +548,32 @@
             <script src="../../../libtwentytwenty/jquery.twentytwenty.js"></script>
 
             <script src="../../../js/main.js"></script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const statusFilter = document.getElementById('statusFilter');
+                    const table = document.getElementById('employeeTableBody');
+                    const rows = table.getElementsByTagName('tr');
+
+                    statusFilter.addEventListener('change', function () {
+                        const selectedStatus = statusFilter.value;
+                        filterTable(selectedStatus);
+                    });
+
+                    function filterTable(status) {
+                        for (let row of rows) {
+                            const statusCell = row.cells[4]; // Assuming the status is in the 5th column (index 4)
+                            const statusText = statusCell.textContent.trim().toLowerCase();
+
+                            if (status === '' || statusText === status.toLowerCase()) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        }
+                    }
+                });
+            </script>
 
             <script>
                 const rowsPerPage = 8;
@@ -351,6 +643,28 @@
                 // Initialize the table
                 displayRows(currentPage);
                 updatePagination();
+            </script>
+
+            <script>
+                $(document).ready(function () {
+                    let examId;
+
+                    $('.submit-button').click(function (event) {
+                        event.preventDefault(); // Prevent the default button behavior
+                        examId = $(this).data('id');
+
+                        // Log the ID for debugging
+                        console.log("Exam ID: " + examId);
+
+                        // Set up the submit button inside the modal
+                        if (examId) {
+                            $('#confirmSubmitButton').off('click').on('click', function () {
+                                window.location.href = 'SubmitExaminationResult?AppID=' + examId;
+                            });
+                        }
+                    });
+                });
+
             </script>
 
     </body>

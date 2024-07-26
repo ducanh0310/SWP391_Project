@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Employee;
 import model.Employees;
 import model.User;
 
@@ -74,19 +73,16 @@ public class ViewEmployeeList extends HttpServlet {
             // Get the current user and their role from the session
             User currentUser = (User) session.getAttribute("currentUser");
             String userRole = (String) session.getAttribute("userRole");
-
             // Check if the user is not logged in
             if (currentUser == null) {
                 // Set an error message and redirect to the home page
-                request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 // Check if the user role is not "admin"
                 // Note: Use .equals() method for string comparison to avoid issues with string literals
-                if (userRole != "admin") {
+                if ("patient".equals(String.valueOf(userRole))) {
                     // Set an error message and redirect to the home page
-                    request.setAttribute("error", "You are not permission!");
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
                 } else {
                     // Create an instance of EmployeeDAO to interact with the database
                     EmployeeDAO employeeDAO = new EmployeeDAO();

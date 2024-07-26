@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import model.Employee;
 import model.Patient;
 import model.PatientGetByIdDTO;
+import model.PatientInfo;
+import model.Representative;
 
 /**
  *
@@ -54,40 +56,77 @@ public class PatientDAO extends DBContext {
         return patient;
     }
 
-    public boolean addPatient(Patient p) throws SQLException {
-        String query = "INSERT INTO Patient (patient_sin, address, name, gender, email, phone, date_of_birth, insurance, rep_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void addPatient(PatientInfo p) throws SQLException {
+        String query = """
+                       INSERT INTO [dbo].[Patient]
+                                  ([patient_sin]
+                                  ,[address]
+                                  ,[name]
+                                  ,[gender]
+                                  ,[email]
+                                  ,[phone]
+                                  ,[date_of_birth]
+                                  ,[type] )
+                            VALUES
+                                  (?
+                                  ,?
+                                  ,?
+                                  ,?
+                                  ,?
+                                  ,?
+                                  ,?
+                       ,?)""";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = getConnection();
             statement = connection.prepareStatement(query);
-            statement.setString(1, p.getSin());
+            statement.setString(1, p.getPatientSin());
             statement.setString(2, p.getAddress());
             statement.setString(3, p.getName());
             statement.setString(4, p.getGender());
             statement.setString(5, p.getEmail());
-            statement.setString(6, p.getPhone());
-            statement.setDate(7, (Date) p.getDob());
-
-            // Set insurance, handle null
-            if (p.getInsurance() != null) {
-                statement.setString(8, p.getInsurance());
-            } else {
-                statement.setObject(8, null);
-            }
-
-            // Set rep_id, handle null
-            if (p.getRep_id() != null) {
-                statement.setInt(9, p.getRep_id());
-            } else {
-                statement.setObject(9, null);
-            }
-
+            statement.setString(6, p.getPhoneNumber());
+            statement.setString(7, String.valueOf(p.getDob()));
+            statement.setString(8, p.getType());
             statement.executeUpdate();
-            return true;
+
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName());
-            return false;
+
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+    }
+
+    public void addRepresentative(Representative representative) throws SQLException {
+        String query = """
+                       INSERT INTO [dbo].[Representative]
+                                             ([name]
+                                             ,[phone]
+                                             ,[email]
+                                             ,[relationship],[type])
+                                       VALUES
+                                             (?
+                                             ,?
+                                             ,?
+                                             ,?,?)""";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, representative.getName());
+            statement.setString(2, representative.getPhone());
+            statement.setString(3, representative.getEmail());
+            statement.setString(4, representative.getRelationship());
+            statement.setString(5, representative.getType());
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName());
+
         } finally {
             closePreparedStatement(statement);
             closeConnection(connection);
@@ -266,6 +305,37 @@ public class PatientDAO extends DBContext {
         }
         return null;
     }
+    
+    public Representative getRepresentative(int pid) throws SQLException {
+        ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        String query = """
+                       Select rep.name, rep.relationship, rep.phone, rep.email from Patient p
+                       join Representative rep on rep.type = p.type
+                       where p.Patient_id = ?""";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, pid);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Representative rep = new Representative();
+                rep.setName(rs.getString("name"));
+                rep.setRelationship(rs.getString("relationship"));
+                rep.setPhone(rs.getString("phone"));
+                rep.setEmail(rs.getString("email"));
+                return rep;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return null;
+    }
 
     public boolean updatePatient(PatientGetByIdDTO paInfo) throws SQLException {
         String query = """
@@ -318,4 +388,23 @@ public class PatientDAO extends DBContext {
         }
     }
 
+    public static void main(String[] args) {
+        try {
+            PatientDAO pa = new PatientDAO();
+            PatientInfo paInfo = new PatientInfo();
+            paInfo.setPatientSin(null);
+            paInfo.setName("Do Minh Duong");
+            paInfo.setPhoneNumber("");
+            paInfo.setEmail(null);
+            paInfo.setGender("M");
+            paInfo.setDob(Date.valueOf("2012-02-10"));
+            paInfo.setAddress("223 Sesame Street, Ottawa, ON, Canada");
+            paInfo.setType(null);
+            pa.addPatient(paInfo);
+            System.out.println(paInfo.getName());
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

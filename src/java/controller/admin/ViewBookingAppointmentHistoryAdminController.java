@@ -31,23 +31,23 @@ public class ViewBookingAppointmentHistoryAdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String userRole = (String) session.getAttribute("userRole");
-        if (userRole == null || userRole.isEmpty()) {
-            session.invalidate();
-            request.getRequestDispatcher("../index.jsp").forward(request, response);
+        HttpSession session = request.getSession(false); // get existing session if exists
+        if (session == null) {
+            response.sendRedirect("../login");
             return;
         }
-        if (userRole.contains("patient")) {
-            session.invalidate();
-            request.getRequestDispatcher("../accessDenied.jsp").forward(request, response);
+
+        String userRole = (String) session.getAttribute("userRole");
+        if (userRole == null || "patient".equals(userRole)) {
+            // Redirect to error page or home page if userRole is patient or userRole is null
+            response.sendRedirect("../accessDenied.jsp"); // You can change this to a relevant page
             return;
         }
         try {
             User currentUser = (User) session.getAttribute("currentUser");
             if (currentUser == null) {
                 session.invalidate();
-                request.getRequestDispatcher("../index.jsp").forward(request, response);
+                response.sendRedirect("../accessDenied.jsp"); // You can change this to a relevant page
                 return;
             }
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
@@ -62,7 +62,15 @@ public class ViewBookingAppointmentHistoryAdminController extends HttpServlet {
                 request.setAttribute("bookingAppointmentHistory", arrBAH);
                 request.setAttribute("emInfo", emInfo);
                 request.setAttribute("username", currentUser.getName());
-                request.getRequestDispatcher("../view/employee/admin/viewAppointmentHistoryAdmin.jsp").forward(request, response);
+                if (userRole.contains("admin")) {
+                    request.getRequestDispatcher("../view/employee/admin/viewAppointmentHistoryAdmin.jsp").forward(request, response);
+                }
+                if (userRole.contains("doctor")) {
+                    request.getRequestDispatcher("../view/employee/doctor/viewAppointmentHistoryDoctor.jsp").forward(request, response);
+                }
+                if (userRole.contains("nurse")) {
+                    request.getRequestDispatcher("../view/employee/nurse/viewAppointmentHistoryNurse.jsp").forward(request, response);
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(ViewBookingAppointmentHistoryAdminController.class.getName()).log(Level.SEVERE, null, ex);

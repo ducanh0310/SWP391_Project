@@ -11,6 +11,7 @@ import java.sql.*;
  * @author Vu Minh Quan
  */
 public class PatientInfo {
+
     private int patientId;
     private String patientSin;
     private String address;
@@ -19,6 +20,7 @@ public class PatientInfo {
     private String email;
     private Date dob;
     private String phoneNumber;
+    private String type;
 
     public PatientInfo() {
     }
@@ -33,8 +35,7 @@ public class PatientInfo {
         this.dob = dob;
         this.phoneNumber = phoneNumber;
     }
-    
-    
+
     public int getPatientId() {
         return patientId;
     }
@@ -98,8 +99,13 @@ public class PatientInfo {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-    
-    
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     
 }

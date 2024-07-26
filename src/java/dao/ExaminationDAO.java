@@ -8,7 +8,6 @@ import dal.DBContext;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ExaminationResult;
 
@@ -127,7 +126,7 @@ public class ExaminationDAO extends DBContext {
     }
 
     public ArrayList<ExaminationResult> getAllExaminationResult() throws SQLException {
-        String query = "SELECT * FROM ExaminationResult where examination_status = 'inactive'";
+        String query = "SELECT * FROM ExaminationResult";
         Connection connection = null;
         PreparedStatement statement = null;
         ArrayList<ExaminationResult> examList = new ArrayList<>();

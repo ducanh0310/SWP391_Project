@@ -281,13 +281,33 @@
                 float: right; /* D?ch sang trái */
                 margin-right: 20px;
             }
-
-
-
         </style>
     </head>
 
     <body>
+        <div class="modal fade" id="confirmApproveModal" tabindex="-1" aria-labelledby="confirmApproveModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmApproveModalLabel">Confirm Approve</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to approve this appointment?<br>
+                        <!--                        - Patient: <input type="text" id="patientName" name="patientName" readonly=""><br>
+                                                - Service: <input type="text" id="serviceName" name="serviceName" readonly=""><br>
+                                                - Room: <input type="text" id="room" name="room" readonly=""><br>
+                                                - Doctor: <input type="text" id="doctor" name="doctorName" readonly=""><br>
+                                                - Date: <input type="text" id="date" name="date" readonly=""><br>
+                                                - Time: <input type="text" id="time" name="time" readonly="">-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmApproveButton">Approve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Book Success Notification start-->
         <div id="bookSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
             <div id="bookSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
@@ -345,11 +365,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <form action="deleteAppointment" method="POST">
+                        <form action="cancel" method="POST">
                             <input type="hidden" id="idDelete" name="idDelete">
                             <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Confirm</button>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -359,7 +378,7 @@
         <!-- Deleted Success Notification start-->
         <div id="deleteSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
             <div id="deleteSuccessAlert" class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                ${deleteSuccess}
+                ${deleteSuccessAdmin}
                 <button type="button" class="btn-close" id="closeNotificationButton" aria-label="Close"></button>
                 <div class="progress mt-2" style="height: 4px;">
                     <div id="deleteSuccessProgressBar" class="progress-bar progress-bar-animated bg-danger" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -417,8 +436,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../ExaminationResultListController">
-                                    <i class="bi bi-people"></i></i> Examination Result List
+                                <a class="nav-link" href="../viewservices">
+                                    <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
                             </li>
                         </ul>
@@ -455,10 +474,13 @@
                         <div class="col-md-6 text-center text-lg-end">
                             <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                                 <div class="me-3 pe-3 border-end py-2">
+                                    <c:if test="${emInfo.employeeType=='r'}">
+                                        <p class="m-0">Receptionist</p>
+                                    </c:if>
                                     <c:if test="${emInfo.employeeType=='d'}">
                                         <p class="m-0">Doctor</p>
                                     </c:if>
-                                    <c:if test="${emInfo.employeeType=='n'}">
+                                    <c:if test="${emInfo.employeeType=='h'}">
                                         <p class="m-0">Nurse</p>
                                     </c:if>
                                     <c:if test="${emInfo.employeeType=='b'}">
@@ -549,18 +571,20 @@
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
                                                                 data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Edit</button>
 
-                                                        <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                                                        <button type="button" class="btn btn-sm btn-neutral approve-button" data-bs-toggle="modal" data-bs-target="#confirmApproveModal" data-patientname="${bAH.patient.name}" 
+                                                                data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                                data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Approve</button>
+                                                        <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-patientname="${bAH.patient.name}"
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
                                                                 data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
                                                             Cancel
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${bAH.statusBook.id == 2}">
-
                                                         <button> <a href="../AddExaminationResult?appId=${bAH.ID}"
                                                                     class="btn btn-sm btn-neutral">View</a>
                                                         </button>
-                                                        <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                                                        <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-patientname="${bAH.patient.name}"
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
                                                                 data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
                                                             Cancel
@@ -729,6 +753,31 @@
                 $('#closeEditNotificationButton').click(function () {
                     $('#editSuccessNotification').hide();
                 });
+                $('.approve-button').click(function (event) {
+                    event.preventDefault(); // Prevent the default anchor behavior
+                    editId = $(this).data('id');
+                    patientname = $(this).data('patientname');
+                    service = $(this).data('service');
+                    room = $(this).data('room');
+                    doctor = $(this).data('doctor');
+                    date = $(this).data('date');
+                    time = $(this).data('time');
+
+                    document.getElementById('patientName').value = patientname;
+                    document.getElementById('serviceName').value = service;
+                    document.getElementById('room').value = room;
+                    document.getElementById('doctor').value = doctor;
+                    document.getElementById('date').value = date;
+                    document.getElementById('time').value = time;
+                    console.log("Edit ID: " + editId);  // Log the ID for debugging
+
+                    // Redirect to the edit URL with the captured ID
+                    if (editId) {
+                        $('#confirmApproveButton').click(function () {
+                            window.location.href = 'approveAppointment?id=' + editId;
+                        });
+                    }
+                });
 
                 // Check for success message from the server
                 let successMessage = '${sessionScope.successEditAdmin}';
@@ -740,6 +789,7 @@
                 //Delete appointment
                 $('.delete-button').click(function (event) {
                     event.preventDefault(); // Prevent the default anchor behavior
+                    patientname = $(this).data('patientname');
                     deleteId = $(this).data('id');
                     service = $(this).data('service');
                     room = $(this).data('room');
@@ -747,6 +797,7 @@
                     date = $(this).data('date');
                     time = $(this).data('time');
 
+                    document.getElementById('patientNameDelete').value = patientname;
                     document.getElementById('serviceDelete').value = service;
                     document.getElementById('roomDelete').value = room;
                     document.getElementById('doctorDelete').value = doctor;
@@ -776,8 +827,8 @@
                 });
 
                 // Check for success message from the server
-                let deleteSuccess = '${sessionScope.deleteSuccess}';
-                if (deleteSuccess) {
+                let deleteSuccessAdmin = '${sessionScope.deleteSuccessAdmin}';
+                if (deleteSuccessAdmin) {
                     showDeleteSuccessNotification();
                 }
 

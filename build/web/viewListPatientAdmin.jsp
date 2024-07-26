@@ -98,13 +98,18 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="PatientController">
+                                <a class="nav-link" href="#">
                                     <i class="bi bi-list-task"></i> Patient
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="ViewEmployeeList">
                                     <i class="bi bi-people"></i></i> Employee
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="viewservices">
+                                    <i class="bi bi-person-lines-fill"></i> Service
                                 </a>
                             </li>
                         </ul>
@@ -221,9 +226,9 @@
                                                     <td>${patient.dob}</td>
                                                     <td class="text-end">
                                                         <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
-                                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+<!--                                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                                             <i class="bi bi-trash"></i>
-                                                        </button>
+                                                        </button>-->
                                                     </td>
                                                 </tr>
                                             </c:forEach>

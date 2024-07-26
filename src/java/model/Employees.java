@@ -11,7 +11,7 @@ import java.sql.Date;
  * @author trung
  */
 public class Employees {
-     private int id;
+    private int id;
     private String employeeSin;
     private String employeeType;
     private String name;

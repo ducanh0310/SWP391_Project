@@ -22,7 +22,7 @@ public class ServiceDB extends DBContext {
 
     public ArrayList<ProcedureCodes> getService() {
         ArrayList<ProcedureCodes> service = new ArrayList<>();
-        String sql = "SELECT * FROM [dbo].[Procedure_codes]";
+        String sql = "SELECT * FROM Procedure_codes ORDER BY CASE WHEN type = 'a' THEN 0 ELSE 1 END, procedure_name";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -34,6 +34,7 @@ public class ServiceDB extends DBContext {
                 p.setProcedure_id(rs.getInt("procedure_id"));
                 p.setProcedure_name(rs.getString("procedure_name"));
                 p.setPrice(rs.getString("price"));
+                p.setDescription(rs.getString("description"));
                 p.setType(rs.getString("type"));
                 service.add(p);
             }
@@ -42,6 +43,7 @@ public class ServiceDB extends DBContext {
         }
         return service;
     }
+
     public void deleteService(int serviceId) throws SQLException {
         String sql = """
                                UPDATE [dbo].[Procedure_codes]

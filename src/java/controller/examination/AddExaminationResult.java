@@ -66,9 +66,10 @@ public class AddExaminationResult extends HttpServlet {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                if (userRole.contains("patient") || userRole.contains("admin") ) {
-                    request.setAttribute("error", "You are not permission!");
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                if (userRole.contains("patient") || userRole.contains("admin")) {
+//                    request.setAttribute("error", "You are not permission!");
+//                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
                 } else {
                     // Retrieve appointment details based on the provided appointment ID
                     String appIdParam = request.getParameter("appId");

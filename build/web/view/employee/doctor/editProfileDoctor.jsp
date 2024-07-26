@@ -454,18 +454,28 @@
                                                 function addCertificateForm() {
                                                     const certificateContainer = document.getElementById('certificateContainer');
                                                     const newCertificateForm = `
-                <div class="row mt-3">
+                <div class="row mt-3 certificate-row">
                     <input type="hidden" name="idCer" value="">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label class="labels">Name</label>
                         <input type="text" id="imageName" name="imageName" class="form-control" placeholder="" value="">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <label class="labels">URL</label>
                         <input type="text" id="imageLink" name="imageLink" class="form-control" placeholder="" value="">
                     </div>
+        <div class="col-md-2">
+                    <label class="labels">&nbsp;</label>
+                    <button type="button" class="btn btn-danger form-control" onclick="deleteCertificateRow(this)"><i class="bi bi-trash"></i></button>
+                </div>
                 </div>`;
                                                     certificateContainer.insertAdjacentHTML('beforeend', newCertificateForm);
+                                                }
+                                                function deleteCertificateRow(button) {
+                                                    const row = button.closest('.certificate-row');
+                                                    if (row) {
+                                                        row.remove();
+                                                    }
                                                 }
         </script>
 

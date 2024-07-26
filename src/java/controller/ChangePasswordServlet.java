@@ -22,7 +22,7 @@ import model.User;
  *
  * @author trung
  */
-@WebServlet(name="ChangePasswordServlet", urlPatterns={"/changepass"})
+@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/changepass"})
 public class ChangePasswordServlet extends HttpServlet {
 
     /**
@@ -67,7 +67,7 @@ public class ChangePasswordServlet extends HttpServlet {
         User currentUser = (User) session.getAttribute("currentUser");
         if (currentUser == null) {
             response.sendRedirect("index.jsp");
-        }else{
+        } else {
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
 
         }
@@ -87,20 +87,25 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPass = request.getParameter("newPass");
         String reEnter = request.getParameter("rePass");
 
-        if (newPass.equals(reEnter)) {
-            try {
-                HttpSession session = request.getSession();
-                User currentUser = (User) session.getAttribute("currentUser");
-                UserDAO userDAO = new UserDAO();
-                userDAO.changePassword(currentUser.getName(), newPass);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+        if (newPass.length() > 8 && newPass.length() < 32) {
+            if (newPass.equals(reEnter)) {
+                try {
+                    HttpSession session = request.getSession();
+                    User currentUser = (User) session.getAttribute("currentUser");
+                    UserDAO userDAO = new UserDAO();
+                    userDAO.changePassword(currentUser.getName(), newPass);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ChangePasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                request.setAttribute("error", "Re-enter password do not match your new password!");
+                request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
+                return;
             }
-        } else {
-            request.setAttribute("error", "Re-enter password do not match your new password!");
+        }else{
+            request.setAttribute("error", "Password must in range 8 - 32!");
             request.getRequestDispatcher("view/authen/changePassword.jsp").forward(request, response);
-            return;
         }
     }
 

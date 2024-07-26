@@ -5,20 +5,15 @@
 package dao;
 
 import dal.DBContext;
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import model.DoctorCertification;
 import model.Employee;
-import model.EmployeeDTO;
 import model.Employees;
-import model.Patient;
-import model.User;
 
 /**
  *
@@ -195,7 +190,7 @@ public class EmployeeDAO extends DBContext {
     public ArrayList<Employees> getEmployees() throws SQLException {
         Employee employeeInfo = new Employee();
         ArrayList<Employees> employeeList = new ArrayList<>();
-        String sql = "select * from Employee";
+        String sql = "select * from Employee WHERE employee_type != 'i'";
         Connection connection = null;
         PreparedStatement statement = null;
         try {

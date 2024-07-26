@@ -63,16 +63,14 @@ public class ConfirmEditSlotController extends HttpServlet {
             DBBookingMedicalAppointment dbBookingMedicalAppointment = new DBBookingMedicalAppointment();
             dbBookingMedicalAppointment.updateAppointment(ba);
 
-            // Xóa tất cả các thuộc tính trong session
-            Enumeration<String> attributeNames = session.getAttributeNames();
-            while (attributeNames.hasMoreElements()) {
-                
-                String attributeName = attributeNames.nextElement();
-                if(!attributeName.equals("currentUser")){
-                    session.removeAttribute(attributeName);
-                }
-                
-            }
+//            // Xóa tất cả các thuộc tính trong session
+//            Enumeration<String> attributeNames = session.getAttributeNames();
+//            while (attributeNames.hasMoreElements()) {
+//                String attributeName = attributeNames.nextElement();
+//                if(!attributeName.equals("currentUser")){
+//                    session.removeAttribute(attributeName);
+//                } 
+//            }
             //Move view appointment history
             session.setAttribute("success", "Edit appointment successfully");
             response.sendRedirect("viewAppointmentHistory");

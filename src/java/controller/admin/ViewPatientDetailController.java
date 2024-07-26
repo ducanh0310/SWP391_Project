@@ -13,11 +13,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Patient;
 import model.PatientGetByIdDTO;
+import model.Representative;
 
 /**
  *
@@ -31,7 +30,9 @@ public class ViewPatientDetailController extends HttpServlet {
             int patientId = Integer.parseInt(request.getParameter("pid"));
             PatientDAO patientView = new PatientDAO();
             PatientGetByIdDTO patients = patientView.getPatient(patientId);
+            Representative representative = patientView.getRepresentative(patientId);
             request.setAttribute("patients", patients);
+            request.setAttribute("representative", representative);
             request.getRequestDispatcher("viewPatientDetail.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ViewPatientDetailController.class.getName()).log(Level.SEVERE, null, ex);

@@ -39,11 +39,11 @@
         <!-- Template Stylesheet -->
         <link href="../css/style.css" rel="stylesheet">
         <style>
-            .hidden {
+          .hidden {
                 display: none;
             }
             .table-container {
-                max-height: 200px; /* Adjust as needed */
+                /*                max-height: 200px;  Adjust as needed */
                 overflow-y: auto;
             }
             .table {
@@ -180,6 +180,10 @@
                 cursor: pointer;
                 color: #aaa;
             }
+
+            .service-list {
+                display: none;
+            }
         </style>
     </head>
 
@@ -224,7 +228,7 @@
 
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-            <a href="index.jsp" class="navbar-brand p-0">
+            <a href="../index.jsp" class="navbar-brand p-0">
                 <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

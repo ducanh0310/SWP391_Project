@@ -13,6 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.*;
 import dao.*;
+import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import validation.Validation;
 
 /**
  *
@@ -59,9 +66,16 @@ public class AddServiceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Retrieve the current session
+        HttpSession session = request.getSession();
+        String userRole = (String) session.getAttribute("userRole");
+        // Check if the user is not logged in
+        if (userRole == null) {
+            // Set an error message and redirect to the home page
+            request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
+            return;
+        }
         request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
-
-        processRequest(request, response);
     }
 
     /**
@@ -75,20 +89,61 @@ public class AddServiceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         try {
             String service = request.getParameter("service");
             String price = request.getParameter("price");
-            ProcedureCodes p = new ProcedureCodes(service, price);
-            ServiceDAO s = new ServiceDAO();
-            if(s.addService(p) == true) {
-                request.getRequestDispatcher("view/admin/viewServiceDetail.jsp");
-            } else {
-                
-            }
-        } catch (Exception e) {
+            String description = request.getParameter("description");
 
+            boolean hasError = false;
+            ServiceDAO s = new ServiceDAO();
+            if (service == null || service.trim().isEmpty()) {
+                request.setAttribute("serviceError", "Service name is required.");
+                hasError = true;
+            } else {
+                if (s.isServiceNameExists(service)) {
+                    request.setAttribute("serviceError", "Service name already exists.");
+                    hasError = true;
+                }
+            }
+            Validation validation = new Validation();
+            String priceError = validation.checkPrice(price);
+            if (priceError != null) {
+                request.setAttribute("priceError", priceError);
+                hasError = true;
+            }
+            if (description == null || description.trim().isEmpty()) {
+                request.setAttribute("descriptionError", "Description is required.");
+                hasError = true;
+            }
+
+            if (hasError) {
+                request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
+                return;
+            }
+
+            ProcedureCodes p = new ProcedureCodes(service, price, description);
+            String result = s.addService(p);
+            HttpSession session = request.getSession();
+            Timer timer = new Timer();
+            if (result.equals("true")) {
+                session.setAttribute("addServicesSuccess", "Service added successfully.");
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        session.removeAttribute("addServicesSuccess");
+                    }
+                }, 5000);
+                response.sendRedirect("viewservices");
+            } else {
+                request.setAttribute("errorMessage", "Failed to add service.");
+                request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddServiceController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Database error: " + ex.getMessage());
+            request.getRequestDispatcher("view/employee/admin/addService.jsp").forward(request, response);
         }
-        processRequest(request, response);
     }
 
     /**

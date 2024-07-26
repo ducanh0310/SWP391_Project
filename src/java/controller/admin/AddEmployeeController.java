@@ -4,9 +4,7 @@
  */
 package controller.admin;
 
-import controller.authen.ConfirmPassword;
 import dao.BranchDAO;
-import dao.DBEmployeeProfile;
 import dao.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +14,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.lang.System.Logger.Level;
 import java.util.logging.Logger;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,7 +21,6 @@ import java.security.SecureRandom;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import model.Branch;
@@ -165,19 +161,10 @@ public class AddEmployeeController extends HttpServlet {
             }
             String password = generateNewPassword();
             boolean isAdded = employeeDAO.addEmployeeAccount(employee, extractUsername(employee.getEmail()), password, certificates);
-            Email.sendNewAccount(employee.getEmail(), extractUsername(employee.getEmail()), password);
             if (isAdded) {
                 // Set success message
                 HttpSession session = request.getSession();
-                // Xóa tất cả các thuộc tính trong session
-                Enumeration<String> attributeNames = session.getAttributeNames();
-                while (attributeNames.hasMoreElements()) {
-
-                    String attributeName = attributeNames.nextElement();
-                    if (!attributeName.equals("currentUser")) {
-                        session.removeAttribute(attributeName);
-                    }
-                }
+                Email.sendNewAccount(employee.getEmail(), extractUsername(employee.getEmail()), password);
                 session.setAttribute("successAddEmployee", "Employee added successfully.");
             } else {
                 // Set error message

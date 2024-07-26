@@ -564,4 +564,72 @@ public class DBBookingMedicalAppointment extends DBContext {
         return arrBookHistory;
     }
 
+    public BookingAppointmentHistory getAppointmentEmail(int id) throws SQLException {
+        String sql = """
+                            Select p.name, ba.booking_date, pc.procedure_name, r.name as room, s.startedTime, s.endTime from Booking_Appointment ba
+                                                        join Patient p on p.Patient_id = ba.patient_id
+                                                        join Slot s on s.id = ba.slot_id
+                                                        join Procedure_codes pc on pc.procedure_id = ba.service_id
+                                                        join Room r on r.id = ba.room_id
+                                                         where ba.id=?""";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                BookingAppointmentHistory bAH = new BookingAppointmentHistory();
+                bAH.setDate(rs.getDate("booking_date"));
+                //Patient
+                Patient patient = new Patient();
+                patient.setEmail(rs.getString("email"));
+                patient.setName(rs.getString("name"));
+                bAH.setPatient(patient);
+                //Service
+                Service service = new Service();
+                service.setName(rs.getString("procedure_name"));
+                bAH.setService(service);
+                //Room
+                Room room = new Room();
+                room.setName(rs.getString("room"));
+                bAH.setRoom(room);
+                //Slot
+                Slot slot = new Slot();
+                slot.setStartedTime(rs.getTimestamp("startedTime").toLocalDateTime().toLocalTime());
+                slot.setEndTime(rs.getTimestamp("endTime").toLocalDateTime().toLocalTime());
+                bAH.setSlot(slot);
+                return bAH;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return null;
+    }
+
+    public void approveAppointment(int id) throws SQLException {
+        String sql = """
+                     UPDATE Booking_Appointment
+                     SET  status_id= 2
+                     WHERE id = ?
+                     """;
+        Connection connection = null;
+        PreparedStatement stm = null;
+        try {
+            connection = getConnection();
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(stm);
+            closeConnection(connection);
+        }
+    }
+
 }

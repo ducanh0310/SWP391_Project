@@ -22,6 +22,8 @@ import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BookingAppointment;
@@ -91,17 +93,16 @@ public class ConfirmSlotController extends HttpServlet {
                 dbBookingMedicalAppointment.insertSlot(appointment);
             }
 
-            // Clear session attributes except 'currentUser'
-            Enumeration<String> attributeNames = session.getAttributeNames();
-            while (attributeNames.hasMoreElements()) {
-                String attributeName = attributeNames.nextElement();
-                if (!attributeName.equals("currentUser")) {
-                    session.removeAttribute(attributeName);
-                }
-            }
-
             session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
             session.setAttribute("bookSuccess", "Appointments booked successfully");
+            // Schedule a task to remove the session attribute after 5 seconds
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    session.removeAttribute("bookSuccess");
+                }
+            }, 5000);
             response.sendRedirect("viewAppointmentHistory");
         } catch (SQLException ex) {
             Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);

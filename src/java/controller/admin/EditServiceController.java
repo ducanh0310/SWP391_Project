@@ -12,10 +12,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dao.*;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
+import validation.Validation;
 
 /**
  *
@@ -23,7 +27,9 @@ import model.*;
  */
 @WebServlet(name = "EditServiceController", urlPatterns = {"/editservice"})
 public class EditServiceController extends HttpServlet {
-int id;
+
+    int id;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,16 +68,26 @@ int id;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false); // get existing session if exists
+        if (session == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        String userRole = (String) session.getAttribute("userRole");
+        if (userRole == null || "patient".equals(userRole)) {
+            // Redirect to error page or home page if userRole is patient or userRole is null
+            response.sendRedirect("accessDenied.jsp"); // You can change this to a relevant page
+        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        ServiceDAO s = new ServiceDAO();
         try {
-            id = Integer.parseInt(request.getParameter("id"));
-            ServiceDAO s = new ServiceDAO();
-            ProcedureCodes p = s.getServiceById(id);
-            request.setAttribute("name", p.getProcedure_name());
-            request.setAttribute("price", p.getPrice());
-            request.getRequestDispatcher("view/employee/admin/editService.jsp").forward(request, response);
-            processRequest(request, response);
+            ProcedureCodes service = s.getServiceById(id);
+            request.setAttribute("service", service);
+            request.getRequestDispatcher("editservice.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Database error: " + ex.getMessage());
+            request.getRequestDispatcher("viewservices.jsp").forward(request, response);
         }
     }
 
@@ -89,17 +105,64 @@ int id;
         try {
             String name = request.getParameter("name");
             String price = request.getParameter("price");
-//            int id = Integer.parseInt(request.getParameter("id"));
-            
+            String description = request.getParameter("description");
+            int id = Integer.parseInt(request.getParameter("id"));
+
             ServiceDAO s = new ServiceDAO();
-            if(s.updateService(id, name, price) ==  true) {
-                response.sendRedirect("viewservices");
-            } else{
-                
+            boolean hasError = false;
+
+            if (name == null || name.trim().isEmpty()) {
+                request.setAttribute("serviceError", "Service name is required.");
+                hasError = true;
             }
-            processRequest(request, response);
+
+            Validation validation = new Validation();
+            String priceError = validation.checkPrice(price);
+            if (priceError != null) {
+                request.setAttribute("priceError", priceError);
+                hasError = true;
+            }
+            if (description == null || description.trim().isEmpty()) {
+                request.setAttribute("descriptionError", "Description is required.");
+                hasError = true;
+            }
+
+            if (hasError) {
+                // Load service data again to display on the form
+                ProcedureCodes service = new ProcedureCodes();
+                service.setProcedure_id(id);
+                service.setProcedure_name(name);
+                service.setPrice(price);
+                service.setDescription(description);
+                request.setAttribute("service", service);
+
+                request.getRequestDispatcher("editservice.jsp").forward(request, response);
+                return;
+            }
+
+            if (s.updateService(id, name, price, description)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("editServiceSuccess", "Service updated successfully.");
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        session.removeAttribute("editServiceSuccess");
+                    }
+                }, 5000);
+                response.sendRedirect("ViewServiceDetail?id=" + id);
+            } else {
+                request.setAttribute("errorMessage", "Failed to update service.");
+                request.getRequestDispatcher("editservice.jsp").forward(request, response);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Database error: " + ex.getMessage());
+            request.getRequestDispatcher("editservice.jsp").forward(request, response);
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(EditServiceController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", "Invalid ID format.");
+            request.getRequestDispatcher("editservice.jsp").forward(request, response);
         }
     }
 

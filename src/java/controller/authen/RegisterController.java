@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import validation.Email;
 
 /**
@@ -84,7 +85,7 @@ public class RegisterController extends HttpServlet {
                 request.getRequestDispatcher("view/authen/confirmemailregister.jsp").forward(request, response);
             }
             request.getRequestDispatcher("view/authen/register.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (ServletException | IOException | SQLException e) {
             //vidu
             request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
         }

@@ -41,6 +41,28 @@ import model.PatientGetByIdDTO;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+//Login with google:
+//    public static String getToken(String code) throws ClientProtocolException, IOException {
+//        //call api to get token
+//        String response = Request.Post(Constants.GOOGLE_LINK_GET_TOKEN)
+//                .bodyForm(Form.form().add("client_id", Constants.GOOGLE_CLIENT_ID)
+//                        .add("client_secret", Constants.GOOGLE_CLIENT_SECRET)
+//                        .add("", Constants.GOOGLE_REDIRECT_URI).add("code", code)
+//                        .add("grant_type", Constants.GOOGLE_GRANT_TYPE).build())
+//                .execute().returnContent().asString();
+//
+//        JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
+//        String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
+//        return accessToken;
+//    }
+//
+//    public static PatientInfo getUserInfor(final String accessToken) throws ClientProtocolException, IOException {
+//        String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
+//        String response = Request.Get(link).execute().returnContent().asString();
+//        PatientInfo googlePojo = new Gson().fromJson(response, PatientInfo.class);
+//
+//        return googlePojo;
+//    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -67,7 +89,6 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("username").trim();
         String passWord = request.getParameter("password").trim();
 
-        // Check if username or password is null or empty
         if (userName == null || passWord == null
                 || userName.isEmpty() || passWord.isEmpty()) {
             request.setAttribute("error", "Username and password must not be empty.");
@@ -76,11 +97,9 @@ public class LoginServlet extends HttpServlet {
             try {
                 UserDAO userDAO = new UserDAO();
                 User user = userDAO.checkUser(userName);
-                // Validate user and password
                 if (user != null && user.getPassword().equals(passWord)) {
                     session.setAttribute("currentUser", user);
                     Authorization author = new Authorization();
-                    // Check user type
                     if (user.getType_Id() == 0) {
                         PatientDAO patientDAO = new PatientDAO();
                         PatientGetByIdDTO pat = patientDAO.getPatientById(user.getPatient_Id());
@@ -91,30 +110,31 @@ public class LoginServlet extends HttpServlet {
                     } else if (user.getType_Id() == 1) {
                         EmployeeDAO empDao = new EmployeeDAO();
                         Employee emp = empDao.getEmployeeByEmployeeId(user.getEmployee_Id());
-                        if (author.isEmployee(user.getEmployee_Id()).equals("b")) {
-                            session.setAttribute("admin", emp);
-                            session.setAttribute("userRole", "admin");
-                            response.sendRedirect("appointment/viewAppointmentHistory");
-                        } else if (author.isEmployee(user.getEmployee_Id()).equals("d")) {
-                            session.setAttribute("doctor", emp);
-                            session.setAttribute("userRole", "doctor");
-                            request.getRequestDispatcher("view/employee/doctor/home.jsp").forward(request, response);
-                        } else if (author.isEmployee(user.getEmployee_Id()).equals("h")) {
-                            session.setAttribute("nurse", emp);
-                            session.setAttribute("userRole", "nurse");
-                            request.getRequestDispatcher("view/employee/Nurse/home.jsp").forward(request, response);
-                        } else {
-                            session.setAttribute("receptionist", emp);
-                            session.setAttribute("userRole", "receptionist");
-                            request.getRequestDispatcher("view/employee/receptionist/home.jsp").forward(request, response);
+                        switch (author.isEmployee(user.getEmployee_Id())) {
+                            case "b":
+                                session.setAttribute("admin", emp);
+                                session.setAttribute("userRole", "admin");
+                                break;
+                            case "d":
+                                session.setAttribute("doctor", emp);
+                                session.setAttribute("userRole", "doctor");
+                                break;
+                            case "n":
+                                session.setAttribute("nurse", emp);
+                                session.setAttribute("userRole", "nurse");
+                                break;
+                            default:
+                                break;
                         }
+                        response.sendRedirect("appointment/viewAppointmentHistory");
                     }
                 } else {
                     request.setAttribute("error", "Invalid username or password.");
                     request.getRequestDispatcher("Login.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println(e);
+//                response.sendRedirect("index.jsp");
             }
         }
 

@@ -97,7 +97,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Brand -->
-                    <a href="index.jsp" class="navbar-brand p-0">
+                    <a href="../index.jsp" class="navbar-brand p-0">
                         <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

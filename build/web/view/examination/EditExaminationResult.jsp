@@ -205,7 +205,7 @@
 
                                             <div class="col-md-6">
                                                 <label class="labels">Pay status</label>
-                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${edit.room}" readonly>
+                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${edit.payRevervationStatus}" readonly>
                                             </div>
                                         </div>
                                         <div class="row mt-3">

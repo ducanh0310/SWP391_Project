@@ -134,6 +134,15 @@
     </head>
 
     <body>
+        <div id="AddServiceSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
+            <div id="bookSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                ${addServicesSuccess}
+                <button type="button" class="btn-close" id="closeBookNotificationButton" aria-label="Close"></button>
+                <div class="progress mt-2" style="height: 4px;">
+                    <div id="bookSuccessProgressBar" class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
         <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
             <!-- Vertical Navbar -->
             <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
@@ -318,190 +327,218 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script>
-                                                    var mnu = document.getElementById("mnu");
-                                                    var mstate = false;
-
-                                                    function slideMenu() {
-                                                        mstate = !mstate;
-                                                        if (mstate) {
-                                                            mnu.style.left = "0px";
-                                                            mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
-                                                        } else {
-                                                            mnu.style.left = "-250px";
-                                                            mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
-                                                        }
+                                                    function showEditServiceSuccessNotification() {
+                                                        $('#editServiceSuccessNotification').show();
+                                                        let progressBar = $('#bookSuccessProgressBar');
+                                                        let width = 0;
+                                                        let interval = setInterval(function () {
+                                                            width++;
+                                                            progressBar.css('width', width + '%');
+                                                            if (width === 200) {
+                                                                clearInterval(interval);
+                                                                $('#editServiceSuccessNotification').fadeOut();
+                                                            }
+                                                        }, 40); // T?c ?? gi?m thanh ti?n ?? (milliseconds)
                                                     }
 
-                                                    function deleteService(serviceId) {
-                                                        if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
-                                                            // Gửi yêu cầu xóa dịch vụ thông qua Ajax
-                                                            fetch(`/delete-service/${serviceId}`, {
-                                                                method: "DELETE"
-                                                            })
-                                                                    .then(response => {
-                                                                        if (response.ok) {
-                                                                            console.log("Dịch vụ đã được xóa thành công!");
-                                                                            // Xóa phần tử giao diện người dùng tương ứng sau khi xóa thành công
-                                                                            const serviceElement = document.getElementById(`service${serviceId}`);
-                                                                            if (serviceElement) {
-                                                                                serviceElement.remove();
-                                                                            }
-                                                                        } else {
-                                                                            console.error("Đã xảy ra lỗi khi xóa dịch vụ");
-                                                                        }
-                                                                    })
-                                                                    .catch(error => {
-                                                                        console.error("Đã xảy ra lỗi khi gửi yêu cầu xóa dịch vụ: " + error);
-                                                                    });
+                                                    // Close notification button handler
+                                                    $('#closeBookNotificationButton').click(function () {
+                                                        $('#editServiceSuccessNotification').hide();
+                                                    });
+
+                                                    // Check for success message from the server
+                                                    let editServiceSuccess = '${sessionScope.editServiceSuccess}';
+                                                    if (addServicesSuccess) {
+                                                        showAddServiceSuccessNotification();
                                                         }
                                                     }
+                                                    );
+        </script>
+        <script>
+            var mnu = document.getElementById("mnu");
+            var mstate = false;
 
-                                                    getPagination('#table-id');
-                                                    $('#maxRows').trigger('change');
-                                                    function getPagination(table) {
+            function slideMenu() {
+                mstate = !mstate;
+                if (mstate) {
+                    mnu.style.left = "0px";
+                    mnu.style.boxShadow = "100px 0px 300px 0px rgba(0,0,0,0.3)";
+                } else {
+                    mnu.style.left = "-250px";
+                    mnu.style.boxShadow = "0px 0px 00px 0px rgba(0,0,0,0.0)";
+                }
+            }
 
-                                                        $('#maxRows').on('change', function () {
-                                                            $('.pagination').html('');						// reset pagination div
-                                                            var trnum = 0;									// reset tr counter 
-                                                            var maxRows = parseInt($(this).val());			// get Max Rows from select option
+            function deleteService(serviceId) {
+                if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
+                    // Gửi yêu cầu xóa dịch vụ thông qua Ajax
+                    fetch(`/delete-service/${serviceId}`, {
+                        method: "DELETE"
+                    })
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log("Dịch vụ đã được xóa thành công!");
+                                    // Xóa phần tử giao diện người dùng tương ứng sau khi xóa thành công
+                                    const serviceElement = document.getElementById(`service${serviceId}`);
+                                    if (serviceElement) {
+                                        serviceElement.remove();
+                                    }
+                                } else {
+                                    console.error("Đã xảy ra lỗi khi xóa dịch vụ");
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Đã xảy ra lỗi khi gửi yêu cầu xóa dịch vụ: " + error);
+                            });
+                }
+            }
 
-                                                            var totalRows = $(table + ' tbody tr').length;		// numbers of rows 
-                                                            $(table + ' tr:gt(0)').each(function () {			// each TR in  table and not the header
-                                                                trnum++;									// Start Counter 
-                                                                if (trnum > maxRows) {						// if tr number gt maxRows
+            getPagination('#table-id');
+            $('#maxRows').trigger('change');
+            function getPagination(table) {
 
-                                                                    $(this).hide();							// fade it out 
-                                                                }
-                                                                if (trnum <= maxRows) {
-                                                                    $(this).show();
-                                                                }// else fade in Important in case if it ..
-                                                            });											//  was fade out to fade it in 
-                                                            if (totalRows > maxRows) {						// if tr total rows gt max rows option
-                                                                var pagenum = Math.ceil(totalRows / maxRows);	// ceil total(rows/maxrows) to get ..  
-                                                                //	numbers of pages 
-                                                                for (var i = 1; i <= pagenum; ) {			// for each page append pagination li 
-                                                                    $('.pagination').append('<li data-page="' + i + '">\
+                $('#maxRows').on('change', function () {
+                    $('.pagination').html('');						// reset pagination div
+                    var trnum = 0;									// reset tr counter 
+                    var maxRows = parseInt($(this).val());			// get Max Rows from select option
+
+                    var totalRows = $(table + ' tbody tr').length;		// numbers of rows 
+                    $(table + ' tr:gt(0)').each(function () {			// each TR in  table and not the header
+                        trnum++;									// Start Counter 
+                        if (trnum > maxRows) {						// if tr number gt maxRows
+
+                            $(this).hide();							// fade it out 
+                        }
+                        if (trnum <= maxRows) {
+                            $(this).show();
+                        }// else fade in Important in case if it ..
+                    });											//  was fade out to fade it in 
+                    if (totalRows > maxRows) {						// if tr total rows gt max rows option
+                        var pagenum = Math.ceil(totalRows / maxRows);	// ceil total(rows/maxrows) to get ..  
+                        //	numbers of pages 
+                        for (var i = 1; i <= pagenum; ) {			// for each page append pagination li 
+                            $('.pagination').append('<li data-page="' + i + '">\
                                                                       <span>' + i++ + '<span class="sr-only">(current)</span></span>\
                                                                     </li>').show();
-                                                                }											// end for i 
+                        }											// end for i 
 
 
-                                                            } 												// end if row count > max rows
-                                                            $('.pagination li:first-child').addClass('active'); // add active class to the first li 
+                    } 												// end if row count > max rows
+                    $('.pagination li:first-child').addClass('active'); // add active class to the first li 
 
 
-                                                            //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
-                                                            showig_rows_count(maxRows, 1, totalRows);
-                                                            //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
+                    //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
+                    showig_rows_count(maxRows, 1, totalRows);
+                    //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
 
-                                                            $('.pagination li').on('click', function (e) {		// on click each page
-                                                                e.preventDefault();
-                                                                var pageNum = $(this).attr('data-page');	// get it's number
-                                                                var trIndex = 0;							// reset tr counter
-                                                                $('.pagination li').removeClass('active');	// remove active class from all li 
-                                                                $(this).addClass('active');					// add active class to the clicked 
-
-
-                                                                //SHOWING ROWS NUMBER OUT OF TOTAL
-                                                                showig_rows_count(maxRows, pageNum, totalRows);
-                                                                //SHOWING ROWS NUMBER OUT OF TOTAL
+                    $('.pagination li').on('click', function (e) {		// on click each page
+                        e.preventDefault();
+                        var pageNum = $(this).attr('data-page');	// get it's number
+                        var trIndex = 0;							// reset tr counter
+                        $('.pagination li').removeClass('active');	// remove active class from all li 
+                        $(this).addClass('active');					// add active class to the clicked 
 
 
+                        //SHOWING ROWS NUMBER OUT OF TOTAL
+                        showig_rows_count(maxRows, pageNum, totalRows);
+                        //SHOWING ROWS NUMBER OUT OF TOTAL
 
-                                                                $(table + ' tr:gt(0)').each(function () {		// each tr in table not the header
-                                                                    trIndex++;								// tr index counter 
-                                                                    // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
-                                                                    if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
-                                                                        $(this).hide();
-                                                                    } else {
-                                                                        $(this).show();
-                                                                    } 				//else fade in 
-                                                                }); 										// end of for each tr in table
-                                                            });										// end of on click pagination list
-                                                        });
-                                                        // end of on select change 
 
-                                                        // END OF PAGINATION 
 
-                                                    }
+                        $(table + ' tr:gt(0)').each(function () {		// each tr in table not the header
+                            trIndex++;								// tr index counter 
+                            // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+                            if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
+                                $(this).hide();
+                            } else {
+                                $(this).show();
+                            } 				//else fade in 
+                        }); 										// end of for each tr in table
+                    });										// end of on click pagination list
+                });
+                // end of on select change 
+
+                // END OF PAGINATION 
+
+            }
 
 
 
 
 // SI SETTING
-                                                    $(function () {
-                                                        // Just to append id number for each row  
-                                                        default_index();
+            $(function () {
+                // Just to append id number for each row  
+                default_index();
 
-                                                    });
+            });
 
 //ROWS SHOWING FUNCTION
-                                                    function showig_rows_count(maxRows, pageNum, totalRows) {
-                                                        //Default rows showing
-                                                        var end_index = maxRows * pageNum;
-                                                        var start_index = ((maxRows * pageNum) - maxRows) + parseFloat(1);
-                                                        var string = 'Showing ' + start_index + ' to ' + end_index + ' of ' + totalRows + ' entries';
-                                                        $('.rows_count').html(string);
-                                                    }
+            function showig_rows_count(maxRows, pageNum, totalRows) {
+                //Default rows showing
+                var end_index = maxRows * pageNum;
+                var start_index = ((maxRows * pageNum) - maxRows) + parseFloat(1);
+                var string = 'Showing ' + start_index + ' to ' + end_index + ' of ' + totalRows + ' entries';
+                $('.rows_count').html(string);
+            }
 
 // CREATING INDEX
-                                                    function default_index() {
-                                                        $('table tr:eq(0)').prepend('<th> ID </th>')
+            function default_index() {
+                $('table tr:eq(0)').prepend('<th> ID </th>')
 
-                                                        var id = 0;
+                var id = 0;
 
-                                                        $('table tr:gt(0)').each(function () {
-                                                            id++
-                                                            $(this).prepend('<td>' + id + '</td>');
-                                                        });
-                                                    }
+                $('table tr:gt(0)').each(function () {
+                    id++
+                    $(this).prepend('<td>' + id + '</td>');
+                });
+            }
 
 // All Table search script
-                                                    function FilterkeyWord_all_table() {
+            function FilterkeyWord_all_table() {
 
 // Count td if you want to search on all table instead of specific column
 
-                                                        var count = $('.table').children('tbody').children('tr:first-child').children('td').length;
+                var count = $('.table').children('tbody').children('tr:first-child').children('td').length;
 
-                                                        // Declare variables
-                                                        var input, filter, table, tr, td, i;
-                                                        input = document.getElementById("search_input_all");
-                                                        var input_value = document.getElementById("search_input_all").value;
-                                                        filter = input.value.toLowerCase();
-                                                        if (input_value != '') {
-                                                            table = document.getElementById("table-id");
-                                                            tr = table.getElementsByTagName("tr");
+                // Declare variables
+                var input, filter, table, tr, td, i;
+                input = document.getElementById("search_input_all");
+                var input_value = document.getElementById("search_input_all").value;
+                filter = input.value.toLowerCase();
+                if (input_value != '') {
+                    table = document.getElementById("table-id");
+                    tr = table.getElementsByTagName("tr");
 
-                                                            // Loop through all table rows, and hide those who don't match the search query
-                                                            for (i = 1; i < tr.length; i++) {
+                    // Loop through all table rows, and hide those who don't match the search query
+                    for (i = 1; i < tr.length; i++) {
 
-                                                                var flag = 0;
+                        var flag = 0;
 
-                                                                for (j = 0; j < count; j++) {
-                                                                    td = tr[i].getElementsByTagName("td")[j];
-                                                                    if (td) {
+                        for (j = 0; j < count; j++) {
+                            td = tr[i].getElementsByTagName("td")[j];
+                            if (td) {
 
-                                                                        var td_text = td.innerHTML;
-                                                                        if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                                                                            //var td_text = td.innerHTML;  
-                                                                            //td.innerHTML = 'shaban';
-                                                                            flag = 1;
-                                                                        } else {
-                                                                            //DO NOTHING
-                                                                        }
-                                                                    }
-                                                                }
-                                                                if (flag == 1) {
-                                                                    tr[i].style.display = "";
-                                                                } else {
-                                                                    tr[i].style.display = "none";
-                                                                }
-                                                            }
-                                                        } else {
-                                                            //RESET TABLE
-                                                            $('#maxRows').trigger('change');
-                                                        }
-                                                    }
+                                var td_text = td.innerHTML;
+                                if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                                    //var td_text = td.innerHTML;  
+                                    //td.innerHTML = 'shaban';
+                                    flag = 1;
+                                } else {
+                                    //DO NOTHING
+                                }
+                            }
+                        }
+                        if (flag == 1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                } else {
+                    //RESET TABLE
+                    $('#maxRows').trigger('change');
+                }
+            }
         </script>
     </body>
 </html>

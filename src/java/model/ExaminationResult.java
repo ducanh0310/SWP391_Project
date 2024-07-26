@@ -23,7 +23,7 @@ public class ExaminationResult {
     private String startTime;
     private String endTime;
     private int room;
-    //private int idStatus;
+    private int idStatus;
     private String status;
     private String payRevervationStatus;
     private String description;
@@ -31,7 +31,7 @@ public class ExaminationResult {
     public ExaminationResult() {
     }
 
-    public ExaminationResult(int id,int appointmentId, int patientId, String patientName, String service, int price, String examinationStatus, String doctor, Date bookingDate, String startTime, String endTime, int room, String status, String payRevervationStatus, String description) {
+    public ExaminationResult(int id,int appointmentId, int patientId, String patientName, String service, int price, String examinationStatus, String doctor, Date bookingDate, String startTime, String endTime, int room, int idStatus, String status, String payRevervationStatus, String description) {
         this.id = id;
         this.appointmentId = appointmentId;
         this.patientId = patientId;
@@ -44,7 +44,7 @@ public class ExaminationResult {
         this.startTime = startTime;
         this.endTime = endTime;
         this.room = room;
-        //this.idStatus = idStatus;
+        this.idStatus = idStatus;
         this.status = status;
         this.payRevervationStatus = payRevervationStatus;
         this.description = description;
@@ -146,13 +146,13 @@ public class ExaminationResult {
         this.room = room;
     }
 
-//    public int getIdStatus() {
-//        return idStatus;
-//    }
-//
-//    public void setIdStatus(int idStatus) {
-//        this.idStatus = idStatus;
-//    }
+    public int getIdStatus() {
+        return idStatus;
+    }
+
+    public void setIdStatus(int idStatus) {
+        this.idStatus = idStatus;
+    }
 
     public String getStatus() {
         return status;

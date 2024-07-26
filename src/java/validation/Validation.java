@@ -18,7 +18,7 @@ public class Validation {
 
     public static boolean isValidPassword(String password) {
         // Check if the password is at least 8 characters long
-        if (password.length() < 8 ||  password.length() > 128) {
+        if (password.length() < 8 || password.length() > 128) {
             return false;
         }
 
@@ -122,6 +122,44 @@ public class Validation {
         return matcher.matches();
     }
 
+    public boolean isDistantDOB14(Date dob) {
+        LocalDate birthDate = dob.toLocalDate();
+        LocalDate today = LocalDate.now();
+
+        // Check if the birth date is in the future
+        if (birthDate.isAfter(today)) {
+            return false;
+        }
+
+        // Check if the birth date is too far in the past (e.g., more than 150 years ago)
+        if (birthDate.isBefore(today.minusYears(150))) {
+            return false;
+        }
+
+        // Check if the age is at least 18 years
+        if (Period.between(birthDate, today).getYears() < 14) {
+            return false;
+        }
+        return true;
+    }
+
+    public String checkPrice(String price) {
+        if (price == null || price.trim().isEmpty()) {
+            return "Price is required.";
+        }
+
+        try {
+            double priceValue = Double.parseDouble(price);
+            if (priceValue < 0) {
+                return "Price must be a positive number.";
+            }
+        } catch (NumberFormatException e) {
+            return "Price must be a valid number.";
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) {
         // Test usernames
         String[] usernames = {"user_1", "user!23", "usa", "valid username", "12345", "''''"};
@@ -132,4 +170,4 @@ public class Validation {
         }
     }
 
-    }
+}

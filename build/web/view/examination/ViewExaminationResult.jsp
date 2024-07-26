@@ -193,18 +193,12 @@
                                         <div class="row mt-3">
                                             <div class="col-md-6">
                                                 <label class="labels">Status</label>
-                                                <select id="appointmentStatus" name="appointmentStatus" class="form-control" readonly>
-                                                    <option value="Verifying" ${edit.status == 'Verifying' ? 'selected' : ''}>Verifying</option>
-                                                    <option value="Not started" ${edit.status == 'Not started' ? 'selected' : ''}>Not started</option>
-                                                    <option value="Completed" ${edit.status == 'Completed' ? 'selected' : ''}>Completed</option>
-                                                    <option value="Cancelled" ${edit.status == 'Cancelled' ? 'selected' : ''}>Cancelled</option>
-                                                    <option value="Empty" ${edit.status == 'Empty' ? 'selected' : ''}>Empty</option>
-                                                </select>
+                                                <input type="text" id="appointmentStatus" name="appointmentStatus" class="form-control" placeholder=" " value="${edit.status}" readonly>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <label class="labels">Pay status</label>
-                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${edit.room}" readonly>
+                                                <input type="text" id="payStatus" name="payStatus" class="form-control" placeholder=" " value="${edit.payRevervationStatus}" readonly>
                                             </div>
                                         </div>
                                         <div class="row mt-3">

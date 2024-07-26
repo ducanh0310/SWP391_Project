@@ -36,17 +36,15 @@ public class PatientController extends HttpServlet {
             User currentUser = (User) session.getAttribute("currentUser");
             if (currentUser == null) {
                 session.invalidate();
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                response.sendRedirect("index.jsp");
                 return;
+            } else if (currentUser.getPatient_Id() != null) {
+                session.invalidate();
+                request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
             }
             DBEmployeeProfile dbEm = new DBEmployeeProfile();
             Employee emInfo = dbEm.getInfoEmployee(currentUser.getName());
             String userRole = (String) session.getAttribute("userRole");
-            if (userRole.contains("patient") || userRole.isEmpty() || userRole == null) {
-                session.invalidate();
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                return;
-            }
             PatientDAO patientList = new PatientDAO();
             ArrayList<PatientGetByIdDTO> patients;
             try {
