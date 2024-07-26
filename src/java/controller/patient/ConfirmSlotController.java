@@ -22,6 +22,8 @@ import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BookingAppointment;
@@ -49,17 +51,6 @@ public class ConfirmSlotController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
-        String userRole = (String) session.getAttribute("userRole");
-        if (userRole == null || userRole.isEmpty()) {
-            session.invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
-        if (currentUser == null) {
-            session.invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
         try {
             // Assuming maximum 10 slots to simplify. Adjust as needed.
             int maxSlots = 10;
@@ -77,12 +68,12 @@ public class ConfirmSlotController extends HttpServlet {
                 String roomId = request.getParameter(roomIdParam);
                 String date = request.getParameter(dateParam);
                 String serviceId = request.getParameter(serviceIdParam);
-                
+
                 // Check if slotId is null to determine if there are no more slots
                 if (slotId == null) {
                     break;
                 }
-                
+
                 // Create and populate BookingAppointment object
                 BookingAppointment ba = new BookingAppointment();
                 ba.setSlotId(Integer.parseInt(slotId));
@@ -90,7 +81,7 @@ public class ConfirmSlotController extends HttpServlet {
                 ba.setRoomId(Integer.parseInt(roomId));
                 ba.setBookingDate(Date.valueOf(date));
                 ba.setServiceId(Integer.parseInt(serviceId));
-                
+                ba.setPatiendId(Integer.parseInt(currentUser.getPatient_Id()));
                 ba.setStatusId(1); // Assuming 1 represents some kind of default status
 
                 appointments.add(ba);
@@ -102,25 +93,17 @@ public class ConfirmSlotController extends HttpServlet {
                 dbBookingMedicalAppointment.insertSlot(appointment);
             }
 
-            // Clear session attributes except 'currentUser'
-            Enumeration<String> attributeNames = session.getAttributeNames();
-            while (attributeNames.hasMoreElements()) {
-                String attributeName = attributeNames.nextElement();
-                if (!attributeName.equals("currentUser")) {
-                    session.removeAttribute(attributeName);
+            session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
+            session.setAttribute("bookSuccess", "Appointments booked successfully");
+            // Schedule a task to remove the session attribute after 5 seconds
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    session.removeAttribute("bookSuccess");
                 }
-            }
-
-            if (userRole.contains("patient")) {
-                session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
-                session.setAttribute("bookSuccess", "Appointments booked successfully");
-                response.sendRedirect("viewAppointmentHistory");
-
-            } else {
-                session.invalidate();
-                request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
-            }
-
+            }, 5000);
+            response.sendRedirect("viewAppointmentHistory");
         } catch (SQLException ex) {
             Logger.getLogger(ConfirmSlotController.class.getName()).log(Level.SEVERE, null, ex);
         }

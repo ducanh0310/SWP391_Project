@@ -822,7 +822,7 @@
                     // Redirect to the edit URL with the captured ID
                     if (editId) {
                         $('#confirmApproveButton').click(function () {
-                            window.location.href = 'approveAppointment?id=' + editId;
+                            window.location.href = 'appointment/approveAppointment?id=' + editId;
                         });
                     }
                 });
@@ -850,7 +850,7 @@
                     // Redirect to the edit URL with the captured ID
                     if (editId) {
                         $('#confirmPayButton').click(function () {
-                            window.location.href = '../PayController?id=' + editId;
+                            window.location.href = 'PayController?id=' + editId;
                         });
                     }
                 });
