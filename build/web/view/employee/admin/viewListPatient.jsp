@@ -162,6 +162,7 @@
                                                 <td>${patient.dob}</td>                                               
                                                 <td class="text-end">
                                                     <a href="viewPatientDetail.jsp" class="btn btn-sm btn-neutral">View</a>
+                                                    <a href="BookingAppointment" class="btn btn-sm btn-neutral">Book</a>
 <!--                                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                                         <i class="bi bi-trash"></i>
                                                     </button>-->

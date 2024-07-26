@@ -311,6 +311,31 @@
                 </div>
             </div>
         </div>
+        <!--Payment-->
+        <div class="modal fade" id="confirmPayModal" tabindex="-1" aria-labelledby="confirmPayModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmPayModalLabel">Confirm Payment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to verify payment for this appointment?<br>
+                        <!--                        - Patient: <input type="text" id="patientName" name="patientName" readonly=""><br>
+                                                - Service: <input type="text" id="serviceName" name="serviceName" readonly=""><br>
+                                                - Room: <input type="text" id="room" name="room" readonly=""><br>
+                                                - Doctor: <input type="text" id="doctor" name="doctorName" readonly=""><br>
+                                                - Date: <input type="text" id="date" name="date" readonly=""><br>
+                                                - Time: <input type="text" id="time" name="time" readonly="">-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmPayButton">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Book Success Notification start-->
         <div id="bookSuccessNotification" class="position-fixed top-0 end-0 p-3" style="z-index: 1060;">
             <div id="bookSuccessAlert" class="alert alert-success alert-dismissible fade show mb-0" role="alert">
@@ -425,7 +450,7 @@
                         <!-- Navigation -->
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="">
                                     <i class="bi bi-clock"></i> Appointment
                                 </a>
                             </li>
@@ -496,13 +521,17 @@
 
                 <!--View Medical Appointment History Start-->
                 <main class="py-6 bg-surface-secondary">
+
                     <div class="container-fluid">                   
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
                                 <h5 class="mb-0">Medical Appointment History</h5>
                             </div>
+
                             <div style="color: red; margin-left: 10px">${payNotification}</div>
+
                             <div class="table-responsive">
+                                <a href="../BookingAppointment" type="button" class="btn btn-primary" >Book Appointment</a>
                                 <table class="table table-hover table-nowrap" id="myTable">
                                     <thead class="thead-light">
                                         <tr>
@@ -569,10 +598,16 @@
                                                         <button type="button" class="btn btn-sm btn-neutral edit-button" data-bs-toggle="modal" data-bs-target="#confirmEditModal" data-patientname="${bAH.patient.name}" 
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
                                                                 data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Edit</button>
-
-                                                        <button type="button" class="btn btn-sm btn-neutral approve-button" data-bs-toggle="modal" data-bs-target="#confirmApproveModal" data-patientname="${bAH.patient.name}" 
-                                                                data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
-                                                                data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Approve</button>
+                                                        <c:if test="${bAH.reservationStatus =='Pay reser'}">
+                                                            <button type="button" class="btn btn-sm btn-neutral approve-button" data-bs-toggle="modal" data-bs-target="#confirmApproveModal" data-patientname="${bAH.patient.name}" 
+                                                                    data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                                    data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Approve</button>
+                                                        </c:if>
+                                                        <c:if test="${bAH.reservationStatus =='Not pay'}">
+                                                            <button type="button" class="btn btn-sm btn-neutral pay-button" data-bs-toggle="modal" data-bs-target="#confirmPayModal" data-patientname="${bAH.patient.name}" 
+                                                                    data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
+                                                                    data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}">Pay</button>
+                                                        </c:if>
                                                         <button type="button" class="btn btn-sm btn-neutral delete-button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                                                 data-id="${bAH.ID}" data-service="${bAH.service.name}" data-room="${bAH.room.name}" data-doctor="${bAH.doctor.name}"
                                                                 data-date="${bAH.date}" data-time="${bAH.slot.startedTime}-${bAH.slot.endTime}" >
@@ -708,6 +743,7 @@
                 let doctor;
                 let date;
                 let time;
+                //Edit 
                 $('.edit-button').click(function (event) {
                     event.preventDefault(); // Prevent the default anchor behavior
                     editId = $(this).data('id');
@@ -734,7 +770,7 @@
                     }
                 });
 
-                //Edit appointment
+                
                 function showEditSuccessNotification() {
                     $('#editSuccessNotification').show();
                     let progressBar = $('#editSuccessProgressBar');
@@ -749,10 +785,22 @@
                     }, 40); // T?c ?? gi?m thanh ti?n ?? (milliseconds)
                 }
 
-                // Close notification button handler
+                
                 $('#closeEditNotificationButton').click(function () {
                     $('#editSuccessNotification').hide();
                 });
+                
+                
+
+                // Check for success message from the server
+                let successMessage = '${sessionScope.successEditAdmin}';
+                console.log(successMessage);
+                if (successMessage) {
+                    showEditSuccessNotification();
+                }
+
+
+                //Approve
                 $('.approve-button').click(function (event) {
                     event.preventDefault(); // Prevent the default anchor behavior
                     editId = $(this).data('id');
@@ -778,13 +826,36 @@
                         });
                     }
                 });
+                
+                
+                //Pay
+                $('.pay-button').click(function (event) {
+                    event.preventDefault(); // Prevent the default anchor behavior
+                    editId = $(this).data('id');
+                    patientname = $(this).data('patientname');
+                    service = $(this).data('service');
+                    room = $(this).data('room');
+                    doctor = $(this).data('doctor');
+                    date = $(this).data('date');
+                    time = $(this).data('time');
 
-                // Check for success message from the server
-                let successMessage = '${sessionScope.successEditAdmin}';
-                console.log(successMessage);
-                if (successMessage) {
-                    showEditSuccessNotification();
-                }
+                    document.getElementById('patientName').value = patientname;
+                    document.getElementById('serviceName').value = service;
+                    document.getElementById('room').value = room;
+                    document.getElementById('doctor').value = doctor;
+                    document.getElementById('date').value = date;
+                    document.getElementById('time').value = time;
+                    console.log("Edit ID: " + editId);  // Log the ID for debugging
+
+                    // Redirect to the edit URL with the captured ID
+                    if (editId) {
+                        $('#confirmPayButton').click(function () {
+                            window.location.href = '../PayController?id=' + editId;
+                        });
+                    }
+                });
+                
+                
 
                 //Delete appointment
                 $('.delete-button').click(function (event) {

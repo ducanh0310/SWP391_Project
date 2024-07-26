@@ -221,6 +221,7 @@
                                                     <td>${patient.dob}</td>
                                                     <td class="text-end">
                                                         <a href="patientDetail?pid=${patient.id}" class="btn btn-sm btn-neutral">View</a>
+                                                         <a href="BookingAppointment?pid=${patient.id}" class="btn btn-sm btn-neutral">Book</a>
 <!--                                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                                             <i class="bi bi-trash"></i>
                                                         </button>-->

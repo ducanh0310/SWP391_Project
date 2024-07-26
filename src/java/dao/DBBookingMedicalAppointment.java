@@ -566,7 +566,7 @@ public class DBBookingMedicalAppointment extends DBContext {
 
     public BookingAppointmentHistory getAppointmentEmail(int id) throws SQLException {
         String sql = """
-                            Select p.name, ba.booking_date, pc.procedure_name, r.name as room, s.startedTime, s.endTime from Booking_Appointment ba
+                            Select p.name, p.email, ba.booking_date, pc.procedure_name, r.name as room, s.startedTime, s.endTime from Booking_Appointment ba
                                                         join Patient p on p.Patient_id = ba.patient_id
                                                         join Slot s on s.id = ba.slot_id
                                                         join Procedure_codes pc on pc.procedure_id = ba.service_id
@@ -631,5 +631,28 @@ public class DBBookingMedicalAppointment extends DBContext {
             closeConnection(connection);
         }
     }
+    
+    public void payAppointment(int id) throws SQLException {
+        String sqlUpdate = """
+                              UPDATE [dbo].[Booking_Appointment]
+                                 SET [payReservationStatus] = ?
+                               WHERE [Booking_Appointment].id=?""";
+            
+        Connection connection = null;
+        PreparedStatement stm = null;
+        try {
+            connection = getConnection();
+            stm = connection.prepareStatement(sqlUpdate);
+            stm.setString(1, "Pay reser");
+            stm.setInt(2, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBookingMedicalAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(stm);
+            closeConnection(connection);
+        }
+    }
+    
 
 }

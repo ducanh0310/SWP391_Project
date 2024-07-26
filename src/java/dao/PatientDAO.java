@@ -218,17 +218,20 @@ public class PatientDAO extends DBContext {
 
     public ArrayList<PatientGetByIdDTO> getPatient() throws SQLException {
         ArrayList<PatientGetByIdDTO> patient = new ArrayList<>();
-        String query = "SELECT [Patient_id]\n"
-                + "      ,[patient_sin]\n"
-                + "      ,[address]\n"
-                + "      ,[name]\n"
-                + "      ,[gender]\n"
-                + "      ,[email]\n"
-                + "      ,[phone]\n"
-                + "      ,[date_of_birth]\n"
-                + "      ,[insurance]\n"
-                + "      ,[rep_id]\n"
-                + "  FROM [Patient]\n";
+        String query = """
+                       SELECT [Patient_id]
+                             ,[patient_sin]
+                             ,[address]
+                             ,[name]
+                             ,[gender]
+                             ,[email]
+                             ,[phone]
+                             ,[date_of_birth]
+                             ,[insurance]
+                             ,[rep_id]
+                         FROM [Patient]
+                       ORDER BY [Patient_id] DESC
+                       """;
         Connection connection = null;
         PreparedStatement statement = null;
         try {

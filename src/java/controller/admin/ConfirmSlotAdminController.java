@@ -2,13 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.patient;
 
+package controller.admin;
+
+import controller.patient.ConfirmSlotController;
 import dao.DBBookingMedicalAppointment;
-import dao.PatientDAO;
-import dao.RoomDAO;
-import dao.ServiceDAO;
-import dao.SlotDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,34 +17,30 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.BookingAppointment;
-import model.Patient;
-import model.PatientGetByIdDTO;
-import model.ProcedureCodes;
-import model.Slot;
 import model.User;
-import validation.Email;
 
 /**
  *
  * @author Vu Minh Quan
  */
-@WebServlet(name = "ConfirmSlotController", urlPatterns = {"/patient/confirmSlot"})
-public class ConfirmSlotController extends HttpServlet {
-
+@WebServlet(name="ConfirmSlotAdminController", urlPatterns={"/ConfirmSlotAdminController"})
+public class ConfirmSlotAdminController extends HttpServlet {
+   
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+    throws ServletException, IOException {
+
+    } 
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
         String userRole = (String) session.getAttribute("userRole");
@@ -63,7 +57,7 @@ public class ConfirmSlotController extends HttpServlet {
         try {
             // Assuming maximum 10 slots to simplify. Adjust as needed.
             int maxSlots = 10;
-            ArrayList<BookingAppointment> appointments = new ArrayList<>();
+            ArrayList<model.BookingAppointment> appointments = new ArrayList<>();
 
             for (int i = 0; i < maxSlots; i++) {
                 String slotIdParam = "slots[" + i + "][slotId]";
@@ -77,20 +71,20 @@ public class ConfirmSlotController extends HttpServlet {
                 String roomId = request.getParameter(roomIdParam);
                 String date = request.getParameter(dateParam);
                 String serviceId = request.getParameter(serviceIdParam);
-                
+                String paID = request.getParameter("paID");
                 // Check if slotId is null to determine if there are no more slots
                 if (slotId == null) {
                     break;
                 }
-                
+
                 // Create and populate BookingAppointment object
-                BookingAppointment ba = new BookingAppointment();
+                model.BookingAppointment ba = new model.BookingAppointment();
                 ba.setSlotId(Integer.parseInt(slotId));
                 ba.setDoctorId(Integer.parseInt(doctorId));
                 ba.setRoomId(Integer.parseInt(roomId));
                 ba.setBookingDate(Date.valueOf(date));
                 ba.setServiceId(Integer.parseInt(serviceId));
-                
+                ba.setPatiendId(Integer.parseInt(paID));
                 ba.setStatusId(1); // Assuming 1 represents some kind of default status
 
                 appointments.add(ba);
@@ -98,7 +92,7 @@ public class ConfirmSlotController extends HttpServlet {
 
             // Insert each appointment into the database
             DBBookingMedicalAppointment dbBookingMedicalAppointment = new DBBookingMedicalAppointment();
-            for (BookingAppointment appointment : appointments) {
+            for (model.BookingAppointment appointment : appointments) {
                 dbBookingMedicalAppointment.insertSlot(appointment);
             }
 
@@ -106,15 +100,13 @@ public class ConfirmSlotController extends HttpServlet {
             Enumeration<String> attributeNames = session.getAttributeNames();
             while (attributeNames.hasMoreElements()) {
                 String attributeName = attributeNames.nextElement();
-                if (!attributeName.equals("currentUser")) {
+                if (!attributeName.equals("currentUser") && !attributeName.equals("userRole")) {
                     session.removeAttribute(attributeName);
                 }
             }
 
-            if (userRole.contains("patient")) {
-                session.setAttribute("payNotification", "***Your appointment is verified when you pay the reservation fee by clicking on 'Pay' button.***");
-                session.setAttribute("bookSuccess", "Appointments booked successfully");
-                response.sendRedirect("viewAppointmentHistory");
+            if (userRole.contains("admin")) {
+                response.sendRedirect("appointment/viewAppointmentHistory");
 
             } else {
                 session.invalidate();
@@ -126,9 +118,8 @@ public class ConfirmSlotController extends HttpServlet {
         }
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override
