@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="pageSize" value="9" />
 <!DOCTYPE html>
@@ -98,10 +98,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <form action="DeleteEmployee" method="POST">
-                            <input type="hidden" id="empIdDeleteInput" name="employeeId">
-                            <button type="submit" class="btn btn-danger" id="confirmDeleteButton">Confirm</button>
-                        </form>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -142,7 +139,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="ViewEmployeeList">
                                     <i class="bi bi-people"></i></i> Employee
                                 </a>
                             </li>
@@ -240,15 +237,15 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="text-end">
-                                                        <form id="deleteForm${emp.id}" action="DeleteEmployee?employeeId=${emp.id}"
-                                                              method="POST">
-                                                            <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
-                                                               class="btn btn-sm btn-neutral">View</a>
-                                                            <button type="submit"
-                                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </form>
+
+                                                        <a href="ViewEmployeeDetailsServlet?employeeId=${emp.id}"
+                                                           class="btn btn-sm btn-neutral">View</a>
+                                                        <button type="button"
+                                                                class="btn btn-sm btn-square btn-neutral text-danger-hover delete-button"
+                                                                data-id="${emp.id}" data-name="${emp.name}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+
                                                     </td>
                                                 </tr>
                                             </c:if>
@@ -392,6 +389,29 @@
             // Initialize the table
             displayRows(currentPage);
             updatePagination();
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                let employeeId;
+
+                $('.delete-button').click(function () {
+                    employeeId = $(this).data('id');
+                    let employeeName = $(this).data('name');
+
+                    // Hiển thị thông tin nhân viên trong modal
+                    $('#empIdDelete').text(employeeId);
+                    $('#empNameDelete').text(employeeName);
+
+                    // Log the ID and name for debugging
+                    console.log("Employee ID: " + employeeId + ", Name: " + employeeName);
+
+                    // Set up the delete button inside the modal
+                    $('#confirmDeleteButton').off('click').on('click', function () {
+                        window.location.href = 'DeleteEmployee?employeeId=' + employeeId;
+                    });
+                });
+            });
         </script>
 
     </body>

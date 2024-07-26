@@ -443,18 +443,17 @@
                                             <th scope="col">No</th>
                                             <th scope="col">Patient</th>
                                             <th scope="col">Doctor</th>
-                                            <th scope="col">Service</th>
                                             <th scope="col">Booking Date</th>
                                             <!--                                            <th scope="col">Examination Status</th>-->
-                                            <th scope="col">
-                                                <select style="width: 160px; margin-bottom: -10px; margin-top: -10px" id="statusFilter" class="form-control" aria-label="Filter by status">
+                                            <th scope="col" style="width: 200px; ">
+                                                <select style="width: 180px; margin-bottom: -10px; margin-top: -10px; margin-right: -30px" id="statusFilter" class="form-control" aria-label="Filter by status">
                                                     <option value="">Examination Status</option>
                                                     <option value="active">Active</option>
                                                     <option value="inactive">Inactive</option>
                                                 </select>
                                             </th>
                                             <th scope="col">Description</th>
-                                            <th scope="col"></th>
+                                            <th scope="col" style="width: 50px; "></th>
                                         </tr>
                                     </thead>
                                     <!--Display employee information-->
@@ -464,7 +463,6 @@
                                                 <td>${status.index + 1}</td>    
                                                 <td>${exam.patientName}</td>
                                                 <td>${exam.doctor}</td>
-                                                <td>${exam.service}</td>
                                                 <td>${exam.bookingDate}</td>
 <!--                                                <td>${exam.examinationStatus}</td>-->
                                                 <td>
