@@ -12,8 +12,7 @@
         <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css' rel='stylesheet' type='text/css'>
-        <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        
     </head>
     <style>
         /* RESET RULES
@@ -1110,7 +1109,7 @@
                         <div class="panel">
                             <div class="user-heading round">
                                 <a href="#">
-                                    <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="">
+                                    <img src="https://www.freeiconspng.com/uploads/profile-icon-9.png" alt="">
                                 </a>
                                 <h1>${pa.name}</h1>
                                 <p>${pa.email}</p>

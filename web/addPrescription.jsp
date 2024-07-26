@@ -756,7 +756,7 @@
                                     <h4>New Prescription</h4>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
-                                        <input type="text" id="name" class="form-control" value="${patientResult.patient.name}" readonly ng-model="nameBox">
+                                        <input type="text" id="name" class="form-control" value="${patientView.patient.name}" readonly ng-model="nameBox">
                                     </div>
                                     <div class="form-group">
                                         <label for="exam_date">Exam Date:</label>
@@ -838,9 +838,7 @@
                                     <div class="form-group">
                                         <input type="checkbox" ng-model="exactMatch"> Exact Match</input>
                                     </div>
-                                    <div class="form-group pull-right">
-                                        <button type="button" class="btn btn-danger" ng-click="deleteAll()"><i class="glyphicon glyphicon-trash"></i> Delete All</button>
-                                    </div>
+                                    
                                 </form>
                                 <div class="table-wrap clearfix">
                                     <table class="table table-hover table-striped table-responsive">
@@ -855,14 +853,14 @@
                                                 <th>Dosage</th>
                                                 <th>Duration</th>
                                                 <th>Notes</th>
-                                                <th></th>
+                                                
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="obj in nameList| filter:filters:exactMatch | filter:filterFavs track by $index" class="{{obj.favorite}} animated fadeIn">
                                                 <td>{{$index + 1}}</td>
-                                                <td>{{obj.name}}</td>
+                                                <td>${patientView.patient.name}</td>
                                                 <td>{{obj.diagnosis}}</td>
                                                 <td>{{obj.symptoms}}</td>
                                                 <td>{{obj.test_result}}</td>
@@ -870,10 +868,7 @@
                                                 <td>{{obj.dosage}}</td>
                                                 <td>{{obj.duration}}</td>
                                                 <td>{{obj.notes}}</td>
-                                                <td class="text-right">
-                                                    <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                    <a ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
-                                                </td>
+                                                
                                             </tr>
                                         </tbody>
                                     </table>
@@ -887,11 +882,7 @@
                                     <!-- Pagination -->
                                     <!-- ... -->
                                 </div>
-                                <div class="col-md-6 text-right">
-                                    <!-- Save Draft and Submit buttons -->
-                                    <button type="button" class="btn btn-default" ng-click="saveDraft()">Save Draft</button>
-                                    <button type="button" class="btn btn-primary" ng-click="submitForm()">Submit</button>
-                                </div>
+                               
                             </div>
 
                         </div>
@@ -920,15 +911,7 @@
                 $scope.notesBox = "";
                 //
 
-                var nameList = [{name: "${patientResult.patient.name}",
-                        diagnosis: "${patientResult.diagnosis}",
-                        symptoms: "${patientResult.symptoms}",
-                        test_result: "${patientResult.test_result}",
-                        medication: "Amoxicillin",
-                        dosage: "500mg",
-                        duration: "7 days",
-                        notes: "Take with food"
-                    }];
+                var nameList = [];
                 $scope.nameList = nameList;
                 $scope.selectedIndex = -1;
 

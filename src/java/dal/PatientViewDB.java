@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,10 +93,62 @@ public class PatientViewDB extends DBContext {
         return null;
     }
 
-    
+    public void editInfoPatient(Patient paInfo) {
+        String sql = """
+                 UPDATE [dbo].[Patient]
+                    SET [patient_sin] = ?,
+                        [address] = ?,
+                        [name] = ?,
+                        [gender] = ?,
+                        [email] = ?,
+                        [phone] = ?,
+                        [date_of_birth] = ?
+                  WHERE [Patient_id] = ?""";
+
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, paInfo.getSin());
+            stm.setString(2, paInfo.getAddress());
+            stm.setString(3, paInfo.getName());
+            stm.setString(4, paInfo.getGender());
+            stm.setString(5, paInfo.getEmail());
+            stm.setString(6, paInfo.getPhone());
+            stm.setDate(7, new java.sql.Date(paInfo.getDob().getTime())); // Convert java.util.Date to java.sql.Date
+            stm.setInt(8, paInfo.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientViewDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void editPatient(HistoryAdmin hiInfo) {
+    String sql = """
+             UPDATE [dbo].[Appointment_procedure] 
+             SET [date_of_procedure] = ?, 
+                 [appointment_description] = ?, 
+                 [patient_charge] = ?, 
+                 [insurance_charge] = ?, 
+                 [total_charge] = ?
+             WHERE [Patient_id] = ?""";
+
+    try (PreparedStatement stm = connection.prepareStatement(sql)) {
+        // Set parameters
+        stm.setDate(1, new java.sql.Date(hiInfo.getDop().getTime())); // Convert java.util.Date to java.sql.Date
+        stm.setString(2, hiInfo.getAppointment_description());
+        stm.setDouble(3, hiInfo.getPatient_charge());
+        stm.setDouble(4, hiInfo.getInsurance_charge());
+        stm.setDouble(5, hiInfo.getTotal_charge());
+        stm.setInt(6, hiInfo.getPatient().getId());
+
+        // Execute the update
+        stm.executeUpdate();
+    } catch (SQLException ex) {
+        Logger.getLogger(PatientViewDB.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
     public static void main(String[] args) {
         PatientViewDB p = new PatientViewDB();
-        System.out.println(p.getHistory(4));
+        System.out.println();
 
     }
 

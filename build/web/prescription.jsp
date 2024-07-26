@@ -13,7 +13,7 @@
         <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css' rel='stylesheet' type='text/css'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js' rel='stylesheet' type='text/css'>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
     </head>
     <style>
@@ -751,9 +751,10 @@
 
                         <div class="row">
                             <div class="col-md-offset-1 col-md-3 module contact-builder">
+                                <form class="form" ng-submit="addContact()" ng-hide="editing" method="POST" action="searchExam">
+                                    <input type="hidden" name="action" value="add">
+                                    <input type="hidden" name="exam_id" value="${patientResult.exam_id}">
 
-                                <form  action ="addPrescriptions?examIdStr=${patientResult.exam_id}" method="POST">
-                                   
                                     <h4>New Prescription</h4>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
@@ -776,24 +777,27 @@
                                         <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly ng-model="test_resultBox">
                                     </div>                           
                                     <div class="form-group">
-                                        <input type="type" id="medication" name="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
+                                        <input type="text" id="medication" name="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="dosage" name="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
+                                        <input type="text" id="dosage" name="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="duration" name="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
+                                        <input type="text" id="duration" name="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="notes" name="notes"class="form-control" placeholder="Notes" ng-model="notesBox" required>
+                                        <input type="text" id="notes" name="notes" class="form-control" placeholder="Notes" ng-model="notesBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>Add Prescription</button>
+                                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add Prescription</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     </div>
                                 </form>
 
-                                <form ng-submit="editContact()" ng-show="editing" class="animated flipInY">
+                                <form ng-submit="editContact()" ng-show="editing" method="POST" action="searchExam">
+                                    <input type="hidden" name="action" value="edit">
+                                    <input type="hidden" name="exam_id" value="${patientResult.exam_id}">
+
                                     <h4>Edit Prescription</h4>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
@@ -812,24 +816,22 @@
                                         <input type="text" id="test_result" class="form-control" value="${patientResult.test_result}" readonly ng-model="test_resultBox">
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="medication" class="form-control" placeholder="Medication" ng-model="medicationBox">
+                                        <input type="text" id="medication" name="medication" class="form-control" placeholder="Medication" ng-model="medicationBox" required> 
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox">
+                                        <input type="text" id="dosage" name="dosage" class="form-control" placeholder="Dosage" ng-model="dosageBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="duration" class="form-control" placeholder="Duration" ng-model="durationBox">
+                                        <input type="text" id="duration" name="duration" class="form-control" placeholder="Duration" ng-model="durationBox" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="type" id="notes" class="form-control" placeholder="Notes" ng-model="notesBox">
+                                        <input type="text" id="notes" name="notes" class="form-control" placeholder="Notes" ng-model="notesBox" required>
                                     </div>
-
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default">Edit Prescription</button>
-                                        <button ng-click="openEdit()" class="btn btn-default">Cancel</button>
+                                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Edit Prescription</button>
+                                        <button type="button" class="btn btn-default" ng-click="cancelEdit()">Cancel</button>
                                     </div>
                                 </form>
-
                             </div>
                             <div class="col-md-7 module contact-list">
                                 <form>
@@ -867,10 +869,10 @@
                                                 <td>{{obj.diagnosis}}</td>
                                                 <td>{{obj.symptoms}}</td>
                                                 <td>{{obj.test_result}}</td>
-                                                <td>{{obj.medication}}</td>
-                                                <td>{{obj.dosage}}</td>
-                                                <td>{{obj.duration}}</td>
-                                                <td>{{obj.notes}}</td>
+                                                <td>${pre.medication}</td>
+                                                <td>${pre.dosage}</td>
+                                                <td>${pre.duration}</td>
+                                                <td>${pre.notes}</td>
                                                 <td class="text-right">
                                                     <a href="#" ng-click="openEdit($index)"><i class="glyphicon glyphicon-pencil"></i></a>
                                                     <a ng-click="removeName($index)"><i class="glyphicon glyphicon-trash"></i></a>
@@ -890,9 +892,10 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <!-- Save Draft and Submit buttons -->
-                                    <button type="button" class="btn btn-default" ng-click="saveDraft()">Save Draft</button>
-                                    <button type="button" class="btn btn-primary" ng-click="submitForm()">Submit</button>
+                                    <a href="searchExam" class="btn btn-default">Cancel</a>
+                                    <a href="#" class="btn btn-primary" id="submitBtn" onclick="confirmSubmit(${patientView.exam_id})">Submit</a>
                                 </div>
+
                             </div>
 
                         </div>
@@ -1032,6 +1035,11 @@
                     return !$scope.favSort || obj.favorite === "favorite";
                 };
             });
-
+    function confirmSubmit() {
+        if (confirm("Are you sure you want to submit?")) {
+            // If user clicks "OK", proceed with form submission
+            window.location.href = "addPrescription.jsp";
+        }
+    }
 </script>
 </html>

@@ -53,7 +53,7 @@ public class DoctorDB extends DBContext {
     }
 
     public boolean addPrescription(Prescription p) {
-    String insertPrescription = """
+        String insertPrescription = """
                                 INSERT INTO [dbo].[Prescription]
                                            ([medication]
                                            ,[dosage]
@@ -63,27 +63,48 @@ public class DoctorDB extends DBContext {
                                      VALUES
                                            (?,?,?,?,?)""";
 
-    try {
-        PreparedStatement prescriptionStatement = connection.prepareStatement(insertPrescription);
+        try {
+            PreparedStatement prescriptionStatement = connection.prepareStatement(insertPrescription);
 
-        prescriptionStatement.setString(1, p.getMedication()); // Set medication
-        prescriptionStatement.setString(2, p.getDosage()); // Set dosage
-        prescriptionStatement.setString(3, p.getDuration()); // Set duration
-        prescriptionStatement.setString(4, p.getNotes()); // Set notes
-        prescriptionStatement.setInt(5, p.getPatientExamResult().getExam_id()); // Set exam_id
+            prescriptionStatement.setString(1, p.getMedication()); // Set medication
+            prescriptionStatement.setString(2, p.getDosage()); // Set dosage
+            prescriptionStatement.setString(3, p.getDuration()); // Set duration
+            prescriptionStatement.setString(4, p.getNotes()); // Set notes
+            prescriptionStatement.setInt(5, p.getPatientExamResult().getExam_id()); // Set exam_id
 
-        int rowsInserted = prescriptionStatement.executeUpdate();
-        if (rowsInserted > 0) {
-            System.out.println("A new prescription was inserted successfully!");
-            return true;
-        } else {
+            int rowsInserted = prescriptionStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new prescription was inserted successfully!");
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, null, ex);
-        return false;
     }
-}
+
+    public void editPrescription(Prescription preInfo) {
+        String sql = """
+                 UPDATE [dbo].[Prescription]
+                    SET [medication] = ?,
+                        [dosage] = ?,
+                        [duration] = ?,
+                        [notes] = ?
+                  WHERE [exam_id] = ?""";
+
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, preInfo.getMedication());
+            stm.setString(2, preInfo.getDosage());
+            stm.setString(3, preInfo.getDuration());
+            stm.setString(4, preInfo.getNotes());
+            stm.setInt(5, preInfo.getPatientExamResult().getExam_id());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DoctorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private Connection getConnection() throws SQLException {
         // Implement this method to return a valid database connection
@@ -247,7 +268,7 @@ public class DoctorDB extends DBContext {
         DoctorDB d = new DoctorDB();
         PatientExamResult pa = new PatientExamResult();
         Prescription p = new Prescription();
-        System.out.println(d.getPatientExamResult(1));
+        System.out.println(d.getPrescriptionDetail(1));
 
     }
 }

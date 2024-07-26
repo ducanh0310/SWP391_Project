@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="model.Patient" %>
+<%@ page import="java.sql.Date" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -417,83 +419,92 @@
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Full Name</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="${patients.name}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">SIN</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="${patients.sin}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Email</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="${patients.email}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Phone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="${patients.phone}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Birthday</h6>
-                                        </div>                                      
-                                        <div class="form-group">                                              
-                                            <input type="date" class="form-control" id="exampleInputDOB1" value="${patients.dob}"placeholder="Date of Birth">
-                                        </div>                              
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Gender</h6>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="<c:choose>
-                                                       <c:when test="${patients.gender == 'M'}">Male</c:when>
-                                                       <c:when test="${patients.gender == 'F'}">Female</c:when>
-                                                       <c:otherwise>${patients.gender}</c:otherwise>
-                                                   </c:choose>".trim()>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Address</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" value="${patients.address}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="row">
-                                            <div class="col-sm-3"></div>
+                                    <form id="editPatientForm" action="editPatient" method="post" onsubmit="return handleSubmit(event)">
+                                        <input type="hidden" name="Patient_id" value="${patients.id}" />
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Full Name</h6>
+                                            </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <button type="submit" class="btn btn-primary px-4" onclick="showCodeAndRedirect()" >Save Changes</button>
-                                                <a href="patientDetail?pid=${patients.id}" class="btn btn-primary px-4">Cancel</a>
+                                                <input type="text" class="form-control" name="name" value="${patients.name}" required />
                                             </div>
                                         </div>
-                                        <div id="result" class="main-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; ">
-                                            <div class="check-container">
-                                                <div class="check-background">
-                                                    <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </div>
-                                                <div class="check-shadow"></div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">SIN</h6>
                                             </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" name="patient_sin" value="${patients.sin}" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="email" class="form-control" name="email" value="${patients.email}" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Phone</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" name="phone" value="${patients.phone}" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Birthday</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="date" class="form-control" name="date_of_birth" value="${patients.dob}" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Gender</h6>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="gender" required>
+                                                    <option value="M" ${patients.gender == 'M' ? 'selected' : ''}>Male</option>
+                                                    <option value="F" ${patients.gender == 'F' ? 'selected' : ''}>Female</option>
+                                                    <option value="O" ${patients.gender == 'O' ? 'selected' : ''}>Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" class="form-control" name="address" value="${patients.address}" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-9 offset-sm-3">
+                                                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                                                <a href="patientDetail?pid=${patients.id}" class="btn btn-secondary px-4">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div id="result" class="main-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 9999; justify-content: center; align-items: center; flex-direction: column;">
+                                        <div class="check-container">
+                                            <div class="check-background">
+                                                <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M7 25L27.3077 44L58.5 7" stroke="white" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                            <div class="check-shadow"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -503,46 +514,52 @@
                     </div>
                 </div>
 
-                <!-- JavaScript Libraries -->
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="lib/wow/wow.min.js"></script>
-                <script src="lib/easing/easing.min.js"></script>
-                <script src="lib/waypoints/waypoints.min.js"></script>
-                <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-                <script src="lib/tempusdominus/js/moment.min.js"></script>
-                <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-                <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-                <script src="lib/twentytwenty/jquery.event.move.js"></script>
-                <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+            </div>
 
-                <!-- Template Javascript -->
-                <script src="js/main.js"></script>
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="lib/wow/wow.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/waypoints/waypoints.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/tempusdominus/js/moment.min.js"></script>
+            <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <script src="lib/twentytwenty/jquery.event.move.js"></script>
+            <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
 
-                </body>
-                <script>
-                                                    function readURL(input) {
-                                                        if (input.files && input.files[0]) {
-                                                            var reader = new FileReader();
-                                                            reader.onload = function (e) {
-                                                                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                                                                $('#imagePreview').hide();
-                                                                $('#imagePreview').fadeIn(650);
-                                                            }
-                                                            reader.readAsDataURL(input.files[0]);
-                                                        }
-                                                    }
-                                                    $("#imageUpload").change(function () {
-                                                        readURL(this);
-                                                    });
-                                                    function showCodeAndRedirect() {
-                                                        var resultDiv = document.getElementById("result");
-                                                        resultDiv.style.display = "flex";
+            <!-- Template Javascript -->
+            <script src="js/main.js"></script>
 
-                                                        setTimeout(function () {
-                                                            window.location.href = "patientDetail?pid=${patients.id}";
-                                                        }, 2000);
-                                                    }
-                                                    
-                </script>
-                </html> 
+    </body>
+    <script>
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                                    $('#imagePreview').hide();
+                                    $('#imagePreview').fadeIn(650);
+                                }
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        $("#imageUpload").change(function () {
+                            readURL(this);
+                        });
+                        function handleSubmit(event) {
+                            event.preventDefault(); // Prevent form from submitting immediately
+
+                            var resultDiv = document.getElementById("result");
+                            resultDiv.style.display = "flex"; // Show the result div
+
+                            setTimeout(function () {
+                                document.getElementById("editPatientForm").submit(); // Submit the form after delay
+                            }, 2000);
+
+                            return false; // Prevent default form submission
+                        }
+
+    </script>
+</html> 

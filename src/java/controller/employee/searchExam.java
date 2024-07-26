@@ -60,41 +60,53 @@ public class searchExam extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    try {
-        int patientId = Integer.parseInt(request.getParameter("eid"));
-        DoctorDB db = new DoctorDB();
-        PatientExamResult patientResult = db.getPatientExamResult(patientId);
-        if (patientResult != null) {
-            request.setAttribute("patientResult", patientResult);
-            request.getRequestDispatcher("/prescription.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorMessage", "Patient not found");
+            throws ServletException, IOException {
+        try {
+            int patientId = Integer.parseInt(request.getParameter("eid"));
+            DoctorDB db = new DoctorDB();
+            PatientExamResult patientResult = db.getPatientExamResult(patientId);
+            ArrayList<Prescription> pre =db.getPrescription();
+            if (patientResult != null) {
+                request.setAttribute("patientResult", patientResult);
+                request.setAttribute("pre", pre);
+                request.getRequestDispatcher("/prescription.jsp").forward(request, response);
+            } else {
+                request.setAttribute("errorMessage", "Patient not found");
+                request.getRequestDispatcher("/searchExamPatient.jsp").forward(request, response);
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("errorMessage", "Invalid patient ID format");
             request.getRequestDispatcher("/searchExamPatient.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
         }
-        
-    } catch (NumberFormatException e) {
-        request.setAttribute("errorMessage", "Invalid patient ID format");
-        request.getRequestDispatcher("/searchExamPatient.jsp").forward(request, response);
-        
-    } catch (Exception e) {
-        request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
     }
-}
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-  
-}
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        DoctorDB db = new DoctorDB();
+        int examId = Integer.parseInt(request.getParameter("exam_id"));
+        if ("add".equals(action)) {
+            Prescription p = new Prescription();
+            p.setMedication(request.getParameter("medication"));
+            p.setDosage(request.getParameter("dosage"));
+            p.setDuration(request.getParameter("duration"));
+            p.setNotes(request.getParameter("notes"));
+            p.setPatientExamResult(db.getPatientExamResult(examId));
+            db.addPrescription(p);
+        } else if ("edit".equals(action)) {
+            Prescription p = new Prescription();
+            p.setMedication(request.getParameter("medication"));
+            p.setDosage(request.getParameter("dosage"));
+            p.setDuration(request.getParameter("duration"));
+            p.setNotes(request.getParameter("notes"));
+            p.setPatientExamResult(db.getPatientExamResult(examId));
+            db.editPrescription(p);
+        }
+        response.sendRedirect("searchExam?eid=" + examId);
+    }
 
     /**
      * Returns a short description of the servlet.
