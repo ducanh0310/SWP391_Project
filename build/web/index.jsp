@@ -114,18 +114,18 @@
             <div class="row gx-0">
                 <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
-                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed </small>
+                        <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 7.30 am - 5.30 pm, All day in week </small>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-lg-end">
                     <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                         <div class="me-3 pe-3 border-end py-2">
                             <a class="m-0" >
-                                <i class="fa fa-envelope-open me-2"></i>${currentUser.getName()}
+                                <i class="fa fa-envelope-open me-2">dentCare23@ks.com</i>
                             </a>
                         </div>
                         <div class="py-2">
-                            <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
+                            <p class="m-0"><i class="fa fa-phone-alt me-2"></i>012 345 6789</p>
                         </div>
                     </div>
                 </div>
@@ -170,9 +170,9 @@
                         <a href="logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
                     </c:otherwise>
                 </c:choose>
-                <a href="patient/bookAppointment" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+                <a href="patient/bookAppointment" class="btn btn-primary py-2 px-4 ms-3">Make Appointment</a>
                 <!--                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>-->
-                <a href="patient/viewAppointmentHistory" class="btn btn-primary py-2 px-4 ms-3">View Appointment</a>
+                <!--<a href="patient/viewAppointmentHistory" class="btn btn-primary py-2 px-4 ms-3">View Appointment</a>-->
             </div>
         </nav>
         <!-- Navbar End -->
@@ -207,8 +207,8 @@
                             <div class="p-3" style="max-width: 900px;">
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
                                 <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>
-                                <a href="appointment.jsp" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
-                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+<!--                                <a href="appointment.jsp" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
+                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>-->
                             </div>
                         </div>
                     </div>
@@ -218,8 +218,8 @@
                             <div class="p-3" style="max-width: 900px;">
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
                                 <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>
-                                <a href="appointment.jsp" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
-                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+<!--                                <a href="appointment.jsp" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
+                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>-->
                             </div>
                         </div>
                     </div>
@@ -239,55 +239,7 @@
         <!-- Carousel End -->
 
 
-        <!-- Banner Start -->
-        <div class="container-fluid banner mb-5">
-            <div class="container">
-                <div class="row gx-0">
-                    <div class="col-lg-4 wow zoomIn" data-wow-delay="0.1s">
-                        <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
-                            <h3 class="text-white mb-3">Opening Hours</h3>
-                            <div class="d-flex justify-content-between text-white mb-3">
-                                <h6 class="text-white mb-0">Mon - Fri</h6>
-                                <p class="mb-0"> 8:00am - 9:00pm</p>
-                            </div>
-                            <div class="d-flex justify-content-between text-white mb-3">
-                                <h6 class="text-white mb-0">Saturday</h6>
-                                <p class="mb-0"> 8:00am - 7:00pm</p>
-                            </div>
-                            <div class="d-flex justify-content-between text-white mb-3">
-                                <h6 class="text-white mb-0">Sunday</h6>
-                                <p class="mb-0"> 8:00am - 5:00pm</p>
-                            </div>
-                            <a class="btn btn-light" href="">Appointment</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
-                        <div class="bg-dark d-flex flex-column p-5" style="height: 300px;">
-                            <h3 class="text-white mb-3">Search A Doctor</h3>
-                            <div class="date mb-3" id="date" data-target-input="nearest">
-                                <input type="text" class="form-control bg-light border-0 datetimepicker-input"
-                                       placeholder="Appointment Date" data-target="#date" data-toggle="datetimepicker" style="height: 40px;">
-                            </div>
-                            <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
-                                <option selected>Select A Service</option>
-                                <option value="1">Service 1</option>
-                                <option value="2">Service 2</option>
-                                <option value="3">Service 3</option>
-                            </select>
-                            <a class="btn btn-light" href="">Search Doctor</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
-                        <div class="bg-secondary d-flex flex-column p-5" style="height: 300px;">
-                            <h3 class="text-white mb-3">Make Appointment</h3>
-                            <p class="text-white">Ipsum erat ipsum dolor clita rebum no rebum dolores labore, ipsum magna at eos et eos amet.</p>
-                            <h2 class="text-white mb-0">+012 345 6789</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Banner Start -->
+
 
 
         <!-- About Start -->
@@ -297,17 +249,17 @@
                     <div class="col-lg-7">
                         <div class="section-title mb-4">
                             <h5 class="position-relative d-inline-block text-primary text-uppercase">About Us</h5>
-                            <h1 class="display-5 mb-0">The World's Best Dental Clinic That You Can Trust</h1>
+                            <h1 class="display-5 mb-0">Perfect Oral Care with Dent Care</h1>
                         </div>
-                        <h4 class="text-body fst-italic mb-4">Diam dolor diam ipsum sit. Clita erat ipsum et lorem stet no lorem sit clita duo justo magna dolore</h4>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+                        <h4 class="text-body fst-italic mb-4">Dent Care is proud to be a leading provider of comprehensive dental care services. </h4>
+                        <p class="mb-4">We are committed to bringing you a radiant smile and optimal oral health through advanced solutions and a dedicated team of experts. Come to Dent Care to experience the difference and take care of your oral health today!</p>
                         <div class="row g-3">
                             <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
-                                <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Award Winning</h5>
                                 <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Professional Staff</h5>
+                                <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Advanced technology</h5>
                             </div>
                             <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
-                                <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>24/7 Opened</h5>
+                                <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Personalized treatment plans</h5>
                                 <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Fair Prices</h5>
                             </div>
                         </div>
@@ -324,68 +276,7 @@
         <!-- About End -->
 
 
-        <!-- Appointment Start -->
-        <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="row gx-5">
-                    <div class="col-lg-6 py-5">
-                        <div class="py-5">
-                            <h1 class="display-5 text-white mb-4">We Are A Certified and Award Winning Dental Clinic You Can Trust</h1>
-                            <p class="text-white mb-0">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-                            <h1 class="text-white mb-4">Make Appointment</h1>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <select class="form-select bg-light border-0" style="height: 55px;">
-                                            <option selected>Select A Service</option>
-                                            <option value="1">Service 1</option>
-                                            <option value="2">Service 2</option>
-                                            <option value="3">Service 3</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <select class="form-select bg-light border-0" style="height: 55px;">
-                                            <option selected>Select Doctor</option>
-                                            <option value="1">Doctor 1</option>
-                                            <option value="2">Doctor 2</option>
-                                            <option value="3">Doctor 3</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="date" id="date1" data-target-input="nearest">
-                                            <input type="text"
-                                                   class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Appointment Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="time" id="time1" data-target-input="nearest">
-                                            <input type="text"
-                                                   class="form-control bg-light border-0 datetimepicker-input"
-                                                   placeholder="Appointment Time" data-target="#time1" data-toggle="datetimepicker" style="height: 55px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-dark w-100 py-3" type="submit">Make Appointment</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Appointment End -->
+
 
 
         <!-- Service Start -->
@@ -409,7 +300,7 @@
                                     <img class="img-fluid" src="img/service-1.jpg" alt="">
                                 </div>
                                 <div class="position-relative bg-light rounded-bottom text-center p-4">
-                                    <h5 class="m-0">Cosmetic Dentistry</h5>
+                                    <h5 class="m-0">Teeth Cleaning</h5>
                                 </div>
                             </div>
                             <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.9s">
@@ -417,7 +308,7 @@
                                     <img class="img-fluid" src="img/service-2.jpg" alt="">
                                 </div>
                                 <div class="position-relative bg-light rounded-bottom text-center p-4">
-                                    <h5 class="m-0">Dental Implants</h5>
+                                    <h5 class="m-0">Wisdom tooth extraction</h5>
                                 </div>
                             </div>
                         </div>
@@ -431,7 +322,7 @@
                                     <img class="img-fluid" src="img/service-3.jpg" alt="">
                                 </div>
                                 <div class="position-relative bg-light rounded-bottom text-center p-4">
-                                    <h5 class="m-0">Dental Bridges</h5>
+                                    <h5 class="m-0">Dentures</h5>
                                 </div>
                             </div>
                             <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
@@ -447,8 +338,8 @@
                     <div class="col-lg-5 service-item wow zoomIn" data-wow-delay="0.9s">
                         <div class="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-4">
                             <h3 class="text-white mb-3">Make Appointment</h3>
-                            <p class="text-white mb-3">Clita ipsum magna kasd rebum at ipsum amet dolor justo dolor est magna stet eirmod</p>
-                            <h2 class="text-white mb-0">+012 345 6789</h2>
+                            <p class="text-white mb-3">When you come to us, the best things will come to you.</p>
+                            <h2 class="text-white mb-0">012 345 6789</h2>
                         </div>
                     </div>
                 </div>
@@ -456,23 +347,6 @@
         </div>
         <!-- Service End -->
 
-
-        <!-- Offer Start -->
-        <div class="container-fluid bg-offer my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
-                        <div class="offer-text text-center rounded p-5">
-                            <h1 class="display-5 text-white">Save 30% On Your First Dental Checkup</h1>
-                            <p class="text-white mb-4">Eirmod sed tempor lorem ut dolores sit kasd ipsum. Dolor ea et dolore et at sea ea at dolor justo ipsum duo rebum sea. Eos vero eos vero ea et dolore eirmod diam duo lorem magna sit dolore sed et.</p>
-                            <a href="appointment.jsp" class="btn btn-dark py-3 px-5 me-3">Appointment</a>
-                            <a href="" class="btn btn-light py-3 px-5">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Offer End -->
 
 
         <!-- Pricing Start -->
@@ -484,9 +358,9 @@
                             <h5 class="position-relative d-inline-block text-primary text-uppercase">Pricing Plan</h5>
                             <h1 class="display-5 mb-0">We Offer Fair Prices for Dental Treatment</h1>
                         </div>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo eirmod magna dolore erat amet</p>
+                        <p class="mb-4">At Dent Care, we believe that high-quality dental care should be accessible to everyone. That’s why we offer fair and competitive prices for all our dental treatments. Whether you need a routine check-up, advanced dental procedures, or cosmetic dentistry, you can trust that our pricing is transparent and affordable. We strive to provide the best value without compromising on the quality of care. Experience top-notch dental services at prices that won’t break the bank, only at Dent Care.</p>
                         <h5 class="text-uppercase text-primary wow fadeInUp" data-wow-delay="0.3s">Call for Appointment</h5>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.6s">+012 345 6789</h1>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.6s">012 345 6789</h1>
                     </div>
                     <div class="col-lg-7">
                         <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
@@ -494,7 +368,7 @@
                                 <div class="position-relative">
                                     <img class="img-fluid rounded-top" src="img/price-1.jpg" alt="">
                                     <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle" style="z-index: 2;">
-                                        <h2 class="text-primary m-0">$35</h2>
+                                        <h2 class="text-primary m-0">$300</h2>
                                     </div>
                                 </div>
                                 <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
@@ -503,39 +377,39 @@
                                     <div class="d-flex justify-content-between mb-3"><span>Modern Equipment</span><i class="fa fa-check text-primary pt-1"></i></div>
                                     <div class="d-flex justify-content-between mb-3"><span>Professional Dentist</span><i class="fa fa-check text-primary pt-1"></i></div>
                                     <div class="d-flex justify-content-between mb-2"><span>24/7 Call Support</span><i class="fa fa-check text-primary pt-1"></i></div>
-                                    <a href="appointment.jsp" class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Appointment</a>
+                                    
                                 </div>
                             </div>
                             <div class="price-item pb-4">
                                 <div class="position-relative">
                                     <img class="img-fluid rounded-top" src="img/price-2.jpg" alt="">
                                     <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle" style="z-index: 2;">
-                                        <h2 class="text-primary m-0">$49</h2>
+                                        <h2 class="text-primary m-0">$75</h2>
                                     </div>
                                 </div>
                                 <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                                    <h4>Dental Implant</h4>
+                                    <h4>Teeth Cleanings</h4>
                                     <hr class="text-primary w-50 mx-auto mt-0">
                                     <div class="d-flex justify-content-between mb-3"><span>Modern Equipment</span><i class="fa fa-check text-primary pt-1"></i></div>
                                     <div class="d-flex justify-content-between mb-3"><span>Professional Dentist</span><i class="fa fa-check text-primary pt-1"></i></div>
                                     <div class="d-flex justify-content-between mb-2"><span>24/7 Call Support</span><i class="fa fa-check text-primary pt-1"></i></div>
-                                    <a href="appointment.jsp" class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Appointment</a>
+                                    
                                 </div>
                             </div>
                             <div class="price-item pb-4">
                                 <div class="position-relative">
                                     <img class="img-fluid rounded-top" src="img/price-3.jpg" alt="">
                                     <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle" style="z-index: 2;">
-                                        <h2 class="text-primary m-0">$99</h2>
+                                        <h2 class="text-primary m-0">$200</h2>
                                     </div>
                                 </div>
                                 <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                                    <h4>Root Canal</h4>
+                                    <h4>Wisdom tooth extraction</h4>
                                     <hr class="text-primary w-50 mx-auto mt-0">
                                     <div class="d-flex justify-content-between mb-3"><span>Modern Equipment</span><i class="fa fa-check text-primary pt-1"></i></div>
                                     <div class="d-flex justify-content-between mb-3"><span>Professional Dentist</span><i class="fa fa-check text-primary pt-1"></i></div>
                                     <div class="d-flex justify-content-between mb-2"><span>24/7 Call Support</span><i class="fa fa-check text-primary pt-1"></i></div>
-                                    <a href="appointment.jsp" class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Appointment</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -554,15 +428,15 @@
                         <div class="owl-carousel testimonial-carousel rounded p-5 wow zoomIn" data-wow-delay="0.6s">
                             <div class="testimonial-item text-center text-white">
                                 <img class="img-fluid mx-auto rounded mb-4" src="img/testimonial-1.jpg" alt="">
-                                <p class="fs-5">Dolores sed duo clita justo dolor et stet lorem kasd dolore lorem ipsum. At lorem lorem magna ut et, nonumy labore diam erat. Erat dolor rebum sit ipsum.</p>
+                                <p class="fs-5">Dent Care is the only place I completely trust for my dental care. The professional staff and advanced technology always make me feel secure when I come here.</p>
                                 <hr class="mx-auto w-25">
-                                <h4 class="text-white mb-0">Client Name</h4>
+                                <h4 class="text-white mb-0">Lyly</h4>
                             </div>
                             <div class="testimonial-item text-center text-white">
                                 <img class="img-fluid mx-auto rounded mb-4" src="img/testimonial-2.jpg" alt="">
-                                <p class="fs-5">Dolores sed duo clita justo dolor et stet lorem kasd dolore lorem ipsum. At lorem lorem magna ut et, nonumy labore diam erat. Erat dolor rebum sit ipsum.</p>
+                                <p class="fs-5">I am very impressed with the service at Dent Care. The prices are reasonable, and the staff are enthusiastic and friendly. I will definitely recommend it to my friends and family.</p>
                                 <hr class="mx-auto w-25">
-                                <h4 class="text-white mb-0">Client Name</h4>
+                                <h4 class="text-white mb-0">Alex</h4>
                             </div>
                         </div>
                     </div>
@@ -587,16 +461,11 @@
                         <div class="team-item">
                             <div class="position-relative rounded-top" style="z-index: 1;">
                                 <img class="img-fluid rounded-top w-100" src="img/team-1.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                                </div>
+                                
                             </div>
                             <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
-                                <h4 class="mb-2">Dr. John Doe</h4>
-                                <p class="text-primary mb-0">Implant Surgeon</p>
+                                <h4 class="mb-2">Samy Touabi</h4>
+                                <p class="text-primary mb-0">Wisdom tooth extraction</p>
                             </div>
                         </div>
                     </div>
@@ -604,16 +473,11 @@
                         <div class="team-item">
                             <div class="position-relative rounded-top" style="z-index: 1;">
                                 <img class="img-fluid rounded-top w-100" src="img/team-2.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                                </div>
+                                
                             </div>
                             <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
-                                <h4 class="mb-2">Dr. John Doe</h4>
-                                <p class="text-primary mb-0">Implant Surgeon</p>
+                                <h4 class="mb-2">John Li</h4>
+                                <p class="text-primary mb-0">Wisdom tooth extraction</p>
                             </div>
                         </div>
                     </div>
@@ -621,16 +485,11 @@
                         <div class="team-item">
                             <div class="position-relative rounded-top" style="z-index: 1;">
                                 <img class="img-fluid rounded-top w-100" src="img/team-3.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                                </div>
+                                
                             </div>
                             <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
-                                <h4 class="mb-2">Dr. John Doe</h4>
-                                <p class="text-primary mb-0">Implant Surgeon</p>
+                                <h4 class="mb-2">Céline Wan</h4>
+                                <p class="text-primary mb-0">Teeth Cleaning</p>
                             </div>
                         </div>
                     </div>
@@ -638,16 +497,11 @@
                         <div class="team-item">
                             <div class="position-relative rounded-top" style="z-index: 1;">
                                 <img class="img-fluid rounded-top w-100" src="img/team-4.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                                </div>
+                                
                             </div>
                             <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
-                                <h4 class="mb-2">Dr. John Doe</h4>
-                                <p class="text-primary mb-0">Implant Surgeon</p>
+                                <h4 class="mb-2">Tisham Islam</h4>
+                                <p class="text-primary mb-0">Teeth Whitening</p>
                             </div>
                         </div>
                     </div>
@@ -655,16 +509,11 @@
                         <div class="team-item">
                             <div class="position-relative rounded-top" style="z-index: 1;">
                                 <img class="img-fluid rounded-top w-100" src="img/team-5.jpg" alt="">
-                                <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                                    <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                                </div>
+                                
                             </div>
                             <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
-                                <h4 class="mb-2">Dr. John Doe</h4>
-                                <p class="text-primary mb-0">Implant Surgeon</p>
+                                <h4 class="mb-2">Nakul Lover</h4>
+                                <p class="text-primary mb-0">Teeth Whitening</p>
                             </div>
                         </div>
                     </div>
@@ -674,76 +523,43 @@
         <!-- Team End -->
 
 
-        <!-- Newsletter Start -->
-        <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
-            <div class="container">
-                <div class="bg-primary p-5">
-                    <form class="mx-auto" style="max-width: 600px;">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-white p-3" placeholder="Your Email">
-                            <button class="btn btn-dark px-4">Sign Up</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Newsletter End -->
+        <br>
+        <br>
+        <br>
+        <br>
 
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
-            <div class="container pt-5">
-                <div class="row g-5 pt-4">
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="text-white mb-4">Quick Links</h3>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                            <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="text-white mb-4">Popular Links</h3>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                            <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                            <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="text-white mb-4">Get In Touch</h3>
-                        <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>info@example.com</p>
-                        <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="text-white mb-4">Follow Us</h3>
-                        <div class="d-flex">
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
-                        </div>
-                    </div>
+    <div class="container pt-5">
+        <div class="row g-5 pt-4">
+            <div class="col-lg-4 col-md-6">
+                <h3 class="text-white mb-4">Popular Links</h3>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                    <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                    <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h3 class="text-white mb-4">Get In Touch</h3>
+                <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>dentCare23@ks.com</p>
+                <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>012 345 67890</p>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h3 class="text-white mb-4">Follow Us</h3>
+                <div class="d-flex">
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
                 </div>
             </div>
         </div>
-        <div class="container-fluid text-light py-4" style="background: #051225;">
-            <div class="container">
-                <div class="row g-0">
-                    <div class="col-md-6 text-center text-md-start">
-                        <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Your Site Name</a>. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+</div>
+        
         <!-- Footer End -->
 
 

@@ -35,6 +35,7 @@ public class BookingAppointmentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         try {
             DBService dbService = new DBService();
             ArrayList<Service> arrService = dbService.getService();
