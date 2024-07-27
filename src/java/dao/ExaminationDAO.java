@@ -4,6 +4,7 @@
  */
 package dao;
 
+import Service.IExaminationResultDAO;
 import dal.DBContext;
 
 import java.sql.*;
@@ -15,7 +16,7 @@ import model.ExaminationResult;
  *
  * @author trung
  */
-public class ExaminationDAO extends DBContext {
+public class ExaminationDAO extends DBContext implements IExaminationResultDAO{
 
     public String addExaminationResult(int id, int patientId, String patientName, String service, int price, String doctor,
             Date bookingDate, String startTime, String endTime, int room, String status, String payRevervationStatus, String examinationStatus, String description) throws SQLException {
@@ -247,13 +248,51 @@ public class ExaminationDAO extends DBContext {
         return examinationList;
     }
     
+    public ArrayList<ExaminationResult> getAllExaminationrResultForPatient(int patientID) throws SQLException {
+        String query = "select * from ExaminationResult where patientId = ? and examination_status = 'active';";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ArrayList<ExaminationResult> examList = new ArrayList<>();
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, patientID);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                ExaminationResult exam = new ExaminationResult(); // Tạo đối tượng mới cho mỗi lần lặp
+                exam.setAppointmentId(rs.getInt("appointmentId"));
+                exam.setId(rs.getInt("id"));
+                exam.setPatientId(rs.getInt("patientId"));
+                exam.setPatientName(rs.getString("patientName"));
+                exam.setService(rs.getString("service"));
+                exam.setPrice(rs.getInt("price"));
+                exam.setDoctor(rs.getString("doctor"));
+                exam.setBookingDate(rs.getDate("bookingDate"));
+                exam.setStartTime(rs.getString("startTime"));
+                exam.setEndTime(rs.getString("endTime"));
+                exam.setRoom(rs.getInt("room"));
+                exam.setStatus(rs.getString("status"));
+                exam.setPayRevervationStatus(rs.getString("payReservationStatus"));
+                exam.setExaminationStatus(rs.getString("examination_status"));
+                exam.setDescription(rs.getString("description"));
+                examList.add(exam); // Thêm đối tượng vào danh sách
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePreparedStatement(statement);
+            closeConnection(connection);
+        }
+        return examList;
+    }
+    
     public static void main(String[] args) {
         try {
             ExaminationDAO dao = new ExaminationDAO();
 //            System.out.println(dao.addExaminationResult(2045, 1, "John Doe", "General Checkup",
 //                    100, "Dr. Smith", Date.valueOf("2024-07-16"), "09:00", "10:00", 1, "Confirmed", "Paid",
 //                    "inactive", "Regular checkup"));;
-            ArrayList<ExaminationResult> check = dao.getAllExaminationResult();
+            ArrayList<ExaminationResult> check = dao.getAllExaminationrResultForPatient(1);
             System.out.println(check);
         } catch (SQLException ex) {
             System.out.println(ex);

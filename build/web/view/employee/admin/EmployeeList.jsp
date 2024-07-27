@@ -222,8 +222,7 @@
                                                     <td>${emp.employeeSin}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${emp.employeeType == 'd'}">Doctor
-                                                            </c:when>
+                                                            <c:when test="${emp.employeeType == 'd'}">Doctor</c:when>
                                                             <c:when test="${emp.employeeType == 'n'}">Nurse</c:when>
                                                             <c:when test="${emp.employeeType == 'b'}">Branch Manager</c:when>
                                                         </c:choose>

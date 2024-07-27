@@ -172,7 +172,11 @@
                 </c:choose>
                 <a href="patient/bookAppointment" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
                 <!--                <a href="confirmpass" class="btn btn-primary py-2 px-4 ms-3">Change password</a>-->
-                <a href="patient/viewAppointmentHistory" class="btn btn-primary py-2 px-4 ms-3">View Appointment</a>
+                <c:if test="${currentUser != null}">
+                    <c:if test="${userRole == 'patient'}">
+                        <a href="ViewExaminationListOfPatient" class="btn btn-primary py-2 px-4 ms-3">View Examination Result</a>
+                    </c:if>
+                </c:if>
             </div>
         </nav>
         <!-- Navbar End -->

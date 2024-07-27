@@ -234,9 +234,16 @@
                                             </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="btn btn-info " style="margin-top: 10px">
-                                                <a href="ExaminationResultListController" style="color: black">Back to examination result list</a>
-                                            </button>
+                                            <c:if test="${userRole == 'doctor' && userRole == 'nurse'}">
+                                                <button class="btn btn-info " style="margin-top: 10px">
+                                                    <a href="ExaminationResultListController" style="color: black">Back to examination result list</a>
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${userRole == 'patient'}">
+                                                <button class="btn btn-info " style="margin-top: 10px">
+                                                    <a href="ViewExaminationListOfPatient" style="color: black">Back to examination result list</a>
+                                                </button>
+                                            </c:if>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>

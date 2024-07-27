@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.examination;
+package controller.patient;
 
-import dao.AppointmentDAO;
+import controller.examination.ExaminationResultListController;
 import dao.ExaminationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +19,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.AppointmentDTO;
 import model.ExaminationResult;
 import model.User;
 
@@ -27,8 +26,8 @@ import model.User;
  *
  * @author trung
  */
-@WebServlet(name="SearchExaminationResult", urlPatterns={"/SearchExaminationResult"})
-public class SearchExaminationResult extends HttpServlet {
+@WebServlet(name="ViewExaminationListOfPatient", urlPatterns={"/ViewExaminationListOfPatient"})
+public class ViewExaminationListOfPatient extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -45,10 +44,10 @@ public class SearchExaminationResult extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchExaminationResult</title>");  
+            out.println("<title>Servlet ViewExaminationListOfPatient</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchExaminationResult at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewExaminationListOfPatient at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,42 +64,34 @@ public class SearchExaminationResult extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User currentUser = (User) session.getAttribute("currentUser");
-        String userRole = (String) session.getAttribute("userRole");
-         // Check if the user is logged in and has the appropriate role
-        if (currentUser == null) {
-            request.setAttribute("error", "You are not permission!");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            if (userRole.contains("admin") ) {
+        try {
+             // Retrieve the current session
+            HttpSession session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            String userRole = (String) session.getAttribute("userRole");
+             // Check if the user is logged in and has the appropriate role
+            if (currentUser == null) {
                 request.setAttribute("error", "You are not permission!");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
-                try {
-                    // Retrieve the search key from the request
-                    String key = request.getParameter("searchKey");
-                    
-                    // Perform the search operation
-                    ExaminationDAO examDAO = new ExaminationDAO();
-                    ArrayList<ExaminationResult> examList = examDAO.SearchERByKey(key);
-                    // Set the search key and examination result list as request attributes
-                    request.setAttribute("searchKey", key);
+                if (userRole.contains("doctor") || userRole.contains("admin") || userRole.contains("nurse") ) {
+                    request.setAttribute("error", "You are not permission!");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } else {
+                      // Retrieve the list of examination results from the database
+                    int patientID = Integer.parseInt(currentUser.getPatient_Id());
+                    ExaminationDAO dao = new ExaminationDAO();
+                    ArrayList<ExaminationResult> examList = dao.getAllExaminationrResultForPatient(patientID);
+                     // Set the list of examination results as a request attribute
                     request.setAttribute("examList", examList);
-                    
-                    if(userRole == "doctor" && userRole == "nurse"){
-                    // Forward to the JSP page for displaying the search results
-                    request.getRequestDispatcher("view/examination/ExaminationResultList.jsp").forward(request, response);
-                    }
-                    if(userRole == "patient"){
-                        request.getRequestDispatcher("view/patient/PatientViewExaminationReusultList.jsp").forward(request, response);
-                    }
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(SearchExaminationResult.class.getName()).log(Level.SEVERE, null, ex);
+                    // Forward to the JSP page for displaying the examination results
+                    request.getRequestDispatcher("view/patient/PatientViewExaminationReusultList.jsp").forward(request, response);
                 }
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(ExaminationResultListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     } 
 
     /** 

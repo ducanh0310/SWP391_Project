@@ -363,10 +363,9 @@
                                         </div>
                                         <div class="col-sm-9 ">
                                             <c:choose>
-                                                <c:when test= "${employee.employeeType == 'r'}">Receptionist</c:when>
-                                                <c:when test="${employee.employeeType == 'd'}">Doctor</c:when>
-                                                <c:when test="${employee.employeeType == 'h'}">Nurse</c:when>
-                                                <c:when test="${employee.employeeType == 'b'}">Admin</c:when>
+                                                <c:when test="${emp.employeeType == 'd'}">Doctor</c:when>
+                                                <c:when test="${emp.employeeType == 'n'}">Nurse</c:when>
+                                                <c:when test="${emp.employeeType == 'b'}">Branch Manager</c:when>
                                             </c:choose>
                                         </div>
                                     </div>
