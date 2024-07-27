@@ -198,6 +198,9 @@ public class EditProfileEmployeeController extends HttpServlet {
             String[] imageLinks = request.getParameterValues("imageLink");
             String[] imageNames = request.getParameterValues("imageName");
             String[] idStrings = request.getParameterValues("idCer");
+            if(idStrings ==  null ){
+                return;
+            }
             int[] idImage = new int[100];
             if (idStrings.length > 0 || imageLinks.length > 0) {
                 for (int i = 0; i < idStrings.length; i++) {
